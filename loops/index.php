@@ -1,0 +1,4 @@
+<?php 
+/*
+Enjoy the silence
+*/ 
