@@ -51,10 +51,10 @@ body.picostrap_header_navbar_position_fixed-top section[id] {	scroll-margin-top:
 
 
 //PAGE HAS SCROLLED: From the Customizer, enable the "Scroll Detection" feature to be able to use the classes:
-/*
-body.scroll-position-at-top  {background:lime}
-body.scroll-position-not-at-top {background:red}
-*/
+
+//body.scroll-position-at-top  {background:lime}
+//body.scroll-position-not-at-top {background:red}
+
 
 // if "Scroll Detection" feature is enabled, enlarge navbar when not scrolled yet
 body.scroll-position-not-at-top #wrapper-navbar .navbar,
