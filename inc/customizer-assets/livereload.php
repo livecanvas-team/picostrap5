@@ -39,14 +39,18 @@ add_action( 'wp_head', function  () {
                 .then(function(response) {
                     return response.text();
                 }).then(function(text) {
-                    //console.log(text);
+                    //console.log(text); //but we don't need it anymore, just needs to include "New CSS bundle"
                     if (text.includes("New CSS bundle")) {
                         //SUCCESS
-                        document.querySelector("#scss-compiler-output").innerHTML = ''; //as there are no errors  
-                        var split = text.split(": ");
-                        var url = split[1];
-                        //console.log(url);
+
+                        //as there are no errors, clear the output feedback
+                        document.querySelector("#scss-compiler-output").innerHTML = ''; 
+                        
+                        //un-cache the frontend css
+                        url = document.getElementById('picostrap-styles-css').href;
                         document.getElementById('picostrap-styles-css').href = url;
+
+                        //retrigger the woodpecker
                         setTimeout(function(){ picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
                     }
                     else {
