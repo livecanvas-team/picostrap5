@@ -667,6 +667,27 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         )
     ));
 	
+
+
+	//SEARCH FORM
+	$wp_customize->add_setting("enable_search_form", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "enable_search_form",
+        array(
+            "label" => __("Enable Search Form", "picostrap"),
+            "section" => "nav", 
+            'type'     => 'checkbox',
+			)
+	));
+
+
+
+
+
 	//  TOPBAR SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("topbar", array(
         "title" => __("Optional Topbar", "picostrap"),

@@ -78,7 +78,9 @@ defined( 'ABSPATH' ) || exit;
               </button>
 
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <?php  wp_nav_menu( array(
+                <?php 
+                  //LEGACY WP_Bootstrap_Navwalker - NOW COMMENTED
+                  if(0) wp_nav_menu( array(
                     'theme_location'    => 'primary',
                     'depth'             => 2,
                     'container'         => '',
@@ -89,12 +91,28 @@ defined( 'ABSPATH' ) || exit;
                     'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
                     'walker'            => new WP_Bootstrap_Navwalker(),
                 ) ); 
-                
+                  
+                  //MODERN  bootstrap_5_wp_nav_menu_walker 
+                  if(1) wp_nav_menu(array(
+                    'theme_location' => 'primary',
+                    'depth'           => 3,
+                    'container' => false,
+                    'menu_class' => '',
+                    'fallback_cb' => '__return_false',
+                    'items_wrap' => '<ul id="%1$s" class="navbar-nav me-auto mb-2 mb-md-0 %2$s">%3$s</ul>',
+                    'depth' => 2,
+                    'walker' => new bootstrap_5_wp_nav_menu_walker()
+                ));
                 ?>
-                <form hidden>
-                  <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                </form>
-              </div>
+                
+
+                <?php if (get_theme_mod('enable_search_form')): ?>
+                  <form action="<?php echo bloginfo('url') ?>" method="get" id="header-search-form">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="s" value="<?php the_search_query(); ?>">
+                  </form> 
+                <?php endif ?>
+
+              </div> <!-- .collapse -->
             </div>
           </nav> <!-- .site-navigation -->
 

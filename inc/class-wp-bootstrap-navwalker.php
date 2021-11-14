@@ -1,7 +1,8 @@
 <?php
 
 
-//NEW ONE BY https://github.com/AlexWebLab/bootstrap-5-wordpress-navbar-walker
+// Bootstrap 5 WordPress navbar walker menu 1.3.4
+// https://github.com/AlexWebLab/bootstrap-5-wordpress-navbar-walker
 // bootstrap 5 wp_nav_menu walker
 class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
 {
@@ -21,7 +22,7 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
     'dropdown-menu-xxl-end'
   ];
 
-  function start_lvl(&$output, $depth = 0, $args = array())
+  function start_lvl(&$output, $depth = 0, $args = null)
   {
     $dropdown_menu_class[] = '';
     foreach($this->current_item->classes as $class) {
@@ -34,7 +35,7 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
     $output .= "\n$indent<ul class=\"dropdown-menu$submenu " . esc_attr(implode(" ",$dropdown_menu_class)) . " depth_$depth\">\n";
   }
 
-  function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
+  function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
   {
     $this->current_item = $item;
 
@@ -49,7 +50,8 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
     $classes[] = 'nav-item';
     $classes[] = 'nav-item-' . $item->ID;
     if ($depth && $args->walker->has_children) {
-      $classes[] = 'dropdown-menu dropdown-menu-end';
+      //$classes[] = 'dropdown-menu dropdown-menu-end'; // standard
+	  $classes[] = 'dropdown-menu-end'; //  patch
     }
 
     $class_names =  join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
@@ -65,7 +67,7 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
     $attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
     $attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 
-    $active_class = ($item->current || $item->current_item_ancestor) ? 'active' : '';
+    $active_class = ($item->current || $item->current_item_ancestor || in_array("current_page_parent", $item->classes, true) || in_array("current-post-ancestor", $item->classes, true)) ? 'active' : '';
     $nav_link_class = ( $depth > 0 ) ? 'dropdown-item ' : 'nav-link ';
     $attributes .= ( $args->walker->has_children ) ? ' class="'. $nav_link_class . $active_class . ' dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : ' class="'. $nav_link_class . $active_class . '"';
 
@@ -102,6 +104,7 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
  */
 
 // Check if Class Exists.
+if(0)
 if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) :
 	/**
 	 * WP_Bootstrap_Navwalker class.
