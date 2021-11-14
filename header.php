@@ -95,17 +95,15 @@ defined( 'ABSPATH' ) || exit;
                   //MODERN  bootstrap_5_wp_nav_menu_walker 
                   if(1) wp_nav_menu(array(
                     'theme_location' => 'primary',
-                    'depth'           => 3,
                     'container' => false,
                     'menu_class' => '',
                     'fallback_cb' => '__return_false',
                     'items_wrap' => '<ul id="%1$s" class="navbar-nav me-auto mb-2 mb-md-0 %2$s">%3$s</ul>',
-                    'depth' => 2,
                     'walker' => new bootstrap_5_wp_nav_menu_walker()
                 ));
                 ?>
                 
-
+                
                 <?php if (get_theme_mod('enable_search_form')): ?>
                   <form action="<?php echo bloginfo('url') ?>" method="get" id="header-search-form">
                     <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="s" value="<?php the_search_query(); ?>">
@@ -115,7 +113,11 @@ defined( 'ABSPATH' ) || exit;
               </div> <!-- .collapse -->
             </div>
           </nav> <!-- .site-navigation -->
+          <?php
 
+          //AS A TEST / DEMO
+          //include("nav-static-test.php");
+          ?>
         </div><!-- #wrapper-navbar end -->
 
       
