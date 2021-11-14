@@ -51,7 +51,6 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
     $classes[] = 'nav-item-' . $item->ID;
     if ($depth && $args->walker->has_children) {
       //$classes[] = 'dropdown-menu dropdown-menu-end'; // standard
-	  //$classes[] = 'dropend'; //  patch
 	  $classes[] = 'dropend dropdown-menu-end'; //  patch
     }
 
