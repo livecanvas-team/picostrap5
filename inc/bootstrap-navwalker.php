@@ -51,7 +51,8 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
     $classes[] = 'nav-item-' . $item->ID;
     if ($depth && $args->walker->has_children) {
       //$classes[] = 'dropdown-menu dropdown-menu-end'; // standard
-	  $classes[] = 'dropdown-menu-end'; //  patch
+	  //$classes[] = 'dropend'; //  patch
+	  $classes[] = 'dropend dropdown-menu-end'; //  patch
     }
 
     $class_names =  join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
@@ -69,7 +70,7 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
 
     $active_class = ($item->current || $item->current_item_ancestor || in_array("current_page_parent", $item->classes, true) || in_array("current-post-ancestor", $item->classes, true)) ? 'active' : '';
     $nav_link_class = ( $depth > 0 ) ? 'dropdown-item ' : 'nav-link ';
-    $attributes .= ( $args->walker->has_children ) ? ' class="'. $nav_link_class . $active_class . ' dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"' : ' class="'. $nav_link_class . $active_class . '"';
+    $attributes .= ( $args->walker->has_children ) ? ' class="'. $nav_link_class . $active_class . ' dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"' : ' class="'. $nav_link_class . $active_class . '"';
 
     $item_output = $args->before;
     $item_output .= '<a' . $attributes . '>';
