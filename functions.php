@@ -17,7 +17,7 @@ $picostrap_includes = array(
 	//'/customizer.php',                      // Customizer additions.
 	'/custom-comments.php',                 // Custom Comments file.
 	//'/jetpack.php',                         // Load Jetpack compatibility file.
-	'/class-wp-bootstrap-navwalker.php',    // Load custom WordPress nav walker. Trying to get deeper navigation? Check out: https://github.com/picostrap/picostrap/issues/567
+	'/bootstrap-navwalker.php',    			// Load custom WordPress nav walker. 
 	'/woocommerce.php',                     // Load WooCommerce functions.
 	'/editor.php',                          // Load Editor functions. 
 	'/customizer-assets/customizer.php',	//Defines Customizer options
