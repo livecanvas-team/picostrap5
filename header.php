@@ -79,21 +79,7 @@ defined( 'ABSPATH' ) || exit;
 
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <?php 
-                  //LEGACY WP_Bootstrap_Navwalker - NOW COMMENTED
-                  if(0) wp_nav_menu( array(
-                    'theme_location'    => 'primary',
-                    'depth'             => 2,
-                    'container'         => '',
-                    'container_class'   => '',
-                    'container_id'      => '',
-                    'menu_class'        => 'navbar-nav me-auto mb-2 mb-lg-0',
-                    'menu_id'         => 'main-menu',
-                    'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-                    'walker'            => new WP_Bootstrap_Navwalker(),
-                ) ); 
-                  
-                  //MODERN  bootstrap_5_wp_nav_menu_walker 
-                  if(1) wp_nav_menu(array(
+                  wp_nav_menu(array(
                     'theme_location' => 'primary',
                     'container' => false,
                     'menu_class' => '',
@@ -103,7 +89,6 @@ defined( 'ABSPATH' ) || exit;
                 ));
                 ?>
                 
-                
                 <?php if (get_theme_mod('enable_search_form')): ?>
                   <form action="<?php echo bloginfo('url') ?>" method="get" id="header-search-form">
                     <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="s" value="<?php the_search_query(); ?>">
@@ -111,12 +96,12 @@ defined( 'ABSPATH' ) || exit;
                 <?php endif ?>
 
               </div> <!-- .collapse -->
-            </div>
+            </div> <!-- .container -->
           </nav> <!-- .site-navigation -->
           <?php
 
-          //AS A TEST / DEMO
-          //include("nav-static-test.php");
+          //AS A TEST / DEMO for a mock-up megamenu
+          //include("nav-static-mega.php");
           ?>
         </div><!-- #wrapper-navbar end -->
 
