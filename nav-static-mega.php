@@ -4,15 +4,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Bootstrap <span class="badge bg-primary">v5.1.1</span></a>
+    <a class="navbar-brand" href="#">Bootstrap <span class="badge bg-primary">Static Mega Menu Demo</span></a>
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content">
-      <div class="hamburger-toggle">
-        <div class="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar-content">
       <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
@@ -76,7 +70,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-12 col-sm-4 col-md-3 py-4">
-                    <h5>Pages</h5>
+                    <h5>No additional JS</h5>
                     <div class="list-group">
                       <a class="list-group-item" href="#">Accomodations</a>
                       <a class="list-group-item" href="#">Terms & Conditions</a>
@@ -84,9 +78,9 @@
                     </div>
                   </div>
                   <div class="col-12 col-sm-4 col-md-3 py-4">
-                    <h5>Card</h5>
+                    <h5>No Additional CSS</h5>
                     <div class="card">
-                <img src="https://via.placeholder.com/320x180" class="img-fluid" alt="image">
+                <img src="https://images.unsplash.com/photo-1509599589979-3b5a15d2816e?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&ixid=MnwzNzg0fDB8MXxzZWFyY2h8NDR8fGZvcmVzdHxlbnwwfDB8fHwxNjM0OTkxMjA3&ixlib=rb-1.2.1&q=80&w=1080&h=768" class="img-fluid" alt="image">
                 <div class="card-body">
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
