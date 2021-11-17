@@ -79,7 +79,7 @@ function picostrap_generate_css(){
 	
 	} catch (Exception $e) {
 		//COMPILER ERROR: TYPICALLY INVALID SCSS CODE
-		die("<div id='compile-error' style='font-size:20px;background:#212337;color:lime;font-family:courier;border:8px solid red;padding:15px;display:block'><h1>SCSS error</h2>".$e->getMessage()."</div>");
+		die("<div id='compile-error' style='font-size:20px;background:#212337;color:lime;font-family:courier;border:8px solid red;padding:15px;display:block'><h1 style='color:lime;'>SCSS error</h1>".$e->getMessage()."</div>");
    	}
 	
 	//CHECK CSS IS REALLY THERE
