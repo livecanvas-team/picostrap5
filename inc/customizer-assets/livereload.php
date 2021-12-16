@@ -34,7 +34,7 @@ add_action( 'wp_head', function  () {
 
         function picostrap_recompile_sass(){
             console.log("picostrap_recompile_sass start");
-            document.querySelector("#scss-compiler-output").innerHTML = "<div style='font-size:30px;background:#212337;color:lime;font-family:courier;border:8px solid red;padding:15px;display:block;user-select: none;'>Compiling SCSS....</div>";
+            if (document.querySelector("#scss-compiler-output")) document.querySelector("#scss-compiler-output").innerHTML = "<div style='font-size:30px;background:#212337;color:lime;font-family:courier;border:8px solid red;padding:15px;display:block;user-select: none;'>Compiling SCSS....</div>";
             fetch("<?php echo admin_url() ?>?ps_compile_scss&ps_compiler_api=1")
                 .then(function(response) {
                     return response.text();
@@ -64,22 +64,22 @@ add_action( 'wp_head', function  () {
                 }); 
         } //end function
 
-        function picostrap_check_css_exists() {
-            if (
-                getComputedStyle(document.documentElement).getPropertyValue('--primary')=="" && 
-                getComputedStyle(document.documentElement).getPropertyValue('--bs-primary')==""
-               ) picostrap_recompile_sass();   
-        }
+         
 
         //END FUNCTIONS
 
+        //IF CSS DOES NOT LOAD, IT MAY NOT EXIST: REBUILD
+        document.querySelector("#picostrap-styles-css").onerror = picostrap_recompile_sass();  
+
         //ON DOMContentLoaded START THE ENGINE / Like document ready :)
         document.addEventListener('DOMContentLoaded', function(event) {
-            
-            document.querySelector("html").insertAdjacentHTML("afterbegin","<div id='scss-compiler-output' style=' position: fixed; z-index: 99999999;'></div>");
-            picostrap_check_css_exists();
+            //add div for feedback
+            document.querySelector("html").insertAdjacentHTML("afterbegin","<div id='scss-compiler-output' style=' position: fixed; z-index: 99999999;'></div>");            
+            //trigger the woodpecker
             picostrap_livereload_woodpecker();
         });
+
+        
 
     </script>
     <?php
