@@ -1271,11 +1271,30 @@ abstract class StylesheetParser extends Parser
             } elseif ($this->scanner->peekChar() === '(') {
                 $supports = $this->supportsCondition();
             } else {
-                $name = $this->expression();
-                $this->scanner->expectChar(':');
-                $this->whitespace();
-                $value = $this->expression();
-                $supports = new SupportsDeclaration($name, $value, $this->scanner->spanFrom($start));
+                if ($this->lookingAtInterpolatedIdentifier()) {
+                    $identifier = $this->interpolatedIdentifier();
+
+                    if ($identifier->getAsPlain() !== null && strtolower($identifier->getAsPlain()) === 'not') {
+                        $this->error('"not" is not a valid identifier here.', $identifier->getSpan());
+                    }
+
+                    if ($this->scanner->scanChar('(')) {
+                        $arguments = $this->interpolatedDeclarationValue(true, true);
+                        $this->scanner->expectChar(')');
+                        $supports = new SupportsFunction($identifier, $arguments, $this->scanner->spanFrom($start));
+                    } else {
+                        // Backtrack to parse a variable declaration
+                        $this->scanner->setPosition($start);
+                    }
+                }
+
+                if ($supports === null) {
+                    $name = $this->expression();
+                    $this->scanner->expectChar(':');
+                    $this->whitespace();
+                    $value = $this->expression();
+                    $supports = new SupportsDeclaration($name, $value, $this->scanner->spanFrom($start));
+                }
             }
 
             $this->scanner->expectChar(')');
@@ -1693,6 +1712,8 @@ abstract class StylesheetParser extends Parser
      * Consumes an expression.
      *
      * @param (callable(): bool)|null $until
+     *
+     * @phpstan-impure
      */
     protected function expression(?callable $until = null, bool $singleEquals = false, bool $bracketList = false): Expression
     {
@@ -2499,6 +2520,8 @@ abstract class StylesheetParser extends Parser
 
     /**
      * Consumes a single hexadecimal digit.
+     *
+     * @phpstan-impure
      */
     private function hexDigit(): int
     {
