@@ -15,7 +15,7 @@ add_action( 'wp_footer', function(){ ?>
 		window.onload = function() { //after all page els are loaded 
 			
 			//find elements that need to be 'lightboxed'
-			var matches = document.querySelectorAll('main#theme-main a img');
+			var matches = document.querySelectorAll('main#theme-main a:not(.nolightbox) img');
 
 			//iterate and add the class
 			for (i=0; i<matches.length; i++) {
