@@ -155,3 +155,21 @@ body span.fp-pill.italic{display: none}
 /* MAXIMIZE CSS EDITOR: enlarge the editor */
 .picostrap-maximize-editor { position: fixed;  left:0;  top: 45vh;bottom:0;height: auto}
 .picostrap-maximize-editor .CodeMirror-wrap {border-top: 3px solid #888;}
+
+
+#accordion-section-colors h3.accordion-section-title::before,
+#accordion-section-typography h3.accordion-section-title::before,
+#accordion-section-components h3.accordion-section-title::before,
+#accordion-section-buttons-forms h3.accordion-section-title::before,
+#accordion-section-buttons h3.accordion-section-title::before { 
+  width:18px;height:18px; 
+  margin-right: 10px; 
+  display: inline-block; 
+  content:" ";
+  background: url('img/bootstrap-logo.png');
+   background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#cs-font-combi {display: none;}
+ 

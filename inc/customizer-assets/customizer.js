@@ -186,8 +186,19 @@ function ps_prepare_fonts_import_code_snippet(){
 		}); 
 		
 		// FONT COMBINATIONS ////////////////////////////////////////////
+
+		//append link to show FONT COMBINATIONs
+		$("#customize-control-SCSSvar_font-family-base h1").append(" <a href='#' id='cs-show-combi' style='float: right; margin-top: 11px; font-size: 10px;text-decoration: none;user-select: none;'>Font Combinations...</button>");
+
+		//show uon clieck 
+		//USER CLICKS  
+		$("body").on("click", "#cs-show-combi", function () {
+			//$(".customize-controls-close").click();
+			$("#cs-font-combi").slideToggle();
+		});
 		$("li#customize-control-SCSSvar_font-family-base").prepend(ps_font_combinations_select);
 	
+
 		//WHEN A FONT COMBINATION IS CHOSEN
 		$("body").on("change", "select#_ps_font_combinations", function() {
 			var value = jQuery(this).val(); //Cabin and Old Standard TT

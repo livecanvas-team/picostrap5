@@ -54,7 +54,7 @@ function picostrap_get_scss_variables_array(){
 		
 
 		//add another section
-		"options" => array( // $variable_name => $variable_props
+		"components" => array( // $variable_name => $variable_props
 						    
 			'$enable-rounded' => array('type' => 'boolean', 'default' => 'true'),
 			'$enable-shadows' => array('type' => 'boolean'),
@@ -77,7 +77,7 @@ function picostrap_get_scss_variables_array(){
 		//add another section
 		"typography" => array( // $variable_name => $variable_props
 			 
-			'$enable-rfs' => array('type' => 'boolean','default' => 'true'),
+			
 						 
 			'$font-family-base' => array('type' => 'text', 'placeholder' => '$font-family-sans-serif ', 'newgroup' => 'Font Families', ), 
 			'$font-family-sans-serif' => array('type' => 'text', 'placeholder' => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" '),
@@ -86,6 +86,8 @@ function picostrap_get_scss_variables_array(){
 			'$font-size-base' => array('newgroup' => 'Font Sizes', 'type' => 'text', 'placeholder' => '1rem'),
 			'$font-size-lg' => array('type' => 'text', 'placeholder' => '1.25rem'),
 			'$font-size-sm' => array('type' => 'text', 'placeholder' => '.875rem '),
+
+			'$enable-rfs' => array('type' => 'boolean','default' => 'true'),
 			
 			'$font-weight-lighter' => array('newgroup' => 'Font Weights', 'type' => 'text', 'placeholder' => 'lighter '),
 			'$font-weight-light' => array('type' => 'text', 'placeholder' => '300'),
@@ -160,7 +162,7 @@ function picostrap_get_scss_variables_array(){
 		
 		
 		//add another section
-		"buttons+forms" => array( // $variable_name => $variable_props
+		"buttons-forms" => array( // $variable_name => $variable_props
 			
 						
 			'$input-btn-padding-y' => array('type' => 'text','placeholder' => '.375rem'),
@@ -442,13 +444,13 @@ function picostrap_theme_customize_register_extras($wp_customize) {
     ));
 	
  
-	$wp_customize->add_section("options", array(
+	$wp_customize->add_section("components", array(
         "title" => __("Components", "picostrap"),
         "priority" => 50,
     ));
 	
 	 
-	$wp_customize->add_section("buttons+forms", array(
+	$wp_customize->add_section("buttons-forms", array(
         "title" => __("Buttons + Forms", "picostrap"),
         "priority" => 50,
     ));
