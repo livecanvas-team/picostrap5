@@ -874,7 +874,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "picostrap_fonts_header_code_disable",
         array(
             "label" => __("Disable the Font Loading in Header", "picostrap"),
-			"description" =>  __("<b>Keep this unchecked, unless you really want.</b>").__("This will prevent the Theme from auto-enqueueing the necessary Google Fonts when they are chosen. Can be relevant if you want to self-host Google Fonts. Refer to this <a target='_blank' href='https://google-webfonts-helper.herokuapp.com/fonts/abeezee?subsets=latin'>tool</a> to get started. ", "picostrap"),
+			"description" =>  __("<b>Keep this unchecked, unless you really want. </b>").__("Disables serving the code in the textarea above. Can be relevant if you want to self-host Google Fonts. Refer to this <a target='_blank' href='https://google-webfonts-helper.herokuapp.com/fonts/abeezee?subsets=latin'>tool</a> to get started. ", "picostrap"),
             "section" => "addcode", 
             'type'     => 'checkbox',
 			)
