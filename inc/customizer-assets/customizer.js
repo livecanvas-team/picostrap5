@@ -133,6 +133,10 @@ function ps_prepare_fonts_import_code_snippet(){
 		//add codemirror to header field - does not work
 		//wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
 		
+
+		//DISABLE TEXTAREA FOR PICOSSTRAP GOOGLE FONTS HEADER CODE
+		$("#_customize-input-picostrap_fonts_header_code").attr("disabled","1");
+			
 		//ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)  PREPARE THE HTML CODE FOR FONT IMPORT AND UPDATE FIELD FOR PASSING TO BACKEND
 		$("body").on("mousedown", "#customize-save-button-wrapper #save", function() {
 			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();

@@ -809,7 +809,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 		
 	// ADD A SECTION FOR HEADER & FOOTER CODE -- to fix
 	$wp_customize->add_section("addcode", array(
-        "title" => __("Add Code to Header / Footer", "picostrap"),
+        "title" => __("Header / Footer Code", "picostrap"),
         "priority" => 180,
     ));
 	
@@ -857,13 +857,28 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_fonts_header_code",
         array(
-            "label" => __("Fonts Loading Header code", "picostrap"),
+            "label" => __("Font Loading Header code", "picostrap"),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>'<b>Do not touch</b> - this hidden field is automatically generated upon publishing'
+			'description' =>'<b>Not editable</b> - Reading purpose only. Automatically generated upon publishing'
 			)
     ));
 	
+	//DISABLE FONTLOADING HEADER CODE  
+	$wp_customize->add_setting("picostrap_fonts_header_code_disable", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "picostrap_fonts_header_code_disable",
+        array(
+            "label" => __("Disable the Font Loading in Header", "picostrap"),
+			"description" =>  __("<b>Keep this unchecked, unless you really want.</b>").__("This will prevent the Theme from auto-enqueueing the necessary Google Fonts when they are chosen. Can be relevant if you want to self-host Google Fonts. Refer to this <a target='_blank' href='https://google-webfonts-helper.herokuapp.com/fonts/abeezee?subsets=latin'>tool</a> to get started. ", "picostrap"),
+            "section" => "addcode", 
+            'type'     => 'checkbox',
+			)
+    ));
 	
 	
 	// ADD A SECTION FOR EXTRAS /////////////////////////////////////////////////////////////////////////////
@@ -922,21 +937,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 
-	//DISABLE FONTLOADING HEADER CODE  
-	$wp_customize->add_setting("picostrap_fonts_header_code_disable", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "picostrap_fonts_header_code_disable",
-        array(
-            "label" => __("Disable the Font Loading in Header", "picostrap"),
-			"description" =>  __("<b>Keep this unchecked, unless you really know what you're doing.</b>").__("This will prevent the Theme from auto-enqueueing the necessary Google Fonts when they are chosen. Can be relevant if you want to self-host Google Fonts. Refer to this <a target='_blank' href='https://google-webfonts-helper.herokuapp.com/fonts/abeezee?subsets=latin'>tool</a> to get started. ", "picostrap"),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-    ));
+
 	/*
 	//DISABLE FONTAWESOME
 	$wp_customize->add_setting("picostrap_fontawesome_disable", array(
