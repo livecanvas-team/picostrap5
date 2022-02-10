@@ -985,7 +985,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "enable_lightbox",
         array(
             "label" => __("Enable Lightbox", "picostrap"),
-			"description" => __("Will add a JS and a CSS file from cdn.jsdelivr.net before closing the BODY of the page, to use   <a target='_blank' href='https://github.com/biati-digital/glightbox'>gLightBox</a>: a very lightweight lightbox implementation.", "picostrap"),
+			"description" => __("Will lazily add a JS and a CSS file from cdn.jsdelivr.net before closing the BODY of the page, to use   <a target='_blank' href='https://github.com/biati-digital/glightbox'>gLightBox</a>: a very lightweight lightbox implementation. <br><br>The lightbox will be enabled on all images matching the selector: main#theme-main a:not(.nolightbox) img<br>To prevent the lightbox on an image, add the <b>nolightbox</b> class to it.", "picostrap"),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)

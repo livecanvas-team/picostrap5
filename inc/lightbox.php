@@ -9,7 +9,9 @@ add_action( 'wp_enqueue_scripts', function() {
 } ,100);
 
 //add inline js in footer, defer execution
-add_action( 'wp_footer', function(){ ?>
+add_action( 'wp_footer', function(){ 
+	if (isset($_GET['lc_page_editing_mode'])) return;
+	?>
 	<script>
 		//picostrap gLightbox integration
 		window.onload = function() { //after all page els are loaded 
