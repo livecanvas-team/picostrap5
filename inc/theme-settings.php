@@ -53,3 +53,16 @@ function lc_theme_is_livecanvas_friendly(){}
 
 // expose to the livecanvas plugin the active Bootstrap version
 function lc_theme_bootstrap_version(){return 5;}
+
+
+//submenu for adminBar in customizer
+add_action('admin_bar_menu', 'add_link_admin_bar', 999);
+function add_link_admin_bar($adminBar) {
+	$args = [
+        'parent' => 'customize',
+		'id' => 'picostrap-theme',
+        'title' => 'Picostrap5 Theme', 
+        'href' => admin_url('themes.php?page=picostrap-theme-options'),
+	];
+    $adminBar->add_node($args);
+}
