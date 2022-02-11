@@ -624,7 +624,25 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 				)
         )
     ));
+
 	
+	//DETECT PAGE SCROLL
+	$wp_customize->add_setting("enable_detect_page_scroll", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "enable_detect_page_scroll",
+        array(
+            "label" => __("Enable Page Scrolling Detection", "picostrap"),
+			"description" => __("Publish and exit the Customizer to see the effect. Adds a scroll-position-at-top / scroll-position-not-at-top class to the BODY element according to scroll position. Customize via CSS. Use with Navbar Position set to Fixed for best results. <!--  <a target='_blank' href='#'>Tutorial Coming Soon</a> --> ", "picostrap"),
+            "section" => "nav", 
+            'type'     => 'checkbox',
+			)
+	));
+
+
 	//HEADERNAVBAR COLOR CHOICE
 	$wp_customize->add_setting("picostrap_header_navbar_color_choice", array(
         'default' => 'bg-dark',
@@ -673,6 +691,10 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         )
     ));
 	
+	
+
+	
+
 
 
 	//SEARCH FORM
@@ -913,8 +935,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_disable_livereload",
         array(
-            "label" => __("Disable    LiveReload  ", "picostrap"),
-			"description" => __("Will completely disable the entire livereload feature. If you're not editing the SCSS files, you can do so. Makes a difference to admins only.", "picostrap"),
+            "label" => __("Disable  SCSS  LiveReload  ", "picostrap"),
+			"description" => __("Will completely disable the entire livereload feature. If you're not editing the SCSS files, you can do so. Makes a difference for site admins only.", "picostrap"),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -991,23 +1013,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
 	));
 	
-	
-	//DETECT PAGE SCROLL
-	$wp_customize->add_setting("enable_detect_page_scroll", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "enable_detect_page_scroll",
-        array(
-            "label" => __("Enable Page Scrolling Detection", "picostrap"),
-			"description" => __("Publish and exit the Customizer to see the effect. Adds a scroll-position-at-top / scroll-position-not-at-top class to the BODY element according to scroll position. Customize via CSS. Useful for custom menus <a target='_blank' href='#'>Tutorial Coming Soon</a> ", "picostrap"),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-	));
-	
+
 	// SINGLE POST & ARCHIVES SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("singleposts", array(
         "title" => __("Single Post & Archives", "picostrap"),
