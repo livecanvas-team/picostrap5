@@ -546,18 +546,19 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 	//COLORS: ANDROID CHROME HEADER COLOR
 	$wp_customize->add_setting(  'picostrap_header_chrome_color',  array(
-	 'default' => '', // Give it a default
-	 'transport" => "postMessage',
-	 ));
-	 $wp_customize->add_control(
-	 new WP_Customize_Color_Control(
-	 $wp_customize,
-	 'picostrap_header_chrome_color', //give it an ID
-	 array(
-	 'label' => __( 'Header Color in Android Chrome', 'picostrap' ), //set the label to appear in the Customizer
-	 'section' => 'colors', //select the section for it to appear under 
+		'default' => '', // Give it a default
+		'transport" => "postMessage',
+		));
+		$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+		$wp_customize,
+		'picostrap_header_chrome_color', //give it an ID
+		array(
+		'label' => __( 'Header Color in Android Chrome', 'picostrap' ), //set the label to appear in the Customizer
+		'section' => 'colors', //select the section for it to appear under 
+		'description' =>" <span hidden class='cs-option-group-title'>Extra</span>" //to implement a divisor
 		)
-	 ));
+	));
  
     //TAGLINE: SHOW / HIDE SWITCH
 	$wp_customize->add_setting('header_disable_tagline', array(
