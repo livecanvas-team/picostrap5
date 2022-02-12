@@ -88,7 +88,9 @@ if ( ! function_exists( 'picostrap_wc_form_field_args' ) ) {
 				 */
 				$args['class'][] = 'form-group';
 				// Add a class to the form input itself.
-				$args['input_class'] = array( 'form-control' );
+				
+				//$args['input_class'] = array( 'form-control' );
+				$args['input_class'][] = 'form-control'; 
 				// Add custom data attributes to the form input itself.
 				$args['custom_attributes'] = array(
 					'data-plugin'      => 'select2',
@@ -124,23 +126,28 @@ if ( ! function_exists( 'picostrap_wc_form_field_args' ) ) {
 			case 'number':
 				$args['class'][]     = 'form-group';
 				//$args['input_class'] = array( 'form-control' );
-				$args['input_class'][] = 'form-control'; // Thank you Dan
+				$args['input_class'][] = 'form-control'; 
 				break;
 			case 'textarea':
-				$args['input_class'] = array( 'form-control' );
+				//$args['input_class'] = array( 'form-control' );
+				$args['input_class'][] = 'form-control';
+
 				break;
 			case 'checkbox':
 				// Add a class to the form input's <label> tag.
 				$args['label_class'] = array( 'custom-control custom-checkbox' );
-				$args['input_class'] = array( 'custom-control-input' );
+				//$args['input_class'] = array( 'custom-control-input' );
+				$args['input_class'][] = 'custom-control-input'; 
 				break;
 			case 'radio':
 				$args['label_class'] = array( 'custom-control custom-radio' );
-				$args['input_class'] = array( 'custom-control-input' );
+				//$args['input_class'] = array( 'custom-control-input' );
+				$args['input_class'][] = 'custom-control-input';
 				break;
 			default:
 				$args['class'][]     = 'form-group';
-				$args['input_class'] = array( 'form-control' );
+				//$args['input_class'] = array( 'form-control' );
+				$args['input_class'][] = 'form-control'; 
 				break;
 		} // End of switch ( $args ).
 		return $args;
