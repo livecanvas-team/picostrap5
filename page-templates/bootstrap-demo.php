@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Bootstrap Demo
+ * Template Name: Bootstrap Demo Template
  *
 
  */
@@ -772,7 +772,64 @@ get_header();
 		</div>
 	</div>
 </section>
- 
+<section>
+	<div class="container py-md-6 py-4">
+		<div class="row justify-content-center">
+			<div class="col-xl-10">
+				<div class="lc-block mb-5">
+					<div editable="rich">
+						<h2 class="text-center rfs-20 fw-bolder">Lorem ipsum dolor sit amet, consectetur adipiscing elit suspendisse a lacus est. Etiam diam metus, lobortis </h2>
+					</div>
+				</div>
+				<div class="row text-center text-md-start ">
+					<div class=" col-md-6  ">
+						<div class="lc-block">
+							<div editable="rich">
+								<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus.&nbsp;</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="lc-block">
+							<div editable="rich">
+								<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus.&nbsp;</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="text-light bg-dark">
+	<div class="container py-md-6 py-4">
+		<div class="row justify-content-center">
+			<div class="col-xl-10">
+				<div class="lc-block mb-5">
+					<div editable="rich">
+						<h2 class="text-center rfs-20 fw-bolder text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit suspendisse a lacus est. Etiam diam metus, lobortis </h2>
+					</div>
+				</div>
+				<div class="row text-center text-md-start ">
+					<div class=" col-md-6  ">
+						<div class="lc-block">
+							<div editable="rich">
+								<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus.&nbsp;</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="lc-block">
+							<div editable="rich">
+								<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus.&nbsp;</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 
 <?php
