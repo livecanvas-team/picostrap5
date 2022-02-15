@@ -31,7 +31,7 @@ function picostrap_get_active_scss_code(){
 	}
 	
 	//READ THE FILE
-	$the_scss_code = $wp_filesystem->get_contents('../wp-content/themes/'.get_stylesheet().'/sass/main.scss');  
+	$the_scss_code = $wp_filesystem->get_contents( get_stylesheet_directory().'/sass/main.scss');  
 
 	//FOR STYLE PACKAGES
 	if(function_exists("picostrap_alter_scss")) $the_scss_code = picostrap_alter_scss ($the_scss_code);	 
@@ -91,7 +91,7 @@ function picostrap_generate_css(){
 	}
 
 	//SAVE THE FILE
-	$saving_operation = $wp_filesystem->put_contents('../wp-content/themes/'.get_stylesheet() . '/' . picostrap_get_css_optional_subfolder_name() . picostrap_get_complete_css_filename(), $compiled_css, FS_CHMOD_FILE ); // , 0644 ?
+	$saving_operation = $wp_filesystem->put_contents( get_stylesheet_directory() . '/' . picostrap_get_css_optional_subfolder_name() . picostrap_get_complete_css_filename(), $compiled_css, FS_CHMOD_FILE ); // , 0644 ?
 	
 	if ($saving_operation) { // IF UPLOAD WAS SUCCESSFUL 
 
