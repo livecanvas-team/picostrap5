@@ -130,7 +130,7 @@ function picostrap_get_scss_files_paths() {
  */
 function picostrap_get_scss_files_list($includeRootFolder = true, $excludeBs5 = true) {
     //get current sass folder directory listing
-    $the_directory = WP_CONTENT_DIR . '/themes/' . get_stylesheet() . '/sass/';
+    $the_directory = get_stylesheet_directory().'/sass/';
     $extPattern = '*.{scss,css}';
     $currentFiles = [];
 

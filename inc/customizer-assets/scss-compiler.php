@@ -19,11 +19,6 @@ add_action("admin_init", function (){
 use ScssPhp\ScssPhp\Compiler; //https://scssphp.github.io/scssphp/docs/
 use ScssPhp\ScssPhp\ValueConverter;
 
-//SOME UTILITIES
-function picostrap_get_active_parent_theme_slug(){ $style_parent_theme = wp_get_theme(get_template()); $theme_name = $style_parent_theme->get('Name'); return sanitize_title($theme_name);}
-
-//function picostrap_get_upload_dir( $param, $subfolder = '' ) {    $upload_dir = wp_upload_dir();    $url = $upload_dir[ $param ];    if ( $param === 'baseurl' && is_ssl() )  $url = str_replace( 'http://', 'https://', $url );return $url . $subfolder; }
-//function picostrap_get_active_theme_slug(){ return get_stylesheet(); } 
 
 /////FUNCTION TO GET ACTIVE SCSS CODE FROM FILE ///////
 function picostrap_get_active_scss_code(){
@@ -58,10 +53,10 @@ function picostrap_generate_css(){
 	
 	try {
 		//SET IMPORT PATH: CURRENTLY ACTIVE THEME's SASS FOLDER
-		$scss->setImportPaths(WP_CONTENT_DIR.'/themes/'.get_stylesheet().'/sass/');
+		$scss->setImportPaths(get_stylesheet_directory().'/sass/');
 
 		//IF USING A CHILD THEME, add parent theme sass folder: picostrap
-		if (is_child_theme()) $scss->addImportPath(WP_CONTENT_DIR.'/themes/'.picostrap_get_active_parent_theme_slug().'/sass/');
+		if (is_child_theme()) $scss->addImportPath(get_template_directory().'/sass/');
 		
 		//add extra path for style packages
 		if(function_exists("picostrap_add_scss_import_path")) $scss->addImportPath(picostrap_add_scss_import_path());
