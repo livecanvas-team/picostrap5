@@ -449,13 +449,13 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	
  
 	$wp_customize->add_section("components", array(
-        "title" => __("Components", "picostrap"),
+        "title" => __("Global Options", "picostrap"),
         "priority" => 50,
     ));
 	
 	 
 	$wp_customize->add_section("buttons-forms", array(
-        "title" => __("Buttons + Forms", "picostrap"),
+        "title" => __("Forms", "picostrap"),
         "priority" => 50,
     ));
 
@@ -733,7 +733,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "enable_topbar",
         array(
             "label" => __("Enable Topbar", "picostrap"),
-			"description" => __("Adds before all, at body start", "picostrap"),
+			"description" => __("Requires Navbar position set to 'Standard static top'", "picostrap"),
             "section" => "topbar", 
             'type'     => 'checkbox',
 			)
@@ -897,7 +897,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "picostrap_fonts_header_code_disable",
         array(
             "label" => __("Disable the Font Loading in Header", "picostrap"),
-			"description" =>  __("<b>Keep this unchecked, unless you really want. </b>").__("Disables serving the code in the textarea above. Can be relevant if you want to self-host Google Fonts. Refer to this <a target='_blank' href='https://google-webfonts-helper.herokuapp.com/fonts/abeezee?subsets=latin'>tool</a> to get started. ", "picostrap"),
+			"description" =>  __("<b>Keep this unchecked, unless you really want. </b>").__("Disables serving the code in the textarea above to the site header. Can be relevant if you want to self-host Google Fonts. Refer to this <a target='_blank' href='https://google-webfonts-helper.herokuapp.com/fonts/abeezee?subsets=latin'>tool</a> to get started. ", "picostrap"),
             "section" => "addcode", 
             'type'     => 'checkbox',
 			)

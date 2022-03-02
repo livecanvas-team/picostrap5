@@ -61,7 +61,7 @@ function add_link_admin_bar($adminBar) {
 	$args = [
         'parent' => 'customize',
 		'id' => 'picostrap-theme',
-        'title' => 'Picostrap Theme', 
+        'title' => 'Picostrap Theme Options', 
         'href' => admin_url('themes.php?page=picostrap-theme-options'),
 	];
     $adminBar->add_node($args);
