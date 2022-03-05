@@ -45,7 +45,8 @@ add_action( 'wp_enqueue_scripts',  function  () {
 ///ADD THE MAIN JS FILE
 //enqueue js in footer, async
 add_action( 'wp_enqueue_scripts', function() {
-	wp_enqueue_script( 'bootstrap5',  "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js#asyncload", array(), null, true );
+    wp_enqueue_script( 'bootstrap5', get_stylesheet_directory_uri() . "/js/bootstrap.bundle.min.js#asyncload", array(), null, true );
+    
 } ,100);
 
   
