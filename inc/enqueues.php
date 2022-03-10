@@ -45,7 +45,10 @@ add_action( 'wp_enqueue_scripts',  function  () {
 ///ADD THE MAIN JS FILE
 //enqueue js in footer, async
 add_action( 'wp_enqueue_scripts', function() {
-    wp_enqueue_script( 'bootstrap5', get_stylesheet_directory_uri() . "/js/bootstrap.bundle.min.js#asyncload", array(), null, true );
+
+    //want to override file in child theme? use get_stylesheet_directory_uri in place of get_template_directory_uri
+    //this was done for compatibility reasons towards older child themes
+    wp_enqueue_script( 'bootstrap5', get_template_directory_uri() . "/js/bootstrap.bundle.min.js#asyncload", array(), null, true );
     
 } ,100);
 
