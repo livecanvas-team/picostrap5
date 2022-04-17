@@ -1,0 +1,779 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: picostrap5\n"
+"POT-Creation-Date: 2022-04-07 21:24+0100\n"
+"PO-Revision-Date: 2022-04-08 21:12+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: 404.php:78
+msgid "Page not found"
+msgstr "Página no encontrada"
+
+#: 404.php:80
+msgid "Perhaps you would like to go to our home page?"
+msgstr "¿Quizás te gustaría ir a nuestra página de inicio?"
+
+#: archive.php:32 home.php:30 index.php:25 page-templates/blank-nofooter.php:38
+#: page-templates/blank.php:37 page-templates/default-no-jumbotron.php:28
+#: page-templates/empty.php:21 page-templates/page-sidebar-left.php:29
+#: page-templates/page-sidebar-right.php:29 page.php:25 search.php:61
+#: single.php:76
+msgid "Sorry, no posts matched your criteria."
+msgstr "Lo sentimos, ninguna entrada coincide con tus criterios."
+
+#. translators: %s: post title
+#: comments.php:37
+#, php-format
+msgctxt "comments title"
+msgid "One thought on &ldquo;%s&rdquo;"
+msgstr "Un comentario sobre &ldquo;%s&rdquo;"
+
+#: comments.php:45
+#, php-format
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s comentario en &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s comentarios sobre &ldquo;%2$s&rdquo;"
+
+#: comments.php:64 comments.php:99
+msgid "Comment navigation"
+msgstr "Navegación de comentarios"
+
+#: comments.php:68 comments.php:103
+msgid "&larr; Older Comments"
+msgstr "&larr; Comentarios antiguos"
+
+#: comments.php:74 comments.php:109
+msgid "Newer Comments &rarr;"
+msgstr "Nuevos Comentarios &rarr;"
+
+#: header.php:40
+msgid "Skip to content"
+msgstr "Saltar al contenido"
+
+#: inc/custom-comments.php:102
+msgid "Comments are closed."
+msgstr "Los comentarios están cerrados."
+
+#: inc/customizer-assets/customizer.php:408
+msgid "Background Image Size"
+msgstr "Tamaño de imagen de fondo"
+
+#: inc/customizer-assets/customizer.php:413
+msgid "Cover"
+msgstr "Portada"
+
+#: inc/customizer-assets/customizer.php:414
+msgid "Contain"
+msgstr "Contiene"
+
+#: inc/customizer-assets/customizer.php:415
+msgid "Inherit"
+msgstr "Heredar"
+
+#: inc/customizer-assets/customizer.php:446
+msgid "Typography"
+msgstr "Tipografía"
+
+#: inc/customizer-assets/customizer.php:452
+msgid "Global Options"
+msgstr "Opciones globales"
+
+#: inc/customizer-assets/customizer.php:458
+msgid "Forms"
+msgstr "Formularios"
+
+#: inc/customizer-assets/customizer.php:463
+msgid "Buttons"
+msgstr "Botones"
+
+#: inc/customizer-assets/customizer.php:557
+msgid "Header Color in Android Chrome"
+msgstr "Color del encabezado en Android Chrome"
+
+#: inc/customizer-assets/customizer.php:572
+msgid "Hide Tagline"
+msgstr "Ocultar la descripción del sitio"
+
+#: inc/customizer-assets/customizer.php:580
+msgid "Main Navigation Bar"
+msgstr "Barra de navegación principal"
+
+#: inc/customizer-assets/customizer.php:593
+msgid "Navbar Expansion"
+msgstr "Expansión de barra de navegación"
+
+#: inc/customizer-assets/customizer.php:596
+msgid ""
+"Navbar is Collapsed on mobile, and expands to a full blown menubar on chosen "
+"breakpoint"
+msgstr ""
+"Navbar está contraído en el móvil y se expande a una barra de menú completa "
+"en el punto de interrupción elegido"
+
+#: inc/customizer-assets/customizer.php:617
+msgid "Navbar Position"
+msgstr "Posición de la barra de navegación"
+
+#: inc/customizer-assets/customizer.php:639
+msgid "Enable Page Scrolling Detection"
+msgstr "Habilitar la detección de desplazamiento de página"
+
+#: inc/customizer-assets/customizer.php:640
+msgid ""
+"Publish and exit the Customizer to see the effect. Adds a scroll-position-at-"
+"top / scroll-position-not-at-top class to the BODY element according to "
+"scroll position. Customize via CSS. Use with Navbar Position set to Fixed "
+"for best results. <!--  <a target='_blank' href='#'>Tutorial Coming Soon</a> "
+"--> "
+msgstr ""
+"Publique y salga del Personalizador para ver el efecto. Agrega una clase "
+"scroll-position-at-top / scroll-position-not-at-top al elemento BODY según "
+"la posición de desplazamiento. Personaliza a través de CSS. Úselo con la "
+"posición de la barra de navegación establecida en Fijo para obtener los "
+"mejores resultados. <!--  <a target='_blank' href='#'>Tutorial próximamente</"
+"a> --> "
+
+#: inc/customizer-assets/customizer.php:656
+msgid "Navbar Background Color"
+msgstr "Color del fondo de la barra de navegación"
+
+#: inc/customizer-assets/customizer.php:684
+msgid "Color Scheme (Menubar links)"
+msgstr "Combinación de colores (enlaces de la barra de menús)"
+
+#: inc/customizer-assets/customizer.php:710
+msgid "Enable Search Form"
+msgstr "Habilitar Formulario de búsqueda"
+
+#: inc/customizer-assets/customizer.php:722
+msgid "Optional Topbar"
+msgstr "Barra superior opcional"
+
+#: inc/customizer-assets/customizer.php:735
+msgid "Enable Topbar"
+msgstr "Habilitar Barra Superior"
+
+#: inc/customizer-assets/customizer.php:736
+msgid "Requires Navbar position set to 'Standard static top'"
+msgstr ""
+"Requiere que la posición de la barra de navegación esté establecida en "
+"'Standard static top'"
+
+#: inc/customizer-assets/customizer.php:751
+msgid "Topbar Text / HTML"
+msgstr "Texto de la barra superior / HTML"
+
+#: inc/customizer-assets/customizer.php:766
+msgid "Topbar Background Color"
+msgstr "Color de fondo de la barra superior"
+
+#: inc/customizer-assets/customizer.php:792
+msgid "Topbar Text Color"
+msgstr "Color del texto de la barra superior"
+
+#: inc/customizer-assets/customizer.php:811
+msgid "Footer"
+msgstr "Pie de página"
+
+#: inc/customizer-assets/customizer.php:824
+msgid "Footer Text"
+msgstr "Texto de pie de página"
+
+#: inc/customizer-assets/customizer.php:835
+msgid "Header / Footer Code"
+msgstr "Código de encabezado / pie de página"
+
+#: inc/customizer-assets/customizer.php:848
+msgid "Add code to Header"
+msgstr "Agregar código al encabezado"
+
+#: inc/customizer-assets/customizer.php:866
+msgid "Add code to Footer"
+msgstr "Agregar código al pie de página"
+
+#: inc/customizer-assets/customizer.php:883
+msgid "Font Loading Header code"
+msgstr "Cargando código de fuente del encabezado"
+
+#: inc/customizer-assets/customizer.php:899
+msgid "Disable the Font Loading in Header"
+msgstr "Deshabilitar la carga de fuentes en el encabezado"
+
+#: inc/customizer-assets/customizer.php:900
+msgid "<b>Keep this unchecked, unless you really want. </b>"
+msgstr "<b>Mantén esto desactivado, a menos que realmente quieras. </b>"
+
+#: inc/customizer-assets/customizer.php:900
+msgid ""
+"Disables serving the code in the textarea above to the site header. Can be "
+"relevant if you want to self-host Google Fonts. Refer to this <a "
+"target='_blank' href='https://google-webfonts-helper.herokuapp.com/fonts/"
+"abeezee?subsets=latin'>tool</a> to get started. "
+msgstr ""
+"Deshabilita la entrega del código del área de texto anterior al encabezado "
+"del sitio. Puede ser relevante si desea alojar localmente fuentes de Google. "
+"Consulte esta <a target='_blank' href='https://google-webfonts-helper."
+"herokuapp.com/fonts/abeezee?subsets=latin'>herramienta</a> para comenzar. "
+
+#: inc/customizer-assets/customizer.php:909
+msgid "Global Options & Utilities"
+msgstr "Opciones globales y utilidades"
+
+#: inc/customizer-assets/customizer.php:939
+msgid "Disable  SCSS  LiveReload  "
+msgstr "Deshabilitar SCSS LiveReload  "
+
+#: inc/customizer-assets/customizer.php:940
+msgid ""
+"Will completely disable the entire livereload feature. If you're not editing "
+"the SCSS files, you can do so. Makes a difference for site admins only."
+msgstr ""
+"Deshabilitará completamente la característica de ver los cambios en vivo. Si "
+"no está editando los archivos SCSS, puede hacerlo. Marca la diferencia solo "
+"para los administradores del sitio."
+
+#: inc/customizer-assets/customizer.php:956
+msgid "Disable the WordPress comments system"
+msgstr "Deshabilitar el sistema de comentarios de WordPress"
+
+#: inc/customizer-assets/customizer.php:957
+msgid "Will completely disable the entire WP comments feature."
+msgstr "Deshabilitará completamente toda la función de comentarios de WP."
+
+#: inc/customizer-assets/customizer.php:991
+msgid "Add a 'Back to Top' button to site"
+msgstr "Agregar un botón 'Volver arriba' al sitio"
+
+#: inc/customizer-assets/customizer.php:992
+msgid ""
+"Very light implementation. To see the button, you will also need to Publish, "
+"exit the Customizer, and scroll down a long page"
+msgstr ""
+"Implementación en segundo plano. Para ver el botón, deberá también publicar, "
+"salir del Personalizador y desplazarse hacia abajo en una página larga"
+
+#: inc/customizer-assets/customizer.php:1010
+msgid "Enable Lightbox"
+msgstr "Habilitar Lightbox"
+
+#: inc/customizer-assets/customizer.php:1011
+msgid ""
+"Will lazily add a JS and a CSS file from cdn.jsdelivr.net before closing the "
+"BODY of the page, to use   <a target='_blank' href='https://github.com/biati-"
+"digital/glightbox'>gLightBox</a>: a very lightweight lightbox "
+"implementation. <br><br>The lightbox will be enabled on all images matching "
+"the selector: main#theme-main a:not(.nolightbox) img<br>To prevent the "
+"lightbox on an image, add the <b>nolightbox</b> class to it."
+msgstr ""
+"Agregará carga diferida de un archivo JS y un archivo CSS desde cdn.jsdelivr."
+"net antes de cerrar el CUERPO de la página, para usar   <a target='_blank' "
+"href='https://github.com/biati-digital/glightbox'>gLightBox</a>: una "
+"implementación de caja de luz muy liviana. <br><br>La caja de luz se "
+"habilitará en todas las imágenes que coincidan con el selector: main#theme-"
+"main a:not(.nolightbox) img<br>Para evitar la caja de luz en una imagen, "
+"agréguele la clase <b>nolightbox</b> ."
+
+#: inc/customizer-assets/customizer.php:1020
+msgid "Single Post & Archives"
+msgstr "Publicación única y archivos"
+
+#: inc/customizer-assets/customizer.php:1033
+msgid "Hide Categories"
+msgstr "Ocultar Categorías"
+
+#: inc/customizer-assets/customizer.php:1049
+msgid "Hide Post Date and Author"
+msgstr "Ocultar fecha de publicación y autor"
+
+#: inc/customizer-assets/customizer.php:1084
+msgid "Enable Sharing Buttons after the Content"
+msgstr "Habilitar botones para compartir después del contenido"
+
+#: inc/customizer-assets/customizer.php:1085
+msgid "Pure HTML only, SVG inline icons, zero bloat"
+msgstr "Solo HTML puro, iconos SVG en línea, sin código innecesario"
+
+#: inc/options-page.php:192
+msgid "Export Settings"
+msgstr "Ajustes de exportación"
+
+#: inc/options-page.php:194
+msgid ""
+"Export the theme settings for this site as a .json file. This allows you to "
+"easily import the configuration into another site."
+msgstr ""
+"Exporte la configuración del tema de este sitio como un archivo .json. Esto "
+"le permite importar fácilmente la configuración a otro sitio."
+
+#: inc/options-page.php:199
+msgid "Export"
+msgstr "Exportar"
+
+#: inc/options-page.php:206
+msgid "Import Settings"
+msgstr "Importar ajustes"
+
+#: inc/options-page.php:208
+msgid ""
+"Import the plugin settings from a .json file. This file can be obtained by "
+"exporting the settings on another site using the form above."
+msgstr ""
+"Importar la configuración del plugin desde un archivo .json. Este archivo se "
+"puede obtener mediante la exportación de los ajustes en otro sitio usando el "
+"formulario de arriba."
+
+#: inc/options-page.php:216
+msgid "Import"
+msgstr "Importar"
+
+#: inc/options-page.php:287
+msgid "Please upload a valid .json file"
+msgstr "Por favor sube un archivo .json válido"
+
+#: inc/options-page.php:293
+msgid "Please upload a file to import"
+msgstr "Por favor sube un archivo para importar"
+
+#: inc/pagination.php:53
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: inc/pagination.php:54
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: inc/pagination.php:57
+msgid "Posts navigation"
+msgstr "Navegación de Entradas"
+
+#: inc/setup.php:49
+msgid "Primary Menu"
+msgstr "Menú principal"
+
+#: inc/setup.php:50
+msgid "Secondary Menu"
+msgstr "Menú Secundario"
+
+#: inc/setup.php:159
+msgid "Read More..."
+msgstr "Leer más..."
+
+#: inc/template-tags.php:29
+msgid "Share"
+msgstr "Compartir"
+
+#: inc/theme-settings.php:76
+msgid "Twitter Username"
+msgstr "Nombre de usuario de Twitter"
+
+#: inc/widgets.php:147
+msgid "Main Sidebar"
+msgstr "Barra lateral principal"
+
+#: inc/widgets.php:149
+msgid "Main sidebar widget area"
+msgstr "Área de widgets de la barra lateral principal"
+
+#: inc/widgets.php:160
+msgid "Footer Full"
+msgstr "Pie de página completo"
+
+#: inc/widgets.php:162
+msgid "Full sized footer widget with dynamic grid"
+msgstr "Widget de pie de página de tamaño completo con cuadrícula dinámica"
+
+#: inc/widgets.php:173
+msgid "WooCommerce Shop Sidebar"
+msgstr "Barra lateral de tienda WooCommerce"
+
+#: inc/widgets.php:175
+msgid "Shop sidebar widget area"
+msgstr "Área de widgets de la barra lateral de la tienda"
+
+#. translators: %s: query term
+#: search.php:16
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Resultados de búsqueda para: %s"
+
+#: single.php:29
+msgid "Categories"
+msgstr "Categorías"
+
+#: single.php:45
+msgid "by"
+msgstr "por"
+
+#: single.php:60
+msgid "Edit this post"
+msgstr "Editar esta publicación"
+
+#: woocommerce/cart/cart-empty.php:29
+msgid "Return to shop"
+msgstr "Volver a la tienda"
+
+#: woocommerce/cart/cart.php:30 woocommerce/cart/cart.php:77
+#: woocommerce/checkout/form-pay.php:27
+msgid "Product"
+msgstr "Producto"
+
+#: woocommerce/cart/cart.php:31 woocommerce/cart/cart.php:97
+msgid "Price"
+msgstr "Precio"
+
+#: woocommerce/cart/cart.php:32 woocommerce/cart/cart.php:103
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: woocommerce/cart/cart.php:33 woocommerce/cart/cart.php:125
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#: woocommerce/cart/cart.php:56
+msgid "Remove this item"
+msgstr "Eliminar este artículo"
+
+#: woocommerce/cart/cart.php:92
+msgid "Available on backorder"
+msgstr "Disponible por pedido pendiente"
+
+#: woocommerce/cart/cart.php:143
+msgid "Coupon:"
+msgstr "Cupón:"
+
+#: woocommerce/cart/cart.php:143 woocommerce/checkout/form-coupon.php:34
+msgid "Coupon code"
+msgstr "Código de cupón"
+
+#: woocommerce/cart/cart.php:143 woocommerce/checkout/form-coupon.php:38
+msgid "Apply coupon"
+msgstr "Aplicar cupón"
+
+#: woocommerce/cart/cart.php:148
+msgid "Update cart"
+msgstr "Actualizar carrito"
+
+#: woocommerce/cart/proceed-to-checkout-button.php:26
+msgid "Proceed to checkout"
+msgstr "Finalizar pedido"
+
+#: woocommerce/checkout/form-checkout.php:26
+msgid "You must be logged in to checkout."
+msgstr "Debes iniciar sesión para realizar el pago."
+
+#: woocommerce/checkout/form-checkout.php:52
+msgid "Your order"
+msgstr "Tu pedido"
+
+#: woocommerce/checkout/form-coupon.php:26
+msgid "Have a coupon?"
+msgstr "¿Tienes un cupón?"
+
+#: woocommerce/checkout/form-coupon.php:26
+msgid "Click here to enter your code"
+msgstr "Haga clic aquí para ingresar su código"
+
+#: woocommerce/checkout/form-coupon.php:31
+msgid "If you have a coupon code, please apply it below."
+msgstr "Si tienes un código de cupón, por favor, introdúcelo abajo."
+
+#: woocommerce/checkout/form-pay.php:28
+msgid "Qty"
+msgstr "Cantidad"
+
+#: woocommerce/checkout/form-pay.php:29
+msgid "Totals"
+msgstr "Totales"
+
+#: woocommerce/checkout/form-pay.php:79
+msgid ""
+"Sorry, it seems that there are no available payment methods for your "
+"location. Please contact us if you require assistance or wish to make "
+"alternate arrangements."
+msgstr ""
+"Lo sentimos, parece que no hay métodos de pago disponibles para tu "
+"ubicación. Por favor, ponte en contacto con nosotros si necesitas ayuda."
+
+#: woocommerce/checkout/payment.php:33
+msgid ""
+"Sorry, it seems that there are no available payment methods for your state. "
+"Please contact us if you require assistance or wish to make alternate "
+"arrangements."
+msgstr ""
+"Lo sentimos, parece que no hay métodos de pago disponibles para su "
+"ubicación. Póngase en contacto con nosotros si necesita ayuda."
+
+#: woocommerce/checkout/payment.php:33
+msgid "Please fill in your details above to see available payment methods."
+msgstr ""
+"Por favor, introduce tus datos arriba para ver los métodos de pago "
+"disponibles."
+
+#. translators: $1 and $2 opening and closing emphasis tags respectively
+#: woocommerce/checkout/payment.php:42
+#, php-format
+msgid ""
+"Since your browser does not support JavaScript, or it is disabled, please "
+"ensure you click the %1$sUpdate Totals%2$s button before placing your order. "
+"You may be charged more than the amount stated above if you fail to do so."
+msgstr ""
+"Debido a que tu navegador no soporta JavaScript, o lo tiene deshabilitado, "
+"asegúrate por favor de hacer clic en el botón %1$sActualizar totales%2$s "
+"antes de realizar el pedido. De no hacerlo, se te podría cobrar más de la "
+"cantidad indicada arriba."
+
+#: woocommerce/checkout/payment.php:44
+msgid "Update totals"
+msgstr "Actualizar totales"
+
+#: woocommerce/global/form-login.php:33
+#: woocommerce/myaccount/form-lost-password.php:28
+msgid "Username or email"
+msgstr "Nombre de usuario o correo electrónico"
+
+#: woocommerce/global/form-login.php:37 woocommerce/myaccount/form-login.php:42
+#: woocommerce/myaccount/form-login.php:92
+msgid "Password"
+msgstr "Contraseña"
+
+#: woocommerce/global/form-login.php:46 woocommerce/myaccount/form-login.php:50
+msgid "Remember me"
+msgstr "Recuérdame"
+
+#: woocommerce/global/form-login.php:50 woocommerce/myaccount/form-login.php:31
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: woocommerce/global/form-login.php:54 woocommerce/myaccount/form-login.php:56
+msgid "Lost your password?"
+msgstr "¿Perdiste tu contraseña?"
+
+#: woocommerce/loop/orderby.php:24
+msgid "Shop order"
+msgstr "Pedido"
+
+#: woocommerce/myaccount/downloads.php:41
+msgid "Go shop"
+msgstr "Ir a tienda"
+
+#: woocommerce/myaccount/downloads.php:43
+msgid "No downloads available yet."
+msgstr "Todavía no hay descargas disponibles."
+
+#: woocommerce/myaccount/form-edit-account.php:27
+msgid "First name"
+msgstr "Nombre"
+
+#: woocommerce/myaccount/form-edit-account.php:31
+msgid "Last name"
+msgstr "Apellido"
+
+#: woocommerce/myaccount/form-edit-account.php:37
+msgid "Display name"
+msgstr "Nombre para mostrar"
+
+#: woocommerce/myaccount/form-edit-account.php:38
+msgid ""
+"This will be how your name will be displayed in the account section and in "
+"reviews"
+msgstr "Así se mostrará tu nombre en la sección de tu cuenta y en las reseñas"
+
+#: woocommerce/myaccount/form-edit-account.php:43
+#: woocommerce/myaccount/form-login.php:85
+msgid "Email address"
+msgstr "Dirección de correo electrónico"
+
+#: woocommerce/myaccount/form-edit-account.php:48
+msgid "Password change"
+msgstr "Cambiar contraseña"
+
+#: woocommerce/myaccount/form-edit-account.php:51
+msgid "Current password (leave blank to leave unchanged)"
+msgstr "Contraseña actual (dejar en blanco para no cambiar la contraseña)"
+
+#: woocommerce/myaccount/form-edit-account.php:55
+msgid "New password (leave blank to leave unchanged)"
+msgstr "Nueva contraseña (dejar en blanco para dejar sin cambios)"
+
+#: woocommerce/myaccount/form-edit-account.php:59
+msgid "Confirm new password"
+msgstr "Confirmar nueva contraseña"
+
+#: woocommerce/myaccount/form-edit-account.php:69
+msgid "Save changes"
+msgstr "Guardar cambios"
+
+#: woocommerce/myaccount/form-edit-address.php:20
+#: woocommerce/myaccount/my-address.php:29
+#: woocommerce/myaccount/my-address.php:38
+msgid "Billing address"
+msgstr "Dirección de facturación"
+
+#: woocommerce/myaccount/form-edit-address.php:20
+#: woocommerce/myaccount/my-address.php:30
+msgid "Shipping address"
+msgstr "Dirección de envío"
+
+#: woocommerce/myaccount/form-edit-address.php:46
+msgid "Save address"
+msgstr "Guardar dirección"
+
+#: woocommerce/myaccount/form-login.php:38
+msgid "Username or email address"
+msgstr "Nombre de usuario o correo electrónico"
+
+#: woocommerce/myaccount/form-login.php:53
+msgid "Log in"
+msgstr "Iniciar sesión"
+
+#: woocommerce/myaccount/form-login.php:69
+#: woocommerce/myaccount/form-login.php:106
+msgid "Register"
+msgstr "Registrarse"
+
+#: woocommerce/myaccount/form-login.php:78
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: woocommerce/myaccount/form-login.php:98
+msgid "A password will be sent to your email address."
+msgstr "Se enviará una contraseña a tu dirección de correo electrónico."
+
+#: woocommerce/myaccount/form-lost-password.php:25
+msgid ""
+"Lost your password? Please enter your username or email address. You will "
+"receive a link to create a new password via email."
+msgstr ""
+"¿Perdiste tu contraseña? Por favor, introduce tu nombre de usuario o correo "
+"electrónico. Recibirás un enlace para crear una contraseña nueva por correo "
+"electrónico."
+
+#: woocommerce/myaccount/form-lost-password.php:38
+msgid "Reset password"
+msgstr "Restablecer contraseña"
+
+#: woocommerce/myaccount/form-reset-password.php:25
+msgid "Enter a new password below."
+msgstr "Ingresa debajo una contraseña nueva."
+
+#: woocommerce/myaccount/form-reset-password.php:28
+msgid "New password"
+msgstr "Nueva contraseña"
+
+#: woocommerce/myaccount/form-reset-password.php:32
+msgid "Re-enter new password"
+msgstr "Repite la nueva contraseña"
+
+#: woocommerce/myaccount/form-reset-password.php:45
+msgid "Save"
+msgstr "Guardar"
+
+#: woocommerce/myaccount/my-address.php:49
+msgid "The following addresses will be used on the checkout page by default."
+msgstr ""
+"Las siguientes direcciones se utilizarán en la página de pago de forma "
+"predeterminada."
+
+#: woocommerce/myaccount/my-address.php:61
+msgid "Edit"
+msgstr "Editar"
+
+#: woocommerce/myaccount/my-address.php:66
+msgid "You have not set up this type of address yet."
+msgstr "Todavía no ha configurado este tipo de dirección."
+
+#: woocommerce/myaccount/my-orders.php:16
+msgid "Order"
+msgstr "Pedido"
+
+#: woocommerce/myaccount/my-orders.php:17
+msgid "Date"
+msgstr "﻿Fecha"
+
+#: woocommerce/myaccount/my-orders.php:18
+msgid "Status"
+msgstr "Estado"
+
+#: woocommerce/myaccount/my-orders.php:19
+msgid "Total"
+msgstr "Total"
+
+#: woocommerce/myaccount/my-orders.php:39
+msgid "Recent orders"
+msgstr "Pedidos recientes"
+
+#: woocommerce/myaccount/my-orders.php:65 woocommerce/myaccount/orders.php:49
+msgctxt "hash before order number"
+msgid "#"
+msgstr "#"
+
+#. translators: 1: formatted order total 2: total order items
+#: woocommerce/myaccount/my-orders.php:77 woocommerce/myaccount/orders.php:61
+#, php-format
+msgid "%1$s for %2$s item"
+msgid_plural "%1$s for %2$s items"
+msgstr[0] "%1$s para %2$s"
+msgstr[1] "%1$s para %2$s elementos"
+
+#: woocommerce/myaccount/orders.php:89
+msgid "Previous"
+msgstr "Anterior"
+
+#: woocommerce/myaccount/orders.php:93
+msgid "Next"
+msgstr "Siguiente"
+
+#: woocommerce/myaccount/orders.php:101
+msgid "Go to the shop"
+msgstr "Ir a la tienda"
+
+#: woocommerce/myaccount/orders.php:103
+msgid "No order has been made yet."
+msgstr "No se ha hecho ningún pedido todavía."
+
+#: woocommerce/product-searchform.php:25
+msgid "Search products&hellip;"
+msgstr "Buscar productos&hellip;"
+
+#: woocommerce/product-searchform.php:26
+msgid "Search for:"
+msgstr "Buscar:"
+
+#: woocommerce/product-searchform.php:29
+msgctxt "submit button"
+msgid "Search"
+msgstr "Buscar"
+
+#. Theme Name of the plugin/theme
+msgid "picostrap5"
+msgstr "picostrap5"
+
+#. Theme URI of the plugin/theme
+msgid "https://picostrap.com"
+msgstr "https://picostrap.com"
+
+#. Description of the plugin/theme
+msgid "The fastest Bootstrap 5 WordPress starter theme"
+msgstr "El Starter theme más rápido de Bootstrap 5 para WordPress"
+
+#. Author of the plugin/theme
+msgid "The picostrap Team"
+msgstr "El equipo de picostrap"
