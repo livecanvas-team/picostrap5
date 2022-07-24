@@ -14,23 +14,12 @@
 		width: rfs-fluid-value($j * 1.15rem);
 	}
 }
-//MIN-VH UTILITIES //now useless, they're generated via the Utilities API in theme variables
-/*
-.min-vh-10 {min-height: 10vh;}
-.min-vh-20 {min-height: 20vh;}
-.min-vh-30 {min-height: 30vh;}
-.min-vh-40 {min-height: 40vh;}
-.min-vh-50 {min-height: 50vh;}
-.min-vh-60 {min-height: 60vh;}
-.min-vh-70 {min-height: 70vh;}
-.min-vh-80 {min-height: 80vh;}
-.min-vh-90 {min-height: 90vh;}
-*/
 
-// WHEN TOP ADMIN BAR IS FIXED, MOVE CONTENT DOWN
+// WHEN HEADER NAVBAR IS FIXED TOP, MOVE CONTENT DOWN 
+// You may want to comment/remove this row for having a transparent menubar
 body.picostrap_header_navbar_position_fixed-top {padding-top:56px}
 
-// WHEN TOP ADMIN BAR IS PRESENT, Make WPADMINBAR SEE-THROUGH
+// WHEN HEADER NAVBAR IS FIXED TOP, Make WPADMINBAR SEE-THROUGH
 body.picostrap_header_navbar_position_fixed-top #wpadminbar {opacity:0.1}
 body.picostrap_header_navbar_position_fixed-top #wpadminbar:hover {opacity:1}
 
