@@ -15,9 +15,9 @@
 	}
 }
 
-// WHEN HEADER NAVBAR IS FIXED TOP, MOVE CONTENT DOWN 
-// You may want to comment/remove this row for having a transparent menubar
-body.picostrap_header_navbar_position_fixed-top {padding-top:56px}
+// WHEN HEADER NAVBAR IS FIXED TOP, MOVE CONTENT DOWN so it's not hidden by the menubar
+// You may want to remove/edit this row depending on your design and navbar height
+body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_color_choice_bg-transparent) {padding-top:58px}
 
 // WHEN HEADER NAVBAR IS FIXED TOP, Make WPADMINBAR SEE-THROUGH
 body.picostrap_header_navbar_position_fixed-top #wpadminbar {opacity:0.1}
