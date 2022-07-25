@@ -377,7 +377,7 @@ msgid "Read More..."
 msgstr "Leer más..."
 
 #: inc/template-tags.php:29
-msgid "Share"
+msgid "Share this post"
 msgstr "Compartir"
 
 #: inc/theme-settings.php:76

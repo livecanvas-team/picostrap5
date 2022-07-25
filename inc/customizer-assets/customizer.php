@@ -344,13 +344,28 @@ function picostrap_register_main_partials( WP_Customize_Manager $wp_customize ) 
 		'render_callback' => '__return_false'    
 	));
 	
-	//SINGLE: meta: date and author
+	//SINGLE: metas: date and author
+	/*
 	$wp_customize->selective_refresh->add_partial( 'singlepost_entry_meta', array(
 		'selector' => '#single-post-meta',
 		'settings' => array( 'singlepost_disable_entry_meta' ),
 		'render_callback' => '__return_false'    
 	));
+	*/
 
+	//SINGLE: meta date  
+	$wp_customize->selective_refresh->add_partial( 'singlepost_date', array(
+		'selector' => '.post-date',
+		'settings' => array( 'singlepost_disable_date' ),
+		'render_callback' => '__return_false'    
+	));
+
+	//SINGLE: meta author
+	$wp_customize->selective_refresh->add_partial( 'singlepost_author', array(
+		'selector' => '.post-author',
+		'settings' => array( 'singlepost_disable_author' ),
+		'render_callback' => '__return_false'    
+	));
 
 	/*
 	//SINGLE: postnavi
@@ -1038,7 +1053,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
 	));
 
-	//ENTRY META: AUTHOR  & DATE  
+	//ENTRY METAS: AUTHOR & DATE  
+	/*
 	$wp_customize->add_setting("singlepost_disable_entry_meta", array(
 		"default" => "",
 		"transport" => "refresh",
@@ -1047,14 +1063,45 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 		$wp_customize,
 		"singlepost_disable_entry_meta",
 		array(
-			"label" => __("Hide Post Date and Author", "picostrap"),
+			"label" => __("Hide Post Metas: Date and Author", "picostrap"),
+			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+			"section" => "singleposts", 
+			'type'     => 'checkbox',
+			)
+	));
+	*/
+
+	//ENTRY META: AUTHOR   
+	$wp_customize->add_setting("singlepost_disable_author", array(
+		"default" => "",
+		"transport" => "refresh",
+	));
+	$wp_customize->add_control(new WP_Customize_Control(
+		$wp_customize,
+		"singlepost_disable_author",
+		array(
+			"label" => __("Hide Post Author", "picostrap"),
 			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
 			"section" => "singleposts", 
 			'type'     => 'checkbox',
 			)
 	));
 
-
+	//ENTRY META: DATE  
+	$wp_customize->add_setting("singlepost_disable_date", array(
+		"default" => "",
+		"transport" => "refresh",
+	));
+	$wp_customize->add_control(new WP_Customize_Control(
+		$wp_customize,
+		"singlepost_disable_date",
+		array(
+			"label" => __("Hide Post Date", "picostrap"),
+			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+			"section" => "singleposts", 
+			'type'     => 'checkbox',
+			)
+	));
 
 	/*
 	//PAGES NAVIGATION: NEXT / PREV ARTICLE
@@ -1073,6 +1120,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 	*/
+	
  	//SHARING BUTTONS
 	$wp_customize->add_setting("enable_sharing_buttons", array(
         "default" => "",

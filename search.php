@@ -40,7 +40,9 @@ get_header();
                     <svg hidden class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                     <?php the_post_thumbnail() ?>
                     <div class="card-body">
-                        <small class="text-muted"><?php the_date() ?></small>
+                        <?php if (!get_theme_mod("singlepost_disable_date") ): ?>
+                          <small class="text-muted"><?php the_date() ?></small>
+                        <?php endif; ?>
                         <h2><a class="stretched-link" href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
                         <p class="card-text"><?php the_excerpt(); ?></p>
                         <!--

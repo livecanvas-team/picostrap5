@@ -38,11 +38,17 @@ if ( have_posts() ) :
 
                 <h1 class="display-4"><?php the_title(); ?></h1>
                 
-                <?php if (!get_theme_mod("singlepost_disable_entry_meta") ): ?>
+                <?php if (!get_theme_mod("singlepost_disable_date") OR !get_theme_mod("singlepost_disable_author")  ): ?>
                     <div class="post-meta" id="single-post-meta">
                         <p class="lead text-secondary">
-                            <span class="post-date"><?php the_date(); ?> </span>
-                            <span class="text-secondary post-author"> <?php _e( 'by', 'picostrap' ) ?> <?php the_author(); ?></span>
+                            
+                            <?php if (!get_theme_mod("singlepost_disable_date") ): ?>
+                                <span class="post-date"><?php the_date(); ?> </span>
+                            <?php endif; ?>
+
+                            <?php if (!get_theme_mod("singlepost_disable_author") ): ?>
+                                <span class="text-secondary post-author"> <?php _e( 'by', 'picostrap' ) ?> <?php the_author(); ?></span>
+                            <?php endif; ?>
                         </p>
                     </div> 
                 <?php endif; ?>

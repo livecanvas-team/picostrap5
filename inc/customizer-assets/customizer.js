@@ -209,8 +209,8 @@ function ps_prepare_fonts_import_code_snippet(){
 		//append link to show FONT COMBINATIONs
 		$("#customize-control-SCSSvar_font-family-base h1").append(" <a href='#' id='cs-show-combi' style='float: right; margin-top: 11px; font-size: 10px;text-decoration: none;user-select: none;'>Font Combinations...</button>");
 
-		//show uon clieck 
-		//USER CLICKS  
+		//show upon click 
+		//USER CLICKS SHOW FONT COMBINATIONS
 		$("body").on("click", "#cs-show-combi", function () {
 			//$(".customize-controls-close").click();
 			$("#cs-font-combi").slideToggle();
@@ -370,6 +370,9 @@ function ps_prepare_fonts_import_code_snippet(){
 		});
 		
 		
+
+		
+
 		
 	}); //end document ready
 

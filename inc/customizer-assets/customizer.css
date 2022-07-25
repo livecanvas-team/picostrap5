@@ -175,4 +175,17 @@ body span.fp-pill.italic{display: none}
 }
 
 #cs-font-combi {display: none;}
- 
+
+/* FOOTER TEXT / HEADER / FOOTER / TEXTAREAS */
+
+#_customize-input-picostrap_footer_text, #_customize-input-picostrap_header_code, #_customize-input-picostrap_footer_code {
+  min-height: 350px;
+  font-size: 12px;
+}
+
+/* FONT HEADER CODE TEXTAREA */
+#_customize-input-picostrap_fonts_header_code {
+  min-height: 160px;
+  font-size: 12px;
+  color:#333;
+}

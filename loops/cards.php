@@ -9,7 +9,10 @@ This loop is used in the Archive and in the Home [.php] templates.
     <?php the_post_thumbnail('medium', ['class' => 'w-100']);    ?>
     
     <div class="card-body">
-        <small class="text-muted"><?php the_date() ?></small>
+        <?php if (!get_theme_mod("singlepost_disable_date") ): ?>
+          <small class="text-muted"><?php the_date() ?></small>
+        <?php endif; ?>
+        
         <h2><a class="stretched-link" href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
         <p class="card-text"><?php the_excerpt(); ?></p>
         <!--
