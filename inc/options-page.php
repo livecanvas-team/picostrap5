@@ -304,6 +304,11 @@ function pico_process_settings_import() {
 	//replace theme version of published presets
 	$file_contents=str_replace('"theme_version":"1.6.0"', '"theme_version":"1.7.7"', $file_contents); //on each version bump remember to update magic number //todo
 	
+	// and of compatible versions
+	$file_contents=str_replace('"theme_version":"1.7.0"', '"theme_version":"1.7.7"', $file_contents); //on each version bump remember to update magic number //todo
+	$file_contents=str_replace('"theme_version":"1.7.5"', '"theme_version":"1.7.7"', $file_contents); //on each version bump remember to update magic number //todo
+	$file_contents=str_replace('"theme_version":"1.7.6"', '"theme_version":"1.7.7"', $file_contents); //on each version bump remember to update magic number //todo
+	
 	$settings = (array) json_decode( $file_contents );
 	
 	if (!isset($settings['theme_version']) OR $settings['theme_version']!=pico_get_parent_theme_version()) wp_die("<h1>Invalid JSON format</h1><h4> You can only import json exported from the same version of the theme</h4>");
