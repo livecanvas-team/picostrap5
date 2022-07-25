@@ -294,24 +294,13 @@ function pico_process_settings_import() {
 	}
 
 	// Retrieve the settings from the file and convert the json object to an array.
-	$file_contents = file_get_contents( $import_file );
+	$settings = (array) json_decode( file_get_contents( $import_file ) );
 	
-	//Some fixes and processing
-	
-	//get rid of nav_menu_locations which breaks all
-	$file_contents=str_replace('nav_menu_locations', 'useless_nav_menu_locations', $file_contents);
-	
-	//replace theme version of published presets
-	$file_contents=str_replace('"theme_version":"1.6.0"', '"theme_version":"1.7.7"', $file_contents); //on each version bump remember to update magic number //todo
-	
-	// and of compatible versions
-	$file_contents=str_replace('"theme_version":"1.7.0"', '"theme_version":"1.7.7"', $file_contents); //on each version bump remember to update magic number //todo
-	$file_contents=str_replace('"theme_version":"1.7.5"', '"theme_version":"1.7.7"', $file_contents); //on each version bump remember to update magic number //todo
-	$file_contents=str_replace('"theme_version":"1.7.6"', '"theme_version":"1.7.7"', $file_contents); //on each version bump remember to update magic number //todo
-	
-	$settings = (array) json_decode( $file_contents );
-	
-	if (!isset($settings['theme_version']) OR $settings['theme_version']!=pico_get_parent_theme_version()) wp_die("<h1>Invalid JSON format</h1><h4> You can only import json exported from the same version of the theme</h4>");
+	//fix settings
+	unset ($settings['nav_menu_locations']);
+
+	//version check
+	//if (!isset($settings['theme_version']) OR $settings['theme_version']!=pico_get_parent_theme_version()) wp_die("<h1>Invalid JSON format</h1><h4> You can only import json exported from the same version of the theme</h4>");
 
 	$theme = get_option( 'stylesheet' );
 
