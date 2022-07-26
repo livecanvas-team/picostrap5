@@ -294,13 +294,26 @@ function pico_process_settings_import() {
 	}
 
 	// Retrieve the settings from the file and convert the json object to an array.
-	$settings = (array) json_decode( file_get_contents( $import_file ) );
-	
-	//fix settings
-	unset ($settings['nav_menu_locations']);
+	$settings = (array) json_decode( file_get_contents( $import_file ), TRUE );
 
-	//version check - maybe its not necessary anymore
+	//version check - should not be necessary anymore, so its disabled
 	//if (!isset($settings['theme_version']) OR $settings['theme_version']!=pico_get_parent_theme_version()) wp_die("<h1>Invalid JSON format</h1><h4> You can only import json exported from the same version of the theme</h4>");
+
+	//should we choose to whitelist only some values, some example code
+	/*
+	// eliminate non - string / boolean values like nav_menu_locations as they break the customizer after importing
+	foreach($settings as $setting_name => $setting_value):
+
+		if (!is_string($setting_value) && !is_bool($setting_value)) {
+			//echo ("eliminate ".$setting_name."<br><br>"); //for debug only
+			unset ($settings[$setting_name]);
+		}
+
+	endforeach; 
+
+	//var_dump ($settings); die; // for debug only
+
+	*/
 
 	$theme = get_option( 'stylesheet' );
 
