@@ -31,8 +31,13 @@ final class FunctionRule extends CallableDeclaration implements SassDeclaration
         return SpanUtil::initialIdentifier(SpanUtil::withoutInitialAtRule($this->getSpan()));
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitFunctionRule($this);
+    }
+
+    public function __toString(): string
+    {
+        return '@function ' . $this->getName() . '(' . $this->getArguments() . ') {' . implode(' ', $this->getChildren()) . '}';
     }
 }

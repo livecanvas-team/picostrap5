@@ -65,7 +65,7 @@ final class Stylesheet extends ParentStatement
         return $this->span;
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitStylesheet($this);
     }
@@ -117,5 +117,10 @@ final class Stylesheet extends ParentStatement
     public static function parseCss(string $contents, ?LoggerInterface $logger = null, ?string $sourceUrl = null): self
     {
         return (new CssParser($contents, $logger, $sourceUrl))->parse();
+    }
+
+    public function __toString(): string
+    {
+        return implode(' ', $this->getChildren());
     }
 }

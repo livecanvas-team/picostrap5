@@ -58,8 +58,13 @@ final class ImportRule implements Statement
         return $this->span;
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitImportRule($this);
+    }
+
+    public function __toString(): string
+    {
+        return '@import ' . implode(', ', $this->imports) . ';';
     }
 }

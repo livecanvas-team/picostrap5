@@ -13,6 +13,7 @@
 namespace ScssPhp\ScssPhp\Ast\Sass;
 
 use ScssPhp\ScssPhp\SourceSpan\FileSpan;
+use ScssPhp\ScssPhp\Util;
 use ScssPhp\ScssPhp\Util\SpanUtil;
 
 /**
@@ -52,6 +53,22 @@ final class Argument implements SassNode, SassDeclaration
         return $this->name;
     }
 
+    /**
+     * The variable name as written in the document, without underscores
+     * converted to hyphens and including the leading `$`.
+     *
+     * This isn't particularly efficient, and should only be used for error
+     * messages.
+     */
+    public function getOriginalName(): string
+    {
+        if ($this->defaultValue === null) {
+            return $this->span->getText();
+        }
+
+        return Util::declarationName($this->span);
+    }
+
     public function getNameSpan(): FileSpan
     {
         if ($this->defaultValue === null) {
@@ -69,5 +86,14 @@ final class Argument implements SassNode, SassDeclaration
     public function getSpan(): FileSpan
     {
         return $this->span;
+    }
+
+    public function __toString(): string
+    {
+        if ($this->defaultValue === null) {
+            return $this->name;
+        }
+
+        return $this->name . ': ' . $this->defaultValue;
     }
 }

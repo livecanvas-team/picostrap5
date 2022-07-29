@@ -99,8 +99,13 @@ final class ForRule extends ParentStatement
         return $this->span;
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitForRule($this);
+    }
+
+    public function __toString(): string
+    {
+        return '@for $' . $this->variable . ' from ' . $this->from . ($this->exclusive ? ' to ' : ' through ') . $this->to . '{' . implode(' ', $this->getChildren()) . '}';
     }
 }

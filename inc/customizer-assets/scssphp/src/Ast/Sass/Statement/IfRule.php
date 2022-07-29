@@ -84,8 +84,23 @@ final class IfRule implements Statement
         return $this->span;
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitIfRule($this);
+    }
+
+    public function __toString(): string
+    {
+        $parts = [];
+
+        foreach ($this->clauses as $index => $clause) {
+            $parts[] = ($index === 0 ? '@if ' : '@else if ') . $clause->getExpression() . '{' . implode(' ', $clause->getChildren()) . '}';
+        }
+
+        if ($this->lastClause !== null) {
+            $parts[] = $this->lastClause;
+        }
+
+        return implode(' ', $parts);
     }
 }

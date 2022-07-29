@@ -31,8 +31,7 @@ final class MixinRule extends CallableDeclaration implements SassDeclaration
     /**
      * Whether the mixin contains a `@content` rule.
      *
-     * @var bool
-     * @readonly
+     * @var bool|null
      */
     private $content;
 
@@ -62,8 +61,21 @@ final class MixinRule extends CallableDeclaration implements SassDeclaration
         return SpanUtil::initialIdentifier($startSpan);
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitMixinRule($this);
+    }
+
+    public function __toString(): string
+    {
+        $buffer = '@mixin ' . $this->getName();
+
+        if (!$this->getArguments()->isEmpty()) {
+            $buffer .= "({$this->getArguments()})";
+        }
+
+        $buffer .= ' {' . implode(' ', $this->getChildren()) . '}';
+
+        return $buffer;
     }
 }

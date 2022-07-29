@@ -14,9 +14,7 @@ namespace ScssPhp\ScssPhp\Ast\Sass\Import;
 
 use ScssPhp\ScssPhp\Ast\Sass\Import;
 use ScssPhp\ScssPhp\Ast\Sass\Interpolation;
-use ScssPhp\ScssPhp\Ast\Sass\SupportsCondition;
 use ScssPhp\ScssPhp\SourceSpan\FileSpan;
-use ScssPhp\ScssPhp\Visitor\ExpressionVisitor;
 
 /**
  * An import that produces a plain CSS `@import` rule.
@@ -36,16 +34,13 @@ final class StaticImport implements Import
     private $url;
 
     /**
-     * @var SupportsCondition|null
-     * @readonly
-     */
-    private $supports;
-
-    /**
+     * The modifiers (such as media or supports queries) attached to this import,
+     * or `null` if none are attached.
+     *
      * @var Interpolation|null
      * @readonly
      */
-    private $media;
+    private $modifiers;
 
     /**
      * @var FileSpan
@@ -53,12 +48,11 @@ final class StaticImport implements Import
      */
     private $span;
 
-    public function __construct(Interpolation $url, FileSpan $span, ?SupportsCondition $supports = null, ?Interpolation $media = null)
+    public function __construct(Interpolation $url, FileSpan $span, ?Interpolation $modifiers = null)
     {
         $this->url = $url;
         $this->span = $span;
-        $this->supports = $supports;
-        $this->media = $media;
+        $this->modifiers = $modifiers;
     }
 
     public function getUrl(): Interpolation
@@ -66,18 +60,24 @@ final class StaticImport implements Import
         return $this->url;
     }
 
-    public function getSupports(): ?SupportsCondition
+    public function getModifiers(): ?Interpolation
     {
-        return $this->supports;
-    }
-
-    public function getMedia(): ?Interpolation
-    {
-        return $this->media;
+        return $this->modifiers;
     }
 
     public function getSpan(): FileSpan
     {
         return $this->span;
+    }
+
+    public function __toString(): string
+    {
+        $buffer = (string) $this->url;
+
+        if ($this->modifiers !== null) {
+            $buffer .= ' ' . $this->modifiers;
+        }
+
+        return $buffer;
     }
 }

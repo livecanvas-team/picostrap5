@@ -57,8 +57,15 @@ final class MapExpression implements Expression
         return $this->span;
     }
 
-    public function accepts(ExpressionVisitor $visitor)
+    public function accept(ExpressionVisitor $visitor)
     {
         return $visitor->visitMapExpression($this);
+    }
+
+    public function __toString(): string
+    {
+        return '(' . implode(', ', array_map(function ($pair) {
+            return $pair[0] . ': ' . $pair[1];
+        }, $this->pairs)) . ')';
     }
 }

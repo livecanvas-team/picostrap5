@@ -52,8 +52,13 @@ final class ColorExpression implements Expression
         return $this->span;
     }
 
-    public function accepts(ExpressionVisitor $visitor)
+    public function accept(ExpressionVisitor $visitor)
     {
         return $visitor->visitColorExpression($this);
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->value;
     }
 }

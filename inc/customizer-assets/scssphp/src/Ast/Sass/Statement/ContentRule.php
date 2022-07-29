@@ -59,8 +59,13 @@ final class ContentRule implements Statement
         return $this->span;
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitContentRule($this);
+    }
+
+    public function __toString(): string
+    {
+        return $this->arguments->isEmpty() ? '@content;' : "@content($this->arguments);";
     }
 }

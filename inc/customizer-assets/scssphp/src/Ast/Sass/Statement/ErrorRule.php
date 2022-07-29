@@ -54,8 +54,13 @@ final class ErrorRule implements Statement
         return $this->span;
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitErrorRule($this);
+    }
+
+    public function __toString(): string
+    {
+        return '@error ' . $this->expression . ';';
     }
 }

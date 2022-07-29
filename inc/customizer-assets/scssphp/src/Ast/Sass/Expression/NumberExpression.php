@@ -69,8 +69,13 @@ final class NumberExpression implements Expression
         return $this->unit;
     }
 
-    public function accepts(ExpressionVisitor $visitor)
+    public function accept(ExpressionVisitor $visitor)
     {
         return $visitor->visitNumberExpression($this);
+    }
+
+    public function __toString(): string
+    {
+        return $this->value . ($this->unit ?? '');
     }
 }

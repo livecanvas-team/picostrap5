@@ -51,8 +51,13 @@ final class SilentComment implements Statement
         return $this->span;
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitSilentComment($this);
+    }
+
+    public function __toString(): string
+    {
+        return $this->text;
     }
 }

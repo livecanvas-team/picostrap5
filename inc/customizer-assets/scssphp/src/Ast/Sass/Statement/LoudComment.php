@@ -45,8 +45,13 @@ final class LoudComment implements Statement
         return $this->text->getSpan();
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitLoudComment($this);
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->text;
     }
 }

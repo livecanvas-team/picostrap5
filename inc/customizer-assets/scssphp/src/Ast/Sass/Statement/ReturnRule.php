@@ -54,8 +54,13 @@ final class ReturnRule implements Statement
         return $this->span;
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitReturnRule($this);
+    }
+
+    public function __toString(): string
+    {
+        return '@return ' . $this->expression . ';';
     }
 }

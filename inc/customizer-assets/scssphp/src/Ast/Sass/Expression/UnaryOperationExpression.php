@@ -21,7 +21,7 @@ use ScssPhp\ScssPhp\Visitor\ExpressionVisitor;
  *
  * @internal
  */
-class UnaryOperationExpression implements Expression
+final class UnaryOperationExpression implements Expression
 {
     /**
      * @var UnaryOperator::*
@@ -69,8 +69,19 @@ class UnaryOperationExpression implements Expression
         return $this->span;
     }
 
-    public function accepts(ExpressionVisitor $visitor)
+    public function accept(ExpressionVisitor $visitor)
     {
         return $visitor->visitUnaryOperationExpression($this);
+    }
+
+    public function __toString(): string
+    {
+        $buffer = $this->operator;
+        if ($this->operator === UnaryOperator::NOT) {
+            $buffer .= ' ';
+        }
+        $buffer .= $this->operand;
+
+        return $buffer;
     }
 }

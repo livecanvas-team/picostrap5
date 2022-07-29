@@ -14,21 +14,27 @@ namespace ScssPhp\ScssPhp\Value;
 
 use ScssPhp\ScssPhp\Visitor\ValueVisitor;
 
+/**
+ * A SassScript list.
+ */
 class SassList extends Value
 {
     /**
      * @var list<Value>
+     * @readonly
      */
     private $contents;
 
     /**
      * @var string
      * @phpstan-var ListSeparator::*
+     * @readonly
      */
     private $separator;
 
     /**
      * @var bool
+     * @readonly
      */
     private $brackets;
 
@@ -75,6 +81,10 @@ class SassList extends Value
 
     public function isBlank(): bool
     {
+        if ($this->brackets) {
+            return false;
+        }
+
         foreach ($this->contents as $element) {
             if (!$element->isBlank()) {
                 return false;

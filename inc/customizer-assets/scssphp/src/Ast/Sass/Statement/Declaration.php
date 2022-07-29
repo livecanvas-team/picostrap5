@@ -116,8 +116,28 @@ final class Declaration extends ParentStatement
         return $this->span;
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitDeclaration($this);
+    }
+
+    public function __toString(): string
+    {
+        $buffer = $this->name . ':';
+
+        if ($this->value !== null) {
+            if (!$this->isCustomProperty()) {
+                $buffer .= ' ';
+            }
+            $buffer .= $this->value;
+        }
+
+        $children = $this->getChildren();
+
+        if ($children === null) {
+            return $buffer . ';';
+        }
+
+        return $buffer . '{' . implode(' ', $children) . '}';
     }
 }

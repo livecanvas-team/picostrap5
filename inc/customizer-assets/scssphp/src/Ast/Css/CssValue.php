@@ -22,6 +22,8 @@ use ScssPhp\ScssPhp\SourceSpan\FileSpan;
  * its span.
  *
  * @template T
+ *
+ * @internal
  */
 class CssValue implements AstNode
 {
@@ -56,5 +58,14 @@ class CssValue implements AstNode
     public function getSpan(): FileSpan
     {
         return $this->span;
+    }
+
+    public function __toString(): string
+    {
+        if (\is_array($this->value)) {
+            return implode($this->value);
+        }
+
+        return (string) $this->value;
     }
 }

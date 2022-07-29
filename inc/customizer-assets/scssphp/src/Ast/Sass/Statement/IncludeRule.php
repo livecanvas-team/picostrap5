@@ -91,6 +91,15 @@ final class IncludeRule implements Statement, CallableInvocation, SassReference
         return $this->span;
     }
 
+    public function getSpanWithoutContent(): FileSpan
+    {
+        if ($this->content === null) {
+            return $this->span;
+        }
+
+        return SpanUtil::trim($this->span->getFile()->span($this->span->getStart()->getOffset(), $this->arguments->getSpan()->getEnd()->getOffset()));
+    }
+
     public function getNameSpan(): FileSpan
     {
         $startSpan = $this->span->getText()[0] === '+' ? SpanUtil::trimLeft($this->span->subspan(1)) : SpanUtil::withoutInitialAtRule($this->span);
@@ -115,8 +124,26 @@ final class IncludeRule implements Statement, CallableInvocation, SassReference
         return SpanUtil::initialIdentifier($startSpan);
     }
 
-    public function accepts(StatementVisitor $visitor)
+    public function accept(StatementVisitor $visitor)
     {
         return $visitor->visitIncludeRule($this);
+    }
+
+    public function __toString(): string
+    {
+        $buffer = '@include ';
+
+        if ($this->namespace !== null) {
+            $buffer .= $this->namespace . '.';
+        }
+        $buffer .= $this->name;
+
+        if (!$this->arguments->isEmpty()) {
+            $buffer .= "($this->arguments)";
+        }
+
+        $buffer .= $this->content === null ? ';' : ' ' . $this->content;
+
+        return $buffer;
     }
 }

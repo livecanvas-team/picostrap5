@@ -31,6 +31,7 @@ final class SassCalculation extends Value
      * The calculation's name, such as `"calc"`.
      *
      * @var string
+     * @readonly
      */
     private $name;
 
@@ -41,8 +42,25 @@ final class SassCalculation extends Value
      * {@see SassString}, a {@see CalculationOperation}, or a {@see CalculationInterpolation}.
      *
      * @var list<object>
+     * @readonly
      */
     private $arguments;
+
+    /**
+     * Creates a new calculation with the given [name] and [arguments]
+     * that will not be simplified.
+     *
+     * @param string       $name
+     * @param list<object> $arguments
+     *
+     * @return Value
+     *
+     * @internal
+     */
+    public static function unsimplified(string $name, array $arguments): Value
+    {
+        return new SassCalculation($name, $arguments);
+    }
 
     /**
      * Creates a `calc()` calculation with the given $argument.
@@ -55,13 +73,13 @@ final class SassCalculation extends Value
      * {@see SassNumber} rather than a {@see SassCalculation}. It throws an exception if it
      * can determine that the calculation will definitely produce invalid CSS.
      *
-     * @param list<object> $argument
+     * @param object $argument
      *
      * @return Value
      *
      * @throws SassScriptException
      */
-    public static function calc($argument): Value
+    public static function calc(object $argument): Value
     {
         $argument = self::simplify($argument);
 
@@ -252,7 +270,7 @@ final class SassCalculation extends Value
      */
     public static function operate(string $operator, object $left, object $right): object
     {
-        return self::operateInternal($operator, $left, $right, false);
+        return self::operateInternal($operator, $left, $right, false, true);
     }
 
     /**
@@ -262,10 +280,13 @@ final class SassCalculation extends Value
      * subtracted with numbers with units, for backwards-compatibility with the
      * old global `min()` and `max()` functions.
      *
+     * If $simplify is `false`, no simplification will be done.
+     *
      * @param string $operator
      * @param object $left
      * @param object $right
      * @param bool   $inMinMax
+     * @param bool   $simplify
      *
      * @return object
      *
@@ -275,8 +296,12 @@ final class SassCalculation extends Value
      *
      * @internal
      */
-    public static function operateInternal(string $operator, object $left, object $right, bool $inMinMax): object
+    public static function operateInternal(string $operator, object $left, object $right, bool $inMinMax, bool $simplify): object
     {
+        if (!$simplify) {
+            return new CalculationOperation($operator, $left, $right);
+        }
+
         $left = self::simplify($left);
         $right = self::simplify($right);
 
@@ -390,7 +415,7 @@ final class SassCalculation extends Value
     }
 
     /**
-     * @param list<mixed> $args
+     * @param list<object> $args
      *
      * @return list<object>
      *
@@ -402,13 +427,9 @@ final class SassCalculation extends Value
     }
 
     /**
-     * @param mixed $arg
-     *
-     * @return object
-     *
      * @throws SassScriptException
      */
-    private static function simplify($arg): object
+    private static function simplify(object $arg): object
     {
         if ($arg instanceof SassNumber || $arg instanceof CalculationInterpolation || $arg instanceof CalculationOperation) {
             return $arg;
@@ -430,7 +451,7 @@ final class SassCalculation extends Value
             throw new SassScriptException("Value $arg can't be used in a calculation.");
         }
 
-        throw new \InvalidArgumentException(sprintf('Unexpected calculation argument %s.', \is_object($arg) ? get_class($arg) : gettype($arg)));
+        throw new \InvalidArgumentException(sprintf('Unexpected calculation argument %s.', get_class($arg)));
     }
 
     /**

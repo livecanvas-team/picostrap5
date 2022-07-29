@@ -21,7 +21,7 @@ use ScssPhp\ScssPhp\Visitor\ExpressionVisitor;
  *
  * @internal
  */
-class CalculationExpression implements Expression
+final class CalculationExpression implements Expression
 {
     /**
      * This calculation's name.
@@ -146,7 +146,7 @@ class CalculationExpression implements Expression
         return $this->span;
     }
 
-    public function accepts(ExpressionVisitor $visitor)
+    public function accept(ExpressionVisitor $visitor)
     {
         return $visitor->visitCalculationExpression($this);
     }
@@ -226,5 +226,10 @@ class CalculationExpression implements Expression
         }
 
         throw new \InvalidArgumentException('Invalid calculation argument.');
+    }
+
+    public function __toString(): string
+    {
+        return $this->name . '(' . implode(', ', $this->arguments) . ')';
     }
 }
