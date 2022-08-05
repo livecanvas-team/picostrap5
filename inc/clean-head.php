@@ -106,6 +106,7 @@ function picostrap_deregister_gstyles() {
     if (function_exists('lc_plugin_option_is_set') && lc_plugin_option_is_set('gtblocks')) return;
     
     wp_dequeue_style( 'wp-block-library' );
+    wp_dequeue_style( 'wp-block-library-theme' ); 
 }
 
 

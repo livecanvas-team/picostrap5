@@ -87,3 +87,33 @@ function picostrap_async_scripts($url){
 	return str_replace( '#asyncload', '', $url )."' async='async"; 
     }
 add_filter( 'clean_url', 'picostrap_async_scripts', 11, 1 );
+
+
+
+//Un-render-blocking CSS - as per https://www.phpied.com/faster-wordpress-rendering-with-3-lines-of-configuration/
+function picostrap_hints() {  
+    //original demo
+    //header("link: </wp-content/themes/phpied2/style.css>; rel=preload, </wp-includes/css/dist/block-library/style.min.css?ver=5.4.1>; rel=preload");
+    
+    header("link: <".picostrap_get_css_hint_link().">; rel=preload, </wp-includes/css/dist/block-library/style.min.css?ver=".get_bloginfo( 'version' ).">; rel=preload");
+    
+}
+//add_action('send_headers', 'picostrap_hints'); //still commented as chrome shows errors
+
+//function to get relative css url for hints
+function picostrap_get_css_hint_link(){
+    $css_url_array= explode('/wp-content/', picostrap_get_css_url());
+    return '/wp-content/'.$css_url_array[1];
+}
+
+
+//for testing of urls
+if (0) add_action ("wp_loaded",function(){
+    echo "/wp-content/themes/phpied2/style.css";
+    echo "<br>";
+    echo picostrap_get_css_hint_link();
+    echo "<br>"; 
+    die;
+});
+
+
