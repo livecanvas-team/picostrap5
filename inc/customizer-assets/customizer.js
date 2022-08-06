@@ -319,7 +319,7 @@ function ps_prepare_fonts_import_code_snippet(){
 		$("label[for=_customize-input-SCSSvar_font-family-base]").append(csFontPickerButton).closest(".customize-control").append("<div hidden><input id='cs-fontpicker-input-base' class='cs-fontpicker-input' type='text' value=''></div>");
 		$("#cs-fontpicker-input-base").fontpicker(csFontPickerOptions);
 		
-		//append field ana initialize Fontpicker for HEADINGS FONT
+		//append field and initialize Fontpicker for HEADINGS FONT
 		$("label[for=_customize-input-SCSSvar_headings-font-family]").append(csFontPickerButton).closest(".customize-control").append("<div hidden><input id='cs-fontpicker-input-headings' class='cs-fontpicker-input' type='text' value=''></div>");
 		$("#cs-fontpicker-input-headings").fontpicker(csFontPickerOptions);
 		
@@ -357,9 +357,7 @@ function ps_prepare_fonts_import_code_snippet(){
 		
 		/////// CSS EDITOR MAXIMIZE BUTTON ////////////////////////////////////////////////////////
 		
-		//wp.codeEditor.initialize($('#fancy-textarea'), cm_settings);
-		
-		//append field and initialize Fontpicker for BASE FONT
+		//prepend button to maximize editor
 		$("#customize-control-custom_css").prepend("<a class='button cs-toggle-csseditor-position' >Maximize</a> ");
 		
 		//when user clicks maximize editor
@@ -369,9 +367,31 @@ function ps_prepare_fonts_import_code_snippet(){
 			$('#customize-control-custom_css').toggleClass('picostrap-maximize-editor');
 		});
 		
-		
+		/// VIDEO TUTORIAL LINKS //
 
-		
+		function pico_add_video_link (section_name, video_url){
+
+			const videoTutLinkStyle = " display:block;text-align:right;font-size: 12px;margin:0 10px 10px;";
+			const videoTutIcon = '<svg style="vertical-align: middle; height:13px; vertical-align: middle; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" viewBox="0 0 16 16" style="" lc-helper="svg-icon"><path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"></path><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path></svg>';
+
+			$("#sub-accordion-" + section_name + " li:first ").after("<a style='" + videoTutLinkStyle + "' href='" + video_url + "' target='_blank'>" + videoTutIcon + "Watch Video</a> ");
+
+		}
+
+		pico_add_video_link("section-colors", "#");
+		pico_add_video_link("section-typography", "#");
+		pico_add_video_link("section-components", "#");
+		pico_add_video_link("section-buttons", "#");
+		pico_add_video_link("section-buttons-forms", "#");
+		pico_add_video_link("section-nav", "https://youtu.be/aY7JmxBe76Y?t=26");
+		pico_add_video_link("section-topbar", "https://youtu.be/aY7JmxBe76Y?t=225");
+		pico_add_video_link("panel-nav_menus", "#");
+		pico_add_video_link("section-footer", "#");
+		pico_add_video_link("panel-widgets", "#");
+		pico_add_video_link("section-static_front_page", "#");
+		pico_add_video_link("section-singleposts", "#");
+		pico_add_video_link("section-addcode","#");
+		pico_add_video_link("section-extras", "#")
 
 		
 	}); //end document ready
