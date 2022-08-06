@@ -31,16 +31,20 @@ foreach ( $picostrap_includes as $file ) {
 	require_once get_template_directory() . '/inc' . $file;
 }
 
-//PURELY OPT-IN FEATURES
+//PURELY OPT-IN FEATURES ////////////////
+
 //OPTIONAL: DISABLE WORDPRESS COMMENTS
-if (get_theme_mod("singlepost_disable_comments") ) require_once locate_template('/inc/disable-comments.php'); 
+if (get_theme_mod("singlepost_disable_comments") ) require_once locate_template('/inc/opt-in/disable-comments.php'); 
 
 //OPTIONAL: BACK TO TOP
-if (get_theme_mod("enable_back_to_top") ) require_once locate_template('/inc/back-to-top.php');
+if (get_theme_mod("enable_back_to_top") ) require_once locate_template('/inc/opt-in/back-to-top.php');
 
 //OPTIONAL: LIGHTBOX  
-if (get_theme_mod("enable_lightbox") ) require_once locate_template('/inc/lightbox.php');
+if (get_theme_mod("enable_lightbox") ) require_once locate_template('/inc/opt-in/lightbox.php');
 	
 //OPTIONAL: DETECT PAGE SCROLL
-if (get_theme_mod("enable_detect_page_scroll") ) require_once locate_template('/inc/detect-page-scroll.php');
+if (get_theme_mod("enable_detect_page_scroll") ) require_once locate_template('/inc/opt-in/detect-page-scroll.php');
 
+//OPTIONAL: DISABLE GUTENBERG  
+if (get_theme_mod("disable_gutenberg") ) require_once locate_template('/inc/opt-in/disable-gutenberg.php');
+	

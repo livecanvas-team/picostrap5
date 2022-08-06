@@ -98,18 +98,6 @@ function my_css_attributes_filter($var) {  return is_array($var) ? array() : '';
 
 
 
-/// REMOVE GUTENBERG BLOCKS CSS - if classic editor plugin is active
-add_action( 'wp_print_styles', 'picostrap_deregister_gstyles', 100 );
-function picostrap_deregister_gstyles() {
-
-    //if user wants to use Gutenberg along with LC editor, exit.... OR we could add a switch in customizer...or //if (  class_exists( 'Classic_Editor' ) )  
-    if (function_exists('lc_plugin_option_is_set') && lc_plugin_option_is_set('gtblocks')) return;
-    
-    wp_dequeue_style( 'wp-block-library' );
-    wp_dequeue_style( 'wp-block-library-theme' ); 
-}
-
-
 
 /////// DISABLE CF7 PLUGIN CSS  - as UnderStrap's CSS does already include it ///////////////////////////////////////////////////////////////
 //add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );

@@ -19,8 +19,13 @@ add_action( 'customize_controls_enqueue_scripts', 'picostrap_customize_enqueue' 
 //ADD BODY CLASSES  //////////////////////////////////////////////////////////////////////////////////////////////////////////
 add_filter( 'body_class', 'picostrap_config_body_classes' );
 function picostrap_config_body_classes( $classes ) {
+
+	//if we are using LC's custom header, don't add anything
+	if (function_exists('lc_custom_header')) return $classes; 
+	
 	$classes[]="picostrap_header_navbar_position_".get_theme_mod('picostrap_header_navbar_position');
 	$classes[]="picostrap_header_navbar_color_choice_".get_theme_mod('picostrap_header_navbar_color_choice');
+	
 	return $classes;
 }
 
@@ -925,23 +930,23 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "title" => __("Global Options & Utilities", "picostrap"),
         "priority" => 190,
     ));
-	/*
-	//USE BOOTSTRAP NATIVE
-	$wp_customize->add_setting("bootstrap_native", array(
+	
+	//DISABLE GUTENBERG
+	$wp_customize->add_setting("disable_gutenberg", array(
         "default" => "",
         "transport" => "refresh",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
-        "bootstrap_native",
+        "disable_gutenberg",
         array(
-            "label" => __("Use Bootstrap Native JS", "picostrap"),
-			"description" => __("Will completely disable the jQuery-based BootStrap JS, and enqueue a similar version written in Vanilla (plain) JS. Publish and exit the Customizer to see the effect", "picostrap"),
+            "label" => __("Disable Gutenberg", "picostrap"),
+			"description" => __("Disables the Gutenberg content editor and its CSS styles. Disables the widget block editor as well.", "picostrap"),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
     ));
-	*/
+	
 	
 	//DISABLE LIVERELOAD
 	$wp_customize->add_setting("picostrap_disable_livereload", array(
@@ -975,25 +980,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             'type'     => 'checkbox',
 			)
     ));
-
-
-	/*
-	//DISABLE FONTAWESOME
-	$wp_customize->add_setting("picostrap_fontawesome_disable", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "picostrap_fontawesome_disable",
-        array(
-            "label" => __("Disable FontAwesome", "picostrap"),
-			"description" => __("<b>Keep this unchecked, unless you really know what you're doing.</b>").__("This will prevent the compiler to pick the FontAwesome icon font from the UnderStrap folder and add it to the CSS bundle.", "picostrap"),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-    ));
-	*/
 
 	//BACK TO TOP
 	$wp_customize->add_setting("enable_back_to_top", array(
