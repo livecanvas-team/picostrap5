@@ -143,3 +143,12 @@ function picostrap_disable_embeds_rewrites($rules) {
 
  
  
+
+// REMOVE DEFAULT WP INLINE STYLE:  <style id='global-styles-inline-css'> and SVG filters on body open
+// https://github.com/WordPress/gutenberg/issues/36834
+
+function picostrap_wp_remove_global_css() {
+   remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
+   remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
+}
+add_action( 'init', 'picostrap_wp_remove_global_css' );

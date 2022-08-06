@@ -947,23 +947,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 	
-	
-	//DISABLE LIVERELOAD
-	$wp_customize->add_setting("picostrap_disable_livereload", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "picostrap_disable_livereload",
-        array(
-            "label" => __("Disable  SCSS  LiveReload  ", "picostrap"),
-			"description" => __("Will completely disable the entire livereload feature. If you're not editing the SCSS files, you can do so. Makes a difference for site admins only.", "picostrap"),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-	));
-	
 
 	//DISABLE COMMENTS
 	$wp_customize->add_setting("singlepost_disable_comments", array(
@@ -980,6 +963,22 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             'type'     => 'checkbox',
 			)
     ));
+
+	//DISABLE LIVERELOAD
+	$wp_customize->add_setting("picostrap_disable_livereload", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "picostrap_disable_livereload",
+        array(
+            "label" => __("Disable  SCSS Autocompile / LiveReload ", "picostrap"),
+			"description" => __("If you're not editing the SCSS files, you can check this option. Makes a difference for site admins only.", "picostrap"),
+            "section" => "extras", 
+            'type'     => 'checkbox',
+			)
+	));
 
 	//BACK TO TOP
 	$wp_customize->add_setting("enable_back_to_top", array(
