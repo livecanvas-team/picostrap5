@@ -1,5 +1,9 @@
 <?php
 
+//////// DISABLE COMMENTS ////////////////////////////////////////////////////
+// this is a purely opt-in feature:
+// this code is executed only if the option is enabled in the  Customizer
+
 //https://gist.github.com/mattclements/eab5ef656b2f946c4bfb
 
 

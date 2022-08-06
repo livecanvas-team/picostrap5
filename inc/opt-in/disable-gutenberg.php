@@ -5,7 +5,7 @@
 // this code is executed only if the option is enabled in the  Customizer
 
 
-//disable Gutenberg editor
+//DISABLE GUTENBERG EDITOR, unless LC needs it
 add_filter('use_block_editor_for_post', function($in){
 	
     //if user wants to use Gutenberg along with LC editor, exit

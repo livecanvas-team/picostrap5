@@ -1,7 +1,9 @@
 <?php
  
-
-//////// GLIGHTBOX - Enables lightbox on all <a class="lightbox" ////////////////////////////////////////////////////
+////////  GLIGHTBOX ////////////////////////////////////////////////////
+// this is a purely opt-in feature:
+// this code is executed only if the option is enabled in the  Customizer
+// enables lightbox on all <a class="lightbox"  
 
 //enqueue js in footer, async
 add_action( 'wp_enqueue_scripts', function() {
@@ -36,4 +38,3 @@ add_action( 'wp_footer', function(){
 
   
 
-//////////////////////////////////////////////////////////////////////

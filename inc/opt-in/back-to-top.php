@@ -1,5 +1,10 @@
 <?php
- 
+
+//////// BACK TO TOP  ////////////////////////////////////////////////////
+// this is a purely opt-in feature:
+// this code is executed only if the option is enabled in the  Customizer
+
+
 //ADD SOME JS TO THE FOOTER 
 add_action( 'wp_footer', function(){ ?>
 	 
