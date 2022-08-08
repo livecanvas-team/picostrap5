@@ -43,5 +43,17 @@ $utilities: (
       100: 100vh,
     )
   ),
+
+  "text-opacity": (
+  css-var: true,
+  class: text-opacity,
+  values: (
+    10: 0.1, //added
+    25: .25,
+    50: .5,
+    75: .75,
+    100: 1
+    )
+  ),
    
 );
