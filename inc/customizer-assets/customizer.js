@@ -11,7 +11,7 @@
 
 			//console.log(color_name+color_value);
 
-			if (color_value) $(el).find(".customize-control-content").css("border-right", "35px solid " + color_value).css("padding-right", "50px");
+			if (color_value) $(el).find(".customize-control-title").css("border-right", "25px solid " + color_value).css("padding-right-no", "");
 		}); //end each
 		
 	}
