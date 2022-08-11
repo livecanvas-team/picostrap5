@@ -89,8 +89,11 @@ function picostrap_async_scripts($url){
 add_filter( 'clean_url', 'picostrap_async_scripts', 11, 1 );
 
 
+//UNRENDER-BLOCK CSS- STILL AN EXPERIMENT
+// as per https://www.phpied.com/faster-wordpress-rendering-with-3-lines-of-configuration/
+// still commented as chrome shows errors, unfinished. Use at your own risk.
+/*
 
-//Un-render-blocking CSS - as per https://www.phpied.com/faster-wordpress-rendering-with-3-lines-of-configuration/
 function picostrap_hints() {  
     //original demo
     //header("link: </wp-content/themes/phpied2/style.css>; rel=preload, </wp-includes/css/dist/block-library/style.min.css?ver=5.4.1>; rel=preload");
@@ -98,7 +101,7 @@ function picostrap_hints() {
     header("link: <".picostrap_get_css_hint_link().">; rel=preload, </wp-includes/css/dist/block-library/style.min.css?ver=".get_bloginfo( 'version' ).">; rel=preload");
     
 }
-//add_action('send_headers', 'picostrap_hints'); //still commented as chrome shows errors
+add_action('send_headers', 'picostrap_hints'); 
 
 //function to get relative css url for hints
 function picostrap_get_css_hint_link(){
@@ -106,8 +109,7 @@ function picostrap_get_css_hint_link(){
     return '/wp-content/'.$css_url_array[1];
 }
 
-
-//for testing of urls
+//for testing of the picostrap_get_css_hint_link function
 if (0) add_action ("wp_loaded",function(){
     echo "/wp-content/themes/phpied2/style.css";
     echo "<br>";
@@ -116,4 +118,5 @@ if (0) add_action ("wp_loaded",function(){
     die;
 });
 
+*/
 
