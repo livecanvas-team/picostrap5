@@ -87,10 +87,12 @@ function ps_prepare_fonts_import_code_snippet(){
 	if (first_part!="" && second_part!="" ) separator_char="&"; 
 	
 	var output="";
-	output+='<link rel="dns-prefetch" href="//fonts.googleapis.com">\n';
-	output+='<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>\n';
-	output+='<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
+
+	output += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
+	output += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
+	output += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
 	
+	//an example:
 	//https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
 	
 	console.log(output);
