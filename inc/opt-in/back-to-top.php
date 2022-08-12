@@ -4,6 +4,8 @@
 // this is a purely opt-in feature:
 // this code is executed only if the option is enabled in the  Customizer
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 //ADD SOME JS TO THE FOOTER 
 add_action( 'wp_footer', function(){ ?>

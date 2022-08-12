@@ -4,6 +4,8 @@
 // this is a purely opt-in feature:
 // this code is executed only if the option is enabled in the  Customizer
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 //ADD BODY CLASS: scroll-position-at-top AS THIS IS THE INITIAL STATE
 add_filter( 'body_class','pico_add_body_class_for_scrolled' );

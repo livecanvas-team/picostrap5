@@ -48,3 +48,6 @@ if (get_theme_mod("enable_detect_page_scroll") ) require_once locate_template('/
 //OPTIONAL: DISABLE GUTENBERG  
 if (get_theme_mod("disable_gutenberg") ) require_once locate_template('/inc/opt-in/disable-gutenberg.php');
 	
+//OPTIONAL: DISABLE WIDGETS BLOCK EDITOR  
+if (get_theme_mod("disable_widgets_block_editor") ) require_once locate_template('/inc/opt-in/disable-widgets-block-editor.php');
+	

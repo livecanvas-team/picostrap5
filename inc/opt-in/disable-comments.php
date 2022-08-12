@@ -6,6 +6,8 @@
 
 //https://gist.github.com/mattclements/eab5ef656b2f946c4bfb
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 add_action('admin_init', function () {
     // Redirect any user trying to access comments page

@@ -4,6 +4,8 @@
 // this is a purely opt-in feature:
 // this code is executed only if the option is enabled in the  Customizer
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 //DISABLE GUTENBERG EDITOR, unless LC needs it
 add_filter('use_block_editor_for_post', function($in){
@@ -16,8 +18,6 @@ add_filter('use_block_editor_for_post', function($in){
 
 }, 10);
 
-//DISABLE BLOCK EDITOR FOR WIDGETS
-add_filter( 'use_widgets_block_editor', '__return_false' );
 
 /// REMOVE GUTENBERG BLOCKS CSS - if classic editor plugin is active
 add_action( 'wp_print_styles', 'picostrap_deregister_gstyles', 100 );
