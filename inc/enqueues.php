@@ -57,8 +57,15 @@ add_action( 'wp_enqueue_scripts', function() {
 //ADD THE CUSTOM HEADER CODE (SET IN CUSTOMIZER)
 add_action( 'wp_head', 'picostrap_add_header_code' );
 function picostrap_add_header_code() {
-      if (!get_theme_mod("picostrap_fonts_header_code_disable")) echo get_theme_mod("picostrap_fonts_header_code")." ";
-	  echo get_theme_mod("picostrap_header_code");
+    if (!get_theme_mod("picostrap_fonts_header_code_disable")) {
+        $fonts_header_code = get_theme_mod("picostrap_fonts_header_code")." ";
+        if (get_theme_mod("picostrap_fonts_use_alternative_font_source")) {
+            $fonts_header_code = str_replace('fonts.googleapis.com','api.fonts.coollabs.io',$fonts_header_code);
+            $fonts_header_code = str_replace('<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>','',$fonts_header_code);
+        }
+        echo $fonts_header_code;
+    }
+    echo get_theme_mod("picostrap_header_code");
 }
 
 //ADD THE CUSTOM FOOTER CODE (SET IN CUSTOMIZER)

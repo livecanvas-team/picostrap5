@@ -908,6 +908,23 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 	
+	//USE ALTERNATIVE FONT SOURCE FOR GDPR COMPLIANCE
+	$wp_customize->add_setting("picostrap_fonts_use_alternative_font_source", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "picostrap_fonts_use_alternative_font_source",
+        array(
+            "label" => __("Use alternative font source for GDPR compliance", "picostrap"),
+			"description" =>  __("<b>Google Fonts can be an issue for GDPR compliance in Europe. </b>").
+			__("Checking this option the Google fonts will be loaded from the privacy compliant <a target='_blank' href='https://fonts.coollabs.io/'>Coollabs Font repository</a>. ", "picostrap"),
+            "section" => "addcode", 
+            'type'     => 'checkbox',
+			)
+    ));
+
 	//DISABLE FONTLOADING HEADER CODE  
 	$wp_customize->add_setting("picostrap_fonts_header_code_disable", array(
         "default" => "",
@@ -924,7 +941,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 	
-	
+
 	// ADD A SECTION FOR EXTRAS /////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("extras", array(
         "title" => __("Global Options & Utilities", "picostrap"),

@@ -74,29 +74,30 @@ function ps_prepare_fonts_import_code_snippet(){
 	//BUILD BASE FONT IMPORT HEAD CODE
 	var first_part="";
 	if ($("#_customize-input-SCSSvar_font-family-base").val().trim()!='' && ps_is_a_google_font($("#_customize-input-SCSSvar_font-family-base").val().split(',')[0].trim().replace(/"/g, "")) ) {  
-		first_part+=$("#_customize-input-SCSSvar_font-family-base").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
-		if ($("#_customize-input-SCSSvar_font-weight-base").val()!='') first_part+=":"+$("#_customize-input-SCSSvar_font-weight-base").val();
+		first_part += 'family=' + $("#_customize-input-SCSSvar_font-family-base").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
+		if ($("#_customize-input-SCSSvar_font-weight-base").val() != '') first_part +=":wght@"+$("#_customize-input-SCSSvar_font-weight-base").val();
 	}
 	 
-	//console.log(first_part);
+	console.log(first_part);
 	
 	//BUILD HEADINGS FONT IMPORT HEAD CODE
 	var second_part="";
 	if ($("#_customize-input-SCSSvar_headings-font-family").val().trim()!=''  && ps_is_a_google_font($("#_customize-input-SCSSvar_headings-font-family").val().split(',')[0].trim().replace(/"/g, "")) ) {
-		second_part+=$("#_customize-input-SCSSvar_headings-font-family").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
-		if ($("#_customize-input-SCSSvar_headings-font-weight").val()!='') second_part+=":"+$("#_customize-input-SCSSvar_headings-font-weight").val();
+		second_part += 'family=' + $("#_customize-input-SCSSvar_headings-font-family").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
+		if ($("#_customize-input-SCSSvar_headings-font-weight").val() != '') second_part +=":wght@"+$("#_customize-input-SCSSvar_headings-font-weight").val();
 	}
-	//console.log(second_part);
+	console.log(second_part);
 	 
 	if (first_part=="" && second_part=="" ) return "";  //no code necessary
 	
 	var separator_char=""; 
-	if (first_part!="" && second_part!="" ) separator_char="|"; 
+	if (first_part!="" && second_part!="" ) separator_char="&"; 
 	
 	var output="";
 	output+='<link rel="dns-prefetch" href="//fonts.googleapis.com">\n';
 	output+='<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>\n';
-	output+='<link href="https://fonts.googleapis.com/css?family='+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
+	output+='<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
+	//https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
 	
 	console.log(output);
 	return output;

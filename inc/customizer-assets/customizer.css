@@ -179,7 +179,7 @@ body span.fp-pill.italic{display: none}
 /* FOOTER TEXT / HEADER / FOOTER / TEXTAREAS */
 
 #_customize-input-picostrap_footer_text, #_customize-input-picostrap_header_code, #_customize-input-picostrap_footer_code {
-  min-height: 350px;
+  height: 200px;
   font-size: 12px;
 }
 
