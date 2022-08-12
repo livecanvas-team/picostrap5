@@ -5,13 +5,13 @@ defined( 'ABSPATH' ) || exit;
 
 // ADD CUSTOM JS & CSS TO CUSTOMIZER //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function picostrap_customize_enqueue() {
-	wp_enqueue_script( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.js', array( 'jquery', 'customize-controls' ), '2.63', true );
-	wp_enqueue_script( 'custom-customize-lib', get_template_directory_uri() . '/inc/customizer-assets/customizer-vars.js', array( 'jquery', 'customize-controls' ), '2.61', true );
-	wp_enqueue_style( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.css'  );
+	wp_enqueue_script( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
+	wp_enqueue_script( 'custom-customize-lib', get_template_directory_uri() . '/inc/customizer-assets/customizer-vars.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
+	wp_enqueue_style( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.css', array(), rand(0,1000)   );
 	
 	//fontpicker
-	wp_enqueue_script( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.js', array( 'jquery', 'customize-controls' ), '2.61', true );
-	wp_enqueue_style( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.css', array(), '2.61' );
+	wp_enqueue_script( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
+	wp_enqueue_style( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.css', array(), rand(0,1000) );
 }
 add_action( 'customize_controls_enqueue_scripts', 'picostrap_customize_enqueue' );
 
@@ -917,9 +917,9 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_fonts_use_alternative_font_source",
         array(
-            "label" => __("Use alternative font source for GDPR compliance", "picostrap"),
+            "label" => __("Load Google Fonts anonymously", "picostrap"),
 			"description" =>  __("<b>Google Fonts can be an issue for GDPR compliance in Europe. </b>").
-			__("Checking this option the Google fonts will be loaded from the privacy compliant <a target='_blank' href='https://fonts.coollabs.io/'>Coollabs Font repository</a>. ", "picostrap"),
+			__("Checking this option, Google fonts will be loaded from the privacy compliant <a target='_blank' href='https://fonts.coollabs.io/'>Coollabs Font repository</a>. ", "picostrap"),
             "section" => "addcode", 
             'type'     => 'checkbox',
 			)
@@ -935,7 +935,12 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "picostrap_fonts_header_code_disable",
         array(
             "label" => __("Disable the Font Loading in Header", "picostrap"),
-			"description" =>  __("<b>Keep this unchecked, unless you really want. </b>").__("Disables serving the code in the textarea above to the site header. Can be relevant if you want to self-host Google Fonts. Refer to this <a target='_blank' href='https://google-webfonts-helper.herokuapp.com/fonts/abeezee?subsets=latin'>tool</a> to get started. ", "picostrap"),
+			"description" =>  __("<b>Keep this unchecked, unless you really want. </b>").__("Prevents the code of 
+			the textarea above from being served in the site header. <br>Can be relevant if you want to customize the font loading code.
+			For example, to add <b>multiple font weights</b>, or to 
+			<a target='_blank' href='https://google-webfonts-helper.herokuapp.com/'>self-host</a> Google Fonts.<br>
+			If you check this option, you may want to copy the code from the <b>Font Loading Header code</b> field to the <b>Add code to Header</b> field, and then customize it.
+			", "picostrap"),
             "section" => "addcode", 
             'type'     => 'checkbox',
 			)
