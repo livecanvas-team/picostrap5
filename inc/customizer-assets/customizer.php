@@ -962,8 +962,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "disable_gutenberg",
         array(
-            "label" => __("Disable Gutenberg", "picostrap"),
-			"description" => __("Disables the Gutenberg content editor and its CSS styles. ", "picostrap"),
+            "label" => __("Disable the Gutenberg Content Editor", "picostrap"),
+			"description" => __("Disables the Gutenberg content editor on all post types. De-enqueues its CSS styles as well.", "picostrap"),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -978,8 +978,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "disable_widgets_block_editor",
         array(
-            "label" => __("Disable the widgets Block editor", "picostrap"),
-			"description" => __("Disables the widgets block editor and restores classic widgets editing.", "picostrap"),
+            "label" => __("Disable the Block-based Widgets Editor", "picostrap"),
+			"description" => __("Disables the Block-based Widgets Editor and restores classic widgets editing.", "picostrap"),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
