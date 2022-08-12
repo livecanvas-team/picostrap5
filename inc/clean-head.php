@@ -99,7 +99,7 @@ function my_css_attributes_filter($var) {  return is_array($var) ? array() : '';
 
 
 
-/////// DISABLE CF7 PLUGIN CSS  - as UnderStrap's CSS does already include it ///////////////////////////////////////////////////////////////
+/////// DISABLE CF7 PLUGIN CSS  - optional  ///////////////////////////////////////////////////////////////
 //add_action( 'wp_print_styles', 'wps_deregister_styles', 100 );
 //function wps_deregister_styles() {    wp_deregister_style( 'contact-form-7' );}
 
