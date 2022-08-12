@@ -89,12 +89,16 @@ function ps_prepare_fonts_import_code_snippet(){
 	var output="";
 
 	output += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
-	output += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
+	if (!$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked"))  output += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
 	output += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
 	
 	//an example:
 	//https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
 	
+	if ($("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked")) {
+		output = output.replaceAll('fonts.googleapis.com','api.fonts.coollabs.io');
+	}
+
 	console.log(output);
 	return output;
 }
@@ -139,6 +143,11 @@ function ps_prepare_fonts_import_code_snippet(){
 			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
 		});			
 		
+		//ON CHANGE CHECKBOX FOR  USE ALTERNATIVE FONT SOURCE FOR GDPR
+		$("body").on("change", "#_customize-input-picostrap_fonts_use_alternative_font_source", function() {
+			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
+		});	
+
 		//LISTEN TO CUSTOMIZER CHANGES: if some variable is changed, we'll have to recompile
 		wp.customize.bind( 'change', function ( setting ) {
 			if (setting.id.includes("SCSSvar")  || setting.id.includes("body_font")   || setting.id.includes("headings_font")  || setting.id.includes("picostrap_fontawesome_disable") ) scss_recompile_is_necessary=true;
@@ -365,16 +374,12 @@ function ps_prepare_fonts_import_code_snippet(){
 			$('#customize-control-custom_css').toggleClass('picostrap-maximize-editor');
 		});
 		
-		/// VIDEO TUTORIAL LINKS //
+		/// VIDEO TUTORIAL LINKS ////////////////////////
 
 		function pico_add_video_link (section_name, video_url){
-			 
 			const videoTutIcon = '<svg style="vertical-align: middle; height:13px; vertical-align: middle; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" viewBox="0 0 16 16" style="" lc-helper="svg-icon"><path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"></path><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path></svg>';
-
 			$("#sub-accordion-" + section_name + " li:first ").after("<a class='video-tutorial-link' href='" + video_url + "' target='_blank'>" + videoTutIcon + "Watch Video</a> ");
-
 		}
-
 
 		pico_add_video_link("section-colors", "https://youtu.be/SwDrR-FmzkE&t=63s");
 		pico_add_video_link("section-typography", "https://youtu.be/SwDrR-FmzkE&t=86s");
