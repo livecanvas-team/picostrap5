@@ -327,7 +327,7 @@
 		/// VIDEO TUTORIAL LINKS ////////////////////////
 
 		function pico_add_video_link (section_name, video_url){
-			const videoTutIcon = '<svg style="vertical-align: middle; height:13px; vertical-align: middle; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" viewBox="0 0 16 16" style="" lc-helper="svg-icon"><path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"></path><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path></svg>';
+			const videoTutIcon = '<svg style="vertical-align: middle; height:13px; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" viewBox="0 0 16 16" style="" lc-helper="svg-icon"><path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"></path><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path></svg>';
 			$("#sub-accordion-" + section_name + " li:first ").after("<a class='video-tutorial-link' href='" + video_url + "' target='_blank'>" + videoTutIcon + "Watch Video</a> ");
 		}
 
