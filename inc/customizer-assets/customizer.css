@@ -190,6 +190,10 @@ body span.fp-pill.italic{display: none}
   color:#333;
 }
 
+/* FONT OBJECT HIDDEN SETTINGS */
+#customize-control-body_font_object,
+#customize-control-headings_font_object {display: none;}
+
 /* VIDEO TUTORIAL LINKS  */
 
 .video-tutorial-link {

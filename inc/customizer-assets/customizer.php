@@ -891,6 +891,38 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 
+	//ADD BODY FONT OBJECT
+	$wp_customize->add_setting("body_font_object", array(
+        "default" => "",
+		"transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "body_font_object",
+        array(
+            "label" => __("body_font_object", "picostrap"),
+            "section" => "addcode",
+            'type'     => 'textarea',
+			'description' =>'<b>Not editable</b> - Internal purpose only.'
+			)
+    ));
+
+	//ADD HEADINGS FONT OBJECT
+	$wp_customize->add_setting("headings_font_object", array(
+        "default" => "",
+		"transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "headings_font_object",
+        array(
+            "label" => __("headings_font_object", "picostrap"),
+            "section" => "addcode",
+            'type'     => 'textarea',
+			'description' =>'<b>Not editable</b> - Internal purpose only.'
+			)
+    ));
+
 	//ADD FONTLOADING HEADER CODE  
 	$wp_customize->add_setting("picostrap_fonts_header_code", array(
         "default" => "",

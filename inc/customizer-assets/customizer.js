@@ -22,7 +22,7 @@
 		preview_iframe_src=$("#customize-preview iframe").attr("src");
 		if (preview_iframe_src===undefined) preview_iframe_src=$("#customize-preview iframe").attr("data-src");
 		//console.log("Preview iFrame URL: "+preview_iframe_src); //for debug
-		//console.log("Preview iFrame URL with no pars: "+preview_iframe_src.split('?')[0]); //for debug
+		
 		//SHOW WINDOW	
 		$("#cs-compiling-window").fadeIn();
 		$('#cs-loader').show();
@@ -40,7 +40,7 @@
 			console.log("ajax loaded");
 			$('#cs-loader').hide();
 			//reload preview iframe
-			$("#customize-preview iframe").attr("src",preview_iframe_src/*.split('?')[0]*/); //not a good idea to remove pars
+			$("#customize-preview iframe").attr("src",preview_iframe_src); 
 			//upon preview iframe loaded, fetch colors
 			$("#customize-preview iframe").on("load",function(){ ps_get_page_colors(); });
 		}); //end on loaded
@@ -48,61 +48,59 @@
 		//RESET FLAG
 		scss_recompile_is_necessary=false;
 			
-	} //END FUNCTION
-	
-
+	} //END FUNCTION ps_recompile_css_bundle
 		
-function ps_is_a_google_font(fontName){
-	var google_fonts_array=Object.keys(__googleFonts); //console.log(google_fonts_array);
-	for (const el of google_fonts_array) {
-		//console.log(el);
-		if(el.toLowerCase()==fontName.toLowerCase()) return true;
-	}
-	return false;
-} // end function definition
+	function ps_is_a_google_font(fontName){
+		var google_fonts_array=Object.keys(__googleFonts); //console.log(google_fonts_array);
+		for (const el of google_fonts_array) {
+			//console.log(el);
+			if(el.toLowerCase()==fontName.toLowerCase()) return true;
+		}
+		return false;
+	} // end function ps_is_a_google_font
 
+	// FUNCTION TO PREPARE THE HTML CODE SNIPPET THAT LOADS THE (GOOGLE) FONTS
+	function ps_prepare_fonts_import_code_snippet(){
+		console.log('Running function ps_prepare_fonts_import_code_snippet to generate html code for font import:');
+		
+		//BUILD BASE FONT IMPORT HEAD CODE
+		var first_part="";
+		if ($("#_customize-input-SCSSvar_font-family-base").val().trim()!='' && ps_is_a_google_font($("#_customize-input-SCSSvar_font-family-base").val().split(',')[0].trim().replace(/"/g, "")) ) {  
+			first_part += 'family=' + $("#_customize-input-SCSSvar_font-family-base").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
+			if ($("#_customize-input-SCSSvar_font-weight-base").val() != '') first_part +=":wght@"+$("#_customize-input-SCSSvar_font-weight-base").val();
+		}
+		//console.log(first_part); //for debug
+		
+		//BUILD HEADINGS FONT IMPORT HEAD CODE
+		var second_part="";
+		if ($("#_customize-input-SCSSvar_headings-font-family").val().trim()!=''  && ps_is_a_google_font($("#_customize-input-SCSSvar_headings-font-family").val().split(',')[0].trim().replace(/"/g, "")) ) {
+			second_part += 'family=' + $("#_customize-input-SCSSvar_headings-font-family").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
+			if ($("#_customize-input-SCSSvar_headings-font-weight").val() != '') second_part +=":wght@"+$("#_customize-input-SCSSvar_headings-font-weight").val();
+		}
+		//console.log(second_part); //for debug
+		
+		if (first_part=="" && second_part=="" ) return "";  //no code necessary
+		
+		var separator_char=""; 
+		if (first_part!="" && second_part!="" ) separator_char="&"; 
+		
+		var output="";
 
-function ps_prepare_fonts_import_code_snippet(){
-	console.log('Running function ps_prepare_fonts_import_code_snippet to generate html code for font import:');
-	
-	//BUILD BASE FONT IMPORT HEAD CODE
-	var first_part="";
-	if ($("#_customize-input-SCSSvar_font-family-base").val().trim()!='' && ps_is_a_google_font($("#_customize-input-SCSSvar_font-family-base").val().split(',')[0].trim().replace(/"/g, "")) ) {  
-		first_part += 'family=' + $("#_customize-input-SCSSvar_font-family-base").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
-		if ($("#_customize-input-SCSSvar_font-weight-base").val() != '') first_part +=":wght@"+$("#_customize-input-SCSSvar_font-weight-base").val();
-	}
-	//console.log(first_part); //for debug
-	
-	//BUILD HEADINGS FONT IMPORT HEAD CODE
-	var second_part="";
-	if ($("#_customize-input-SCSSvar_headings-font-family").val().trim()!=''  && ps_is_a_google_font($("#_customize-input-SCSSvar_headings-font-family").val().split(',')[0].trim().replace(/"/g, "")) ) {
-		second_part += 'family=' + $("#_customize-input-SCSSvar_headings-font-family").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
-		if ($("#_customize-input-SCSSvar_headings-font-weight").val() != '') second_part +=":wght@"+$("#_customize-input-SCSSvar_headings-font-weight").val();
-	}
-	//console.log(second_part); //for debug
-	 
-	if (first_part=="" && second_part=="" ) return "";  //no code necessary
-	
-	var separator_char=""; 
-	if (first_part!="" && second_part!="" ) separator_char="&"; 
-	
-	var output="";
+		output += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
+		if (!$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked"))  output += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
+		output += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
+		
+		//an example:
+		//https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
+		
+		if ($("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked")) {
+			output = output.replaceAll('fonts.googleapis.com','api.fonts.coollabs.io');
+		}
 
-	output += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
-	if (!$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked"))  output += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
-	output += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
-	
-	//an example:
-	//https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
-	
-	if ($("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked")) {
-		output = output.replaceAll('fonts.googleapis.com','api.fonts.coollabs.io');
-	}
-
-	console.log(output);
-	return output;
-}
-	
+		console.log(output);
+		return output;
+	} // end function ps_prepare_fonts_import_code_snippet
+		
 	
 
 
@@ -134,8 +132,7 @@ function ps_prepare_fonts_import_code_snippet(){
 		//add codemirror to header field - does not work
 		//wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
 		
-
-		//DISABLE TEXTAREA FOR PICOSSTRAP GOOGLE FONTS HEADER CODE
+		//DISABLE TEXTAREA FOR PICOSTRAP GOOGLE FONTS HEADER CODE
 		$("#_customize-input-picostrap_fonts_header_code").attr("disabled","1");
 			
 		//ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)  PREPARE THE HTML CODE FOR FONT IMPORT AND UPDATE FIELD FOR PASSING TO BACKEND
@@ -156,32 +153,13 @@ function ps_prepare_fonts_import_code_snippet(){
 		//AFTER PUBLISHING CUSTOMIZER CHANGES
 		wp.customize.bind('saved', function( /* data */ ) {
 			if (scss_recompile_is_necessary)  ps_recompile_css_bundle();
-
 		});
 				
 		// USER CLICKS ON COLORS SECTION: run  get page colors routine
 		$("body").on("click", "#accordion-section-colors", function() {
 			ps_get_page_colors();
 		});
-		
-		/*
-		//ADD COLOR PALETTE GENERATOR
-		var html = "<a href='#' class='generate-palette'>Generate palette from this </a>";
-		$("#customize-control-SCSSvar_primary").prepend(html);
-		
-		//USER CLICKS GENERATE PALETTE
-		$("body").on("click", ".generate-palette", function() {
-			var jqxhr = $.getJSON("https://palett.es/API/v1/palette/from/84172b", function(a) {
-				console.log(a.results);
-	
-			}); //end loaded json ok
-	
-			jqxhr.fail(function() {
-				alert("Network error. Try later.");
-			});
-		}); //END ONCLICK
-		*/
-		
+			
 		//USER CLICKS CLOSE COMPILING WINDOW
 		$("body").on("click",".cs-close-compiling-window,.cs-closex",function(){
 			//$(".customize-controls-close").click();
@@ -241,87 +219,42 @@ function ps_prepare_fonts_import_code_snippet(){
 							
 			//reset combination select
 			//$('select#_ps_font_combinations option:first').attr('selected','selected');
+
+			//rebuild header code
+			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
 	
 		});
 		
 		// ON CHANGE OF NEW FONT FAMILY FIELD 
-		$("body").on("change", "#_customize-input-SCSSvar_font-family-base", function() { //reset legacy font select
-			$('select[data-customize-setting-link="picostrap_body_font"] option:first').attr('selected', 'selected').change();
+		$("body").on("change", "#_customize-input-SCSSvar_font-family-base", function() { 
+			$('select[data-customize-setting-link="picostrap_body_font"] option:first').attr('selected', 'selected').change(); //reset legacy font select
+			//if empty, reset font object field, as a security
+			if ($(this).val()==""){
+				$("#_customize-input-body_font_object").val("").change();
+			}
 		});
 		// ON CHANGE OF NEW FONT HEADING FIELD 
-		$("body").on("change", "#_customize-input-SCSSvar_headings-font-family", function() { //reset legacy font select
-			$('select[data-customize-setting-link="picostrap_headings_font"] option:first').attr('selected', 'selected').change();
+		$("body").on("change", "#_customize-input-SCSSvar_headings-font-family", function() { 
+			$('select[data-customize-setting-link="picostrap_headings_font"] option:first').attr('selected', 'selected').change(); //reset legacy font select
+			//if empty, reset font object field, as a security
+			if ($(this).val() == "") {
+				$("#_customize-input-headings_font_object").val("").change();
+			}
 		});
 		
 		
-		
-		//FONTPICKER ////////////////////////////  ////////////////////////////////////////
-		
-		var csFontPickerOptions=({
-				variants: true,
-				localFonts:{
-					"American Typewriter": {
-					   "category": "serif",
-					   "variants": "400,400i,600,600i"
-					},
-					"Arial": {
-					   "category": "sans-serif",
-					   "variants": "400,400i,600,600i"
-					},
-				/*	"Bradley Hand": {
-					   "category": "handwriting",
-					   //"variants": "400,400i,600,600i"
-					}, */
-					"Copperplate": {
-					   "category": "display",
-					   "variants": "400,400i,600,600i"
-					},
-					"Courier New": {
-					   "category": "monospace",
-					   "variants": "400,400i,600,600i"
-					},
-					"Didot": {
-					   "category": "serif",
-					   "variants": "400,400i,600,600i"
-					},
-					"Georgia": {
-					   "category": "serif",
-					   "variants": "400,400i,600,600i"
-					},
-					"Helvetica": {
-					   "category": "sans-serif",
-					   "variants": "400,400i,600,600i"
-					},
-					"Monaco": {
-					   "category": "sans-serif",
-					   "variants": "400,400i,600,600i"
-					},/*
-					"Optima": {
-					   "category": "serif",
-					   "variants": "400,400i,600,600i"
-					},*/
-					"Tahoma": {
-					   "category": "sans-serif",
-					   "variants": "400,400i,600,600i"
-					},
-					"Times New Roman": {
-					   "category": "serif",
-					   "variants": "400,400i,600,600i"
-					},
-					"Trebuchet MS": {
-					   "category": "sans-serif",
-					   "variants": "400,400i,600,600i"
-					},
-					"Verdana": {
-					   "category": "sans-serif",
-					   "variants": "400,400i,600,600i",
-					}
-					
-				},
+		//FONT PICKER ////////////////////////////  ////////////////////////////////////////
+
+		var csFontPickerOptions = ({
+			variants: true,
+			onSelect: fontHasBeenSelected,
+			localFonts: theLocalFonts //defined in customizer-vars.js file
 		});
-		
-		var csFontPickerButton=" <button class='cs-open-fontpicker button button-secondary' style='float:right;margin-top:4px;'>Font Picker...</button>";
-				
+
+		var csFontPickerButton = " <button class='cs-open-fontpicker button button-secondary' style='float:right;margin-top:4px;'>Font Picker...</button>";
+
+		//INIT FONTPICKERs
+
 		//append field and initialize Fontpicker for BASE FONT
 		$("label[for=_customize-input-SCSSvar_font-family-base]").append(csFontPickerButton).closest(".customize-control").append("<div hidden><input id='cs-fontpicker-input-base' class='cs-fontpicker-input' type='text' value=''></div>");
 		$("#cs-fontpicker-input-base").fontpicker(csFontPickerOptions);
@@ -330,7 +263,7 @@ function ps_prepare_fonts_import_code_snippet(){
 		$("label[for=_customize-input-SCSSvar_headings-font-family]").append(csFontPickerButton).closest(".customize-control").append("<div hidden><input id='cs-fontpicker-input-headings' class='cs-fontpicker-input' type='text' value=''></div>");
 		$("#cs-fontpicker-input-headings").fontpicker(csFontPickerOptions);
 		
-		//ON CLICK OF FONT PICKER BLUE TRIGGER BUTTONS: OPEN THE PICKER
+		//ON CLICK OF FONT PICKER TRIGGER BUTTONS, OPEN THE PICKER
 		$("body").on("click",".cs-open-fontpicker",function(e){
 			e.preventDefault();
 			$(this).closest(".customize-control").find(".cs-fontpicker-input").val("").change().fontpicker('show'); //trick to reset and solve the picker bug returning wromg weight after selecting two times the same font
@@ -341,26 +274,43 @@ function ps_prepare_fonts_import_code_snippet(){
 			
 			//exit if empty value - eg when changed programmatically two rows above
 			if (this.value=="") { /* console.log("Change ignored"); */ return; }
-			
-			// Split font into family and weight/style
-			var tmp = this.value.split(':'),
-			   family = tmp[0],
-			   variant = tmp[1] || '400',
-			   weight = parseInt(variant,10),
-			   italic = /i$/.test(variant); 
-			
-			//UPDATE FONT FAMILY FIELD
-			$(this).closest(".customize-control").find("input:not(.cs-fontpicker-input)").val(family).change();
-			
-			//UPDATE FONT WEIGHT FIELD
-			//base
-			if ($(this).attr("id") =="cs-fontpicker-input-base") $("#_customize-input-SCSSvar_font-weight-base").val(weight).change();
-			//headings
-			if ($(this).attr("id") =="cs-fontpicker-input-headings")   $("#_customize-input-SCSSvar_headings-font-weight").val(weight).change();		
-		
-		}); //END FONTPICKER
-		
 
+			window.lastSelectedFontFieldId = $(this).attr("id"); // so field id is reachable in callback function
+
+		}); //end on picker change
+
+		//CALLBACK: FONT HAS BEEN SELECTED ON PICKER
+		function fontHasBeenSelected(fontObj) {
+			console.log(fontObj);
+			//console.log(window.lastSelectedFontFieldId); //for debug
+
+			if (window.lastSelectedFontFieldId == 'cs-fontpicker-input-base') {
+
+				//store font object
+				$("#_customize-input-body_font_object").val(JSON.stringify(fontObj)).change();
+
+				//maybe in the future, for google fonts, suggest opening modal for multiple weights
+
+				//set font family and font weight fields
+				$("#_customize-input-SCSSvar_font-family-base").val(fontObj.fontFamily).change();
+				$("#_customize-input-SCSSvar_font-weight-base").val(fontObj.fontWeight); //maybe not always, we should ask
+			}
+
+			if (window.lastSelectedFontFieldId == 'cs-fontpicker-input-headings') {
+
+				//store font object
+				$("#_customize-input-headings_font_object").val(JSON.stringify(fontObj)).change();
+
+				//maybe in the future, for google fonts, suggest opening modal for multiple weights
+
+				//set font family and font weight fields
+				$("#_customize-input-SCSSvar_headings-font-family").val(fontObj.fontFamily).change();
+				$("#_customize-input-SCSSvar_headings-font-weight").val(fontObj.fontWeight); //maybe not always, we should ask
+
+			}
+
+		} //end callback function
+		
 		
 		/////// CSS EDITOR MAXIMIZE BUTTON ////////////////////////////////////////////////////////
 		
@@ -394,9 +344,30 @@ function ps_prepare_fonts_import_code_snippet(){
 		pico_add_video_link("section-static_front_page", "https://youtu.be/jvaK12m5tVQ&t=203s");
 		pico_add_video_link("section-singleposts", "#");
 		pico_add_video_link("section-addcode", "#");
-		pico_add_video_link("section-extras", "#")
+		pico_add_video_link("section-extras", "#");
 
 		
+		///COLOR PALETTE GENERATOR /////
+		/*
+		//ADD COLOR PALETTE GENERATOR
+		var html = "<a href='#' class='generate-palette'>Generate palette from this </a>";
+		$("#customize-control-SCSSvar_primary").prepend(html);
+			
+		//USER CLICKS GENERATE PALETTE
+		$("body").on("click", ".generate-palette", function() {
+			var jqxhr = $.getJSON("https://palett.es/API/v1/palette/from/84172b", function(a) {
+				console.log(a.results);
+			
+			}); //end loaded json ok
+			
+			jqxhr.fail(function() {
+				alert("Network error. Try later.");
+			});
+		}); //END ONCLICK
+		*/
+
+
+
 	}); //end document ready
 
 
@@ -409,31 +380,27 @@ function ps_prepare_fonts_import_code_snippet(){
 
 	function picostrap_make_customizations_to_customizer(){
 
-	//$("#sub-accordion-section-colors").append("HEELLLOO");
+		//$("#sub-accordion-section-colors").append("HEELLLOO");
 
-	$('iframe').on('load', function(){
-	picostrap_highlight_menu();
-	});
+		$('iframe').on('load', function(){
+			picostrap_highlight_menu();
+		});
 
 	}
 
 	function picostrap_highlight_menu() {
 
-	if($("iframe").contents().find("body").hasClass("archive")) {
-	jQuery("li#accordion-section-archives h3").css("background","#ffcc99");
-	}
+		if($("iframe").contents().find("body").hasClass("archive")) {
+			jQuery("li#accordion-section-archives h3").css("background","#ffcc99");
+		}
 
-	if($("iframe").contents().find("body").hasClass("single-post")) {
-	jQuery("li#accordion-section-singleposts h3").css("background","#ffcc99");
-	}
-
-
-
-
+		if($("iframe").contents().find("body").hasClass("single-post")) {
+			jQuery("li#accordion-section-singleposts h3").css("background","#ffcc99");
+		}
 	}
 
 	setTimeout(function(){
-	picostrap_make_customizations_to_customizer();
+		picostrap_make_customizations_to_customizer();
 
 	}, 1000);
 
