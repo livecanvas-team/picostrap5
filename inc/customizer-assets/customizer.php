@@ -303,7 +303,6 @@ function picostrap_register_main_partials( WP_Customize_Manager $wp_customize ) 
 	$wp_customize->selective_refresh->add_partial( 'header_menu_left', array(
         'selector' => '#navbar .menuwrap-left',
         'settings' => array( 'nav_menu_locations[navbar-left]' ),
-          
     ) );
 	
 	/*
@@ -371,21 +370,6 @@ function picostrap_register_main_partials( WP_Customize_Manager $wp_customize ) 
 		'settings' => array( 'singlepost_disable_author' ),
 		'render_callback' => '__return_false'    
 	));
-
-	/*
-	//SINGLE: postnavi
-	$wp_customize->selective_refresh->add_partial( 'singlepost_posts_nav', array(
-        'selector' => 'nav.post-navigation',
-        'settings' => array( 'singlepost_disable_posts_nav' ),
-		'render_callback' => '__return_false' 
-    ));
-	
-	//SINGLE: comments
-	$wp_customize->selective_refresh->add_partial( 'singlepost_comments', array(
-        'selector' => '#comments',
-        'settings' => array( 'singlepost_disable_comments' ),
-		'render_callback' => '__return_false'    
-	)); */
 
 	//SINGLE: sharing buttons
 	$wp_customize->selective_refresh->add_partial( 'enable_sharing_buttons', array(
@@ -487,7 +471,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	
 	
 	
-	
 	//istantiate  all controls needed for controlling the SCSS variables
 	foreach(picostrap_get_scss_variables_array() as $section_slug => $section_data):
 	
@@ -565,6 +548,23 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	//SANITIZE CHECKBOX
 	function picostrap_sanitize_checkbox( $input ) {		return ( ( isset( $input ) && true == $input ) ? true : false ); }
 
+	//COLORS: ADDITIONAL COLOR SHADES
+	$wp_customize->add_setting(  'picostrap_additional_color_shades',  array(
+		'default' => '', // Give it a default
+		//'transport" => "postMessage',
+		));
+		$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+		$wp_customize,
+		'picostrap_additional_color_shades', //give it an ID
+		array(
+			'label' => __( 'Generate Color Shade Classes', 'picostrap' ), //set the label to appear in the Customizer
+			'section' => 'colors', //select the section for it to appear under 
+			'description' =>"<span hidden class='cs-option-group-title'>Color Shades</span> Generates additional classes to have lighter and darker variations of your colors, eg:<br> bg-primary-100 ... bg-primary-900<br>text-primary-100 ... text-primary-900",
+			'type' => 'checkbox'  
+		)
+	));
+
 	//COLORS: ANDROID CHROME HEADER COLOR
 	$wp_customize->add_setting(  'picostrap_header_chrome_color',  array(
 		'default' => '', // Give it a default
@@ -575,11 +575,13 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 		$wp_customize,
 		'picostrap_header_chrome_color', //give it an ID
 		array(
-		'label' => __( 'Header Color in Android Chrome', 'picostrap' ), //set the label to appear in the Customizer
-		'section' => 'colors', //select the section for it to appear under 
-		'description' =>" <span hidden class='cs-option-group-title'>Extra</span>" //to implement a divisor
+			'label' => __( 'Header Color in Android Chrome', 'picostrap' ), //set the label to appear in the Customizer
+			'section' => 'colors', //select the section for it to appear under 
+			'description' =>" <span hidden class='cs-option-group-title'>Extra</span>", //to implement a divisor
+			'type' => 'color'  
 		)
 	));
+
  
     //TAGLINE: SHOW / HIDE SWITCH
 	$wp_customize->add_setting('header_disable_tagline', array(
@@ -687,8 +689,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 				'bg-light' 	=> 'Light', 	
 				'bg-dark' 		=> 'Dark', 		
 				'bg-transparent' 		=> 'Transparent' 
-				
-				
 				)
         )
     ));
@@ -714,11 +714,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
     ));
 	
 	
-
-	
-
-
-
 	//SEARCH FORM
 	$wp_customize->add_setting("enable_search_form", array(
         "default" => "",
@@ -733,8 +728,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             'type'     => 'checkbox',
 			)
 	));
-
-
 
 
 
@@ -878,8 +871,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "default" => "",
         "transport" => "refresh",
     ));
-
-
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
         "picostrap_footer_code",
@@ -891,7 +882,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 
-	//ADD BODY FONT OBJECT
+	//ADD BODY FONT OBJECT - hidden by CSS
 	$wp_customize->add_setting("body_font_object", array(
         "default" => "",
 		"transport" => "refresh",
@@ -907,7 +898,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 
-	//ADD HEADINGS FONT OBJECT
+	//ADD HEADINGS FONT OBJECT - hidden by CSS
 	$wp_customize->add_setting("headings_font_object", array(
         "default" => "",
 		"transport" => "refresh",
@@ -923,7 +914,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 
-	//ADD FONTLOADING HEADER CODE  
+	//ADD FONT LOADING HEADER CODE  
 	$wp_customize->add_setting("picostrap_fonts_header_code", array(
         "default" => "",
 		"transport" => "refresh",
@@ -1017,7 +1008,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 
-
 	//DISABLE COMMENTS
 	$wp_customize->add_setting("singlepost_disable_comments", array(
         "default" => "",
@@ -1066,9 +1056,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 	
-	
-	
-	
+		
 	//LIGHTBOX
 	$wp_customize->add_setting("enable_lightbox", array(
         "default" => "",
@@ -1158,23 +1146,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
 	));
 
-	/*
-	//PAGES NAVIGATION: NEXT / PREV ARTICLE
-	$wp_customize->add_setting("singlepost_disable_posts_nav", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "singlepost_disable_posts_nav",
-        array(
-            "label" => __("Hide Next and Prev Post Links (Single Post Template)", "picostrap"),
-			"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
-            "section" => "singleposts", 
-            'type'     => 'checkbox',
-			)
-    ));
-	*/
 	
  	//SHARING BUTTONS
 	$wp_customize->add_setting("enable_sharing_buttons", array(

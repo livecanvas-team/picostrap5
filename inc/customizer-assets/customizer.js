@@ -147,7 +147,7 @@
 
 		//LISTEN TO CUSTOMIZER CHANGES: if some variable is changed, we'll have to recompile
 		wp.customize.bind( 'change', function ( setting ) {
-			if (setting.id.includes("SCSSvar")  || setting.id.includes("body_font")   || setting.id.includes("headings_font")  || setting.id.includes("picostrap_fontawesome_disable") ) scss_recompile_is_necessary=true;
+			if (setting.id.includes("SCSSvar") || setting.id.includes("body_font") || setting.id.includes("headings_font") || setting.id.includes("picostrap_additional_color_shades") ) scss_recompile_is_necessary=true;
 		});
 		
 		//AFTER PUBLISHING CUSTOMIZER CHANGES
@@ -221,7 +221,7 @@
 			//$('select#_ps_font_combinations option:first').attr('selected','selected');
 
 			//rebuild header code
-			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
+			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet());
 	
 		});
 		

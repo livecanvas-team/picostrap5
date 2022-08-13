@@ -1,0 +1,138 @@
+    
+// Generate Bootstrap Theme Colors Shades for primary, secondary, success and danger
+
+// Primary
+$primary-100: tint-color($primary, 80%) !default;
+$primary-200: tint-color($primary, 60%) !default;
+$primary-300: tint-color($primary, 40%) !default;
+$primary-400: tint-color($primary, 20%) !default;
+$primary-500: $primary !default;
+$primary-600: shade-color($primary, 20%) !default;
+$primary-700: shade-color($primary, 40%) !default;
+$primary-800: shade-color($primary, 60%) !default;
+$primary-900: shade-color($primary, 80%) !default;
+
+
+$primarys: (
+  "primary-100": $primary-100,
+  "primary-200": $primary-200,
+  "primary-300": $primary-300,
+  "primary-400": $primary-400,
+  "primary-500": $primary-500,
+  "primary-600": $primary-600,
+  "primary-700": $primary-700,
+  "primary-800": $primary-800,
+  "primary-900": $primary-900
+) !default;
+
+@each $key, $value in $primarys {
+  .bg-#{$key}{
+        background-color: $value !important;
+        color: color-contrast($value);
+  }
+  .text-#{$key}{
+    color: $value !important;
+  }
+}
+
+// Secondary
+$secondary-100: tint-color($secondary, 80%) !default;
+$secondary-200: tint-color($secondary, 60%) !default;
+$secondary-300: tint-color($secondary, 40%) !default;
+$secondary-400: tint-color($secondary, 20%) !default;
+$secondary-500: $secondary !default;
+$secondary-600: shade-color($secondary, 20%) !default;
+$secondary-700: shade-color($secondary, 40%) !default;
+$secondary-800: shade-color($secondary, 60%) !default;
+$secondary-900: shade-color($secondary, 80%) !default;
+
+
+$secondarys: (
+  "secondary-100": $secondary-100,
+  "secondary-200": $secondary-200,
+  "secondary-300": $secondary-300,
+  "secondary-400": $secondary-400,
+  "secondary-500": $secondary-500,
+  "secondary-600": $secondary-600,
+  "secondary-700": $secondary-700,
+  "secondary-800": $secondary-800,
+  "secondary-900": $secondary-900
+) !default;
+
+@each $key, $value in $secondarys {
+  .bg-#{$key}{
+        background-color: $value !important;
+        color: color-contrast($value);
+  }
+  .text-#{$key}{
+    color: $value !important;
+  }
+}
+
+// Success
+$success-100: tint-color($success, 80%) !default;
+$success-200: tint-color($success, 60%) !default;
+$success-300: tint-color($success, 40%) !default;
+$success-400: tint-color($success, 20%) !default;
+$success-500: $success !default;
+$success-600: shade-color($success, 20%) !default;
+$success-700: shade-color($success, 40%) !default;
+$success-800: shade-color($success, 60%) !default;
+$success-900: shade-color($success, 80%) !default;
+
+
+$successs: (
+  "success-100": $success-100,
+  "success-200": $success-200,
+  "success-300": $success-300,
+  "success-400": $success-400,
+  "success-500": $success-500,
+  "success-600": $success-600,
+  "success-700": $success-700,
+  "success-800": $success-800,
+  "success-900": $success-900
+) !default;
+
+@each $key, $value in $successs {
+  .bg-#{$key}{
+        background-color: $value !important;
+        color: color-contrast($value);
+  }
+  .text-#{$key}{
+    color: $value !important;
+  }
+}
+
+// Danger
+$danger-100: tint-color($danger, 80%) !default;
+$danger-200: tint-color($danger, 60%) !default;
+$danger-300: tint-color($danger, 40%) !default;
+$danger-400: tint-color($danger, 20%) !default;
+$danger-500: $danger !default;
+$danger-600: shade-color($danger, 20%) !default;
+$danger-700: shade-color($danger, 40%) !default;
+$danger-800: shade-color($danger, 60%) !default;
+$danger-900: shade-color($danger, 80%) !default;
+
+
+$dangers: (
+  "danger-100": $danger-100,
+  "danger-200": $danger-200,
+  "danger-300": $danger-300,
+  "danger-400": $danger-400,
+  "danger-500": $danger-500,
+  "danger-600": $danger-600,
+  "danger-700": $danger-700,
+  "danger-800": $danger-800,
+  "danger-900": $danger-900
+) !default;
+
+@each $key, $value in $dangers {
+  .bg-#{$key}{
+        background-color: $value !important;
+        color: color-contrast($value);
+  }
+  .text-#{$key}{
+    color: $value !important;
+  }
+}
