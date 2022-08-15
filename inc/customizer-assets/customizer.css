@@ -141,10 +141,8 @@ body .font-picker .fp-modal {
     bottom: 15px;
 }
 /* hide italic font selection */
-body span.fp-pill.italic{display: none} 
+body span.fp-pill.italic { display: none} 
 
-/* HIDE TEXT FIELD FOR FONT LOADING CODE */	
- body li#customize-control-picostrap_fonts_header_code  textarea {opacity:0.7;}  
 
 /* MAXIMIZE CSS EDITOR: trigger button */
  
@@ -156,7 +154,7 @@ body span.fp-pill.italic{display: none}
 .picostrap-maximize-editor { position: fixed;  left:0;  top: 45vh;bottom:0;height: auto}
 .picostrap-maximize-editor .CodeMirror-wrap {border-top: 3px solid #888;}
 
-
+/* BOOTSTRAP LOGO ON SECTION TITLES */
 #accordion-section-colors h3.accordion-section-title::before,
 #accordion-section-typography h3.accordion-section-title::before,
 #accordion-section-components h3.accordion-section-title::before,

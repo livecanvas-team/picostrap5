@@ -132,20 +132,16 @@
 		//add codemirror to header field - does not work
 		//wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
 			
-		//ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)  PREPARE THE HTML CODE FOR FONT IMPORT AND UPDATE FIELD FOR PASSING TO BACKEND
-		//no more necessary, we do it on font family change or alterrnative font source check
-		/*
+		//ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)  
 		$("body").on("mousedown", "#customize-save-button-wrapper #save", function() {
-			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
+			console.log("Clicked Publish");
 		});			
-		*/
 
 		//CHECK IF USING VINTAGE GOOGLE FONTS API V1, REBUILD FONT IMPORT CODE
 		
 		if ($("#_customize-input-picostrap_fonts_header_code").val().includes('https://fonts.googleapis.com/css?')){
-			console.log("GOOGLE FONTS API V1 is used, let's redo the fornt import header code");
+			console.log("GOOGLE FONTS API V1 is used, let's rebuild the font import header code to update it to v2 syntax");
 			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
-
 		}
 
 		//ON CHANGE FONT FAMILY
@@ -154,18 +150,17 @@
 			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
 		});	
 
-		
 		//ON CHANGE CHECKBOX FOR  USE ALTERNATIVE FONT SOURCE FOR GDPR
 		$("body").on("change", "#_customize-input-picostrap_fonts_use_alternative_font_source", function() {
 			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
 		});	
 
-		//LISTEN TO CUSTOMIZER CHANGES: if some variable is changed, we'll have to recompile
+		//LISTEN TO CUSTOMIZER CHANGES: if some field containing scssvar is changed, we'll have to recompile
 		wp.customize.bind( 'change', function ( setting ) {
 			if (setting.id.includes("SCSSvar") || setting.id.includes("body_font") || setting.id.includes("headings_font") || setting.id.includes("picostrap_additional_color_shades") ) scss_recompile_is_necessary=true;
 		});
 		
-		//AFTER PUBLISHING CUSTOMIZER CHANGES
+		//AFTER PUBLISHING CUSTOMIZER CHANGES, RECOMPILE SCSS
 		wp.customize.bind('saved', function( /* data */ ) {
 			if (scss_recompile_is_necessary)  ps_recompile_css_bundle();
 		});
@@ -216,8 +211,7 @@
 			$("#cs-font-combi").slideToggle();
 		});
 		$("li#customize-control-SCSSvar_font-family-base").prepend(ps_font_combinations_select);
-	
-
+		
 		//WHEN A FONT COMBINATION IS CHOSEN
 		$("body").on("change", "select#_ps_font_combinations", function() {
 			var value = jQuery(this).val(); //Cabin and Old Standard TT
@@ -302,9 +296,9 @@
 
 				//maybe in the future, for google fonts, suggest opening modal for multiple weights
 
-				//set font family and font weight fields
-				$("#_customize-input-SCSSvar_font-family-base").val(fontObj.fontFamily).change();
+				//set font family and font weight fields	
 				$("#_customize-input-SCSSvar_font-weight-base").val(fontObj.fontWeight); //maybe not always, we should ask
+				$("#_customize-input-SCSSvar_font-family-base").val(fontObj.fontFamily).change();
 			}
 
 			if (window.lastSelectedFontFieldId == 'cs-fontpicker-input-headings') {
@@ -315,8 +309,8 @@
 				//maybe in the future, for google fonts, suggest opening modal for multiple weights
 
 				//set font family and font weight fields
-				$("#_customize-input-SCSSvar_headings-font-family").val(fontObj.fontFamily).change();
 				$("#_customize-input-SCSSvar_headings-font-weight").val(fontObj.fontWeight); //maybe not always, we should ask
+				$("#_customize-input-SCSSvar_headings-font-family").val(fontObj.fontFamily).change();
 
 			}
 
