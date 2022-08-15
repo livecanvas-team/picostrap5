@@ -927,7 +927,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             "label" => __("Font Loading Header code", "picostrap"),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>'<b>Not editable</b> - Reading purpose only. Automatically generated upon publishing'
+			'description' =>'You can customize this field, for example to add multiple font weights, but please mind that this field is reset and regenerated automatically upon setting a new font family for body or headings.
+			So if you set new fonts, your edits will be discarded.'
 			)
     ));
 	
@@ -959,11 +960,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         array(
             "label" => __("Disable the Font Loading in Header", "picostrap"),
 			"description" =>  __("<b>Keep this unchecked, unless you really want. </b>").__("Prevents the code of 
-			the textarea above from being served in the site header. <br>Can be relevant if you want to customize the font loading code.
-			For example, to add <b>multiple font weights</b>, or to 
-			<a target='_blank' href='https://google-webfonts-helper.herokuapp.com/'>self-host</a> Google Fonts.<br>
-			If you check this option, you may want to copy the code from the <b>Font Loading Header code</b> field to the <b>Add code to Header</b> field, and then customize it.
-			", "picostrap"),
+			the textarea above from being served in the site header. ", "picostrap"),
             "section" => "addcode", 
             'type'     => 'checkbox',
 			)

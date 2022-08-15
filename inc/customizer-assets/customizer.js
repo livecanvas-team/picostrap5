@@ -50,13 +50,13 @@
 			
 	} //END FUNCTION ps_recompile_css_bundle
 		
-	function ps_is_a_google_font(fontName){
-		var google_fonts_array=Object.keys(__googleFonts); //console.log(google_fonts_array);
-		for (const el of google_fonts_array) {
-			//console.log(el);
-			if(el.toLowerCase()==fontName.toLowerCase()) return true;
-		}
-		return false;
+	function ps_is_a_google_font(fontFamilyName){
+		
+		var fontData = google_fonts.find(function (element) {
+			return element.family == fontFamilyName;
+		});
+		if (!fontData) return false; else return true;
+		
 	} // end function ps_is_a_google_font
 
 	// FUNCTION TO PREPARE THE HTML CODE SNIPPET THAT LOADS THE (GOOGLE) FONTS
@@ -99,7 +99,7 @@
 
 		console.log(output);
 		return output;
-	} // end function ps_prepare_fonts_import_code_snippet
+	} // end function 
 		
 	
 
@@ -131,14 +131,21 @@
 		
 		//add codemirror to header field - does not work
 		//wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
-		
-		//DISABLE TEXTAREA FOR PICOSTRAP GOOGLE FONTS HEADER CODE
-		$("#_customize-input-picostrap_fonts_header_code").attr("disabled","1");
 			
 		//ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)  PREPARE THE HTML CODE FOR FONT IMPORT AND UPDATE FIELD FOR PASSING TO BACKEND
+		//no more necessary, we do it on font family change or alterrnative font source check
+		/*
 		$("body").on("mousedown", "#customize-save-button-wrapper #save", function() {
 			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
 		});			
+		*/
+
+		//ON CHANGE FONT FAMILY
+		$("body").on("change", "#_customize-input-SCSSvar_font-family-base, #_customize-input-SCSSvar_headings-font-family", function () {
+			console.log("Font family change");
+			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
+		});	
+
 		
 		//ON CHANGE CHECKBOX FOR  USE ALTERNATIVE FONT SOURCE FOR GDPR
 		$("body").on("change", "#_customize-input-picostrap_fonts_use_alternative_font_source", function() {
@@ -219,10 +226,6 @@
 							
 			//reset combination select
 			//$('select#_ps_font_combinations option:first').attr('selected','selected');
-
-			//rebuild header code
-			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet());
-	
 		});
 		
 		// ON CHANGE OF NEW FONT FAMILY FIELD 
