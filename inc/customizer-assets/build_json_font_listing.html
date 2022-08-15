@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <title>GF Build list</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        //Request google fonts with axios
+        document.addEventListener('DOMContentLoaded', () => {
+        
+            axios.get('https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyCWH7CfLizoL_KjHxClDVEZ1vdaWz5Q4GQ')
+                .then(res => res.data)
+                .then(data => {
+                    const fonts = [];
+                    fonts.push(...data.items); 
+                    console.log("const google_fonts_json='"+JSON.stringify(fonts)+"';"); 
+                    alert("Done. Check out console");
+                });
+
+        });
+    
+    </script>
+</head>
+<body>
+    
+     
+</body>
+</html>
