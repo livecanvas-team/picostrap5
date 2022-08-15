@@ -140,6 +140,14 @@
 		});			
 		*/
 
+		//CHECK IF USING VINTAGE GOOGLE FONTS API V1, REBUILD FONT IMPORT CODE
+		
+		if ($("#_customize-input-picostrap_fonts_header_code").val().includes('https://fonts.googleapis.com/css?')){
+			console.log("GOOGLE FONTS API V1 is used, let's redo the fornt import header code");
+			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
+
+		}
+
 		//ON CHANGE FONT FAMILY
 		$("body").on("change", "#_customize-input-SCSSvar_font-family-base, #_customize-input-SCSSvar_headings-font-family", function () {
 			console.log("Font family change");
