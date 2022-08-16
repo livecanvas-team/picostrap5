@@ -928,7 +928,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             "section" => "addcode",
             'type'     => 'textarea',
 			'description' =>'You can customize this field, for example to add multiple font weights, but please mind that this field is reset and regenerated automatically upon setting a new font family for body or headings.
-			So if you set new fonts, your edits will be discarded.'
+			So if you set new fonts, your edits will be discarded.<br>Check out the <a target="_blank" href="https://fonts.google.com/">Google Fonts website</a> and our <a target="_blank" href="">video tutorial on multiple font weights</a>'
 			)
     ));
 	
