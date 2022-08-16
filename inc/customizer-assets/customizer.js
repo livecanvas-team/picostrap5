@@ -152,6 +152,13 @@
 			ps_prepare_fonts_import_code_snippet();
 		});	
 
+		//ON CHANGE FONT MAIN WEIGHT
+		$("body").on("change", "#_customize-input-SCSSvar_font-weight-base, #_customize-input-SCSSvar_headings-font-weight", function () {
+			console.log("Font weight change");
+			ps_prepare_fonts_import_code_snippet();
+		});	
+
+
 		//ON CLICK LINK TO REGENERATE FONT LOADING CODE, DO IT
 		$("body").on("click", "#regenerate-font-loading-code", function () {
 			ps_prepare_fonts_import_code_snippet();
@@ -304,6 +311,13 @@
 		function fontHasBeenSelected(fontObj) {
 			console.log(fontObj);
 			//console.log(window.lastSelectedFontFieldId); //for debug
+
+			//protection for removed google fonts
+			if (fontObj.fontType == 'google' && !ps_is_a_google_font(fontObj.fontFamily)){
+				alert("Apologies. The " + fontObj.fontFamily +" font has been recently removed from the Google Font directory. Please choose another one.");
+				return false;
+			}
+
 
 			if (window.lastSelectedFontFieldId == 'cs-fontpicker-input-base') {
 
