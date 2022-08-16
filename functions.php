@@ -51,3 +51,6 @@ if (get_theme_mod("disable_gutenberg") ) require_once locate_template('/inc/opt-
 //OPTIONAL: DISABLE WIDGETS BLOCK EDITOR  
 if (get_theme_mod("disable_widgets_block_editor") ) require_once locate_template('/inc/opt-in/disable-widgets-block-editor.php');
 	
+//OPTIONAL: DISABLE XML/RPC
+if (get_theme_mod("disable_xml_rpc") ) require_once locate_template('/inc/opt-in/disable-xml-rpc.php');
+	

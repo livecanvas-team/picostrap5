@@ -843,8 +843,130 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         )
     ));
 	
+	// ADD SECTION FOR SINGLE POST & ARCHIVES //////////////////////////////////////////////////////////////////////////////////////////////////////////
+	$wp_customize->add_section("singleposts", array(
+        "title" => __("Single Post & Archives", "picostrap"),
+        "priority" => 160,
+    ));
 		
-	// ADD A SECTION FOR HEADER & FOOTER CODE -- to fix
+	//ENTRY META: CATEGORIES  
+	$wp_customize->add_setting("singlepost_disable_entry_cats", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "singlepost_disable_entry_cats",
+        array(
+            "label" => __("Hide Categories", "picostrap"),
+			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+            "section" => "singleposts", 
+            'type'     => 'checkbox',
+			)
+	));
+
+	//ENTRY METAS: AUTHOR & DATE  
+	/*
+	$wp_customize->add_setting("singlepost_disable_entry_meta", array(
+		"default" => "",
+		"transport" => "refresh",
+	));
+	$wp_customize->add_control(new WP_Customize_Control(
+		$wp_customize,
+		"singlepost_disable_entry_meta",
+		array(
+			"label" => __("Hide Post Metas: Date and Author", "picostrap"),
+			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+			"section" => "singleposts", 
+			'type'     => 'checkbox',
+			)
+	));
+	*/
+
+	//ENTRY META: AUTHOR   
+	$wp_customize->add_setting("singlepost_disable_author", array(
+		"default" => "",
+		"transport" => "refresh",
+	));
+	$wp_customize->add_control(new WP_Customize_Control(
+		$wp_customize,
+		"singlepost_disable_author",
+		array(
+			"label" => __("Hide Post Author", "picostrap"),
+			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+			"section" => "singleposts", 
+			'type'     => 'checkbox',
+			)
+	));
+
+	//ENTRY META: DATE  
+	$wp_customize->add_setting("singlepost_disable_date", array(
+		"default" => "",
+		"transport" => "refresh",
+	));
+	$wp_customize->add_control(new WP_Customize_Control(
+		$wp_customize,
+		"singlepost_disable_date",
+		array(
+			"label" => __("Hide Post Date", "picostrap"),
+			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+			"section" => "singleposts", 
+			'type'     => 'checkbox',
+			)
+	));
+
+	
+ 	//SHARING BUTTONS
+	$wp_customize->add_setting("enable_sharing_buttons", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "enable_sharing_buttons",
+        array(
+            "label" => __("Enable Sharing Buttons after the Content", "picostrap"),
+			"description" => __("Pure HTML only, SVG inline icons, zero bloat", "picostrap"),
+            "section" => "singleposts", 
+            'type'     => 'checkbox',
+			)
+    ));
+	//end single posts ////////////////////////////////////
+
+	/* 
+	// ADD A SECTION FOR ARCHIVES ///////////////////////////////
+	$wp_customize->add_section("archives", array(
+        "title" => __("Archive Templates", "picostrap"),
+        "priority" => 160,
+    ));
+	
+	//FIELDS
+	
+	//ARCHIVES_TEMPLATE
+	$wp_customize->add_setting("archives_template", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "archives_template",
+        array(
+            "label" => __("Template", "picostrap"),
+            "section" => "archives",
+            "settings" => "archives_template",
+            'type'     => 'select',
+			'choices'  => array(
+				''  => 'Standard Blog: List With Sidebar',
+				'v2' => 'v2 : Horizontal split with Featured Image',
+				'v3' => 'v3 : Simple 3 Columns Grid ',
+				'v4' => 'v4 : Masonry Grid',
+				 				)
+			)
+    ));
+	
+	*/
+	
+	// ADD A SECTION FOR HEADER & FOOTER CODE /////////////////////////////////////
 	$wp_customize->add_section("addcode", array(
         "title" => __("Header / Footer Code", "picostrap"),
         "priority" => 180,
@@ -1015,8 +1137,24 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "singlepost_disable_comments",
         array(
-            "label" => __("Disable the WordPress comments system", "picostrap"),
+            "label" => __("Disable WordPress Comments", "picostrap"),
 			"description" => __("Will completely disable the entire WP comments feature.", "picostrap"),
+            "section" => "extras", 
+            'type'     => 'checkbox',
+			)
+    ));
+
+	//DISABLE XML-RPC
+	$wp_customize->add_setting("disable_xml_rpc", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "disable_xml_rpc",
+        array(
+            "label" => __("Disable XML - RPC", "picostrap"),
+			"description" => __("Disabling XML-RPC will close one more door that a potential hacker may try to exploit to hack your website.", "picostrap"),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -1072,128 +1210,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	));
 	
 
-	// SINGLE POST & ARCHIVES SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////
-	$wp_customize->add_section("singleposts", array(
-        "title" => __("Single Post & Archives", "picostrap"),
-        "priority" => 160,
-    ));
-		
-	//ENTRY META: CATEGORIES  
-	$wp_customize->add_setting("singlepost_disable_entry_cats", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "singlepost_disable_entry_cats",
-        array(
-            "label" => __("Hide Categories", "picostrap"),
-			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
-            "section" => "singleposts", 
-            'type'     => 'checkbox',
-			)
-	));
 
-	//ENTRY METAS: AUTHOR & DATE  
-	/*
-	$wp_customize->add_setting("singlepost_disable_entry_meta", array(
-		"default" => "",
-		"transport" => "refresh",
-	));
-	$wp_customize->add_control(new WP_Customize_Control(
-		$wp_customize,
-		"singlepost_disable_entry_meta",
-		array(
-			"label" => __("Hide Post Metas: Date and Author", "picostrap"),
-			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
-			"section" => "singleposts", 
-			'type'     => 'checkbox',
-			)
-	));
-	*/
-
-	//ENTRY META: AUTHOR   
-	$wp_customize->add_setting("singlepost_disable_author", array(
-		"default" => "",
-		"transport" => "refresh",
-	));
-	$wp_customize->add_control(new WP_Customize_Control(
-		$wp_customize,
-		"singlepost_disable_author",
-		array(
-			"label" => __("Hide Post Author", "picostrap"),
-			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
-			"section" => "singleposts", 
-			'type'     => 'checkbox',
-			)
-	));
-
-	//ENTRY META: DATE  
-	$wp_customize->add_setting("singlepost_disable_date", array(
-		"default" => "",
-		"transport" => "refresh",
-	));
-	$wp_customize->add_control(new WP_Customize_Control(
-		$wp_customize,
-		"singlepost_disable_date",
-		array(
-			"label" => __("Hide Post Date", "picostrap"),
-			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
-			"section" => "singleposts", 
-			'type'     => 'checkbox',
-			)
-	));
-
-	
- 	//SHARING BUTTONS
-	$wp_customize->add_setting("enable_sharing_buttons", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "enable_sharing_buttons",
-        array(
-            "label" => __("Enable Sharing Buttons after the Content", "picostrap"),
-			"description" => __("Pure HTML only, SVG inline icons, zero bloat", "picostrap"),
-            "section" => "singleposts", 
-            'type'     => 'checkbox',
-			)
-    ));
-	//end single posts ////////////////////////////////////
-
-	/*  .php
-	// ADD A SECTION FOR ARCHIVES ///////////////////////////////
-	$wp_customize->add_section("archives", array(
-        "title" => __("Archive Templates", "picostrap"),
-        "priority" => 160,
-    ));
-	
-	//FIELDS
-	
-	//ARCHIVES_TEMPLATE
-	$wp_customize->add_setting("archives_template", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "archives_template",
-        array(
-            "label" => __("Template", "picostrap"),
-            "section" => "archives",
-            "settings" => "archives_template",
-            'type'     => 'select',
-			'choices'  => array(
-				''  => 'Standard Blog: List With Sidebar',
-				'v2' => 'v2 : Horizontal split with Featured Image',
-				'v3' => 'v3 : Simple 3 Columns Grid ',
-				'v4' => 'v4 : Masonry Grid',
-				 				)
-			)
-    ));
-	
-	*/
-	
 }
  

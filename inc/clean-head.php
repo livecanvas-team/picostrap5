@@ -14,7 +14,7 @@ function picostrap_cleanup() {
     remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
     remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
     
-    /*DISABLE EMOJIS */   
+    /* DISABLE EMOJIS */   
     remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
     remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
     remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -61,28 +61,16 @@ function disable_self_pingbacks(&$links) {
  }
 
 
-// Disable XML-RPC - not necess?
-//add_filter('xmlrpc_enabled', '__return_false');
-//add_filter('wp_headers', 'remove_x_pingback');
-//add_filter('pings_open', '__return_false', 9999);
+// Show less info to users on failed login for security.
+//(Will not let a valid username be known.)
 
-//function remove_x_pingback($headers) {
-//     unset($headers['X-Pingback'], $headers['x-pingback']);
-//     return $headers;
-//}
-
-
-
-/*
-Show less info to users on failed login for security.
-(Will not let a valid username be known.)
-*/
 function picostrap_show_less_login_info() { 
     return "<strong>ERROR</strong>: Stop guessing!"; }
 add_filter( 'login_errors', 'picostrap_show_less_login_info' );
-/*
-Do not generate and display WordPress version
-*/
+
+ 
+// Do not generate and display WordPress version
+ 
 function picostrap_no_generator()  {     return ''; }
 add_filter( 'the_generator', 'picostrap_no_generator' );
 
