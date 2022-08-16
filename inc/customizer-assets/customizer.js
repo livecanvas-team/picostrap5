@@ -93,12 +93,14 @@
 		//an example:
 		//https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
 		
-		if ($("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked")) {
-			output = output.replaceAll('fonts.googleapis.com','api.fonts.coollabs.io');
-		}
+		//disable alternative font source checkbox
+		$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked",false);
 
 		console.log(output);
-		return output;
+		
+		//populate the textarea with the result
+		$("#_customize-input-picostrap_fonts_header_code").val(output).change();
+
 	} // end function 
 		
 	
@@ -141,18 +143,32 @@
 		
 		if ($("#_customize-input-picostrap_fonts_header_code").val().includes('https://fonts.googleapis.com/css?')){
 			console.log("GOOGLE FONTS API V1 is used, let's rebuild the font import header code to update it to v2 syntax");
-			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
+			ps_prepare_fonts_import_code_snippet();
 		}
 
 		//ON CHANGE FONT FAMILY
 		$("body").on("change", "#_customize-input-SCSSvar_font-family-base, #_customize-input-SCSSvar_headings-font-family", function () {
 			console.log("Font family change");
-			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
+			ps_prepare_fonts_import_code_snippet();
+		});	
+
+		//ON CLICK LINK TO REGENERATE FONT LOADING CODE, DO IT
+		$("body").on("click", "#regenerate-font-loading-code", function () {
+			ps_prepare_fonts_import_code_snippet();
 		});	
 
 		//ON CHANGE CHECKBOX FOR  USE ALTERNATIVE FONT SOURCE FOR GDPR
 		$("body").on("change", "#_customize-input-picostrap_fonts_use_alternative_font_source", function() {
-			$("#_customize-input-picostrap_fonts_header_code").val(ps_prepare_fonts_import_code_snippet()).change();
+			var output = $("#_customize-input-picostrap_fonts_header_code").val();
+
+			if ($(this).prop("checked")) {
+				output = output.replaceAll('fonts.googleapis.com', 'api.fonts.coollabs.io');
+			} else {
+				output = output.replaceAll('api.fonts.coollabs.io', 'fonts.googleapis.com');
+			}
+
+			$("#_customize-input-picostrap_fonts_header_code").val(output)
+
 		});	
 
 		//LISTEN TO CUSTOMIZER CHANGES: if some field containing scssvar is changed, we'll have to recompile
