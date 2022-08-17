@@ -38,7 +38,6 @@ body.picostrap_header_navbar_position_fixed-top section[id] {	scroll-margin-top:
 #backToTop {visibility: hidden;position:fixed;bottom:20px;right:20px;z-index:99999;opacity:0.6;padding: 3px 11px 7px;}
 #backToTop:hover {cursor: pointer}
 
-
 //PAGE HAS SCROLLED: SIMPLE OPT-IN DEMO 
 //From the Customizer, enable the "Scroll Detection" feature to be able to use the "scroll-position-at-top" / "body.scroll-position-not-at-top" classes 
 
@@ -56,5 +55,5 @@ body.scroll-position-at-top #wrapper-navbar .navbar {
 	transition: all .5s ease-out;
 }
 
-/* ============ BEFORE EDITING HERE: YOU MAY WANT TO THE STARTER CHILD THEME.  ============  */
+/* ============ BEFORE EDITING HERE: YOU MAY WANT TO USE THE STARTER CHILD THEME.  ============  */
 
