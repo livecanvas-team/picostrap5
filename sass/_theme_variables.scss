@@ -8,8 +8,6 @@
 //$primary:teal;
 //$body-bg: darkgrey;
 
- 
-
 //SOME CUSTOMIZATION FOR PICOSTRAP & LC
 
 //CUSTOM SPACING UP TO 8
@@ -41,18 +39,6 @@ $utilities: (
       50: 50vh,
       75: 75vh,
       100: 100vh,
-    )
-  ),
-
-  "text-opacity": (
-  css-var: true,
-  class: text-opacity,
-  values: (
-    10: 0.1, //added
-    25: .25,
-    50: .5,
-    75: .75,
-    100: 1
     )
   ),
    

@@ -23,7 +23,7 @@ body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_col
 body.picostrap_header_navbar_position_fixed-top #wpadminbar {opacity:0.1}
 body.picostrap_header_navbar_position_fixed-top #wpadminbar:hover {opacity:1}
 
-// WHEN TOP ADMIN BAR IS PRESENT, MOVE MENU AND SITE DOWN A BIT
+// OPT-IN: WHEN TOP ADMIN BAR IS PRESENT, MOVE MENU AND SITE DOWN A BIT
 //body.admin-bar #wrapper-navbar nav {top:30px;}
 //body.admin-bar.picostrap_header_navbar_position_fixed-top {padding-top: 88px;}
 
@@ -39,29 +39,22 @@ body.picostrap_header_navbar_position_fixed-top section[id] {	scroll-margin-top:
 #backToTop:hover {cursor: pointer}
 
 
-//PAGE HAS SCROLLED: From the Customizer, enable the "Scroll Detection" feature to be able to use the classes:
+//PAGE HAS SCROLLED: SIMPLE OPT-IN DEMO 
+//From the Customizer, enable the "Scroll Detection" feature to be able to use the "scroll-position-at-top" / "body.scroll-position-not-at-top" classes 
 
 //body.scroll-position-at-top  {background:lime}
 //body.scroll-position-not-at-top {background:red}
 
-
-// if "Scroll Detection" feature is enabled, enlarge navbar when not scrolled yet
-body.scroll-position-not-at-top #wrapper-navbar .navbar,
-body.scroll-position-at-top #wrapper-navbar .navbar { 
-	transition: all .5s ease-out;
-}
+//PAGE HAS SCROLLED: ENLARGE NAVBAR when not scrolled yet
 body.scroll-position-at-top  #wrapper-navbar .navbar { 
 	padding-top: 2rem;
     padding-bottom: 2rem;
 }
 
-/* ============ BEFORE EDITING HERE YOU MAY WANT TO USE A CHILD THEME. THERE'S ONE EXAMPLE READY FOR YOU ============  */
+body.scroll-position-not-at-top #wrapper-navbar .navbar,
+body.scroll-position-at-top #wrapper-navbar .navbar { 
+	transition: all .5s ease-out;
+}
 
-
- 
-
-
-
-
-
+/* ============ BEFORE EDITING HERE: YOU MAY WANT TO THE STARTER CHILD THEME.  ============  */
 
