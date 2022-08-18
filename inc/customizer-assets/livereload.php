@@ -5,7 +5,7 @@ add_action( 'wp_head', function  () {
     ?>
     <script>
 
-        //alert("Livereload yo");
+        /* this script is here only for site admins, to handle SASS autocompile */
         var picostrap_livereload_timeout=1500;
         
         function picostrap_livereload_woodpecker(){
@@ -64,22 +64,23 @@ add_action( 'wp_head', function  () {
                 }); 
         } //end function
 
-         
+        //END FUNCTIONS ////
 
-        //END FUNCTIONS
+        //ADD DIV TO SHOW COMPILER MESSAGES / FEEDBACK
+        document.querySelector("html").insertAdjacentHTML("afterbegin","<div id='scss-compiler-output' style=' position: fixed; z-index: 99999999;'></div>");            
 
-        //IF CSS DOES NOT LOAD, IT MAY NOT EXIST: REBUILD
-        document.querySelector("#picostrap-styles-css").onerror = picostrap_recompile_sass();  
-
+        //IF CSS BUNDLE FILE DOES NOT LOAD SUCCESSFULLY, IT MAY NOT EXIST: REBUILD
+        document.querySelector("#picostrap-styles-css").onerror = function(){
+            console.log("CSS bundle does not exist, recompiling");
+            picostrap_recompile_sass();  
+        }
+        
         //ON DOMContentLoaded START THE ENGINE / Like document ready :)
-        document.addEventListener('DOMContentLoaded', function(event) {
-            //add div for feedback
-            document.querySelector("html").insertAdjacentHTML("afterbegin","<div id='scss-compiler-output' style=' position: fixed; z-index: 99999999;'></div>");            
+        document.addEventListener('DOMContentLoaded', function(event) {          
+            
             //trigger the woodpecker
             picostrap_livereload_woodpecker();
         });
-
-        
 
     </script>
     <?php
