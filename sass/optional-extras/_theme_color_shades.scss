@@ -1,4 +1,3 @@
-    
 // Generate Bootstrap Theme Colors Shades for primary, secondary, success and danger
 
 // Primary
@@ -136,3 +135,73 @@ $dangers: (
     color: $value !important;
   }
 }
+
+// warning
+$warning-100: tint-color($warning, 80%) !default;
+$warning-200: tint-color($warning, 60%) !default;
+$warning-300: tint-color($warning, 40%) !default;
+$warning-400: tint-color($warning, 20%) !default;
+$warning-500: $warning !default;
+$warning-600: shade-color($warning, 20%) !default;
+$warning-700: shade-color($warning, 40%) !default;
+$warning-800: shade-color($warning, 60%) !default;
+$warning-900: shade-color($warning, 80%) !default;
+
+
+$warnings: (
+  "warning-100": $warning-100,
+  "warning-200": $warning-200,
+  "warning-300": $warning-300,
+  "warning-400": $warning-400,
+  "warning-500": $warning-500,
+  "warning-600": $warning-600,
+  "warning-700": $warning-700,
+  "warning-800": $warning-800,
+  "warning-900": $warning-900
+) !default;
+
+@each $key, $value in $warnings {
+  .bg-#{$key}{
+        background-color: $value !important;
+        color: color-contrast($value);
+  }
+  .text-#{$key}{
+    color: $value !important;
+  }
+}
+
+
+// info
+$info-100: tint-color($info, 80%) !default;
+$info-200: tint-color($info, 60%) !default;
+$info-300: tint-color($info, 40%) !default;
+$info-400: tint-color($info, 20%) !default;
+$info-500: $info !default;
+$info-600: shade-color($info, 20%) !default;
+$info-700: shade-color($info, 40%) !default;
+$info-800: shade-color($info, 60%) !default;
+$info-900: shade-color($info, 80%) !default;
+
+
+$infos: (
+  "info-100": $info-100,
+  "info-200": $info-200,
+  "info-300": $info-300,
+  "info-400": $info-400,
+  "info-500": $info-500,
+  "info-600": $info-600,
+  "info-700": $info-700,
+  "info-800": $info-800,
+  "info-900": $info-900
+) !default;
+
+@each $key, $value in $infos {
+  .bg-#{$key}{
+        background-color: $value !important;
+        color: color-contrast($value);
+  }
+  .text-#{$key}{
+    color: $value !important;
+  }
+}
+  
