@@ -4,7 +4,27 @@
 // and text-primary-100 ... text-primary-900
 
 
-// Primary
+//Define general mixin
+@mixin define-color-classes($colors_array) {
+  @each $key, $value in $colors_array {
+    .bg-#{$key}{
+      background-color: $value !important;
+    }
+    .text-#{$key}{
+      color: $value !important;
+    }
+    /*
+    .text-bg-#{$key}{
+      background-color: $value !important;
+      color: color-contrast($value);
+    }
+    */
+  }
+}
+
+
+
+// Primary ////////////////////////
 $primary-100: tint-color($primary, 80%) !default;
 $primary-200: tint-color($primary, 60%) !default;
 $primary-300: tint-color($primary, 40%) !default;
@@ -28,17 +48,11 @@ $primarys: (
   "primary-900": $primary-900
 ) !default;
 
-@each $key, $value in $primarys {
-  .bg-#{$key}{
-        background-color: $value !important;
-        color: color-contrast($value);
-  }
-  .text-#{$key}{
-    color: $value !important;
-  }
-}
 
-// Secondary
+@include define-color-classes($primarys);
+
+
+// Secondary ////////////////////////
 $secondary-100: tint-color($secondary, 80%) !default;
 $secondary-200: tint-color($secondary, 60%) !default;
 $secondary-300: tint-color($secondary, 40%) !default;
@@ -62,17 +76,10 @@ $secondarys: (
   "secondary-900": $secondary-900
 ) !default;
 
-@each $key, $value in $secondarys {
-  .bg-#{$key}{
-        background-color: $value !important;
-        color: color-contrast($value);
-  }
-  .text-#{$key}{
-    color: $value !important;
-  }
-}
 
-// Success
+@include define-color-classes($secondarys);
+
+// Success ////////////////////////
 $success-100: tint-color($success, 80%) !default;
 $success-200: tint-color($success, 60%) !default;
 $success-300: tint-color($success, 40%) !default;
@@ -84,7 +91,7 @@ $success-800: shade-color($success, 60%) !default;
 $success-900: shade-color($success, 80%) !default;
 
 
-$successs: (
+$successes: (
   "success-100": $success-100,
   "success-200": $success-200,
   "success-300": $success-300,
@@ -96,17 +103,10 @@ $successs: (
   "success-900": $success-900
 ) !default;
 
-@each $key, $value in $successs {
-  .bg-#{$key}{
-        background-color: $value !important;
-        color: color-contrast($value);
-  }
-  .text-#{$key}{
-    color: $value !important;
-  }
-}
 
-// Danger
+@include define-color-classes($successes);
+
+// Danger ////////////////////////
 $danger-100: tint-color($danger, 80%) !default;
 $danger-200: tint-color($danger, 60%) !default;
 $danger-300: tint-color($danger, 40%) !default;
@@ -130,17 +130,10 @@ $dangers: (
   "danger-900": $danger-900
 ) !default;
 
-@each $key, $value in $dangers {
-  .bg-#{$key}{
-        background-color: $value !important;
-        color: color-contrast($value);
-  }
-  .text-#{$key}{
-    color: $value !important;
-  }
-}
 
-// warning
+@include define-color-classes($dangers);
+
+// warning ////////////////////////
 $warning-100: tint-color($warning, 80%) !default;
 $warning-200: tint-color($warning, 60%) !default;
 $warning-300: tint-color($warning, 40%) !default;
@@ -164,18 +157,11 @@ $warnings: (
   "warning-900": $warning-900
 ) !default;
 
-@each $key, $value in $warnings {
-  .bg-#{$key}{
-        background-color: $value !important;
-        color: color-contrast($value);
-  }
-  .text-#{$key}{
-    color: $value !important;
-  }
-}
+
+@include define-color-classes($warnings);
 
 
-// info
+// info ////////////////////////
 $info-100: tint-color($info, 80%) !default;
 $info-200: tint-color($info, 60%) !default;
 $info-300: tint-color($info, 40%) !default;
@@ -199,13 +185,6 @@ $infos: (
   "info-900": $info-900
 ) !default;
 
-@each $key, $value in $infos {
-  .bg-#{$key}{
-        background-color: $value !important;
-        color: color-contrast($value);
-  }
-  .text-#{$key}{
-    color: $value !important;
-  }
-}
+
+@include define-color-classes($infos);
   
