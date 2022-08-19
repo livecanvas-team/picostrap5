@@ -8,14 +8,15 @@
 //$primary:teal;
 //$body-bg: darkgrey;
 
-//SOME CUSTOMIZATION FOR PICOSTRAP & LC
+
+// LET'S CUSTOMIZE SOME BOOTSTRAP VARIABLES 
 
 //CUSTOM SPACING UP TO 8
 $spacer: 1rem !default;
 $spacers: (
   0: 0,
-  1: $spacer / 4,
-  2: $spacer / 2,
+  1: $spacer * .25,
+  2: $spacer * .5,
   3: $spacer,
   4: $spacer * 1.5,
   5: $spacer * 3,
@@ -43,3 +44,11 @@ $utilities: (
   ),
    
 );
+
+// LET'S CUSTOMIZE SOME PICOSTRAP VARIABLES 
+
+// configuration for theme_color_shades
+$enable-text-shades: true; //EG text-primary-400
+$enable-bg-shades: true; //EG bg-primary-400
+$enable-text-bg-shades: false; //EG text-bg-primary-400
+

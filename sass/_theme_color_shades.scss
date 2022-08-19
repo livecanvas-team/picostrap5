@@ -1,24 +1,40 @@
-// Generate Bootstrap Theme Colors Shades for primary, secondary, success, danger, warning, info
-// Generates additional classes to have lighter and darker variations of your colors,
-// eg:  bg-primary-100 ... bg-primary-900
-// and text-primary-100 ... text-primary-900
+
+// Generates additional classes to have lighter and darker variations of your colors
+// EG: 
+// text-primary-100 ... text-primary-900
+// bg-primary-100 ... bg-primary-900
+// and optionally
+// text-bg-primary-100
+
+
+//set variable defaults
+$enable-text-shades: true !default;
+$enable-bg-shades: true !default;
+$enable-text-bg-shades: false !default;
 
 
 //Define general mixin
 @mixin define-color-classes($colors_array) {
   @each $key, $value in $colors_array {
-    .bg-#{$key}{
-      background-color: $value !important;
+    
+    @if $enable-bg-shades  {
+      .bg-#{$key}{
+        background-color: $value !important;
+      }
     }
-    .text-#{$key}{
-      color: $value !important;
+
+    @if $enable-text-shades  {
+      .text-#{$key}{
+        color: $value !important;
+      }
     }
-    /*
-    .text-bg-#{$key}{
-      background-color: $value !important;
-      color: color-contrast($value);
+
+    @if $enable-text-bg-shades  {
+      .text-bg-#{$key}{
+        background-color: $value !important;
+        color: color-contrast($value);
+      }
     }
-    */
   }
 }
 
