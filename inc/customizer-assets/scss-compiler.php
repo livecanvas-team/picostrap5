@@ -36,8 +36,8 @@ function picostrap_get_active_scss_code(){
 	//FOR STYLE PACKAGES
 	if(function_exists("picostrap_alter_scss")) $the_scss_code = picostrap_alter_scss ($the_scss_code);	 
 	
-	//FOR OPTIONAL SASS EXTRAS: COLOR SHADES - option: picostrap_additional_color_shades
-	if (get_theme_mod("picostrap_additional_color_shades") )  $the_scss_code.=' @import "optional-extras/theme_color_shades"; ';
+	//EXAMPLE FOR OPTIONAL SASS EXTRAS
+	//if (get_theme_mod("picostrap_additional_color_shades") )  $the_scss_code.=' @import "optional-extras/theme_color_shades"; ';
 
 	return $the_scss_code;
 }

@@ -1,4 +1,8 @@
-// Generate Bootstrap Theme Colors Shades for primary, secondary, success and danger
+// Generate Bootstrap Theme Colors Shades for primary, secondary, success, danger, warning, info
+// Generates additional classes to have lighter and darker variations of your colors,
+// eg:  bg-primary-100 ... bg-primary-900
+// and text-primary-100 ... text-primary-900
+
 
 // Primary
 $primary-100: tint-color($primary, 80%) !default;

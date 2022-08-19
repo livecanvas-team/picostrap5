@@ -15,6 +15,9 @@
 	}
 }
 
+//COLOR SHADES UTILITY:  generate classes for lighter and darker variations of your colors
+@import "theme_color_shades"; // eg:  .bg-primary-100  and  .text-primary-100 ... .text-primary-900
+
 // WHEN HEADER NAVBAR IS FIXED TOP, unless it's transparent, MOVE CONTENT DOWN so it's not hidden by the menubar
 // You may want to remove/edit this row depending on your design and navbar height
 body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_color_choice_bg-transparent) {padding-top:58px}

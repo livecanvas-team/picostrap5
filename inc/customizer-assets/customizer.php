@@ -261,7 +261,7 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 			
 			
 		);	 
-	}
+	} //end function
 
 endif;
 
@@ -269,7 +269,7 @@ endif;
 //ENABLE SELECTIVE REFRESH 
 add_theme_support( 'customize-selective-refresh-widgets' );
 
-//ADD HELPER ICONS
+//ADD CUSTOMIZATION HELPER ICONS & CONFIGURE CUSTOMIZATION LIVE PREVIEWS
 function picostrap_register_main_partials( WP_Customize_Manager $wp_customize ) {
  
     // Abort if selective refresh is not available.
@@ -327,6 +327,7 @@ function picostrap_register_main_partials( WP_Customize_Manager $wp_customize ) 
              return picostrap_site_info();
         },     
     ));
+
 	/*
 	//inline css
 	$wp_customize->selective_refresh->add_partial( 'picostrap_inline_css', array(
@@ -337,9 +338,6 @@ function picostrap_register_main_partials( WP_Customize_Manager $wp_customize ) 
         },
     ));
 	*/
-	
-
-
 	
 	//SINGLE: categories
 	$wp_customize->selective_refresh->add_partial( 'singlepost_entry_footer', array(
@@ -444,21 +442,18 @@ add_action("customize_register","picostrap_theme_customize_register_extras");
 function picostrap_theme_customize_register_extras($wp_customize) {
 	
 	///ADDITIONAL SECTIONS:
-	//COLORS is already default
-	
-	 
+	//COLORS section is already built, so lets define the other ones
+		 
 	$wp_customize->add_section("typography", array(
         "title" => __("Typography", "picostrap"),
         "priority" => 50,
     ));
-	
- 
+	 
 	$wp_customize->add_section("components", array(
         "title" => __("Global Options", "picostrap"),
         "priority" => 50,
     ));
 	
-	 
 	$wp_customize->add_section("buttons-forms", array(
         "title" => __("Forms", "picostrap"),
         "priority" => 50,
@@ -468,8 +463,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "title" => __("Buttons", "picostrap"),
         "priority" => 50,
     ));
-	
-	
 	
 	//istantiate  all controls needed for controlling the SCSS variables
 	foreach(picostrap_get_scss_variables_array() as $section_slug => $section_data):
@@ -547,7 +540,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 	//SANITIZE CHECKBOX
 	function picostrap_sanitize_checkbox( $input ) {		return ( ( isset( $input ) && true == $input ) ? true : false ); }
-
+	
+	/*
 	//COLORS: ADDITIONAL COLOR SHADES
 	$wp_customize->add_setting(  'picostrap_additional_color_shades',  array(
 		'default' => '', // Give it a default
@@ -564,6 +558,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			'type' => 'checkbox'  
 		)
 	));
+	*/
 
 	//COLORS: ANDROID CHROME HEADER COLOR
 	$wp_customize->add_setting(  'picostrap_header_chrome_color',  array(
@@ -582,7 +577,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 		)
 	));
 
- 
     //TAGLINE: SHOW / HIDE SWITCH
 	$wp_customize->add_setting('header_disable_tagline', array(
         'default' => '',
@@ -649,7 +643,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         )
     ));
 
-	
 	//DETECT PAGE SCROLL
 	$wp_customize->add_setting("enable_detect_page_scroll", array(
         "default" => "",
@@ -713,7 +706,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         )
     ));
 	
-	
 	//SEARCH FORM
 	$wp_customize->add_setting("enable_search_form", array(
         "default" => "",
@@ -728,7 +720,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             'type'     => 'checkbox',
 			)
 	));
-
 
 
 	//  TOPBAR SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -915,7 +906,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
 	));
 
-	
  	//SHARING BUTTONS
 	$wp_customize->add_setting("enable_sharing_buttons", array(
         "default" => "",
@@ -1192,7 +1182,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 	
-		
 	//LIGHTBOX
 	$wp_customize->add_setting("enable_lightbox", array(
         "default" => "",
@@ -1211,5 +1200,5 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	
 
 
-}
+} //end function
  
