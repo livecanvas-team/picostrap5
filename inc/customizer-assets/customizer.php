@@ -533,7 +533,11 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 						'label' => __( $variable_pretty_format_name, 'picostrap' ), //set the label to appear in the Customizer
 						'description' => $optional_grouptitle. " <!-- (".$variable_name.") -->".$placeholder_html." ". $optional_comment,  
 						'section' => $section_slug, //select the section for it to appear under
-						'type' => 'text', 
+						'type' => 'text',
+						 'input_attrs' => array(
+							//'placeholder' => strip_tags($placeholder_html),
+							'title' => esc_attr($variable_name)
+							)
 						)
 				));
 			endif;
