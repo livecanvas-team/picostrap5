@@ -8,6 +8,10 @@ span.cs-optional-comment {
     font-style: normal; 
 }
 
+span.cs-optional-comment b {
+  white-space: nowrap;  
+}
+
 .generate-palette {
 	float: right;
 	font-size: 8px;

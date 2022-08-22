@@ -61,7 +61,7 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				//ADDITIONAL COLOR CLASSES
 				'$enable-text-shades'=> array('type' => 'boolean', 'default' => 'true', 'newgroup' => 'Color Shades', 'comment' => 'Generates text shade classes: from <b>.text-primary-100</b> to <b>.text-primary-900</b>'),
 				'$enable-bg-shades' => array('type' => 'boolean', 'default' => 'true', 'comment' => 'Generates background shade classes: from <b>.bg-primary-100</b> to <b>.bg-primary-900</b>'),
-				'$enable-text-bg-shades' => array('type' => 'boolean', 'comment' => 'Generates text & background combination shade classes: from .text-bg-primary-100 to <b>.text-bg-primary-900</b>'),
+				'$enable-text-bg-shades' => array('type' => 'boolean', 'comment' => 'Generates text & background combination shade classes: from <b>.text-bg-primary-100</b> to <b>.text-bg-primary-900</b>'),
 				),	
 			//add another section
 			"components" => array( // $variable_name => $variable_props
@@ -90,8 +90,8 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				
 							
 				'$font-family-base' => array('type' => 'text', 'placeholder' => '$font-family-sans-serif ', 'newgroup' => 'Font Families', ), 
-				'$font-family-sans-serif' => array('type' => 'text', 'placeholder' => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" '),
-				'$font-family-monospace' => array('type' => 'text', 'placeholder' => 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace '),
+				'$font-family-sans-serif' => array('type' => 'text', ),
+				'$font-family-monospace' => array('type' => 'text' ),
 				
 				'$font-size-base' => array('newgroup' => 'Font Sizes', 'type' => 'text', 'placeholder' => '1rem'),
 				'$font-size-lg' => array('type' => 'text', 'placeholder' => '1.25rem'),
