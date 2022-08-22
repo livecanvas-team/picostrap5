@@ -3,10 +3,10 @@
 	//FUNCTION TO LOOP ALL COLOR WIDGETS AND SHOW CURRENT COLOR grabbing the exposed css variable from page
 	function ps_get_page_colors(){
 		
-		$(".customize-control-color").each(function(index, el) { //foreach color widget
+		$("#sub-accordion-section-colors .customize-control-color").each(function(index, el) { //foreach color widget
 			if (!$(el).find(".customize-control-description").text().includes("$")) return; //skip element if description does not contain a dollar
 
-			color_name = $(el).find(".customize-control-description").text().replace("(", "").replace(")", "").replace("$", "--bs-");
+			color_name = $(el).find(".customize-control-description .variable-name").text().replace("(", "").replace(")", "").replace("$", "--bs-");
 			var color_value = getComputedStyle(document.querySelector("#customize-preview iframe").contentWindow.document.documentElement).getPropertyValue(color_name);
 
 			//console.log(color_name+color_value);
@@ -119,9 +119,6 @@
 		
 		//hide useless bg color widget
 		$("#customize-control-background_color").hide();
-		
-		//ADD COLORS HEADING 
-		$("#customize-control-SCSSvar_primary").prepend(" <h1>Bootstrap Colors</h1><hr> ");
 		
 		//ADD HEADINGS LOOP
 		$(".cs-option-group-title").each(function(index, el) { //foreach group title	

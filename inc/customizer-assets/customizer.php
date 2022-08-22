@@ -59,9 +59,9 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				'$dark' => array('type' => 'color'),
 				
 				//ADDITIONAL COLOR CLASSES
-				'$enable-text-shades'=> array('type' => 'boolean', 'default' => 'true', 'newgroup' => 'Color Shades Additional Classes'),
-				'$enable-bg-shades' => array('type' => 'boolean', 'default' => 'true'),
-				'$enable-text-bg-shades' => array('type' => 'boolean'),
+				'$enable-text-shades'=> array('type' => 'boolean', 'default' => 'true', 'newgroup' => 'Color Shades', 'comment' => 'Generates text shade classes: from <b>.text-primary-100</b> to <b>.text-primary-900</b>'),
+				'$enable-bg-shades' => array('type' => 'boolean', 'default' => 'true', 'comment' => 'Generates background shade classes: from <b>.bg-primary-100</b> to <b>.bg-primary-900</b>'),
+				'$enable-text-bg-shades' => array('type' => 'boolean', 'comment' => 'Generates text & background combination shade classes: from .text-bg-primary-100 to <b>.text-bg-primary-900</b>'),
 				),	
 			//add another section
 			"components" => array( // $variable_name => $variable_props
@@ -475,8 +475,9 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			$variable_slug=str_replace("$","SCSSvar_",$variable_name);
 			$variable_pretty_format_name=ucwords(str_replace("-",' ',str_replace("$","",$variable_name)));		
 			$variable_type=$variable_props['type'];
-			if (array_key_exists('default',$variable_props)) $default=$variable_props['default']; else $default="";
-			
+			if (array_key_exists('default',$variable_props)) $default = $variable_props['default']; else $default="";
+			if (array_key_exists('newgroup',$variable_props)) $optional_grouptitle = " <span hidden class='cs-option-group-title'>".$variable_props['newgroup']."</span> "; else $optional_grouptitle="";
+			if (array_key_exists('comment',$variable_props)) $optional_comment = " <span class='cs-optional-comment'>".$variable_props['comment']."</span> "; else $optional_comment="";
 			
 			if($variable_type=="color"):
 			
@@ -491,7 +492,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 					$variable_slug, //give it an ID
 					array(
 						'label' => __( $variable_pretty_format_name, 'picostrap' ), //set the label to appear in the Customizer
-						'description' =>  "(".$variable_name.")",
+						'description' => $optional_grouptitle. " (<span class='variable-name'>".$variable_name."</span>) ".$optional_comment, 
 						'section' => $section_slug, //select the section for it to appear under  
 						)
 					));	
@@ -508,7 +509,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 					$variable_slug,
 					array(
 						'label' => __( $variable_pretty_format_name, 'picostrap' ), //set the label to appear in the Customizer
-						'description' =>  "(".$variable_name.")",
+						'description' => $optional_grouptitle.  " (<span class='variable-name'>".$variable_name."</span>) " .$optional_comment, 
 						'section' => $section_slug, //select the section for it to appear under
 						'type' => 'checkbox'
 						)
@@ -518,8 +519,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			if($variable_type=="text"):
 			
 				if(array_key_exists('placeholder',$variable_props)) $placeholder_html="<b>Default:</b> ".$variable_props['placeholder']; else $placeholder_html="";
-				if (array_key_exists('newgroup',$variable_props)) $optional_grouptitle=" <span hidden class='cs-option-group-title'>".$variable_props['newgroup']."</span>"; else $optional_grouptitle="";
-			
+
 				$wp_customize->add_setting($variable_slug, array(
 					"default" => $default,
 					"transport" => "postMessage",
@@ -531,7 +531,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 					$variable_slug,
 					array(
 						'label' => __( $variable_pretty_format_name, 'picostrap' ), //set the label to appear in the Customizer
-						'description' => $optional_grouptitle. " <!-- (".$variable_name.") -->".$placeholder_html, //ADD COMMENT HERE IF NECESSARY
+						'description' => $optional_grouptitle. " <!-- (".$variable_name.") -->".$placeholder_html." ". $optional_comment,  
 						'section' => $section_slug, //select the section for it to appear under
 						'type' => 'text', 
 						)
@@ -543,25 +543,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 	//SANITIZE CHECKBOX
 	function picostrap_sanitize_checkbox( $input ) {		return ( ( isset( $input ) && true == $input ) ? true : false ); }
-	
-	/*
-	//COLORS: ADDITIONAL COLOR SHADES
-	$wp_customize->add_setting(  'picostrap_additional_color_shades',  array(
-		'default' => '', // Give it a default
-		//'transport" => "postMessage',
-		));
-		$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-		$wp_customize,
-		'picostrap_additional_color_shades', //give it an ID
-		array(
-			'label' => __( 'Generate Color Shade Classes', 'picostrap' ), //set the label to appear in the Customizer
-			'section' => 'colors', //select the section for it to appear under 
-			'description' =>"<span hidden class='cs-option-group-title'>Color Shades</span> Generates additional classes to have lighter and darker variations of your colors, eg:<br> bg-primary-100 ... bg-primary-900<br>text-primary-100 ... text-primary-900",
-			'type' => 'checkbox'  
-		)
-	));
-	*/
 
 	//COLORS: ANDROID CHROME HEADER COLOR
 	$wp_customize->add_setting(  'picostrap_header_chrome_color',  array(

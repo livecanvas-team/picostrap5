@@ -2,6 +2,12 @@
 	font-size: 9px !important;
 }
 
+span.cs-optional-comment {
+    display: block; 
+    margin-top: 5px;
+    font-style: normal; 
+}
+
 .generate-palette {
 	float: right;
 	font-size: 8px;
