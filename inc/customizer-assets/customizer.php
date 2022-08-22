@@ -57,9 +57,12 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				'$danger' => array('type' => 'color'),
 				'$light' => array('type' => 'color'),
 				'$dark' => array('type' => 'color'),
-				),
-			
-
+				
+				//ADDITIONAL COLOR CLASSES
+				'$enable-text-shades'=> array('type' => 'boolean', 'default' => 'true', 'newgroup' => 'Color Shades Additional Classes'),
+				'$enable-bg-shades' => array('type' => 'boolean', 'default' => 'true'),
+				'$enable-text-bg-shades' => array('type' => 'boolean'),
+				),	
 			//add another section
 			"components" => array( // $variable_name => $variable_props
 								
