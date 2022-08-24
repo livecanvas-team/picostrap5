@@ -6,9 +6,7 @@
  * @deprecated 2.6.0 this template file is no longer used. My Account shortcode uses orders.php.
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 $my_orders_columns = apply_filters(
 	'woocommerce_my_account_my_orders_columns',
@@ -95,4 +93,4 @@ if ( $customer_orders ) : ?>
 		</tbody>
 	</table>
 	<?php
-endif;
+	endif;

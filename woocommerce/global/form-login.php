@@ -12,11 +12,17 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 3.6.1
+ * @version 3.6.0
  */
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
+
+
+
+
+
+
 
 if ( is_user_logged_in() ) {
 	return;
@@ -42,7 +48,7 @@ if ( is_user_logged_in() ) {
 	<?php do_action( 'woocommerce_login_form' ); ?>
 
 	<p class="form-row">
-		<label class="woocommerce-form__label woocommerce-form__label-for-checkbox">
+		<label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
 			<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'woocommerce' ); ?></span>
 		</label>
 		<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
