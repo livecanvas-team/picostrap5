@@ -167,8 +167,10 @@
 
 			if ($(this).prop("checked")) {
 				output = output.replaceAll('fonts.googleapis.com', 'api.fonts.coollabs.io');
+				output = output.replaceAll('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>', '<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->');
 			} else {
 				output = output.replaceAll('api.fonts.coollabs.io', 'fonts.googleapis.com');
+				output = output.replaceAll('<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->', '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
 			}
 
 			$("#_customize-input-picostrap_fonts_header_code").val(output)
