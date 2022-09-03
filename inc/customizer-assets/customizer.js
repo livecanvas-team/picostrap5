@@ -87,7 +87,7 @@
 		var output="";
 
 		output += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
-		if (!$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked"))  output += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
+		output += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
 		output += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
 		
 		//an example:
