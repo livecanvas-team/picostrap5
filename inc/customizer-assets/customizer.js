@@ -39,10 +39,22 @@
 		$("#cs-recompiling-target").load(recompiling_url, function() { //when got results,
 			console.log("ajax loaded");
 			$('#cs-loader').hide();
-			//reload preview iframe
+			
+			//reload preview iframe 
 			$("#customize-preview iframe").attr("src",preview_iframe_src); 
+			 
 			//upon preview iframe loaded, fetch colors
-			$("#customize-preview iframe").on("load",function(){ ps_get_page_colors(); });
+			$("#customize-preview iframe").on("load",function(){ 
+				console.log('Preview iframe loaded');
+
+				//reload the CSS, bust the cache
+				var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
+				url = iframeDoc.querySelector('#picostrap-styles-css').href;
+				iframeDoc.querySelector('#picostrap-styles-css').href = url;
+				
+				//get page colors and paint UX
+				ps_get_page_colors(); 
+			});
 		}); //end on loaded
 		
 		//RESET FLAG
@@ -167,14 +179,23 @@
 
 			if ($(this).prop("checked")) {
 				html_code = html_code.replaceAll('fonts.googleapis.com', 'api.fonts.coollabs.io');
-				html_code = html_code.replaceAll('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>', '<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->');
+				html_code = html_code.replaceAll('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>', '<!-- -->');
 			} else {
 				html_code = html_code.replaceAll('api.fonts.coollabs.io', 'fonts.googleapis.com');
-				html_code = html_code.replaceAll('<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->', '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+				html_code = html_code.replaceAll('<!-- -->', '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
 			}
 
 			$("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
 
+		});	
+
+		//ON CHANGE FONT LOADING CODE TEXTAREA, IF INSERTED TEXT CONTAINS GOOGLE FONTS DOMAIN, RESET ALTERNATIVE FONT SOURCE CHECKBOX
+		$("body").on("input", "#_customize-input-picostrap_fonts_header_code", function () {
+			if ($(this).val().includes('fonts.googleapis.com') && $("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked")){
+				console.log("New textarea content contains 'fonts.googleapis.com' so we will uncheck the GDPR compliance checkbox");
+				//disable alternative font source checkbox
+				$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked", false);
+			}
 		});	
 
 		//LISTEN TO CUSTOMIZER CHANGES: if some field containing scssvar is changed, we'll have to recompile
