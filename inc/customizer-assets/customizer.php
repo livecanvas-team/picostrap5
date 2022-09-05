@@ -962,7 +962,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             "label" => __("Add code to Header", "picostrap"),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>'Placed inside the HEAD of the page'
+			'description' =>'Will be added to the &lt;HEAD&gt; of all site pages'
 			)
     ));
 	
@@ -978,7 +978,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             "label" => __("Add code to Footer", "picostrap"),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>'Placed before closing the BODY of the page'
+			'description' =>'Will be added before closing the BODY of all site pages'
 			)
     ));
 
@@ -1027,9 +1027,15 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             "label" => __("Font Loading Header code", "picostrap"),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>'You can customize this code, for example to add multiple font weights, but please mind that <b>this field is reset and regenerated</b> automatically upon setting a new font family for body or headings.
-			So if you choose new fonts, your customizations will be lost.<br>Check out the <a target="_blank" href="https://fonts.google.com/">Google Fonts website</a> and our <a target="_blank" href="">video tutorial on multiple font weights</a>.<br>
-			In case you break things up, you may want to reset and <a href="#" id="regenerate-font-loading-code">regenerate</a> the code.	'
+			'description' =>__('
+						The code in the field below is generated each time you set a new font family for body or headings, and is served in the site\'s &lt;head&gt;.
+						<br><br>
+						You can customize this code, for example to add multiple font weights, but please mind that if you choose new fonts, your customizations will be lost.
+						<br><br>
+						In case you break things up while editing, you can manually regenerate the code <a href="#" id="regenerate-font-loading-code">clicking here</a>.
+						<br><br>
+						For further information, please refer to our <a target="_blank" href="">multiple font weights video tutorial</a> and to the <a target="_blank" href="https://fonts.google.com/">Google Fonts website</a>.
+						')
 			)
     ));
 	
@@ -1061,7 +1067,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         array(
             "label" => __("Disable the Font Loading in Header", "picostrap"),
 			"description" =>  __("<b>Keep this unchecked, unless you really want. </b>").__("Prevents the code of 
-			the textarea above from being served in the site header. ", "picostrap"),
+			the textarea above from being served in the site's &lt;head&gt;. ", "picostrap"),
             "section" => "addcode", 
             'type'     => 'checkbox',
 			)
@@ -1100,7 +1106,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "disable_widgets_block_editor",
         array(
             "label" => __("Disable the Block-based Widgets Editor", "picostrap"),
-			"description" => __("Disables the Block-based Widgets Editor and restores classic widgets editing.", "picostrap"),
+			"description" => __("Disables the Block-based Widgets Editor and restores the classic widgets editor.", "picostrap"),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -1180,7 +1186,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "enable_lightbox",
         array(
             "label" => __("Enable Lightbox", "picostrap"),
-			"description" => __("Will lazily add a JS and a CSS file from cdn.jsdelivr.net before closing the BODY of the page, to use   <a target='_blank' href='https://github.com/biati-digital/glightbox'>gLightBox</a>: a very lightweight lightbox implementation. <br><br>The lightbox will be enabled on all images matching the selector: main#theme-main a:not(.nolightbox) img<br>To prevent the lightbox on an image, add the <b>nolightbox</b> class to it.", "picostrap"),
+			"description" => __("Will lazily add a JS and a CSS file from cdn.jsdelivr.net before closing the BODY of the page, to use   <a target='_blank' href='https://github.com/biati-digital/glightbox'>gLightBox</a>: a very lightweight lightbox implementation. <br><br>The lightbox will be enabled on all images matching the selector: main#theme-main a:not(.nolightbox) img<br><br>This means that any image linked to something will open a lightbox.<br><br>To force the lightbox on an element, add the <b>glightbox</b> class to it.<br><br> To prevent the lightbox on a linked image, add the <b>nolightbox</b> class to it.", "picostrap"),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)

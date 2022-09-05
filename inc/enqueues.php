@@ -29,16 +29,18 @@ if (!function_exists('picostrap_get_complete_css_filename')):
     }
 endif;
 
+//FUNCTION TO GET THEME VERSION
+function picostrap_get_css_version(){
+    //if (current_user_can("administrator")) $version=rand(1,9999); else 
+    $version = intval((get_theme_mod("picostrap_scss_last_filesmod_timestamp")) % 999); 
+    return $version;
+}
 
 //ADD THE MAIN CSS FILE
 add_action( 'wp_enqueue_scripts',  function  () {
-
-    //DETERMINE a VERSION NUMBER
-    if (current_user_can("administrator")) $version=rand(1,9999); else 
-        $version = intval((get_theme_mod("picostrap_scss_last_filesmod_timestamp")) % 999); 
-    
+ 
     //ENQUEUE THE CSS FILE
-    wp_enqueue_style( 'picostrap-styles', picostrap_get_css_url(), array(), $version); 
+    wp_enqueue_style( 'picostrap-styles', picostrap_get_css_url(), array(), picostrap_get_css_version()); 
     
 });
 
@@ -52,7 +54,6 @@ add_action( 'wp_enqueue_scripts', function() {
     
 } ,100);
 
-  
 
 //ADD THE CUSTOM HEADER CODE (SET IN CUSTOMIZER)
 add_action( 'wp_head', 'picostrap_add_header_code' );
@@ -91,34 +92,37 @@ function picostrap_async_scripts($url){
 add_filter( 'clean_url', 'picostrap_async_scripts', 11, 1 );
 
 
-//UNRENDER-BLOCK CSS- STILL AN EXPERIMENT
+//UNRENDER-BLOCK CSS 
 // as per https://www.phpied.com/faster-wordpress-rendering-with-3-lines-of-configuration/
-// still commented as chrome shows errors, unfinished. Use at your own risk.
-/*
 
-function picostrap_hints() {  
-    //original demo
-    //header("link: </wp-content/themes/phpied2/style.css>; rel=preload, </wp-includes/css/dist/block-library/style.min.css?ver=5.4.1>; rel=preload");
-    
-    header("link: <".picostrap_get_css_hint_link().">; rel=preload, </wp-includes/css/dist/block-library/style.min.css?ver=".get_bloginfo( 'version' ).">; rel=preload");
-    
+function picostrap_get_headers(){
+    //add link to preload CSS bundle
+    $headers = "link: <".picostrap_get_css_url()."?ver=".picostrap_get_css_version().">; rel=preload; as=style";
+    //if relevant, add the CSS for Gutenberg blocks
+    if (!get_theme_mod("disable_gutenberg") OR
+        ( function_exists('lc_plugin_option_is_set') && lc_plugin_option_is_set('gtblocks') )
+        ) $headers.=", <".includes_url()."css/dist/block-library/style.min.css?ver=".get_bloginfo( 'version' ).">; rel=preload; as=style";
+    return $headers;
 }
+
+if(!function_exists('picostrap_hints')):
+    function picostrap_hints() {  
+        header(picostrap_get_headers());
+    }
+endif;
+
 add_action('send_headers', 'picostrap_hints'); 
-
-//function to get relative css url for hints
-function picostrap_get_css_hint_link(){
-    $css_url_array= explode('/wp-content/', picostrap_get_css_url());
-    return '/wp-content/'.$css_url_array[1];
-}
-
-//for testing of the picostrap_get_css_hint_link function
-if (0) add_action ("wp_loaded",function(){
-    echo "/wp-content/themes/phpied2/style.css";
-    echo "<br>";
-    echo picostrap_get_css_hint_link();
-    echo "<br>"; 
+ 
+//for testing
+add_action ("template_redirect",function(){
+    if(!current_user_can("administrator") or !isset($_GET['debug_headers'])) return;
+    echo "<pre style='font-size:16px;'>";
+    echo "<br><br>picostrap_get_headers:<br><br>". str_replace(",","<br>",htmlentities(picostrap_get_headers()));
+    echo "<br><br><br>Original demo:<br><br>". str_replace(",","<br>",htmlentities("link: </wp-content/themes/phpied2/style.css>; rel=preload, </wp-includes/css/dist/block-library/style.min.css?ver=5.4.1>; rel=preload"));
+    echo "</pre>";
     die;
 });
 
-*/
+
+ 
 

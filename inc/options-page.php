@@ -12,7 +12,7 @@ function pico_get_parent_theme_version(){
 
 //ADD THEME OPTIONS PAGE
 function add_picostrap_theme_page() {
-    add_theme_page( 'Picostrap Theme Options Page', 'Picostrap Theme', 'edit_theme_options', 'picostrap-theme-options', 'theme_option_page' );
+    add_theme_page( 'Picostrap Theme Options Page', 'Picostrap Options', 'edit_theme_options', 'picostrap-theme-options', 'theme_option_page' );
 }
 add_action( 'admin_menu', 'add_picostrap_theme_page' );
  

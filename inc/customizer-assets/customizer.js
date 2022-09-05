@@ -84,11 +84,11 @@
 		var separator_char=""; 
 		if (first_part!="" && second_part!="" ) separator_char="&"; 
 		
-		var output="";
+		var html_code="";
 
-		output += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
-		output += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
-		output += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
+		html_code += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
+		html_code += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
+		html_code += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
 		
 		//an example:
 		//https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
@@ -96,10 +96,10 @@
 		//disable alternative font source checkbox
 		$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked",false);
 
-		console.log(output);
+		console.log(html_code);
 		
 		//populate the textarea with the result
-		$("#_customize-input-picostrap_fonts_header_code").val(output).change();
+		$("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
 
 	} // end function 
 		
@@ -163,17 +163,17 @@
 
 		//ON CHANGE CHECKBOX FOR  USE ALTERNATIVE FONT SOURCE FOR GDPR
 		$("body").on("change", "#_customize-input-picostrap_fonts_use_alternative_font_source", function() {
-			var output = $("#_customize-input-picostrap_fonts_header_code").val();
+			var html_code = $("#_customize-input-picostrap_fonts_header_code").val();
 
 			if ($(this).prop("checked")) {
-				output = output.replaceAll('fonts.googleapis.com', 'api.fonts.coollabs.io');
-				output = output.replaceAll('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>', '<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->');
+				html_code = html_code.replaceAll('fonts.googleapis.com', 'api.fonts.coollabs.io');
+				html_code = html_code.replaceAll('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>', '<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->');
 			} else {
-				output = output.replaceAll('api.fonts.coollabs.io', 'fonts.googleapis.com');
-				output = output.replaceAll('<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->', '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+				html_code = html_code.replaceAll('api.fonts.coollabs.io', 'fonts.googleapis.com');
+				html_code = html_code.replaceAll('<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->', '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
 			}
 
-			$("#_customize-input-picostrap_fonts_header_code").val(output)
+			$("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
 
 		});	
 
