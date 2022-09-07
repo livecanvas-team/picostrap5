@@ -1234,8 +1234,8 @@ add_action( 'wp_head', function  () {
 				--bs-body-font-weight: <?php echo get_theme_mod("SCSSvar_font-weight-normal") ?>;
 			<?php endif ?>
 
-			<?php if (get_theme_mod("SCSSvar_line-size-base")): ?>
-				--bs-body-line-height: <?php echo get_theme_mod("SCSSvar_line-size-base") ?>;
+			<?php if (get_theme_mod("SCSSvar_line-height-base")): ?>
+				--bs-body-line-height: <?php echo get_theme_mod("SCSSvar_line-height-base") ?>;
 			<?php endif ?>
 		 
 
