@@ -3,7 +3,7 @@
 
 	/*
 
-	//we do someones in php, more reliable//
+	//we do some of those in php, more reliable//
 
 	wp.customize('SCSSvar_font-family-base', function (value) {
 		value.bind(function (newval) {
