@@ -2,19 +2,24 @@
 
 	//FUNCTION TO LOOP ALL COLOR WIDGETS AND SHOW CURRENT COLOR grabbing the exposed css variable from page
 	function ps_get_page_colors(){
-		
-		$("#sub-accordion-section-colors .customize-control-color").each(function(index, el) { //foreach color widget
-			if (!$(el).find(".customize-control-description").text().includes("$")) return; //skip element if description does not contain a dollar
+        
+        $("#sub-accordion-section-colors .customize-control-color").each(function(index, el) { //foreach color widget
+            if (!$(el).find(".customize-control-description").text().includes("$")) return; //skip element if description does not contain a dollar
 
-			color_name = $(el).find(".customize-control-description .variable-name").text().replace("(", "").replace(")", "").replace("$", "--bs-");
-			var color_value = getComputedStyle(document.querySelector("#customize-preview iframe").contentWindow.document.documentElement).getPropertyValue(color_name);
 
-			//console.log(color_name+color_value);
+			console.log($(el).find(".customize-control-description").text());
+			if ($(el).find(".customize-control-description").text().includes("link-")) return true; //skip element if description does   contain link
+			if ($(el).find(".customize-control-description").text().includes("body-")) return true; //skip element if description does   contain body 
 
-			if (color_value) $(el).find(".customize-control-title").css("border-right", "25px solid " + color_value).css("padding-right-no", "");
-		}); //end each
-		
-	}
+            color_name = $(el).find(".customize-control-description .variable-name").text().replace("(", "").replace(")", "").replace("$", "--bs-");
+            var color_value = getComputedStyle(document.querySelector("#customize-preview iframe").contentWindow.document.documentElement).getPropertyValue(color_name);
+
+            //console.log(color_name+color_value);
+
+            if (color_value) $(el).find(".customize-control-title").append("<div class=customizer-current-color>Current</div>").css("border-right", "24px solid " + color_value);
+        }); //end each
+        
+    }
 	
 	
 	function ps_recompile_css_bundle(){
@@ -137,6 +142,10 @@
 			$(el).closest("li.customize-control").prepend(" <h1>"+$(el).text()+"</h1><hr> ");
 		}); //end each
 		
+		//ADD H1 SUBTITLE for BS COLORS
+		$("#customize-control-SCSSvar_primary h1").css("padding-bottom", "0").append('<p style="margin: 0">Live Preview is not possible for Bootstrap Theme Colors. Click the Publish button to view the changes.</p>');
+ 
+
 		//ADD COLORS HEADING 
 		$("#customize-control-enable_back_to_top").prepend(" <h1>Opt-in extra features</h1><hr> ");
 		

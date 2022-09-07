@@ -1088,7 +1088,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 	// ADD A SECTION FOR EXTRAS /////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("extras", array(
-        "title" => __("Global Options & Utilities", "picostrap"),
+        "title" => __("Global Utilities", "picostrap"),
         "priority" => 190,
     ));
 	

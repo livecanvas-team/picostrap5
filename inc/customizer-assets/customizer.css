@@ -12,6 +12,19 @@ span.cs-optional-comment b {
   white-space: nowrap;  
 }
 
+
+.customize-control-color .customize-control-title{
+  display: flex;
+  justify-content: space-between;
+}
+.customize-control-color .customizer-current-color {
+
+  font-size: 0.7rem;
+  padding-right: 0.5rem;
+  color:#8e8e8e;
+}
+
+
 .generate-palette {
 	float: right;
 	font-size: 8px;
