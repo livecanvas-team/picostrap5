@@ -1227,15 +1227,15 @@ add_action( 'wp_head', function  () {
 		:root {
 			/* for TEXTual inputs we use transport refresh */
 			<?php if (get_theme_mod("SCSSvar_font-family-base")): ?>
-				--bs-body-font-family: "<?php echo get_theme_mod("SCSSvar_font-family-base") ?>";
+				--bs-body-font-family: "<?php echo get_theme_mod("SCSSvar_font-family-base") ?>" !important;
 			<?php endif ?>
 			
 			<?php if (get_theme_mod("SCSSvar_font-weight-normal")): ?>
-				--bs-body-font-weight: <?php echo get_theme_mod("SCSSvar_font-weight-normal") ?>;
+				--bs-body-font-weight: <?php echo get_theme_mod("SCSSvar_font-weight-normal") ?> !important;
 			<?php endif ?>
 
 			<?php if (get_theme_mod("SCSSvar_line-height-base")): ?>
-				--bs-body-line-height: <?php echo get_theme_mod("SCSSvar_line-height-base") ?>;
+				--bs-body-line-height: <?php echo get_theme_mod("SCSSvar_line-height-base") ?> !important;
 			<?php endif ?>
 		 
 
@@ -1243,7 +1243,7 @@ add_action( 'wp_head', function  () {
 		
 		h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 			<?php if (get_theme_mod("SCSSvar_headings-font-family")): ?>
-				font-family:"<?php echo get_theme_mod("SCSSvar_headings-font-family") ?>"; 
+				font-family:"<?php echo get_theme_mod("SCSSvar_headings-font-family") ?>" !important; 
 			<?php endif ?>
 		}
 		
