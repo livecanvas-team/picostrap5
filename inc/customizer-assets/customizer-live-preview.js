@@ -33,26 +33,30 @@
 
 	//for color input widgets we use transport postMessage
 
-	wp.customize('SCSSvar_body-color', function (value) {
+	wp.customize('SCSSvar_body-bg', function (value) {
 		value.bind(function (newval) {
-			document.querySelector(":root").style.setProperty("--bs-body-color", newval);
+			if (newval == '') newval = "#fff";
+			document.querySelector(":root").style.setProperty("--bs-body-bg", newval);
 		});
 	});
 
-	wp.customize('SCSSvar_body-bg', function (value) {
+	wp.customize('SCSSvar_body-color', function (value) {
 		value.bind(function (newval) {
-			document.querySelector(":root").style.setProperty("--bs-body-bg", newval);
+			if (newval == '') newval = "#212529";
+			document.querySelector(":root").style.setProperty("--bs-body-color", newval);
 		});
 	});
 
 	wp.customize('SCSSvar_link-color', function (value) {
 		value.bind(function (newval) {
+			if (newval == '') newval = "#0d6efd";
 			document.querySelector(":root").style.setProperty("--bs-link-color", newval);
 		});
 	});
 	
 	wp.customize('SCSSvar_link-hover-color', function (value) {
 		value.bind(function (newval) {
+			if (newval == '') newval = "#0a58ca";
 			document.querySelector(":root").style.setProperty("--bs-link-hover-color", newval);
 		});
 	});
