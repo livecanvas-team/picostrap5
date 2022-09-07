@@ -24,7 +24,7 @@
 		});
 	});
 
-	wp.customize('SCSSvar_line-size-base', function (value) {
+	wp.customize('SCSSvar_line-height-base', function (value) {
 		value.bind(function (newval) {
 			document.querySelector(":root").style.setProperty("--bs-body-line-height", newval);
 		});

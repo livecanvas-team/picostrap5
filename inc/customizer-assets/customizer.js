@@ -149,36 +149,39 @@
 		});			
 
 		//CHECK IF USING VINTAGE GOOGLE FONTS API V1, REBUILD FONT IMPORT CODE
-		
 		if ($("#_customize-input-picostrap_fonts_header_code").val().includes('https://fonts.googleapis.com/css?')){
 			console.log("GOOGLE FONTS API V1 is used, let's rebuild the font import header code to update it to v2 syntax");
 			ps_prepare_fonts_import_code_snippet();
 		}
+		
+		//////////////////// LISTEN TO CUSTOMIZER CHANGES ////////////////////////
 
-		//ON CHANGE FONT FAMILY
-		$("body").on("change", "#_customize-input-SCSSvar_font-family-base, #_customize-input-SCSSvar_headings-font-family", function () {
-			console.log("Font family change");
-			ps_prepare_fonts_import_code_snippet();
-		});	
+		//ON CHANGES OF CUSTOMIZER, FOR RELEVANT FIELDS, UPDATE SCSS OR FONT SNIPPET ///////////////////
+		wp.customize.bind('change', function (setting) {
 
-		//ON CHANGE FONT MAIN WEIGHT
-		$("body").on("change", "#_customize-input-SCSSvar_font-weight-base, #_customize-input-SCSSvar_headings-font-weight", function () {
-			console.log("Font weight change");
-			ps_prepare_fonts_import_code_snippet();
-		});	
-		//ON INPUT FONT FAMILY
-		$("body").on("input", "#_customize-input-SCSSvar_font-family-base, #_customize-input-SCSSvar_headings-font-family", function () {
-			console.log("Font family change");
-			ps_prepare_fonts_import_code_snippet();
+			console.log(setting.id + " has changed value");
+
+			//if some field containing scssvar is changed, we'll have to recompile
+			if (setting.id.includes("SCSSvar")) scss_recompile_is_necessary = true;
+
+			//if body or heading font family is changed, rebuild the code import snippet
+			if (setting.id == "SCSSvar_font-family-base" || setting.id == "SCSSvar_headings-font-family") {
+				ps_prepare_fonts_import_code_snippet();
+			}
+
 		});
 
-		//ON INPUT FONT MAIN WEIGHT
-		$("body").on("input", "#_customize-input-SCSSvar_font-weight-base, #_customize-input-SCSSvar_headings-font-weight", function () {
-			console.log("Font weight change");
-			ps_prepare_fonts_import_code_snippet();
-		});	
+		//CLEANEST VANILLA EXAMPLE FOR INTERCEPTING MORE CUSTOMIZER CHANGES, FOR FUTURE REFERENCE
+		/*
+		wp.customize('picostrap_fonts_header_code', function (value) {
+			value.bind(function (newval) {
+				console.log(newval);
+			});
+		});
+		*/
 
-
+		//////////// USER ACTIONS / UX HELPERS /////////////////
+		
 		//ON CLICK LINK TO REGENERATE FONT LOADING CODE, DO IT
 		$("body").on("click", "#regenerate-font-loading-code", function () {
 			ps_prepare_fonts_import_code_snippet();
@@ -208,12 +211,6 @@
 				$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked", false);
 			}
 		});	
-
-		
-		//LISTEN TO CUSTOMIZER CHANGES: if some field containing scssvar is changed, we'll have to recompile
-		wp.customize.bind( 'change', function ( setting ) {
-			if (setting.id.includes("SCSSvar") || setting.id.includes("body_font") || setting.id.includes("headings_font") || setting.id.includes("picostrap_additional_color_shades") ) scss_recompile_is_necessary=true;
-		});
 		
 		//AFTER PUBLISHING CUSTOMIZER CHANGES, RECOMPILE SCSS
 		wp.customize.bind('saved', function( /* data */ ) {
@@ -303,7 +300,7 @@
 		});
 		
 		
-		//FONT PICKER ////////////////////////////  ////////////////////////////////////////
+		//FONT PICKER ///////////////////////////////////////////////////////////////////
 
 		var csFontPickerOptions = ({
 			variants: true,
@@ -350,7 +347,7 @@
 				return false;
 			}
 
-
+			//is it a body font that's been chosen?
 			if (window.lastSelectedFontFieldId == 'cs-fontpicker-input-base') {
 
 				//store font object
@@ -363,6 +360,7 @@
 				$("#_customize-input-SCSSvar_font-family-base").val(fontObj.fontFamily).change();
 			}
 
+			//is it a headings font that's been chosen?
 			if (window.lastSelectedFontFieldId == 'cs-fontpicker-input-headings') {
 
 				//store font object
