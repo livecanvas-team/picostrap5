@@ -1,5 +1,4 @@
- 
-/* ============ SOME SIMPLE UTILITIES  ============ */
+/* ============ SOME USEFUL UTILITIES  ============ */
 
 //RFS UTILITY: generate classes for responsive font sizes: from rfs-1 to rfs-50
 @for $i from 1 through 50 {
@@ -18,6 +17,14 @@
 //COLOR SHADES UTILITY:  generate classes for lighter and darker variations of your colors
 @import "theme_color_shades"; // eg:  .bg-primary-100  and  .text-primary-100 ... .text-primary-900
 
+//SCROLL TO ANCHORS WITH OFFSET (when using fixed header) 
+//as per https://css-tricks.com/fixed-headers-and-jump-links-the-solution-is-scroll-margin-top/
+//set to menubar height if customizing menubar
+body.picostrap_header_navbar_position_fixed-top section[id] {	scroll-margin-top: 63px;}
+
+
+/* ============ THEME TWEAKS  ============ */
+
 // WHEN HEADER NAVBAR IS FIXED TOP, unless it's transparent, MOVE CONTENT DOWN so it's not hidden by the menubar
 // You may want to remove/edit this row depending on your design and navbar height
 body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_color_choice_bg-transparent) {padding-top:58px}
@@ -30,12 +37,8 @@ body.picostrap_header_navbar_position_fixed-top #wpadminbar:hover {opacity:1}
 //body.admin-bar #wrapper-navbar nav {top:30px;}
 //body.admin-bar.picostrap_header_navbar_position_fixed-top {padding-top: 88px;}
 
-//FIX SVG LOGO 
+//HEADER: FIX SVG LOGO 
 .custom-logo-link img[src$='.svg'] {width:100%}
-
-//FIX SCROLL TO ANCHOR when using fixed header as per https://css-tricks.com/fixed-headers-and-jump-links-the-solution-is-scroll-margin-top/
-//set to menubar height if customizing menubar
-body.picostrap_header_navbar_position_fixed-top section[id] {	scroll-margin-top: 63px;}
 
 //"BACK TO TOP" optional BUTTON (Enable from the Customizer)
 #backToTop {visibility: hidden;position:fixed;bottom:20px;right:20px;z-index:99999;opacity:0.6;padding: 3px 11px 7px;}
