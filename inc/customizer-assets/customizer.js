@@ -166,6 +166,17 @@
 			console.log("Font weight change");
 			ps_prepare_fonts_import_code_snippet();
 		});	
+		//ON INPUT FONT FAMILY
+		$("body").on("input", "#_customize-input-SCSSvar_font-family-base, #_customize-input-SCSSvar_headings-font-family", function () {
+			console.log("Font family change");
+			ps_prepare_fonts_import_code_snippet();
+		});
+
+		//ON INPUT FONT MAIN WEIGHT
+		$("body").on("input", "#_customize-input-SCSSvar_font-weight-base, #_customize-input-SCSSvar_headings-font-weight", function () {
+			console.log("Font weight change");
+			ps_prepare_fonts_import_code_snippet();
+		});	
 
 
 		//ON CLICK LINK TO REGENERATE FONT LOADING CODE, DO IT
@@ -198,6 +209,7 @@
 			}
 		});	
 
+		
 		//LISTEN TO CUSTOMIZER CHANGES: if some field containing scssvar is changed, we'll have to recompile
 		wp.customize.bind( 'change', function ( setting ) {
 			if (setting.id.includes("SCSSvar") || setting.id.includes("body_font") || setting.id.includes("headings_font") || setting.id.includes("picostrap_additional_color_shades") ) scss_recompile_is_necessary=true;

@@ -15,6 +15,17 @@ function picostrap_customize_enqueue() {
 }
 add_action( 'customize_controls_enqueue_scripts', 'picostrap_customize_enqueue' );
 
+//one more file for live preview
+add_action( 'customize_preview_init', function(){
+	wp_enqueue_script( 
+		  'picostrap-themecustomizer',			//Give the script an ID
+		  get_template_directory_uri().'/inc/customizer-assets/customizer-live-preview.js',//Point to file
+		  array( 'jquery','customize-preview' ),	//Define dependencies
+		  '',						//Define a version (optional) 
+		  true						//Put script in footer?
+	);
+});
+
 
 //ADD BODY CLASSES  //////////////////////////////////////////////////////////////////////////////////////////////////////////
 add_filter( 'body_class', 'picostrap_config_body_classes' );
@@ -502,7 +513,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
  
 				$wp_customize->add_setting($variable_slug, array(
 					"default" => $default,
-					"transport" => "postMessage",
+					//"transport" => "postMessage",
+					"transport" => "refresh",
 				));
 				$wp_customize->add_control(new WP_Customize_Control(
 					$wp_customize,
@@ -522,7 +534,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 				$wp_customize->add_setting($variable_slug, array(
 					"default" => $default,
-					"transport" => "postMessage",
+					"transport" => "refresh",
 					//"default" => "1rem",
 					//'sanitize_callback' => 'picostrap_sanitize_rem'
 				));
@@ -1018,7 +1030,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	$wp_customize->add_setting("picostrap_fonts_header_code", array(
         "default" => "",
 		"transport" => "refresh",
-        //"transport" => "postMessage", // and no custom js is added: so no live page update is done, how it should be - but causes unstable behavoiur
+        //"transport" => "postMessage", // and no custom js is added: so no live page update is done, how it should be - but causes unstable behaviour
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -1196,3 +1208,46 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 } //end function
  
+
+
+
+
+
+/////////// LIVE CUSTOMIZER HELPER FOR CSS  VARIABLES ///////////
+
+// if we are in customizer preview iframe,
+// add some CSS that alters the bootstrap css variables,
+// so live preview is possible
+// check out also customizer-live-preview.js
+
+add_action( 'wp_head', function  () {
+	if (!current_user_can('administrator') OR !isset($_GET['customize_theme'])) return;
+    ?>
+	<style>
+		:root {
+			/* for TEXTual inputs we use transport refresh */
+			<?php if (get_theme_mod("SCSSvar_font-family-base")): ?>
+				--bs-body-font-family: "<?php echo get_theme_mod("SCSSvar_font-family-base") ?>";
+			<?php endif ?>
+			
+			<?php if (get_theme_mod("SCSSvar_font-weight-normal")): ?>
+				--bs-body-font-weight: <?php echo get_theme_mod("SCSSvar_font-weight-normal") ?>;
+			<?php endif ?>
+
+			<?php if (get_theme_mod("SCSSvar_line-size-base")): ?>
+				--bs-body-line-height: <?php echo get_theme_mod("SCSSvar_line-size-base") ?>;
+			<?php endif ?>
+		 
+
+		} /* close :root */
+		
+		h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+			<?php if (get_theme_mod("SCSSvar_headings-font-family")): ?>
+				font-family:"<?php echo get_theme_mod("SCSSvar_headings-font-family") ?>"; 
+			<?php endif ?>
+		}
+		
+	</style>
+	<?php
+} );
+
