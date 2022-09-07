@@ -24,6 +24,8 @@
 	//Please remember that for the input widgets down below to work,
 	// we have to have the controls "transport" setting set to postMessage
 
+	//COLORS
+
 	wp.customize('SCSSvar_body-bg', function (value) {
 		value.bind(function (newval) {
 			if (newval == '') newval = "#fff";
@@ -52,6 +54,8 @@
 		});
 	});
 
+	//TYPOGHRAPHY
+
 	wp.customize('SCSSvar_font-weight-base', function (value) {
 		value.bind(function (newval) {
 			document.querySelector(":root").style.setProperty("--bs-body-font-weight", newval);
@@ -64,6 +68,53 @@
 		});
 	});
 
+	//GLOBAL OPTIONS
 
+	wp.customize('SCSSvar_border-width', function (value) {
+		value.bind(function (newval) {
+			document.querySelector(":root").style.setProperty("--bs-border-width", newval);
+		});
+	});
 
+	wp.customize('SCSSvar_border-color', function (value) {
+		value.bind(function (newval) {
+			document.querySelector(":root").style.setProperty("--bs-border-color", newval);
+		});
+	});
+
+	wp.customize('SCSSvar_border-radius', function (value) {
+		value.bind(function (newval) {
+			document.querySelector(":root").style.setProperty("--bs-border-radius", newval);
+		});
+	});
+
+	wp.customize('SCSSvar_border-radius-sm', function (value) {
+		value.bind(function (newval) {
+			document.querySelector(":root").style.setProperty("--bs-border-radius-sm", newval);
+		});
+	});
+
+	wp.customize('SCSSvar_border-radius-lg', function (value) {
+		value.bind(function (newval) {
+			document.querySelector(":root").style.setProperty("--bs-border-radius-lg", newval);
+		});
+	});
+
+	wp.customize('SCSSvar_border-radius-xl', function (value) {
+		value.bind(function (newval) {
+			document.querySelector(":root").style.setProperty("--bs-border-radius-xl", newval);
+		});
+	});
+
+	wp.customize('SCSSvar_border-radius-2xl', function (value) {
+		value.bind(function (newval) {
+			document.querySelector(":root").style.setProperty("--bs-border-radius-2xl", newval);
+		});
+	});
+ 
+	wp.customize('SCSSvar_border-radius-pill', function (value) {
+		value.bind(function (newval) {
+			document.querySelector(":root").style.setProperty("--bs-border-radius-pill", newval);
+		});
+	});
 })(jQuery);

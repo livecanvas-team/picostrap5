@@ -84,11 +84,15 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				'$spacer' => array('type' => 'text','placeholder' => '1rem'),
 				
 				'$border-width' => array('type' => 'text','placeholder' => '1px'),
+				'$border-style' => array('type' => 'text','placeholder' => 'solid'),
 				'$border-color' => array('type' => 'color' ),
-				'$border-radius' => array('type' => 'text','placeholder' => '.25rem'),
-				'$border-radius-lg' => array('type' => 'text','placeholder' => '.3rem'),
-				'$border-radius-sm' => array('type' => 'text','placeholder' => '.2rem'),
-				'$rounded-pill' => array('type' => 'text','placeholder' => '50rem'),
+				'$border-radius' => array('type' => 'text','placeholder' => '.375rem'),
+				
+				'$border-radius-sm' => array('type' => 'text','placeholder' => '.25rem'),
+				'$border-radius-lg' => array('type' => 'text','placeholder' => '.5rem'),
+				'$border-radius-xl' => array('type' => 'text','placeholder' => '1rem'),
+				'$border-radius-2xl' => array('type' => 'text','placeholder' => '2rem'),
+				'$border-radius-pill' => array('type' => 'text','placeholder' => '50rem'),
 				
 
 				),
@@ -105,14 +109,16 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				'$font-family-monospace' => array('type' => 'text' ),
 				
 				'$font-size-base' => array('newgroup' => 'Font Sizes', 'type' => 'text', 'placeholder' => '1rem'),
-				'$font-size-lg' => array('type' => 'text', 'placeholder' => '1.25rem'),
+				
 				'$font-size-sm' => array('type' => 'text', 'placeholder' => '.875rem '),
+				'$font-size-lg' => array('type' => 'text', 'placeholder' => '1.25rem'),
 
 				'$enable-rfs' => array('type' => 'boolean','default' => 'true'),
 				
 				'$font-weight-lighter' => array('newgroup' => 'Font Weights', 'type' => 'text', 'placeholder' => 'lighter '),
 				'$font-weight-light' => array('type' => 'text', 'placeholder' => '300'),
 				'$font-weight-normal' => array('type' => 'text', 'placeholder' => '400'),
+				'$font-weight-semibold' => array('type' => 'text', 'placeholder' => '600'),
 				'$font-weight-bold' => array('type' => 'text', 'placeholder' => '700'),
 				'$font-weight-bolder' => array('type' => 'text', 'placeholder' => 'bolder'),
 				
@@ -137,11 +143,7 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				//'$display2-size' => array('type' => 'text', 'placeholder' => '5.5rem'),
 				//'$display3-size' => array('type' => 'text', 'placeholder' => '4.5rem'),
 				//'$display4-size' => array('type' => 'text', 'placeholder' => '3.5rem'),
-				//
-				//'$display1-weight' => array('type' => 'text', 'placeholder' => '300'),
-				//'$display2-weight' => array('type' => 'text', 'placeholder' => '300'),
-				//'$display3-weight' => array('type' => 'text', 'placeholder' => '300'),
-				//'$display4-weight' => array('type' => 'text', 'placeholder' => '300'),
+				//'$display-font-weight' => array('type' => 'text', 'placeholder' => '300'),
 				//'$display-line-height' => array('type' => 'text', 'placeholder' => ' $headings-line-height '),
 				
 				'$lead-font-size' => array('newgroup' => 'Lead, Small and Muted', 'type' => 'text', 'placeholder' => '1.25rem'),
@@ -152,10 +154,11 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				'$text-muted' => array('type' => 'color',  ),
 				
 				
-				'$blockquote-small-font-size' => array('newgroup' => 'Blockquotes', 'type' => 'text', 'placeholder' => '$small-font-size '),
+				'$blockquote-margin-y' => array('newgroup' => 'Blockquotes', 'type' => 'text', 'placeholder' => '$spacer'),
 				'$blockquote-font-size' => array('type' => 'text', 'placeholder' => '1.25rem '),
-				'$blockquote-footer-font-size' => array('type' => 'text', 'placeholder' => '$small-font-size'),
 				'$blockquote-footer-color' => array('type' => 'color' ),
+				'$blockquote-footer-font-size' => array('type' => 'text', 'placeholder' => '$small-font-size'),
+
 				
 				
 				'$hr-height' => array('newgroup' => 'HRs', 'type' => 'text', 'placeholder' => '$border-width'),
@@ -182,7 +185,7 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 			
 			
 			
-			//add another section
+			//add another section for FORMS
 			"buttons-forms" => array( // $variable_name => $variable_props
 				
 							
@@ -193,26 +196,26 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				'$input-btn-line-height' => array('type' => 'text','placeholder' => '$line-height-base'),
 				
 				'$input-btn-focus-width' => array('type' => 'text','placeholder' => '.2rem'),
+				'$input-btn-focus-color-opacity' => array('type' => 'text','placeholder' => '.25'),
 				'$input-btn-focus-color' => array('type' => 'color','placeholder' => 'rgba($component-active-bg, .25)'),
+				'$input-btn-focus-blur' => array('type' => 'text','placeholder' => '0'),
 				'$input-btn-focus-box-shadow' => array('type' => 'text','placeholder' => '0 0 0 $input-btn-focus-width $input-btn-focus-color'),
 				
 				'$input-btn-padding-y-sm' => array('type' => 'text','placeholder' => '.25rem'),
 				'$input-btn-padding-x-sm' => array('type' => 'text','placeholder' => '.5rem'),
 				'$input-btn-font-size-sm' => array('type' => 'text','placeholder' => '$font-size-sm'),
-				'$input-btn-line-height-sm' => array('type' => 'text','placeholder' => '    $line-height-sm'),
-				
+				 
 				'$input-btn-padding-y-lg' => array('type' => 'text','placeholder' => '.5rem'),
 				'$input-btn-padding-x-lg' => array('type' => 'text','placeholder' => '1rem'),
 				'$input-btn-font-size-lg' => array('type' => 'text','placeholder' => '$font-size-lg'),
-				'$input-btn-line-height-lg' => array('type' => 'text','placeholder' => '    $line-height-lg'),
-				
+ 
 				'$input-btn-border-width' => array('type' => 'text','placeholder' => '$border-width'),
 				
 
 				),
 			
 			
-			//add another section
+			//add another section for BUTTONS
 			"buttons" => array( // $variable_name => $variable_props
 				
 							
