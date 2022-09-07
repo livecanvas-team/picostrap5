@@ -29,11 +29,9 @@ if (!function_exists('picostrap_get_complete_css_filename')):
     }
 endif;
 
-//FUNCTION TO GET THEME VERSION
-function picostrap_get_css_version(){
-    //if (current_user_can("administrator")) $version=rand(1,9999); else 
-    $version = intval((get_theme_mod("picostrap_scss_last_filesmod_timestamp")) % 999); 
-    return $version;
+//HELPER FUNCTION TO GET CSS BUNDLE VERSION
+function picostrap_get_css_version(){ 
+    return(get_theme_mod ('css_bundle_version_number'));
 }
 
 //ADD THE MAIN CSS FILE

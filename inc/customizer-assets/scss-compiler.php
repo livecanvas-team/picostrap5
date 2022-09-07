@@ -107,6 +107,11 @@ function picostrap_generate_css(){
 			echo "<br><br><b>Size: </b><br>".round(mb_strlen($compiled_css, '8bit')/1000)." kB - ".round(mb_strlen(gzcompress($compiled_css), '8bit')/1000)." kB gzipped";
 		}
 
+		//STORE VERSION NUMBER
+		$current_version_number = get_theme_mod ('css_bundle_version_number');
+		if (!is_numeric($current_version_number)) $current_version_number=rand(1,1000);
+		set_theme_mod ('css_bundle_version_number', $current_version_number+1);
+
 	} else {
 		//GIVE NEGATIVE FEEDBACK
 		if (isset($_GET['ps_compiler_api'])) {
