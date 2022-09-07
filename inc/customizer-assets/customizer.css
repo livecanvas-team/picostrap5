@@ -32,7 +32,9 @@ span.cs-optional-comment b {
 }
 
 #cs-compiling-window {
-  width: 273px;
+  min-width: 300px;
+  max-width: 600px;
+  width: 18%;
   position: fixed;
   z-index: 999999;
   font-size: 14px;
@@ -86,6 +88,16 @@ span.cs-optional-comment b {
 }
 
 #cs-loader {margin:40%}
+
+/* COMPILER ERROR */
+
+div#compile-error {
+    /* font-size: 10px !important; */
+    overflow-wrap: break-word;
+}
+div#compile-error:hover{
+  cursor: pointer;
+}
 
 /*  SPINNING LOADER */
 

@@ -231,7 +231,7 @@
 		});
 			
 		//USER CLICKS CLOSE COMPILING WINDOW
-		$("body").on("click",".cs-close-compiling-window,.cs-closex",function(){
+		$("body").on("click",".cs-close-compiling-window,.cs-closex, #compile-error",function(){
 			//$(".customize-controls-close").click();
 			$("#cs-compiling-window").fadeOut();
 		});
@@ -258,8 +258,8 @@
 						`;
 			if ($("#_customize-input-topbar_content").val() == "") $("#_customize-input-topbar_content").val(html_default.trim().replace(/(\r\n|\n|\r)/gm, "")).change();
 		}); 
-		
-		// FONT COMBINATIONS ////////////////////////////////////////////
+
+		// FONT COMBINATIONS SELECT ////////////////////////////////////////////
 
 		//append link to show FONT COMBINATIONs
 		$("#customize-control-SCSSvar_font-family-base h1").append(" <a href='#' id='cs-show-combi' style='float: right; margin-top: 11px; font-size: 10px;text-decoration: none;user-select: none;'>Font Combinations...</button>");
