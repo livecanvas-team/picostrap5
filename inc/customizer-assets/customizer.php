@@ -513,8 +513,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
  
 				$wp_customize->add_setting($variable_slug, array(
 					"default" => $default,
-					//"transport" => "postMessage",
-					"transport" => "refresh",
+					"transport" => "postMessage", 
 				));
 				$wp_customize->add_control(new WP_Customize_Control(
 					$wp_customize,
@@ -534,7 +533,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 				$wp_customize->add_setting($variable_slug, array(
 					"default" => $default,
-					"transport" => "refresh",
+					"transport" => (in_array($variable_slug, array('SCSSvar_font-family-base','SCSSvar_headings-font-family')) )  ? "refresh" : "postMessage",
 					//"default" => "1rem",
 					//'sanitize_callback' => 'picostrap_sanitize_rem'
 				));
@@ -1220,24 +1219,17 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 // so live preview is possible
 // check out also customizer-live-preview.js
 
+//Please remember that for the input widgets down below to work,
+// we have to have the controls "transport" setting set to "refresh"
+
 add_action( 'wp_head', function  () {
 	if (!current_user_can('administrator') OR !isset($_GET['customize_theme'])) return;
     ?>
 	<style>
 		:root {
-			/* for TEXTual inputs we use transport refresh */
 			<?php if (get_theme_mod("SCSSvar_font-family-base")): ?>
 				--bs-body-font-family: "<?php echo get_theme_mod("SCSSvar_font-family-base") ?>" !important;
 			<?php endif ?>
-			
-			<?php if (get_theme_mod("SCSSvar_font-weight-normal")): ?>
-				--bs-body-font-weight: <?php echo get_theme_mod("SCSSvar_font-weight-normal") ?> !important;
-			<?php endif ?>
-
-			<?php if (get_theme_mod("SCSSvar_line-height-base")): ?>
-				--bs-body-line-height: <?php echo get_theme_mod("SCSSvar_line-height-base") ?> !important;
-			<?php endif ?>
-		 
 
 		} /* close :root */
 		
