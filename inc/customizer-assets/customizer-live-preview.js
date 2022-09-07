@@ -52,7 +52,7 @@
 		});
 	});
 
-	wp.customize('SCSSvar_font-weight-normal', function (value) {
+	wp.customize('SCSSvar_font-weight-base', function (value) {
 		value.bind(function (newval) {
 			document.querySelector(":root").style.setProperty("--bs-body-font-weight", newval);
 		});

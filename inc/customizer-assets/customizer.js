@@ -364,8 +364,14 @@
 				//maybe in the future, for google fonts, suggest opening modal for multiple weights
 
 				//set font family and font weight fields	
-				$("#_customize-input-SCSSvar_font-weight-base").val(fontObj.fontWeight); //maybe not always, we should ask
 				$("#_customize-input-SCSSvar_font-family-base").val(fontObj.fontFamily).change();
+
+				//wait for the font to be "accepted"
+				setTimeout(() => {
+					$("#_customize-input-SCSSvar_font-weight-base").val(fontObj.fontWeight).change();
+				}, "1500")
+
+				
 			}
 
 			//is it a headings font that's been chosen?
@@ -377,8 +383,8 @@
 				//maybe in the future, for google fonts, suggest opening modal for multiple weights
 
 				//set font family and font weight fields
-				$("#_customize-input-SCSSvar_headings-font-weight").val(fontObj.fontWeight); //maybe not always, we should ask
 				$("#_customize-input-SCSSvar_headings-font-family").val(fontObj.fontFamily).change();
+				$("#_customize-input-SCSSvar_headings-font-weight").val(fontObj.fontWeight).change();
 
 			}
 
