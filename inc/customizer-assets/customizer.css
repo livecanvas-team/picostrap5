@@ -22,6 +22,10 @@ span.cs-optional-comment b {
   font-size: 0.7rem;
   padding-right: 0.5rem;
   color:#8e8e8e;
+  border-right: 24px solid transparent;
+  position: absolute; 
+  right: 11px;
+  margin-top: 4px;
 }
 
 

@@ -6,8 +6,8 @@
         $("#sub-accordion-section-colors .customize-control-color").each(function(index, el) { //foreach color widget
             if (!$(el).find(".customize-control-description").text().includes("$")) return; //skip element if description does not contain a dollar
 
+			//console.log($(el).find(".customize-control-description").text());
 
-			console.log($(el).find(".customize-control-description").text());
 			if ($(el).find(".customize-control-description").text().includes("link-")) return true; //skip element if description does   contain link
 			if ($(el).find(".customize-control-description").text().includes("body-")) return true; //skip element if description does   contain body 
 
@@ -16,7 +16,11 @@
 
             //console.log(color_name+color_value);
 
-            if (color_value) $(el).find(".customize-control-title").append("<div class=customizer-current-color>Current</div>").css("border-right", "24px solid " + color_value);
+			//append if not already present add a small widget for feedback
+			if (!$(el).find(".customizer-current-color").length) $(el).find(".customize-control-title").append("<div class=customizer-current-color>Current</div>");
+
+			//set the color on the widget
+			if (color_value) $(el).find(".customizer-current-color").css("border-color", color_value);
         }); //end each
         
     }
