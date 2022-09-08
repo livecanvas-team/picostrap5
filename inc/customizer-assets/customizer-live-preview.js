@@ -76,17 +76,28 @@
 		});
 	});
 
+	wp.customize('SCSSvar_border-style', function (value) {
+		value.bind(function (newval) {
+			document.querySelector(":root").style.setProperty("--bs-border-style", newval);
+		});
+	});
+
 	wp.customize('SCSSvar_border-color', function (value) {
 		value.bind(function (newval) {
 			document.querySelector(":root").style.setProperty("--bs-border-color", newval);
 		});
 	});
 
+
+	/*
+	//does not work!!!
+	
 	wp.customize('SCSSvar_border-radius', function (value) {
 		value.bind(function (newval) {
 			document.querySelector(":root").style.setProperty("--bs-border-radius", newval);
 		});
 	});
+	*/
 
 	wp.customize('SCSSvar_border-radius-sm', function (value) {
 		value.bind(function (newval) {
