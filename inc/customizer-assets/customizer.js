@@ -299,21 +299,32 @@
 		});
 		
 		// ON CHANGE OF NEW FONT FAMILY FIELD 
-		$("body").on("change", "#_customize-input-SCSSvar_font-family-base", function() { 
-			$('select[data-customize-setting-link="picostrap_body_font"] option:first').attr('selected', 'selected').change(); //reset legacy font select
+		$("body").on("change", "#_customize-input-SCSSvar_font-family-base", function() {
 			//if empty, reset font object field, as a security
-			if ($(this).val()==""){
-				$("#_customize-input-body_font_object").val("").change();
-			}
+			if ($(this).val()=="") $("#_customize-input-body_font_object").val("").change();
 		});
 		// ON CHANGE OF NEW FONT HEADING FIELD 
 		$("body").on("change", "#_customize-input-SCSSvar_headings-font-family", function() { 
-			$('select[data-customize-setting-link="picostrap_headings_font"] option:first').attr('selected', 'selected').change(); //reset legacy font select
 			//if empty, reset font object field, as a security
-			if ($(this).val() == "") {
-				$("#_customize-input-headings_font_object").val("").change();
-			}
+			if ($(this).val() == "")  $("#_customize-input-headings_font_object").val("").change();
 		});
+		// ON KEYDOWN OF FONT FAMILY FIELD 
+		$("body").on("keydown", "#_customize-input-SCSSvar_font-family-base", function () {
+			console.log("keydown #_customize-input-SCSSvar_font-family-base, so we reset the font weight");
+
+			//RESET FONT WEIGHT FIELD
+			$("#_customize-input-SCSSvar_font-weight-base").val(""); 	
+
+		});
+		// ON KEYDOWN OF FONT HEADING FIELD
+		$("body").on("keydown", "#_customize-input-SCSSvar_headings-font-family", function () {
+			console.log("keydown #_customize-input-SCSSvar_headings-font-family, so we reset the font weight");
+
+			//RESET FONT WEIGHT FIELD
+			$("#_customize-input-SCSSvar_headings-font-weight").val("");	
+			
+		});
+
 		
 		
 		//FONT PICKER ///////////////////////////////////////////////////////////////////
