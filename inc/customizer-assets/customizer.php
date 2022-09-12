@@ -51,13 +51,18 @@ function picostrap_filter_head() {
 ///MAIN SETTING: DECLARE ALL SCSS VARIABLES TO HANDLE IN THE CUSTOMIZER
 if(!function_exists("picostrap_get_scss_variables_array")):
 	function picostrap_get_scss_variables_array(){
+		$live_preview_message = '
+		<span class="lpa">
+			<svg viewBox="0 0 24 24"> <path fill="currentColor" d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z" /></svg>
+			Live Preview
+		</span>';
 		return array(
 			"colors" => array( //  $variable_name => $variable_props
-				'$body-bg' => array('type' => 'color'),
-				'$body-color' => array('type' => 'color'),
-				'$link-color' => array('type' => 'color'),
+				'$body-bg' => array('type' => 'color', 'comment' => $live_preview_message),
+				'$body-color' => array('type' => 'color', 'comment' => $live_preview_message),
+				'$link-color' => array('type' => 'color', 'comment' => $live_preview_message),
 				//'$link-decoration' => array('type' => 'text'),
-				'$link-hover-color' => array('type' => 'color'),
+				'$link-hover-color' => array('type' => 'color', 'comment' => $live_preview_message),
 				//'$link-hover-decoration' => array('type' => 'text'),
 				// STATUS COLORS
 				'$primary'=> array('type' => 'color','newgroup' => 'Bootstrap Colors'),
@@ -83,16 +88,16 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				
 				'$spacer' => array('type' => 'text','placeholder' => '1rem'),
 				
-				'$border-width' => array('type' => 'text','placeholder' => '1px'),
-				'$border-style' => array('type' => 'text','placeholder' => 'solid'),
-				'$border-color' => array('type' => 'color' ),
+				'$border-width' => array( 'newgroup' => 'Global Borders','type' => 'text','placeholder' => '1px', 'comment' => $live_preview_message),
+				'$border-style' => array('type' => 'text','placeholder' => 'solid', 'comment' => $live_preview_message),
+				'$border-color' => array('type' => 'color', 'comment' => $live_preview_message ),
 				'$border-radius' => array('type' => 'text','placeholder' => '.375rem'),
 				
-				'$border-radius-sm' => array('type' => 'text','placeholder' => '.25rem'),
-				'$border-radius-lg' => array('type' => 'text','placeholder' => '.5rem'),
-				'$border-radius-xl' => array('type' => 'text','placeholder' => '1rem'),
-				'$border-radius-2xl' => array('type' => 'text','placeholder' => '2rem'),
-				'$border-radius-pill' => array('type' => 'text','placeholder' => '50rem'),
+				'$border-radius-sm' => array('newgroup' => 'Rounded Helper Classes', 'type' => 'text','placeholder' => '.25rem', 'comment' => $live_preview_message),
+				'$border-radius-lg' => array('type' => 'text','placeholder' => '.5rem', 'comment' => $live_preview_message),
+				'$border-radius-xl' => array('type' => 'text','placeholder' => '1rem', 'comment' => $live_preview_message),
+				'$border-radius-2xl' => array('type' => 'text','placeholder' => '2rem', 'comment' => $live_preview_message),
+				'$border-radius-pill' => array('type' => 'text','placeholder' => '50rem', 'comment' => $live_preview_message),
 				
 
 				),
@@ -104,7 +109,7 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 				
 				
 							
-				'$font-family-base' => array('type' => 'text', 'placeholder' => '$font-family-sans-serif ', 'newgroup' => 'Font Families', ), 
+				'$font-family-base' => array('type' => 'text', 'placeholder' => '$font-family-sans-serif ', 'newgroup' => 'Font Families', 'comment' => $live_preview_message ), 
 				'$font-family-sans-serif' => array('type' => 'text', ),
 				'$font-family-monospace' => array('type' => 'text' ),
 				
@@ -115,17 +120,21 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 
 				'$enable-rfs' => array('type' => 'boolean','default' => 'true'),
 				
-				'$font-weight-lighter' => array('newgroup' => 'Font Weights', 'type' => 'text', 'placeholder' => 'lighter '),
+				'$font-weight-base' => array('newgroup' => 'Font Weights', 'type' => 'text', 'placeholder' => '400', 'comment' => $live_preview_message),
+				'$line-height-base' => array('type' => 'text', 'placeholder' => '1.5', 'comment' => $live_preview_message),
+
+				
+				
+				'$font-weight-lighter' => array('type' => 'text', 'placeholder' => 'lighter '),
 				'$font-weight-light' => array('type' => 'text', 'placeholder' => '300'),
 				'$font-weight-normal' => array('type' => 'text', 'placeholder' => '400'),
 				'$font-weight-semibold' => array('type' => 'text', 'placeholder' => '600'),
 				'$font-weight-bold' => array('type' => 'text', 'placeholder' => '700'),
 				'$font-weight-bolder' => array('type' => 'text', 'placeholder' => 'bolder'),
 				
-				'$font-weight-base' => array('type' => 'text', 'placeholder' => '400'),
-				'$line-height-base' => array('type' => 'text', 'placeholder' => '1.5'),
+				
 			
-				'$headings-font-family' => array('type' => 'text', 'placeholder' => 'null','newgroup' => 'Headings', ),
+				'$headings-font-family' => array('type' => 'text', 'placeholder' => 'null','newgroup' => 'Headings', 'comment' => $live_preview_message ),
 				'$headings-font-weight' => array('type' => 'text', 'placeholder' => '500 '),
 				'$headings-line-height' => array('type' => 'text', 'placeholder' => '1.2'),
 				'$headings-color' => array('type' => 'color'),

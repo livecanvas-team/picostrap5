@@ -151,7 +151,7 @@
 		}); //end each
 		
 		//ADD H1 SUBTITLE for BS COLORS
-		$("#customize-control-SCSSvar_primary h1").css("padding-bottom", "0").append('<p style="margin: 0">Live Preview is not possible for Bootstrap Theme Colors. Click the Publish button to view the changes.</p>');
+		$("#customize-control-SCSSvar_primary h1").css("padding-bottom", "0").append('<p class="pico-text-suggestion" >Live Preview is not possible for Bootstrap Theme Colors. Click the Publish button to view the changes.</p>');
  
 		//ADD COLORS HEADING 
 		$("#customize-control-enable_back_to_top").prepend(" <h1>Opt-in extra features</h1><hr> ");
@@ -270,7 +270,7 @@
 		// FONT COMBINATIONS SELECT ////////////////////////////////////////////
 
 		//append link to show FONT COMBINATIONs
-		$("#customize-control-SCSSvar_font-family-base h1").append(" <a href='#' id='cs-show-combi' style='float: right; margin-top: 11px; font-size: 10px;text-decoration: none;user-select: none;'>Font Combinations...</button>");
+		$("#customize-control-SCSSvar_font-family-base h1").append(" <a href='#' id='cs-show-combi' style='float: right;  font-size: 10px;text-decoration: none;user-select: none;'>Font Combinations...</button>");
 
 		//show upon click 
 		//USER CLICKS SHOW FONT COMBINATIONS
@@ -324,7 +324,7 @@
 			localFonts: theLocalFonts //defined in customizer-vars.js file
 		});
 
-		var csFontPickerButton = " <button class='cs-open-fontpicker button button-secondary' style='float:right;margin-top:4px;'>Font Picker...</button>";
+		var csFontPickerButton = " <button class='cs-open-fontpicker button button-secondary' style='float:right;'>Font Picker...</button>";
 
 		//INIT FONTPICKERs
 

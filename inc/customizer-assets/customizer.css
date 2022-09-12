@@ -2,9 +2,7 @@
 	font-size: 9px !important;
 }
 
-span.cs-optional-comment {
-    display: block; 
-    margin-top: 5px;
+span.cs-optional-comment {  
     font-style: normal; 
 }
 
@@ -13,15 +11,37 @@ span.cs-optional-comment b {
 }
 
 
+/* LIVE PREVIEW AVAILABLE */
+span.lpa { 
+    float: right;
+    user-select: none;
+    color:#abb8c3;
+}
+span.lpa svg  {
+  width:12px;height:12px;vertical-align:top
+}
+#_customize-description-SCSSvar_font-family-base.customize-control-description ,
+#_customize-description-SCSSvar_headings-font-family.customize-control-description { 
+    margin-top: 12px;
+}
+
+.pico-text-suggestion {
+    color: #50575e;
+    font-style: italic;
+}
+/* PLACEHOLDER FOR INPUT TEXT */
+.customize-control input[type=text]::placeholder {color:#cbcbcb}
+
+/* CURRENT COLOR WIDGET FOR COLOR WIDGETS */
+
 .customize-control-color .customize-control-title{
   display: flex;
   justify-content: space-between;
 }
 .customize-control-color .customizer-current-color {
-
   font-size: 0.7rem;
   padding-right: 0.5rem;
-  color:#8e8e8e;
+  color:#abb8c3;
   border-right: 24px solid transparent;
   position: absolute; 
   right: 11px;
