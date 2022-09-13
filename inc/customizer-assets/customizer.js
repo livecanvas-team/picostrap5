@@ -70,6 +70,7 @@
 		scss_recompile_is_necessary=false;
 			
 	} //END FUNCTION ps_recompile_css_bundle
+
 		
 	function ps_is_a_google_font(fontFamilyName){
 		
@@ -80,9 +81,10 @@
 		
 	} // end function ps_is_a_google_font
 
+
 	// FUNCTION TO PREPARE THE HTML CODE SNIPPET THAT LOADS THE (GOOGLE) FONTS
-	function ps_prepare_fonts_import_code_snippet(){
-		console.log('Running function ps_prepare_fonts_import_code_snippet to generate html code for font import:');
+	function ps_update_fonts_import_code_snippet(){
+		console.log('Running function ps_update_fonts_import_code_snippet to generate html code for font import:');
 		
 		//BUILD BASE FONT IMPORT HEAD CODE
 		var first_part="";
@@ -99,21 +101,22 @@
 			if ($("#_customize-input-SCSSvar_headings-font-weight").val() != '') second_part +=":wght@"+$("#_customize-input-SCSSvar_headings-font-weight").val();
 		}
 		//console.log(second_part); //for debug
-		
-		if (first_part=="" && second_part=="" ) return "";  //no code necessary
-		
-		var separator_char=""; 
-		if (first_part!="" && second_part!="" ) separator_char="&"; 
-		
-		var html_code="";
 
-		html_code += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
-		html_code += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
-		html_code += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
-		
-		//an example:
-		//https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
-		
+		var html_code = "";
+
+		if (first_part == "" && second_part == "") {
+			//no import code needed
+		} else {
+			var separator_char = ""; 
+			if (first_part != "" && second_part != "") separator_char = "&"; 
+
+			html_code += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
+			html_code += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
+			html_code += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
+			
+			//an example: https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
+		}
+			
 		//disable alternative font source checkbox
 		$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked",false);
 
@@ -167,7 +170,7 @@
 		//CHECK IF USING VINTAGE GOOGLE FONTS API V1, REBUILD FONT IMPORT CODE
 		if ($("#_customize-input-picostrap_fonts_header_code").val().includes('https://fonts.googleapis.com/css?')){
 			console.log("GOOGLE FONTS API V1 is used, let's rebuild the font import header code to update it to v2 syntax");
-			ps_prepare_fonts_import_code_snippet();
+			ps_update_fonts_import_code_snippet();
 		}
 		
 		//////////////////// LISTEN TO CUSTOMIZER CHANGES ////////////////////////
@@ -175,15 +178,10 @@
 		//ON CHANGES OF CUSTOMIZER, FOR RELEVANT FIELDS, UPDATE SCSS OR FONT SNIPPET ///////////////////
 		wp.customize.bind('change', function (setting) {
 
-			console.log(setting.id + " has changed value");
+			//console.log(setting.id + " has changed value");
 
 			//if some field containing scssvar is changed, we'll have to recompile
 			if (setting.id.includes("SCSSvar")) scss_recompile_is_necessary = true;
-
-			//if body or heading font family is changed, rebuild the code import snippet
-			if (setting.id == "SCSSvar_font-family-base" || setting.id == "SCSSvar_headings-font-family") {
-				ps_prepare_fonts_import_code_snippet();
-			}
 
 		});
 
@@ -200,7 +198,7 @@
 		
 		//ON CLICK LINK TO REGENERATE FONT LOADING CODE, DO IT
 		$("body").on("click", "#regenerate-font-loading-code", function () {
-			ps_prepare_fonts_import_code_snippet();
+			ps_update_fonts_import_code_snippet();
 		});	
 
 		//ON CHANGE CHECKBOX FOR  USE ALTERNATIVE FONT SOURCE FOR GDPR
@@ -269,17 +267,18 @@
 
 		// FONT COMBINATIONS SELECT ////////////////////////////////////////////
 
-		//append link to show FONT COMBINATIONs
+		//ADD THE UI: append link to show FONT COMBINATIONs
 		$("#customize-control-SCSSvar_font-family-base h1").append(" <a href='#' id='cs-show-combi' style='float: right;  font-size: 10px;text-decoration: none;user-select: none;'>Font Combinations...</button>");
 
-		//show upon click 
-		//USER CLICKS SHOW FONT COMBINATIONS
+		//ADD THE UI: the SELECT
+		$("li#customize-control-SCSSvar_font-family-base").prepend(ps_font_combinations_select);
+
+		//USER CLICKS SHOW FONT COMBINATIONS: show the select
 		$("body").on("click", "#cs-show-combi", function () {
 			//$(".customize-controls-close").click();
 			$("#cs-font-combi").slideToggle();
 		});
-		$("li#customize-control-SCSSvar_font-family-base").prepend(ps_font_combinations_select);
-		
+
 		//WHEN A FONT COMBINATION IS CHOSEN
 		$("body").on("change", "select#_ps_font_combinations", function() {
 			var value = jQuery(this).val(); //Cabin and Old Standard TT
@@ -287,12 +286,17 @@
 			var font_headings = arr[0];
 			var font_body = arr[1];
 			if (value === '') {		font_headings = "";	font_body = "";		}
+
 			//SET FONT FAMILY VALUES
 			$("#_customize-input-SCSSvar_font-family-base").val(font_body).change();
 			$("#_customize-input-SCSSvar_headings-font-family").val(font_headings).change();
+
 			//RESET FONT WEIGHT FIELDS
 			$("#_customize-input-SCSSvar_font-weight-base").val("").change();
-			$("#_customize-input-SCSSvar_headings-font-weight").val("").change();		
+			$("#_customize-input-SCSSvar_headings-font-weight").val("").change();	
+
+			//prepare font import snippet
+			ps_update_fonts_import_code_snippet();	
 							
 			//reset combination select
 			//$('select#_ps_font_combinations option:first').attr('selected','selected');
@@ -303,26 +307,33 @@
 			//if empty, reset font object field, as a security
 			if ($(this).val()=="") $("#_customize-input-body_font_object").val("").change();
 		});
+
 		// ON CHANGE OF NEW FONT HEADING FIELD 
 		$("body").on("change", "#_customize-input-SCSSvar_headings-font-family", function() { 
 			//if empty, reset font object field, as a security
 			if ($(this).val() == "")  $("#_customize-input-headings_font_object").val("").change();
 		});
-		// ON KEYDOWN OF FONT FAMILY FIELD 
-		$("body").on("keydown", "#_customize-input-SCSSvar_font-family-base", function () {
-			console.log("keydown #_customize-input-SCSSvar_font-family-base, so we reset the font weight");
 
-			//RESET FONT WEIGHT FIELD
+		// ON keyup OF FONT FAMILY FIELD: user is editing field with the keyboard
+		$("body").on("keyup", "#_customize-input-SCSSvar_font-family-base", function () {
+			console.log("keyup #_customize-input-SCSSvar_font-family-base, so we reset the font weight");
+
+			//reset font weight field, as the weight might not be available on the newly chosen font
 			$("#_customize-input-SCSSvar_font-weight-base").val(""); 	
 
+			//prepare font import snippet
+			ps_update_fonts_import_code_snippet();
 		});
-		// ON KEYDOWN OF FONT HEADING FIELD
-		$("body").on("keydown", "#_customize-input-SCSSvar_headings-font-family", function () {
-			console.log("keydown #_customize-input-SCSSvar_headings-font-family, so we reset the font weight");
 
-			//RESET FONT WEIGHT FIELD
+		// ON keyup OF FONT HEADING FIELD: user is editing field with the keyboard
+		$("body").on("keyup", "#_customize-input-SCSSvar_headings-font-family", function () {
+			console.log("keyup #_customize-input-SCSSvar_headings-font-family, so we reset the font weight");
+
+			//reset font weight field, as the weight might not be available on the newly chosen font
 			$("#_customize-input-SCSSvar_headings-font-weight").val("");	
-			
+
+			//prepare font import snippet
+			ps_update_fonts_import_code_snippet();
 		});
 
 		
@@ -383,14 +394,8 @@
 				//maybe in the future, for google fonts, suggest opening modal for multiple weights
 
 				//set font family and font weight fields	
+				$("#_customize-input-SCSSvar_font-weight-base").val(fontObj.fontWeight).change();
 				$("#_customize-input-SCSSvar_font-family-base").val(fontObj.fontFamily).change();
-
-				//wait for the font to be "accepted"
-				setTimeout(() => {
-					$("#_customize-input-SCSSvar_font-weight-base").val(fontObj.fontWeight).change();
-				}, "1500")
-
-				
 			}
 
 			//is it a headings font that's been chosen?
@@ -402,10 +407,12 @@
 				//maybe in the future, for google fonts, suggest opening modal for multiple weights
 
 				//set font family and font weight fields
-				$("#_customize-input-SCSSvar_headings-font-family").val(fontObj.fontFamily).change();
 				$("#_customize-input-SCSSvar_headings-font-weight").val(fontObj.fontWeight).change();
-
+				$("#_customize-input-SCSSvar_headings-font-family").val(fontObj.fontFamily).change();
 			}
+			
+			//anyway, a new font has been selected, so generate the import code
+			ps_update_fonts_import_code_snippet();
 
 		} //end callback function
 		
