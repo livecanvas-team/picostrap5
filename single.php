@@ -63,7 +63,7 @@ if ( have_posts() ) :
                 
                 if( get_theme_mod("enable_sharing_buttons")) picostrap_the_sharing_buttons();
                 
-                edit_post_link( __( 'Edit this post', 'picostrap' ), '<p class="text-right">', '</p>' );
+                edit_post_link( __( 'Edit this post', 'picostrap' ), '<p class="text-end">', '</p>' );
                 
                 // If comments are open or we have at least one comment, load up the comment template.
                 if (!get_theme_mod("singlepost_disable_comments")) if ( comments_open() || get_comments_number() ) {

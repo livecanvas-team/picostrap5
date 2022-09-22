@@ -39,7 +39,7 @@ if ( ! function_exists( 'picostrap_pagination' ) ) {
 	 * }
 	 * @param string       $class           (Optional) Classes to be added to the <ul> element. Default 'pagination'.
 	 */
-	function picostrap_pagination( $args = array(), $class = 'pagination' ) {
+	function picostrap_pagination( $args = array(), $class = 'pagination pagination-lg' ) {
 
 		if ( ! isset( $args['total'] ) && $GLOBALS['wp_query']->max_num_pages <= 1 ) {
 			return;
