@@ -1,131 +1,75 @@
 <?php
  
-add_action( 'wp_head', function  () {
-	if (!current_user_can('administrator') or isset($_GET['customize_theme']) or get_theme_mod("picostrap_disable_livereload")) return; //exit if not admin
-    ?>
-    <script>
+///ENQUEUE THE JS FILE FOR AUTOCOMPILE / LIVERELOAD
+add_action( 'wp_enqueue_scripts', 'picostrap_enqueue_livereload_scripts' );
 
-        /* this script is here only for site admins, to handle SASS autocompile */
-        var picostrap_livereload_timeout=1500;
-        
-        function picostrap_livereload_woodpecker(){
-            //console.log("picostrap_livereload_woodpecker start");
-            fetch("<?php echo admin_url() ?>?ps_check_sass_changes")
-                .then(function(response) {
-                    return response.text();
-                }).then(function(text) {
-                    //console.log(text);
-                    if (text==="N") {
-                        //no sass change has been detected
-                        //console.log("No sass change has been detected");
-                        setTimeout(function(){ picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
-                    }
-                    if (text==="Y") {
-                        //sass change has been detected
-                        //console.log("Sass change has been detected");
-                        picostrap_recompile_sass();
-                    }
-                }).catch(function(err) {
-                    console.log("picostrap_livereload_woodpecker Fetch Error");
-                }); 
-        } //end function
-        
-
-
-        function picostrap_recompile_sass(){
-            console.log("picostrap_recompile_sass start");
-            if (document.querySelector("#scss-compiler-output")) document.querySelector("#scss-compiler-output").innerHTML = "<div style='font-size:30px;background:#212337;color:lime;font-family:courier;border:8px solid red;padding:15px;display:block;user-select: none;'>Compiling SCSS....</div>";
-            fetch("<?php echo admin_url() ?>?ps_compile_scss&ps_compiler_api=1")
-                .then(function(response) {
-                    return response.text();
-                }).then(function(text) {
-                    //console.log(text); //but we don't need it anymore, just needs to include "New CSS bundle"
-                    if (text.includes("New CSS bundle")) {
-                        //SUCCESS
-
-                        //as there are no errors, clear the output feedback
-                        document.querySelector("#scss-compiler-output").innerHTML = ''; 
-                        
-                        //un-cache the frontend css
-                        url = document.getElementById('picostrap-styles-css').href;
-                        document.getElementById('picostrap-styles-css').href = url;
-
-                        //retrigger the woodpecker
-                        setTimeout(function(){ picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
-                    }
-                    else {
-                        //COMPILE ERRORS
-                        document.querySelector("#scss-compiler-output").innerHTML = text; //display errors
-                        setTimeout(function(){ picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
-                    }
-                    
-                }).catch(function(err) {
-                    console.log("picostrap_recompile_sass Fetch Error");
-                }); 
-        } //end function
-
-        //END FUNCTIONS ////
-
-        //ADD DIV TO SHOW COMPILER MESSAGES / FEEDBACK
-        document.querySelector("html").insertAdjacentHTML("afterbegin","<div id='scss-compiler-output' style=' position: fixed; z-index: 99999999;'></div>");            
-
-        //IF CSS BUNDLE FILE DOES NOT LOAD SUCCESSFULLY, IT MAY NOT EXIST: REBUILD
-        document.querySelector("#picostrap-styles-css").onerror = function(){
-            console.log("CSS bundle does not exist, recompiling");
-            picostrap_recompile_sass();  
-        }
-        
-        //ON DOMContentLoaded START THE ENGINE / Like document ready :)
-        document.addEventListener('DOMContentLoaded', function(event) {          
-            
-            //trigger the woodpecker
-            picostrap_livereload_woodpecker();
-        });
-
-    </script>
-    <?php
-});
-
-
-
-//HANDLE ps_check_sass_changes  URL 
-add_action("admin_init", function (){
+function picostrap_enqueue_livereload_scripts() {
     
-	if(!is_user_logged_in() OR !current_user_can("administrator") /* OR isset($_GET['customize_theme']) */ ) return; //exit if unlogged
-	
-	if (isset($_GET['ps_check_sass_changes'])) {
-        
-        //onboarding
-        if(get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)==0) { echo "Y"; die(); } //set_theme_mod("picostrap_scss_last_filesmod_timestamp",picostrap_get_scss_last_filesmod_timestamp());
-        
-        //DEBUG 
-        //echo get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)."<br>".picostrap_get_scss_last_filesmod_timestamp();die;
+    //exit if not appropriate: non admins, customizer, or disabled livereload option is true
+    if (!current_user_can('administrator') or isset($_GET['customize_theme']) or get_theme_mod("picostrap_disable_livereload")) return; //exit if not admin
 
-        //check if timestamps differ 
-        if (get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)!=picostrap_get_scss_last_filesmod_timestamp()) echo "Y"; else echo ("N");
-        die();
-    } 
+    wp_enqueue_script(
+		'picostrap_livereload',
+		get_template_directory_uri().'/inc/customizer-assets/livereload.js',
+		array(),
+		'1.0.0',
+		false
+	);
+
+	wp_localize_script(
+		'picostrap_livereload',
+		'picostrap_ajax_obj',
+		array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce'    => wp_create_nonce( 'picostrap_livereload' ),
+		)
+	);
+
+}
+
+//HANDLE ACTION for AJAX REQUEST: picostrap_check_for_sass_changes    
+add_action("wp_ajax_picostrap_check_for_sass_changes", function (){
+    
+    //exit if unlogged or non admin
+	if(!is_user_logged_in() OR !current_user_can("administrator")  ) return; 
+	
+    //check nonce
+    check_ajax_referer('picostrap_livereload', 'nonce');
+
+    //onboarding
+    if(get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)==0) { echo "Y"; die(); } //set_theme_mod("picostrap_scss_last_filesmod_timestamp",picostrap_get_scss_last_filesmod_timestamp());
+    
+    //DEBUG 
+    //echo get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)."<br>".picostrap_get_scss_last_filesmod_timestamp();die;
+
+    //check if timestamps differ 
+    if (get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)!=picostrap_get_scss_last_filesmod_timestamp()) echo "Y"; else echo ("N");
+    
+    wp_die();
+ 
 });
 
-/**
- * Returns unique lists of folders containing files to be compiled
- *
- * @return void
- */
-/*
-function picostrap_get_scss_files_paths() {
-    $files = picostrap_get_scss_files_list();
-    $results = [];
-    foreach($files as $file) {
-        $results[] = dirname($file);
-    }
-    return array_unique($results);
-}
-*/
+ 
+//HANDLE ACTION for AJAX REQUEST: picostrap_recompile_sass
+add_action("wp_ajax_picostrap_recompile_sass", function (){
+    
+	//exit if unlogged or non admin
+	if(!is_user_logged_in() OR !current_user_can("administrator")  ) return; 
+	
+    //check nonce
+    check_ajax_referer('picostrap_livereload', 'nonce');
+	    
+    $_GET['ps_compiler_api']=1;
+
+    picostrap_generate_css();
+
+    wp_die();
+ 
+});
 
 
 /**
- * Returns a list of scass and css files to be compiled
+ * Returns a list of scss and css files to be compiled
  *
  * @return void
  */

@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 add_action("admin_init", function (){
 	if (!current_user_can("administrator")) return; //ADMINS ONLY
 	
-	if (isset($_GET['ps_compile_scss'])) {		picostrap_generate_css();		die();	}
+	if (isset($_GET['ps_compile_scss'])) {		picostrap_generate_css();		die();	} //legacy, just for backend, todo....
 	if (isset($_GET['ps_reset_theme'])) {		remove_theme_mods(); 	echo ("Theme Options Reset.<br>");	picostrap_generate_css();		die(); }
 	if (isset($_GET['ps_show_mods'])){		print_r(get_theme_mods());		wp_die();	}
 });
