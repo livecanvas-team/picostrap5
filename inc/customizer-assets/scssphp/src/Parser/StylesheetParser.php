@@ -12,6 +12,8 @@
 
 namespace ScssPhp\ScssPhp\Parser;
 
+use League\Uri\Exceptions\SyntaxError;
+use League\Uri\Uri;
 use ScssPhp\ScssPhp\Ast\Sass\Argument;
 use ScssPhp\ScssPhp\Ast\Sass\ArgumentDeclaration;
 use ScssPhp\ScssPhp\Ast\Sass\ArgumentInvocation;
@@ -79,6 +81,7 @@ use ScssPhp\ScssPhp\Logger\LoggerInterface;
 use ScssPhp\ScssPhp\SourceSpan\FileSpan;
 use ScssPhp\ScssPhp\Util;
 use ScssPhp\ScssPhp\Util\Character;
+use ScssPhp\ScssPhp\Util\Path;
 use ScssPhp\ScssPhp\Util\StringUtil;
 use ScssPhp\ScssPhp\Value\ListSeparator;
 use ScssPhp\ScssPhp\Value\SassColor;
@@ -1232,18 +1235,33 @@ abstract class StylesheetParser extends Parser
             return new StaticImport(new Interpolation([$urlSpan->getText()], $urlSpan), $this->scanner->spanFrom($start), $modifiers);
         }
 
-        // TODO catch the exception of parseImportUrl once it validates the URI format
-
-        return new DynamicImport($this->parseImportUrl($url), $urlSpan);
+        try {
+            return new DynamicImport($this->parseImportUrl($url), $urlSpan);
+        } catch (SyntaxError $e) {
+            $this->error('Invalid URL: ' . $e->getMessage(), $urlSpan, $e);
+        }
     }
 
     /**
      * Parses $url as an import URL.
+     *
+     * @throws SyntaxError
      */
     protected function parseImportUrl(string $url): string
     {
-        // TODO implement URI parsing to enforce well-formed URI for imports ?
+        // Backwards-compatibility for implementations that allow absolute Windows
+        // paths in imports.
+        if (Path::isWindowsAbsolute($url) && !self::isRootRelativeUrl($url)) {
+            return (string) Uri::createFromWindowsPath($url);
+        }
+
+        Uri::createFromString($url);
         return $url;
+    }
+
+    private static function isRootRelativeUrl(string $path): bool
+    {
+        return $path !== '' && $path[0] === '/';
     }
 
     /**
@@ -1574,7 +1592,7 @@ abstract class StylesheetParser extends Parser
 
         return $this->withChildren($this->statementCallable, $start, function (array $children, FileSpan $span) use ($name, $value, $needsDeprecationWarning) {
             if ($needsDeprecationWarning) {
-                $this->logger->warn($span->message("@-moz-document is deprecated and support will be removed in Dart Sass 2.0.0.\n\nFor details, see http://bit.ly/MozDocument."), true);
+                $this->logger->warn("@-moz-document is deprecated and support will be removed in Dart Sass 2.0.0.\n\nFor details, see https://sass-lang.com/d/moz-document.", true, $span);
             }
 
             return new AtRule($name, $span, $value, $children);
@@ -1910,6 +1928,31 @@ abstract class StylesheetParser extends Parser
             } else {
                 $singleExpression = new BinaryOperationExpression($operator, $left, $right);
                 $allowSlash = false;
+
+                if ($operator === BinaryOperator::PLUS || $operator === BinaryOperator::MINUS) {
+                    if (
+                        $this->scanner->substring($right->getSpan()->getStart()->getOffset() - 1, $right->getSpan()->getStart()->getOffset()) === $operator
+                        && Character::isWhitespace($this->scanner->getString()[$left->getSpan()->getEnd()->getOffset()])
+                    ) {
+                        $message = <<<WARNING
+This operation is parsed as:
+
+    $left $operator $right
+
+but you may have intended it to mean:
+
+    $left ($operator$right)
+
+Add a space after $operator to clarify that it's meant to be a binary operation, or wrap
+it in parentheses to make it a unary operation. This will be an error in future
+versions of Sass.
+
+More info and automated migrator: https://sass-lang.com/d/strict-unary
+WARNING;
+
+                        $this->logger->warn($message, true, $singleExpression->getSpan());
+                    }
+                }
             }
         };
 
@@ -4004,12 +4047,12 @@ abstract class StylesheetParser extends Parser
         $expression = $this->expressionUntilComparison();
 
         if ($needsParenDeprecation || $needsNotDeprecation) {
-            $this->logger->warn($expression->getSpan()->message(sprintf(
+            $this->logger->warn(sprintf(
                 "Starting a @media query with \"%s\" is deprecated because it conflicts with official CSS syntax.\n\nTo preserve existing behavior: #{%s}\nTo migrate to new behavior: #{\"%s\"}\n\nFor details, see https://sass-lang.com/d/media-logic",
                 $needsParenDeprecation ? '(' : 'not',
                 $expression,
                 $expression
-            )), true);
+            ), true, $expression->getSpan());
         }
 
         $buffer->add($expression);

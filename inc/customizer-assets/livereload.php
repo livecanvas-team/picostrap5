@@ -82,7 +82,7 @@ add_action("wp_ajax_picostrap_reset_theme_options", function (){
  *
  * @return void
  */
-function picostrap_get_scss_files_list($includeRootFolder = true, $excludeBs5 = true) {
+function picostrap_get_scss_files_list($includeRootFolder = true, $excludeBs5 = false) {
     //get current sass folder directory listing
     $the_directory = get_stylesheet_directory().'/sass/';
     $extPattern = '*.{scss,css}';
@@ -109,9 +109,9 @@ function picostrap_get_scss_files_list($includeRootFolder = true, $excludeBs5 = 
 //FUNCTION TO MAKE A TIMESTAMP OF CHILD THEME SASS DIRECTORY
 function picostrap_get_scss_last_filesmod_timestamp() {
 
-	$files_listing = picostrap_get_scss_files_list(true, false);
+	$files_listing = picostrap_get_scss_files_list();
 
-    if (!count($files_listing)) die("<div id='compile-error' style='font-size:20px;background:#212337;color:lime;font-family:courier;border:8px solid red;padding:15px;display:block'> Cannot find SASS folder. Are you sure child theme name is coherent with folder name? </div>");
+    if (!count($files_listing)) wp_die("<compiler-error> Cannot read SASS folder. If you're using a custom child theme, make sure its name is coherent with folder name. Otherwise it could be a server configuration issue. </compiler-error>");
 	
     $mod_time_total=0;
 	foreach($files_listing as $file_name):

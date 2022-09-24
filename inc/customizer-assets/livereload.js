@@ -34,6 +34,7 @@ function picostrap_livereload_woodpecker(){
                 picostrap_recompile_sass();
             }
 
+            if (response.includes("<compiler-error>")) alert(response);
         })
         .catch(err => {
             console.log("Error during picostrap_check_for_sass_changes fetch. Details: " + err);
