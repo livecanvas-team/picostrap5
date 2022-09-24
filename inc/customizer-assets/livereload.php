@@ -8,23 +8,13 @@ function picostrap_enqueue_livereload_scripts() {
     //exit if not appropriate: non admins, customizer, or disabled livereload option is true
     if (!current_user_can('administrator') or isset($_GET['customize_theme']) or get_theme_mod("picostrap_disable_livereload")) return; //exit if not admin
 
-    wp_enqueue_script(
-		'picostrap_livereload',
-		get_template_directory_uri().'/inc/customizer-assets/livereload.js',
-		array(),
-		'1.0.0',
-		false
-	);
+    wp_enqueue_script('picostrap_livereload', get_template_directory_uri().'/inc/customizer-assets/livereload.js', array(), rand(0,100), false	);
 
-	wp_localize_script(
-		'picostrap_livereload',
-		'picostrap_ajax_obj',
-		array(
+	wp_localize_script('picostrap_livereload', 'picostrap_ajax_obj', array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce'    => wp_create_nonce( 'picostrap_livereload' ),
 		)
 	);
-
 }
 
 //HANDLE ACTION for AJAX REQUEST: picostrap_check_for_sass_changes    
@@ -43,7 +33,7 @@ add_action("wp_ajax_picostrap_check_for_sass_changes", function (){
     //echo get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)."<br>".picostrap_get_scss_last_filesmod_timestamp();die;
 
     //check if timestamps differ 
-    if (get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)!=picostrap_get_scss_last_filesmod_timestamp()) echo "Y"; else echo ("N");
+    if (get_theme_mod("picostrap_scss_last_filesmod_timestamp",0) != picostrap_get_scss_last_filesmod_timestamp()) echo "Y"; else echo "N";
     
     wp_die();
  
@@ -59,6 +49,7 @@ add_action("wp_ajax_picostrap_recompile_sass", function (){
     //check nonce
     check_ajax_referer('picostrap_livereload', 'nonce');
 
+    //trigger the compiler
     picostrap_generate_css();
 
     wp_die();
@@ -66,17 +57,19 @@ add_action("wp_ajax_picostrap_recompile_sass", function (){
 });
 
 
-//HANDLE ACTION for AJAX REQUEST: picostrap_recompile_sass
+//HANDLE ACTION for AJAX REQUEST: picostrap_reset_theme_options
 add_action("wp_ajax_picostrap_reset_theme_options", function (){
     
 	//exit if unlogged or non admin
 	if(!is_user_logged_in() OR !current_user_can("administrator")  ) return; 
 	
     //check nonce
-    check_ajax_referer('picostrap_livereload', 'nonce');
-	    
-    $_GET['ps_compiler_api']=1;
+    check_ajax_referer('picostrap_livereload', 'nonce'); 
 
+    //reset theme options
+    remove_theme_mods(); 
+
+    //trigger the compiler
     picostrap_generate_css();
 
     wp_die();

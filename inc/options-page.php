@@ -67,10 +67,50 @@ function theme_option_page() {
 			text-decoration: underline;
 		}
 
+	</style>
+    
+	<script>
+		function ps_recompile_sass_in_admin() {
+			jQuery('#ps-panel-actions-loading-target').text('Rebuilding CSS. Please wait...').show(); 
+			jQuery.ajax({
+				url: ajaxurl, // this will point to admin-ajax.php
+				type: 'POST',
+				data: {
+					'action': 'picostrap_recompile_sass',  
+					'nonce': '<?php echo wp_create_nonce( 'picostrap_livereload' ) ?>' 
+				}, 
+				success: function (response) {
+					jQuery('#ps-panel-actions-loading-target').html(response);
+				}
+			});	
+
+		} //end function definition
 
 
-		</style>
-    <div class="pico-wrap">
+
+		
+		function ps_reset_theme_settings() {
+			if(!confirm('This will DESTROY all your Customizer settings. Are you sure?')) return FALSE;
+			jQuery('#ps-panel-actions-loading-target').text('Resetting options and rebuilding CSS. Please wait...').show(); 
+			jQuery.ajax({
+				url: ajaxurl, // this will point to admin-ajax.php
+				type: 'POST',
+				data: {
+					'action': 'picostrap_reset_theme_options',  
+					'nonce': '<?php echo wp_create_nonce( 'picostrap_livereload' ) ?>' 
+				}, 
+				success: function (response) {
+					jQuery('#ps-panel-actions-loading-target').html(response);
+				}
+			});	
+
+		} //end function definition
+
+	</script>
+	
+	
+	
+	<div class="pico-wrap">
 
         <div class="pico-welcome-panel">
         
@@ -108,48 +148,6 @@ function theme_option_page() {
                     <div class="pico-column">
 
                         <h3>Secondary Utilities</h3>
-						
-						<script>
-							function ps_recompile_sass_in_admin() {
-								jQuery('#ps-panel-actions-loading-target').text('Rebuilding CSS. Please wait...').show(); 
-								jQuery.ajax({
-									url: ajaxurl, // this will point to admin-ajax.php
-									type: 'POST',
-									data: {
-										'action': 'picostrap_recompile_sass',  
-										'nonce': '<?php echo wp_create_nonce( 'picostrap_livereload' ) ?>',
-										'ps_compiler_api','1'  
-									}, 
-									success: function (response) {
-										if (response != '') jQuery('#ps-panel-actions-loading-target').html(response);
-									}
-								});	
-
-							} //end function definition
-
-
-
-							
-							function ps_reset_theme_settings() {
-								jQuery('#ps-panel-actions-loading-target').text('Resetting options and rebuilding CSS. Please wait...').show(); 
-								jQuery.ajax({
-									url: ajaxurl, // this will point to admin-ajax.php
-									type: 'POST',
-									data: {
-										'action': 'picostrap_reset_theme_options',  
-										'nonce': '<?php echo wp_create_nonce( 'picostrap_livereload' ) ?>',
-										'ps_compiler_api','1' 
-									}, 
-									success: function (response) {
-										if (response != '') jQuery('#ps-panel-actions-loading-target').html(response);
-									}
-								});	
-
-							} //end function definition
-
-
-
-							</script>
 
                         <ul id="pico-utils">
                                     <li>

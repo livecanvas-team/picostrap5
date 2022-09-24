@@ -77,11 +77,21 @@ function picostrap_generate_css(){
 	
 	} catch (Exception $e) {
 		//COMPILER ERROR: TYPICALLY INVALID SCSS CODE
-		die("<div id='compile-error' style='font-size:20px;background:#212337;color:lime;font-family:courier;border:8px solid red;padding:15px;display:block'><h1 style='color:lime;'>SCSS error</h1>".$e->getMessage()."</div>");
+		echo "<compiler-error>";
+		echo  "<h1>SCSS Compile Error</h1>". $e->getMessage();
+		echo "</compiler-error>";
+		return FALSE;
    	}
 	
 	//CHECK CSS IS REALLY THERE
-	if ($compiled_css=="") die("Compiled CSS is empty, aborting.");
+	if ($compiled_css=="") {
+		//COMPILER ERROR: NO OUTPUT
+		echo "<compiler-error>";
+		echo  "<h1>SCSS Compile Error</h1>";
+		echo "<p>Compiled CSS is empty, aborting.</p>";
+		echo "</compiler-error>";
+		return FALSE;
+   	}
 	
 	//ADD SOME COMMENT
 	$compiled_css .= " /* DO NOT ADD YOUR CSS HERE. ADD IT TO SASS/_CUSTOM.SCSS */ ";
@@ -98,33 +108,28 @@ function picostrap_generate_css(){
 	
 	if ($saving_operation) { // IF UPLOAD WAS SUCCESSFUL 
 
-		//GIVE POSITIVE FEEDBACK	
-		if (isset($_GET['ps_compiler_api'])) {
-			echo "New CSS bundle: " . picostrap_get_css_url();
-		} else {		
-			echo "File was successfully uploaded<br><br>";
-			echo "<a href='".picostrap_get_css_url()."' target='new'>View File</a>";
-			echo "<br><br><b>Size: </b><br>".round(mb_strlen($compiled_css, '8bit')/1000)." kB - ".round(mb_strlen(gzcompress($compiled_css), '8bit')/1000)." kB gzipped";
-		}
-
-		//STORE VERSION NUMBER
+		//STORE CSS BUNDLE VERSION NUMBER
 		$current_version_number = get_theme_mod ('css_bundle_version_number');
 		if (!is_numeric($current_version_number)) $current_version_number=rand(1,1000);
 		set_theme_mod ('css_bundle_version_number', $current_version_number+1);
 
+		//GIVE POSITIVE FEEDBACK	
+		echo "<compiler-success>";
+		echo "<h1>New CSS bundle successfully generated</h1>";
+		echo "<a href='".picostrap_get_css_url()."' target='new'>View File</a>";
+		echo "<br><br><b>Size: </b><br>".round(mb_strlen($compiled_css, '8bit')/1000)." kB - ".round(mb_strlen(gzcompress($compiled_css), '8bit')/1000)." kB gzipped";
+		echo "</compiler-success>";
+		return TRUE;
+
 	} else {
 		//GIVE NEGATIVE FEEDBACK
-		if (isset($_GET['ps_compiler_api'])) {
-			echo  "<br><br><span id='saving-error'>Error saving CSS file "."</span>";
-		} else {
-			echo  "<div id='savingfile-error' style='font-size:20px;background:#212337;color:lime;font-family:courier;border:8px solid red;padding:15px;display:block'><h1>Error writing file</h1></div>";
-		die();
-		}
+		echo "<compiler-error>";
+		echo  "<h1>Error writing CSS file</h1>";
+		echo "</compiler-error>";
+		return FALSE;
 	}
- 
-	//PRINT A CLOSE BUTTON
-	if (!isset($_GET['ps_compiler_api'])) echo  " <button style='font-size:30px;width:100%' class='cs-close-compiling-window'>OK </button>";
-}
+  
+} ///end function
 
 
 

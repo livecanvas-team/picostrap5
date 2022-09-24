@@ -36,7 +36,7 @@ function picostrap_livereload_woodpecker(){
 
         })
         .catch(err => {
-            alert("Form submit error. Details: " + err);
+            console.log("Error during picostrap_check_for_sass_changes fetch. Details: " + err);
         });
 
 } //end function
@@ -44,16 +44,15 @@ function picostrap_livereload_woodpecker(){
 
 
 function picostrap_recompile_sass(){
-    console.log("picostrap_recompile_sass start");
+    console.log("Picostrap detected changes in SASS folder. Recompiling...");
 
     //write message: compiling SASS....
-    if (document.querySelector("#scss-compiler-output")) document.querySelector("#scss-compiler-output").innerHTML = "<div style='font-size:30px;background:#212337;color:lime;font-family:courier;border:8px solid red;padding:15px;display:block;user-select: none;'>Compiling SCSS....</div>";
+    if (document.querySelector("#scss-compiler-output")) document.querySelector("#scss-compiler-output").innerHTML = " Compiling SCSS. Please wait... ";
     
     //build the request
     const formdata = new FormData();
     formdata.append("nonce", picostrap_ajax_obj.nonce);
-    formdata.append("action", "picostrap_recompile_sass");
-    formdata.append("ps_compiler_api","1");
+    formdata.append("action", "picostrap_recompile_sass"); 
     fetch(picostrap_ajax_obj.ajax_url, {
         method: "POST",
         credentials: "same-origin",
@@ -62,10 +61,10 @@ function picostrap_recompile_sass(){
         },
         body: formdata
     }).then(response => response.text())
-        .then(response => {
-            //console.log(response);
+        .then(response => { 
+            console.log(response.replace(/(<([^>]+)>)/gi, "").replace('generatedView','generated. '));
              
-            if (response.includes("New CSS bundle")) {
+            if (response.includes("<compiler-success>")) {
                 //SUCCESS
 
                 //as there are no errors, clear the output feedback
@@ -85,22 +84,41 @@ function picostrap_recompile_sass(){
             }
             
         }).catch(function(err) {
-            console.log("picostrap_recompile_sass Fetch Error");
+            console.log("picostrap_recompile_sass Error. Details: " + err);
         }); 
 } //end function
 
 //END FUNCTIONS ////
 
 //ADD DIV TO SHOW COMPILER MESSAGES / FEEDBACK
-document.querySelector("html").insertAdjacentHTML("afterbegin","<div id='scss-compiler-output' style=' position: fixed; z-index: 99999999;'></div>");            
+var theStyle = `
+    <style>
+        #scss-compiler-output { 
+            position: fixed; 
+            z-index: 99999999;
+            font-size:30px;
+            background:#212337;
+            color:lime;
+            font-family:courier;
+            border:8px solid red;
+            padding:15px;
+            display:block;
+            user-select: none;
+        }
+        #scss-compiler-output:empty {display:none}
+    </style>
+
+`; 
+document.querySelector("html").insertAdjacentHTML("afterbegin", "<div id='scss-compiler-output'></div>" + theStyle);            
 
 //IF CSS BUNDLE FILE DOES NOT LOAD SUCCESSFULLY, IT MAY NOT EXIST: REBUILD
-document.querySelector("#picostrap-styles-css").onerror = function(){
-    console.log("CSS bundle does not exist, recompiling");
-    picostrap_recompile_sass();  
-}
+// this cant work as the error happens too early, when file is not loaded
+//document.querySelector("#picostrap-styles-css").onerror = function(){
+//    console.log("CSS bundle does not exist, recompiling");
+//    picostrap_recompile_sass();  
+//}
 
-//ON DOMContentLoaded START THE ENGINE / Like document ready :)
+//ON DOMContentLoaded: START THE ENGINE / Like document ready :)
 document.addEventListener('DOMContentLoaded', function(event) {          
     
     //trigger the woodpecker

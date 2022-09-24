@@ -36,7 +36,7 @@
 		$("#cs-compiling-window").fadeIn();
 		$('#cs-loader').show();
 				
-		$("#cs-recompiling-target").html("Working..."); 
+		$("#cs-recompiling-target").html("<h1 style='display:block;text-align:center'>Recompiling SASS...</h1>"); 
 		
 		//AJAX CALL
 
@@ -58,8 +58,9 @@
 				$('#cs-loader').hide();
 
 				//show feedback
-				$("#cs-recompiling-target").html(response);
-				
+				var theCloseButton =" <button style='font-size:30px;width:100%' class='cs-close-compiling-window'>OK </button> ";
+				$("#cs-recompiling-target").html(response + theCloseButton);
+
 				//reload preview iframe 
 				$("#customize-preview iframe").attr("src", preview_iframe_src);
 
@@ -78,11 +79,9 @@
 				 
 
 			}).catch(function (err) {
-				console.log("picostrap_recompile_sass Fetch Error");
+				console.log("picostrap_recompile_sass Error: "+err);
 			}); 
 
-
- 
 		
 		//RESET FLAG
 		scss_recompile_is_necessary=false;
@@ -160,7 +159,7 @@
 				
 		//ADD COMPILING WINDOW AND LOADING MESSAGE TO HTML BODY
 		var the_loader='<div class="cs-chase">  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div></div>';
-		var html="<div id='cs-compiling-window' hidden> <span class='cs-closex'>Close X</span> <h1>Rebuilding CSS bundle</h1> <div id='cs-loader'>"+the_loader+"</div> <div id='cs-recompiling-target'></div></div>";
+		var html = "<div id='cs-compiling-window' hidden> <span class='cs-closex'>Close X</span> <div id='cs-loader'> " + the_loader +" </div> <div id='cs-recompiling-target'></div></div>";
 		$("body").append(html);
 		
 		//hide useless bg color widget
