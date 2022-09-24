@@ -1,5 +1,7 @@
 /* this script is here only for site admins, to handle SASS autocompile */
 
+console.warn("Since you're logged in as administrator, picostrap is checking every four seconds for SASS folder changes via an AJAX request. If this is bothering you or your server, you can disable SCSS Autocompile / LiveReload in the Customizer / Global Utilities panel.");
+
 //set frequency of check
 var picostrap_livereload_timeout=4000;
 
@@ -51,6 +53,7 @@ function picostrap_recompile_sass(){
     const formdata = new FormData();
     formdata.append("nonce", picostrap_ajax_obj.nonce);
     formdata.append("action", "picostrap_recompile_sass");
+    formdata.append("ps_compiler_api","1");
     fetch(picostrap_ajax_obj.ajax_url, {
         method: "POST",
         credentials: "same-origin",

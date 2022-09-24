@@ -58,6 +58,22 @@ add_action("wp_ajax_picostrap_recompile_sass", function (){
 	
     //check nonce
     check_ajax_referer('picostrap_livereload', 'nonce');
+
+    picostrap_generate_css();
+
+    wp_die();
+ 
+});
+
+
+//HANDLE ACTION for AJAX REQUEST: picostrap_recompile_sass
+add_action("wp_ajax_picostrap_reset_theme_options", function (){
+    
+	//exit if unlogged or non admin
+	if(!is_user_logged_in() OR !current_user_can("administrator")  ) return; 
+	
+    //check nonce
+    check_ajax_referer('picostrap_livereload', 'nonce');
 	    
     $_GET['ps_compiler_api']=1;
 

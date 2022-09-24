@@ -35,36 +35,54 @@
 		//SHOW WINDOW	
 		$("#cs-compiling-window").fadeIn();
 		$('#cs-loader').show();
-		
-		//PREPARE URL TO CALL
-		var current_url=window.location.href;
-		var wpadmin_url = current_url.substring(0, current_url.indexOf('wp-admin/'))+'wp-admin/';
-		var recompiling_url=wpadmin_url+"?ps_compile_scss";
-		
-		$("#cs-recompiling-target").html("Working...");
-		//alert("recompiling_url: "+recompiling_url); //FOR DEBUG
+				
+		$("#cs-recompiling-target").html("Working..."); 
 		
 		//AJAX CALL
-		$("#cs-recompiling-target").load(recompiling_url, function() { //when got results,
-			console.log("ajax loaded");
-			$('#cs-loader').hide();
-			
-			//reload preview iframe 
-			$("#customize-preview iframe").attr("src",preview_iframe_src); 
-			 
-			//upon preview iframe loaded, fetch colors
-			$("#customize-preview iframe").on("load",function(){ 
-				console.log('Preview iframe loaded');
 
-				//reload the CSS, bust the cache
-				var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
-				url = iframeDoc.querySelector('#picostrap-styles-css').href;
-				iframeDoc.querySelector('#picostrap-styles-css').href = url;
+		//build the request
+		const formdata = new FormData();
+		formdata.append("nonce", picostrap_ajax_obj.nonce);
+		formdata.append("action", "picostrap_recompile_sass");
+		fetch(picostrap_ajax_obj.ajax_url, {
+			method: "POST",
+			credentials: "same-origin",
+			headers: {
+				"Cache-Control": "no-cache",
+			},
+			body: formdata
+		}).then(response => response.text())
+			.then(response => {
 				
-				//get page colors and paint UX
-				ps_get_page_colors(); 
-			});
-		}); //end on loaded
+				//hide preload
+				$('#cs-loader').hide();
+
+				//show feedback
+				$("#cs-recompiling-target").html(response);
+				
+				//reload preview iframe 
+				$("#customize-preview iframe").attr("src", preview_iframe_src);
+
+				//upon preview iframe loaded, fetch colors
+				$("#customize-preview iframe").on("load", function () {
+					console.log('Preview iframe loaded');
+
+					//reload the CSS, bust the cache
+					var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
+					url = iframeDoc.querySelector('#picostrap-styles-css').href;
+					iframeDoc.querySelector('#picostrap-styles-css').href = url;
+
+					//get page colors and paint UX
+					ps_get_page_colors();
+				});
+				 
+
+			}).catch(function (err) {
+				console.log("picostrap_recompile_sass Fetch Error");
+			}); 
+
+
+ 
 		
 		//RESET FLAG
 		scss_recompile_is_necessary=false;

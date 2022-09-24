@@ -6,6 +6,18 @@ defined( 'ABSPATH' ) || exit;
 // ADD CUSTOM JS & CSS TO CUSTOMIZER //////////////////////////////////////////////////////////////////////////////////////////////////////////
 function picostrap_customize_enqueue() {
 	wp_enqueue_script( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
+	 
+	wp_localize_script(
+		'custom-customize',
+		'picostrap_ajax_obj',
+		array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce'    => wp_create_nonce( 'picostrap_livereload' ),
+		)
+	);
+	
+	
+	
 	wp_enqueue_script( 'custom-customize-lib', get_template_directory_uri() . '/inc/customizer-assets/customizer-vars.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
 	wp_enqueue_style( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.css', array(), rand(0,1000)   );
 	
@@ -1254,4 +1266,4 @@ add_action( 'wp_head', function  () {
 	</style>
 	<?php
 } );
-
+ 

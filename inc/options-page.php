@@ -22,7 +22,7 @@ function theme_option_page() {
 			<div class='wrap' style="padding: 20px;    font-size: 18px;    background: azure;    margin-top: 10px;     ">Settings imported from file.</div> 
 			<script>
 				jQuery('document').ready(function(){
-					jQuery('#ps-panel-actions-loading-target').text('Working...').show().load('<?php echo admin_url('?ps_compile_scss&ps_compiler_api') ?>');
+					ps_recompile_sass_in_admin();
 				});
 			</script>
 		<?php 
@@ -109,11 +109,51 @@ function theme_option_page() {
 
                         <h3>Secondary Utilities</h3>
 						
- 
+						<script>
+							function ps_recompile_sass_in_admin() {
+								jQuery('#ps-panel-actions-loading-target').text('Rebuilding CSS. Please wait...').show(); 
+								jQuery.ajax({
+									url: ajaxurl, // this will point to admin-ajax.php
+									type: 'POST',
+									data: {
+										'action': 'picostrap_recompile_sass',  
+										'nonce': '<?php echo wp_create_nonce( 'picostrap_livereload' ) ?>',
+										'ps_compiler_api','1'  
+									}, 
+									success: function (response) {
+										if (response != '') jQuery('#ps-panel-actions-loading-target').html(response);
+									}
+								});	
+
+							} //end function definition
+
+
+
+							
+							function ps_reset_theme_settings() {
+								jQuery('#ps-panel-actions-loading-target').text('Resetting options and rebuilding CSS. Please wait...').show(); 
+								jQuery.ajax({
+									url: ajaxurl, // this will point to admin-ajax.php
+									type: 'POST',
+									data: {
+										'action': 'picostrap_reset_theme_options',  
+										'nonce': '<?php echo wp_create_nonce( 'picostrap_livereload' ) ?>',
+										'ps_compiler_api','1' 
+									}, 
+									success: function (response) {
+										if (response != '') jQuery('#ps-panel-actions-loading-target').html(response);
+									}
+								});	
+
+							} //end function definition
+
+
+
+							</script>
 
                         <ul id="pico-utils">
                                     <li>
-										<a onclick="jQuery('#ps-panel-actions-loading-target').text('Working...').show().load('<?php echo admin_url('?ps_compile_scss&ps_compiler_api') ?>');" href="#" class="">
+										<a onclick="ps_recompile_sass_in_admin()" href="#" class="">
 											<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" style="" lc-helper="svg-icon">
 												<path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"></path>
 												<path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"></path>
@@ -124,7 +164,7 @@ function theme_option_page() {
                                     
 									
 									<li>
-										<a onclick="if(confirm('This will DESTROY all your Customizer settings. Are you sure?')) jQuery('#ps-panel-actions-loading-target').text('Working...').show().load('<?php echo admin_url('?ps_reset_theme&ps_compiler_api') ?>');"   href="#" >
+										<a onclick="ps_reset_theme_settings()"   href="#" >
 											<svg viewBox="0 0 24 24">
     										<path fill="currentColor" d="M16.24,3.56L21.19,8.5C21.97,9.29 21.97,10.55 21.19,11.34L12,20.53C10.44,22.09 7.91,22.09 6.34,20.53L2.81,17C2.03,16.21 2.03,14.95 2.81,14.16L13.41,3.56C14.2,2.78 15.46,2.78 16.24,3.56M4.22,15.58L7.76,19.11C8.54,19.9 9.8,19.9 10.59,19.11L14.12,15.58L9.17,10.63L4.22,15.58Z" />
 											</svg>
