@@ -28,13 +28,13 @@ add_action("wp_ajax_picostrap_check_for_sass_changes", function (){
     check_ajax_referer('picostrap_livereload', 'nonce');
 
     //onboarding
-    if(get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)==0) { echo "Y"; die(); } //set_theme_mod("picostrap_scss_last_filesmod_timestamp",picostrap_get_scss_last_filesmod_timestamp());
+    if(get_theme_mod("picostrap_scss_last_filesmod_timestamp", 0) == 0) { echo "<YES>"; die(); } //set_theme_mod("picostrap_scss_last_filesmod_timestamp", picostrap_get_scss_last_filesmod_timestamp());
     
     //DEBUG 
-    //echo get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)."<br>".picostrap_get_scss_last_filesmod_timestamp();die;
+    //echo get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)."<br>".picostrap_get_scss_last_filesmod_timestamp(); die;
 
     //check if timestamps differ 
-    if (get_theme_mod("picostrap_scss_last_filesmod_timestamp",0) != picostrap_get_scss_last_filesmod_timestamp()) echo "Y"; else echo "N";
+    if (get_theme_mod("picostrap_scss_last_filesmod_timestamp", 0) != picostrap_get_scss_last_filesmod_timestamp()) echo "<YES>"; else echo "<NO>";
     
     wp_die();
  
@@ -112,7 +112,7 @@ function picostrap_get_scss_last_filesmod_timestamp() {
 
 	$files_listing = picostrap_get_scss_files_list();
 
-    if (!count($files_listing)) wp_die("<compiler-error> Cannot read SASS folder. If you're using a custom child theme, make sure its name is coherent with folder name. Otherwise it could be a server configuration issue. </compiler-error>");
+    if (!count($files_listing)) wp_die("Cannot read SASS folder. If you're using a custom child theme, make sure its name is coherent with the folder name. Otherwise it can be a server issue, some server security settings can prevent the PHP glob function to work. Picostrap needs it to get the listing of the SCSS files. ");
 	
     $mod_time_total=0;
 	foreach($files_listing as $file_name):

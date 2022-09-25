@@ -21,20 +21,23 @@ function picostrap_livereload_woodpecker(){
         body: formdata
     }).then(response => response.text())
         .then(response => {
-            //console.log(response);
+            //console.log('picostrap_check_for_sass_changes returns: '+response);
 
-            if (response === "N") {
+            if (response.includes('<NO>')) {
                 //no sass change has been detected
                 //console.log("No sass change has been detected");
                 if (picostrap_ajax_obj.disable_livereload != '1') setTimeout(function () { picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
+                return;
             }
-            if (response === "Y") {
+            if (response.includes('<YES>')) {
                 //sass change has been detected
                 //console.log("Sass change has been detected");
                 picostrap_recompile_sass();
+                return;
             }
 
-            if (response.includes("<compiler-error>")) alert(response);
+            //if didnt exit yet...
+            alert(response);
         })
         .catch(err => {
             console.log("Error during picostrap_check_for_sass_changes fetch. Details: " + err);
