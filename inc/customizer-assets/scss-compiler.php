@@ -9,10 +9,7 @@ defined( 'ABSPATH' ) || exit;
 //CHECK URL PARAMETERS AND REACT ACCORDINGLY
 add_action("admin_init", function (){
 	if (!current_user_can("administrator")) return; //ADMINS ONLY
-	
-	if (isset($_GET['ps_compile_scss'])) {		picostrap_generate_css();		die();	} //legacy, just for customizer, todo....
-	 
-	if (isset($_GET['ps_show_mods'])){		print_r(get_theme_mods());		wp_die();	}
+	if (isset($_GET['ps_show_mods'])){ print_r(get_theme_mods()); wp_die();	}
 });
 
 // USE LEAFO's SCSSPHP LIBRARY
