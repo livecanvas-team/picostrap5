@@ -6,13 +6,14 @@ add_action( 'wp_enqueue_scripts', 'picostrap_enqueue_livereload_scripts' );
 function picostrap_enqueue_livereload_scripts() {
     
     //exit if not appropriate: non admins, customizer, or disabled livereload option is true
-    if (!current_user_can('administrator') or isset($_GET['customize_theme']) or get_theme_mod("picostrap_disable_livereload")) return; //exit if not admin
+    if (!current_user_can('administrator') or isset($_GET['customize_theme'])) return; //exit if not admin
 
     wp_enqueue_script('picostrap_livereload', get_template_directory_uri().'/inc/customizer-assets/livereload.js', array(), rand(0,100), false	);
 
 	wp_localize_script('picostrap_livereload', 'picostrap_ajax_obj', array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce'    => wp_create_nonce( 'picostrap_livereload' ),
+            'disable_livereload' => get_theme_mod("picostrap_disable_livereload")
 		)
 	);
 }

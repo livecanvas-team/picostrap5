@@ -1,6 +1,6 @@
 /* this script is here only for site admins, to handle SASS autocompile */
 
-console.warn("Since you're logged in as administrator, picostrap is checking every four seconds for SASS folder changes via an AJAX request. If this is bothering you or your server, you can disable SCSS Autocompile / LiveReload in the Customizer / Global Utilities panel.");
+if (picostrap_ajax_obj.disable_livereload != '1')  console.warn("Since you're logged in as administrator, picostrap will be checking every four seconds for SASS folder changes via an AJAX request. If this is bothering you or your server, you can disable SCSS Autocompile / LiveReload in the Customizer / Global Utilities panel.");
 
 //set frequency of check
 var picostrap_livereload_timeout=4000;
@@ -26,7 +26,7 @@ function picostrap_livereload_woodpecker(){
             if (response === "N") {
                 //no sass change has been detected
                 //console.log("No sass change has been detected");
-                setTimeout(function () { picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
+                if (picostrap_ajax_obj.disable_livereload != '1') setTimeout(function () { picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
             }
             if (response === "Y") {
                 //sass change has been detected
