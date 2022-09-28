@@ -24,3 +24,16 @@ figure.woocommerce-product-gallery__wrapper {
 
 //fix quantity input in cart
 .woocommerce-cart-form input.qty {display: inline;}
+
+//2022 updates
+
+//parameters
+$wc_color1: $primary;
+
+//css override of buttons
+.woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt {
+    background-color: $wc_color1 !important;
+    $color: color-contrast($wc_color1) !important;
+    border-radius: $btn-border-radius !important;
+    -webkit-font-smoothing: antialiased;
+}
