@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 //get_sidebar( 'shop' ); //this did originally wc
 
-if (is_active_sidebar( 'wc-sidebar' )): ?>
+if (!is_single() && is_active_sidebar( 'wc-sidebar' )): ?>
 
     <div class="wrapper bg-light p-3" id="wrapper-main-sidebar-widgets">
     

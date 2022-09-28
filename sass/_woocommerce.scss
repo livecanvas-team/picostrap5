@@ -1,3 +1,414 @@
+
+/* MAIN ACTION BUTTONS: make things look like bootstrap buttons */
+button,
+.woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, // from add to cart message button
+.woocommerce-Address .edit, // account page address edit link,
+.woocommerce div.product form.cart .reset_variations // clear variations link on product page
+{
+  @extend .btn;
+  @extend .btn-outline-primary;
+}
+
+/* ALTERNATE  BUTTONS: make things look like bootstrap buttons */  
+.woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt
+
+{
+  border: none;
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+/* DISABLED BUTTONS */
+@at-root.woocommerce #respond input#submit.disabled, .woocommerce #respond input#submit:disabled, .woocommerce #respond input#submit:disabled[disabled], .woocommerce a.button.disabled, .woocommerce a.button:disabled, .woocommerce a.button:disabled[disabled], .woocommerce button.button.disabled, .woocommerce button.button:disabled, .woocommerce button.button:disabled[disabled], .woocommerce input.button.disabled, .woocommerce input.button:disabled, .woocommerce input.button:disabled[disabled]
+{
+  color: $primary;
+  padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
+}
+
+
+
+/* fix view cart link after ajaxed add to cart ** */
+a.added_to_cart.wc-forward {
+  margin-left:15px;
+  text-decoration: underline !important;
+}
+
+/* make proceed to checkout button large ** */  
+.wc-proceed-to-checkout a.checkout-button.button.alt
+{
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-lg;
+}
+
+/* make form login  button large ** */   
+button.woocommerce-button.button.woocommerce-form-login__submit 
+{
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-lg;
+  @extend .mt-3;
+}
+
+/* make place order button large */
+.woocommerce-checkout #payment #place_order {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-lg;
+}
+
+/* END BUTTONS */
+
+/* TABLES: make woocommerce tables bootstrappy */
+.woocommerce-table,
+.woocommerce table.shop_table,
+.woocommerce-Tabs-panel table {
+  border: unset;
+  margin: unset;
+  text-align: unset;
+  // width: unset;
+  border-collapse: unset;
+  border-radius: unset;
+  margin-bottom: $spacer;
+  @extend .table;
+  // @extend .table-striped;
+}
+.woocommerce table.shop_table td,
+.woocommerce table.shop_table tbody th,
+.woocommerce table.shop_table tfoot td,
+.woocommerce table.shop_table tfoot th {
+  border-top: unset;
+}
+
+/* right align order details /shop/my-account/view-order/ and other shop tables */
+.woocommerce table.shop_table .woocommerce-remove-coupon {
+  float: left;
+}
+.woocommerce table.shop_table .product-total,
+.woocommerce table.shop_table .amount,
+.woocommerce table.shop_table .product-subtotal,
+.woocommerce table.shop_table .cart-subtotal,
+.woocommerce table.shop_table .shipping,
+.woocommerce table.shop_table .cart-discount,
+.woocommerce table.shop_table .woocommerce-shipping-totals,
+.woocommerce table.shop_table .tax-total,
+.woocommerce table.shop_table .order-total,
+.woocommerce table.shop_table tfoot {
+  text-align: right;
+}
+section.shipping-calculator-form {
+  text-align: left;
+}
+
+/* larger text on orders table /shop/my-account/orders */
+.woocommerce table.my_account_orders {
+  font-size: 1em;
+}
+
+
+/* FIXES */
+
+/* fix alignment of checkboxes on checkout page */
+.woocommerce form .form-row .input-checkbox {
+  margin: 5px -7px 0 0;
+}
+
+/* fix payment box labels to look like other labels */
+#add_payment_method #payment div.payment_box,
+.woocommerce-cart #payment div.payment_box,
+.woocommerce-checkout #payment div.payment_box {
+  all: unset;
+  @extend body;
+}
+
+/* fix alignment of radios on checkout page */
+#add_payment_method #payment ul.payment_methods li input,
+.woocommerce-cart #payment ul.payment_methods li input,
+.woocommerce-checkout #payment ul.payment_methods li input {
+  margin: 5px 10px 0 0;
+}
+
+/* fix alignment of radio on payment methods */
+.woocommerce-checkout #payment ul.payment_methods li input[type="radio"] {
+  vertical-align: middle;
+  margin: $spacer/2 $spacer/2 $spacer/2 0;
+  padding: 0;
+}
+
+/* fix coupon input on cart page */
+#add_payment_method table.cart td.actions .coupon,
+.woocommerce-cart table.cart td.actions .coupon,
+.woocommerce-checkout table.cart td.actions .coupon {
+  width: auto;
+}
+#add_payment_method table.cart td.actions .coupon .input-text,
+.woocommerce-cart table.cart td.actions .coupon .input-text,
+.woocommerce-checkout table.cart td.actions .coupon .input-text {
+  //float: left;
+  // box-sizing: unset;
+  display: inline-block;
+  overflow: auto;
+  width: auto;
+  outline: $form-select-border-width solid $form-select-border-color;
+  border: unset;
+  // border: initial;
+  // padding: initial;
+  //margin: 0 4px 0 0;
+  //outline: 0;
+  @extend .form-control;
+}
+
+/*
+.single-product .summary.entry-summary {
+  padding: $spacer;
+  @extend .card;
+}
+*/
+
+/* product variations form like card */
+.single-product .variations_form {
+  padding: $spacer;
+  background-color: $gray-100;
+  @extend .card;
+}
+
+
+/* product variations select: add space table rows */
+.woocommerce div.product form.cart .variations select {
+  @extend .mb-2;
+}
+
+
+
+/* promotion badge fixes */
+/*
+.woocommerce span.onsale {
+  min-height: unset;
+  min-width: unset;
+  padding: $spacer * 0.5 $spacer * 0.5;
+  font-size: $font-size-base * 0.85;
+  font-weight: bold;
+  position: relative;
+  text-transform: uppercase;
+  text-align: unset;
+  line-height: unset;
+  top: unset;
+  left: unset;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  color: white;
+  border-color: var(--bs-red);
+  background-color: var(--bs-red);
+  // border-radius: $border-radius;
+  z-index: 9;
+}
+.woocommerce ul.products li.product span.onsale {
+  top: 1px;
+  right: 1px;
+  left: auto;
+  margin: 0;
+  float: right;
+  position: absolute;
+  border-radius: 0 var(--border-radius) 0 var(--border-radius);
+  color: white;
+  border-color: var(--bs-red);
+  background-color: var(--bs-red);
+}
+*/
+
+
+/* Set border radius for product description section tabs */
+.woocommerce div.product .woocommerce-tabs ul.tabs li {
+  border-radius: $border-radius $border-radius 0 0;
+}
+
+/* normalize spacing between quantity and add to cart button */
+.woocommerce div.product form.cart div.quantity {
+  margin-right: $spacer;
+}
+
+/* normalize spacing after variations form */
+.woocommerce div.product form.cart {
+  margin-bottom: $spacer;
+}
+
+/* normalize height on product lists */
+ul.products {
+  display: flex;
+  flex-flow: wrap;
+}
+
+/*
+ul.products li.product {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+ul.products li.product .price {
+  margin-top: auto !important;
+}
+*/
+
+@include media-breakpoint-down(md) {
+  .woocommerce ul.products[class*="columns-"] li.product,
+  .woocommerce-page ul.products[class*="columns-"] li.product {
+    width: 49%;
+  }
+
+  .woocommerce ul.products[class*="columns-"] li.product:nth-child(odd),
+  .woocommerce-page ul.products[class*="columns-"] li.product:nth-child(odd) {
+    margin-right: 2%;
+  }
+}
+
+/* flex fill product lists */
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+  margin: 0 $spacer $spacer 0;
+}
+
+@include media-breakpoint-up(md) {
+  .woocommerce ul.products li.product,
+  .woocommerce-page ul.products li.product {
+    flex: 1 1 auto;
+    max-width: 326px;
+    min-width: 225px;
+  }
+}
+
+/* SPACING BETWEEN WIDGETS */
+body.woocommerce aside.widget {
+  @extend .mb-4;
+}
+
+/* NOTICES / ALERTS: make woocommerce-notices like bootstrap alerts */
+.woocommerce-error::before,
+.woocommerce-info::before,
+.woocommerce-message::before {
+  all: unset;
+}
+.woocommerce-error,
+.woocommerce-info,
+.woocommerce-message {
+  @extend .alert;
+  @extend .rfs-12;
+}
+.woocommerce-error {
+  @extend .alert-danger;
+}
+.woocommerce-info {
+  @extend .alert-primary;
+}
+.woocommerce-message {
+  @extend .alert-primary;
+}
+
+/* make button large in alert */
+
+.woocommerce-message a.button.wc-forward {
+  @extend .btn-lg;
+}
+
+ 
+/*  PAGINATION */
+.woocommerce nav.woocommerce-pagination {
+  @extend .mt-5;
+  @extend .mb-4;
+}
+.woocommerce nav.woocommerce-pagination ul li a,
+.woocommerce nav.woocommerce-pagination ul li span {
+  padding: $spacer;
+}
+.woocommerce nav.woocommerce-pagination ul li:first-child .page-numbers {
+  border-top-left-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
+}
+.woocommerce nav.woocommerce-pagination ul li:last-child .page-numbers {
+  border-top-right-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+}
+
+// .woocommerce nav.woocommerce-pagination ul {
+//   // display: inline-block;
+//   white-space: unset;
+//   // padding: unset;
+//   clear: unset;
+//   border: unset;
+//   border-right: unset;
+//   margin: unset;
+//   @extend .pagination-lg;
+// }
+// ul.page-numbers > li {
+//   @extend .page-item;
+// }
+// .woocommerce nav.woocommerce-pagination ul li {
+//   border-right: unset;
+// }
+.woocommerce nav.woocommerce-pagination ul li a,
+.woocommerce nav.woocommerce-pagination ul li span {
+  margin: unset;
+  // text-decoration: none;
+  // padding: 0;
+  line-height: unset;
+  font-size: $font-size-lg;
+  font-weight: unset;
+  // padding: .5em;
+  min-width: unset;
+  // display: block;
+  // @extend .page-link;
+}
+// .woocommerce nav.woocommerce-pagination ul li:first-child .page-numbers {
+//   border-top-left-radius: $border-radius;
+//   border-bottom-left-radius: $border-radius;
+// }
+// .woocommerce nav.woocommerce-pagination ul li:last-child .page-numbers {
+//   border-top-right-radius: $border-radius;
+//   border-bottom-right-radius: $border-radius;
+// }
+// .woocommerce nav.woocommerce-pagination ul li:not(:first-child) .page-numbers {
+//   margin-left: -1px;
+// }
+// .woocommerce nav.woocommerce-pagination ul li a:focus,
+// .woocommerce nav.woocommerce-pagination ul li a:hover,
+// .woocommerce nav.woocommerce-pagination ul li span.current {
+//   @extend .page-item.disabled; // .page-link;
+//   @extend .page-link;
+// }
+
+
+//////////
+
+/* make radios and checkboxes wrapper boostrappy */
+body.woocommerce-page .checkbox,
+body.woocommerce-page .radio,
+.woocommerce-form__label-for-checkbox,
+.woocommerce-form__label-for-radio {
+  @extend .form-check;
+}
+
+/* make radios and checkboxes boostrappy */
+body.woocommerce-page input[type="radio"],
+body.woocommerce-page input[type="checkbox"],
+body.woocommerce-page .input-radio,
+body.woocommerce-page .input-checkbox,
+.woocommerce-form__input-checkbox,
+.woocommerce-form__input-radio {
+  @extend .form-check-input;
+  margin-top: 0.25rem;
+  font-size: 20px;
+}
+
+
+//login form eye
+.woocommerce form .show-password-input, .woocommerce-page form .show-password-input{
+  top:unset
+}
+
+
+/* OLD FIXES */
+
 // Fix billing field wrapper
 .woocommerce-input-wrapper {
 	width: 100%;
@@ -7,9 +418,6 @@
 figure.woocommerce-product-gallery__wrapper {
 	max-width: inherit !important;
 }
-
-// Fix coupon code input width
-@media(min-width: 768px) {}
 
 #coupon_code.input-text {
 		min-width: 134px !important;
@@ -24,3 +432,5 @@ figure.woocommerce-product-gallery__wrapper {
 
 //fix quantity input in cart
 .woocommerce-cart-form input.qty {display: inline;}
+
+ 
