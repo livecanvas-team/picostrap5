@@ -45,7 +45,7 @@ function picostrap_get_active_scss_code(){
 function picostrap_generate_css(){
 	
 	//SET TIMESTAMP
-	set_theme_mod("picostrap_scss_last_filesmod_timestamp",picostrap_get_scss_last_filesmod_timestamp());
+	set_theme_mod("picostrap_scss_last_filesmod_timestamp", picostrap_get_scss_last_filesmod_timestamp());
 		
 	//INITIALIZE COMPILER
 	require_once "scssphp/scss.inc.php";

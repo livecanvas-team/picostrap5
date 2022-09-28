@@ -79,12 +79,12 @@ function picostrap_recompile_sass(){
                 document.getElementById('picostrap-styles-css').href = url;
 
                 //retrigger the woodpecker
-                setTimeout(function(){ picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
+                setTimeout(function(){ picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout/4);
             }
             else {
                 //COMPILE ERRORS
                 document.querySelector("#scss-compiler-output").innerHTML = response; //display errors
-                setTimeout(function(){ picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
+                setTimeout(function(){ picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout/2);
             }
             
         }).catch(function(err) {
@@ -115,16 +115,12 @@ var theStyle = `
 `; 
 document.querySelector("html").insertAdjacentHTML("afterbegin", "<div id='scss-compiler-output'></div>" + theStyle);            
 
-//IF CSS BUNDLE FILE DOES NOT LOAD SUCCESSFULLY, IT MAY NOT EXIST: REBUILD
-// this cant work as the error happens too early, when file is not loaded
-//document.querySelector("#picostrap-styles-css").onerror = function(){
-//    console.log("CSS bundle does not exist, recompiling");
-//    picostrap_recompile_sass();  
-//}
-
 //ON DOMContentLoaded: START THE ENGINE / Like document ready :)
 document.addEventListener('DOMContentLoaded', function(event) {          
-    
+ 
+    //check if main stylesheet was loaded fine
+    if (document.querySelector("#picostrap-styles-css").sheet === null) picostrap_recompile_sass();
+
     //trigger the woodpecker
     picostrap_livereload_woodpecker();
 });

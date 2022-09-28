@@ -14,11 +14,11 @@ function picostrap_get_css_url (){
 }
 
 if (!function_exists('picostrap_get_css_optional_subfolder_name')):
-    function picostrap_get_css_optional_subfolder_name() { return ""; }
+    function picostrap_get_css_optional_subfolder_name() { return "css-output/"; }
 endif;
 
 if (!function_exists('picostrap_get_base_css_filename')):
-    function picostrap_get_base_css_filename() { return "styles-bundle.css"; }
+    function picostrap_get_base_css_filename() { return "bundle.css"; }
 endif;
 
 if (!function_exists('picostrap_get_complete_css_filename')):
