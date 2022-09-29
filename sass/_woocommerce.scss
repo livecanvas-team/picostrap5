@@ -25,15 +25,184 @@ figure.woocommerce-product-gallery__wrapper {
 //fix quantity input in cart
 .woocommerce-cart-form input.qty {display: inline;}
 
-//2022 updates
+//2022 updates ///////////////////////////////////////////////////////////////
 
-//parameters
+///////// PARAMETERS //////////////
 $wc_color1: $primary;
+$wc_color2: $secondary;
+$wc_color1_lighter: $primary-100;
+$wc_color2_lighter: $secondary-100;
+$wc_color1_stronger: $primary-700;
+$wc_color2_stronger: $secondary-800;
 
-//css override of buttons
+ 
+//BUTTONS
+
+//PLAIN BUTTONS: OUTLINE BUTTONS
+.woocommerce #respond input#submit:not(.alt), .woocommerce a.button:not(.alt), .woocommerce button.button:not(.alt), .woocommerce input.button:not(.alt) {
+  padding: $btn-padding-y $btn-padding-x;
+  font-family: $btn-font-family;
+  font-size: $btn-font-size;
+  line-height: $btn-line-height;
+  white-space: $btn-white-space;
+  
+  border: $btn-border-width solid  $wc_color1; 
+  font-weight: $btn-font-weight;
+  box-shadow:  inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075);
+  color: $wc_color1; 
+  background: none;
+  border-radius: $btn-border-radius;
+  transition: $btn-transition;
+}
+
+//PLAIN BUTTONS: HOVER
+.woocommerce #respond input#submit:not(.alt):hover, .woocommerce a.button:not(.alt):hover, .woocommerce button.button:not(.alt):hover, .woocommerce input.button:not(.alt):hover {
+  color: #fff !important;   
+  background-color: $wc_color1;
+}
+
+//ALTERNATE BUTTONS : FULL BUTTONS
 .woocommerce #respond input#submit.alt, .woocommerce a.button.alt, .woocommerce button.button.alt, .woocommerce input.button.alt {
-    background-color: $wc_color1 !important;
-    $color: color-contrast($wc_color1) !important;
-    border-radius: $btn-border-radius !important;
-    -webkit-font-smoothing: antialiased;
+  padding: $btn-padding-y $btn-padding-x;
+  font-family: $btn-font-family;
+  font-size: $btn-font-size;
+  line-height: $btn-line-height;
+  white-space: $btn-white-space;
+  border:none;
+  font-weight: $btn-font-weight;
+  box-shadow:  inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075);
+  color: color-contrast($wc_color1);  
+  background-color: $wc_color1;
+  border-radius: $btn-border-radius;
+  transition: $btn-transition;
+}
+
+//ALTERNATE BUTTONS: HOVER
+.woocommerce #respond input#submit.alt:hover, .woocommerce a.button.alt:hover, .woocommerce button.button.alt:hover, .woocommerce input.button.alt:hover {
+  background-color: $wc_color1_stronger;
+  color: color-contrast($wc_color1_stronger);  
+}
+
+//DISABLED BUTTONS
+.woocommerce #respond input#submit.disabled, .woocommerce #respond input#submit:disabled, .woocommerce #respond input#submit:disabled[disabled], .woocommerce a.button.disabled, .woocommerce a.button:disabled, .woocommerce a.button:disabled[disabled], .woocommerce button.button.disabled, .woocommerce button.button:disabled, .woocommerce button.button:disabled[disabled], .woocommerce input.button.disabled, .woocommerce input.button:disabled, .woocommerce input.button:disabled[disabled] {
+  border-color: $dark !important;
+}
+
+//DISABLED BUTTONS:HOVER
+.woocommerce #respond input#submit.disabled:hover, .woocommerce #respond input#submit:disabled:hover, .woocommerce #respond input#submit:disabled[disabled]:hover, .woocommerce a.button.disabled:hover, .woocommerce a.button:disabled:hover, .woocommerce a.button:disabled[disabled]:hover, .woocommerce button.button.disabled:hover, .woocommerce button.button:disabled:hover, .woocommerce button.button:disabled[disabled]:hover, .woocommerce input.button.disabled:hover, .woocommerce input.button:disabled:hover, .woocommerce input.button:disabled[disabled]:hover {
+  border-color: $dark !important;
+  background: #2f2a2f;
+}
+//ALT DISABLED BBUT TONS
+.woocommerce #respond input#submit.alt.disabled, .woocommerce #respond input#submit.alt.disabled:hover, .woocommerce #respond input#submit.alt:disabled, .woocommerce #respond input#submit.alt:disabled:hover, .woocommerce #respond input#submit.alt:disabled[disabled], .woocommerce #respond input#submit.alt:disabled[disabled]:hover, .woocommerce a.button.alt.disabled, .woocommerce a.button.alt.disabled:hover, .woocommerce a.button.alt:disabled, .woocommerce a.button.alt:disabled:hover, .woocommerce a.button.alt:disabled[disabled], .woocommerce a.button.alt:disabled[disabled]:hover, .woocommerce button.button.alt.disabled, .woocommerce button.button.alt.disabled:hover, .woocommerce button.button.alt:disabled, .woocommerce button.button.alt:disabled:hover, .woocommerce button.button.alt:disabled[disabled], .woocommerce button.button.alt:disabled[disabled]:hover, .woocommerce input.button.alt.disabled, .woocommerce input.button.alt.disabled:hover, .woocommerce input.button.alt:disabled, .woocommerce input.button.alt:disabled:hover, .woocommerce input.button.alt:disabled[disabled], .woocommerce input.button.alt:disabled[disabled]:hover {
+    background-color: $wc_color1_lighter;
+    color: $dark;
+}
+
+//LARGE BUTTONS
+#add_payment_method .wc-proceed-to-checkout a.checkout-button, .woocommerce-cart .wc-proceed-to-checkout a.checkout-button, .woocommerce-checkout .wc-proceed-to-checkout a.checkout-button {
+  padding: $btn-padding-y-lg $btn-padding-x-lg; 
+  font-size: $btn-font-size-lg; 
+  border-radius: $border-radius-lg;
+}
+
+
+//ALERTS eg added to cart in single
+.woocommerce-error, .woocommerce-info, .woocommerce-message {
+  font-size: $lead-font-size;
+}
+.woocommerce-message {
+    border-top-color: $wc_color2_lighter;
+}
+
+///////// FORMS ////////////////
+  
+/// INPUTS & TEXTAREAS
+.woocommerce form .form-row input.input-text, .woocommerce form .form-row textarea {
+
+    padding: 0.375rem 0.45rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    border: 1px solid #ced4da;
+}    
+
+
+//SELECT 
+body.woocommerce-page select {
+  display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    -moz-padding-start: calc(0.75rem - 3px);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    appearance: none;
+
+}
+
+//SELECT2
+/* fix select2 autocomplete dropdowns */
+.select2-selection {
+  min-height: 45px;
+  padding: $input-padding-y $input-padding-x;
+  @extend .form-select;
+  // padding: $input-padding-y 0;
+}
+// fix border color and padding on select2 wrapper
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-left: unset;
+  padding-right: unset;
+  line-height: normal;
+}
+span.select2-selection.select2-selection {
+  min-height: 40px;
+  padding: $input-padding-y $input-padding-x;
+  border: $form-select-border-width solid $form-select-border-color;
+}
+
+// hide select2 carat and selection clear in favor of bs carat
+.select2-container--default b[role="presentation"],
+.select2-container--default .select2-selection__clear {
+  display: none;
+}
+// fix highlighted option color to match bs primary
+.select2-container--default
+  .select2-results__option--highlighted[aria-selected],
+.select2-container--default
+  .select2-results__option--highlighted[data-selected] {
+  background-color: $primary;
+}
+
+ 
+ /* fix view cart link after clicking ajaxed add to cart ** */
+a.added_to_cart.wc-forward {
+  margin-left:12px;
+  text-decoration: underline !important;
+}
+
+
+//STORE SIDEBAR ASIDE
+#store-sidebar aside {margin-bottom: 15px;}
+
+
+
+//login form eye
+.woocommerce form .show-password-input, .woocommerce-page form .show-password-input{
+  top:unset;
+  opacity: 0.5;
+}
+
+/* product variations select: add space table rows */
+.woocommerce div.product form.cart .variations select {
+  margin-bottom: 20px;
 }
