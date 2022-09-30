@@ -18,7 +18,7 @@ if (!function_exists('picostrap_get_css_optional_subfolder_name')):
 endif;
 
 if (!function_exists('picostrap_get_base_css_filename')):
-    function picostrap_get_base_css_filename() { return "bundle.css"; }
+    function picostrap_get_base_css_filename() { return "styles-bundle.css"; }
 endif;
 
 if (!function_exists('picostrap_get_complete_css_filename')):

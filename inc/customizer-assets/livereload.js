@@ -8,6 +8,13 @@ var picostrap_livereload_timeout=4000;
 function picostrap_livereload_woodpecker(){
     //console.log("picostrap_livereload_woodpecker start");
 
+    //check if browser tab has focus
+    if (document.visibilityState !== 'visible') {
+        //schedule for later
+        setTimeout(function () { picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout);
+        return;
+    }
+
     //build the request
     const formdata = new FormData();
     formdata.append("nonce", picostrap_ajax_obj.nonce);
@@ -36,11 +43,14 @@ function picostrap_livereload_woodpecker(){
                 return;
             }
 
-            //if didnt exit yet...
-            alert(response);
+            //if didnt exit yet...it's an error
+            console.log("Invalid ajax response during picostrap_check_for_sass_changes fetch. Maybe you're unlogged? Response: " + response);
+            
+            //do more..
         })
         .catch(err => {
-            console.log("Error during picostrap_check_for_sass_changes fetch. Details: " + err);
+            console.log("Error during picostrap_check_for_sass_changes fetch. Error: " + err);
+            if (picostrap_ajax_obj.disable_livereload != '1') setTimeout(function () { picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout*2);
         });
 
 } //end function
