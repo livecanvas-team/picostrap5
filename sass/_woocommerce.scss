@@ -1,32 +1,3 @@
-// Fix billing field wrapper
-.woocommerce-input-wrapper {
-	width: 100%;
-}
-
-// Woocommerce product gallery slider width fix
-figure.woocommerce-product-gallery__wrapper {
-	max-width: inherit !important;
-}
-
-// Fix coupon code input width
-@media(min-width: 768px) {}
-
-#coupon_code.input-text {
-		min-width: 134px !important;
-}
-
-//Fix login form
-.woocommerce form.woocommerce-form-login .form-row label { width: 100%;}
-
-.woocommerce form.woocommerce-form-login .form-row .password-input { width: 100%;}
-
-.woocommerce form .form-row label { flex: auto;}
-
-//fix quantity input in cart
-.woocommerce-cart-form input.qty {display: inline;}
-
-//2022 updates ///////////////////////////////////////////////////////////////
-
 ///////// PARAMETERS //////////////
 $wc_color1: $primary;
 $wc_color2: $secondary;
@@ -206,3 +177,34 @@ a.added_to_cart.wc-forward {
 .woocommerce div.product form.cart .variations select {
   margin-bottom: 20px;
 }
+
+
+//OLD PICOWC FIXES FROM V1.x
+
+
+// Fix billing field wrapper
+.woocommerce-input-wrapper {
+	width: 100%;
+}
+
+// Woocommerce product gallery slider width fix
+figure.woocommerce-product-gallery__wrapper {
+	max-width: inherit !important;
+}
+
+// Fix coupon code input width
+@media(min-width: 768px) {}
+
+#coupon_code.input-text {
+		min-width: 134px !important;
+}
+
+//Fix login form
+.woocommerce form.woocommerce-form-login .form-row label { width: 100%;}
+
+.woocommerce form.woocommerce-form-login .form-row .password-input { width: 100%;}
+
+.woocommerce form .form-row label { flex: auto;}
+
+//fix quantity input in cart
+.woocommerce-cart-form input.qty {display: inline;}
