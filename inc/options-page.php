@@ -214,7 +214,7 @@ function theme_option_page() {
 					} else {
 					echo '<p>You can freely edit the <b style="font-family:Courier;font-size:20px;"> sass/_custom.scss </b> file inside your child theme folder.</p>
 					<p>Open this file with your favourite text editor, save, and view the page as admin in your browser:<br>
-					A new CSS bundle will be built and served via ajax after a couple seconds.<br> So while working on your CSS / SCSS code, you can immediately see the "results" of your new styling edits without reloading the page.</p>
+					A new CSS bundle will be built and served via ajax after a few seconds.<br> So while working on your CSS / SCSS code, you can immediately see the "results" of your new styling edits without reloading the page.</p>
 					
 					<p style="font-style:italic" >Stop hitting cmd-R like a drunken monkey!</p>';
 					}

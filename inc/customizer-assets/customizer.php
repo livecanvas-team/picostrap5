@@ -1013,7 +1013,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             "label" => __("Add code to Footer", "picostrap"),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>'Will be added before closing the BODY of all site pages'
+			'description' =>'Will be added before closing the &lt;BODY&gt;  of all site pages'
 			)
     ));
 
