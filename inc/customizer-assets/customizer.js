@@ -90,7 +90,7 @@
 
 		
 	function ps_is_a_google_font(fontFamilyName){
-		
+		const google_fonts = JSON.parse(google_fonts_json);
 		var fontData = google_fonts.find(function (element) {
 			return element.family == fontFamilyName;
 		});
