@@ -292,7 +292,8 @@ function pico_process_settings_export() {
 	$settings['theme_version'] = pico_get_parent_theme_version();
 
     foreach (get_theme_mods() as $setting_name => $setting_value):
-        if ($setting_name=="picostrap_scss_last_filesmod_timestamp") continue;
+		if ($setting_name=="picostrap_scss_last_filesmod_timestamp") continue;
+        if ($setting_name=="picostrap_scss_last_filesmod_timestamp_v2") continue;
         if ($setting_name=="custom_css_post_id") continue;
         $settings[$setting_name]=$setting_value;
     endforeach;

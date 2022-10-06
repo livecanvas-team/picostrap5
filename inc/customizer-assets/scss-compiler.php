@@ -45,7 +45,7 @@ function picostrap_get_active_scss_code(){
 function picostrap_generate_css(){
 	
 	//SET TIMESTAMP
-	set_theme_mod("picostrap_scss_last_filesmod_timestamp", picostrap_get_scss_last_filesmod_timestamp());
+	set_theme_mod("picostrap_scss_last_filesmod_timestamp_v2", picostrap_get_scss_last_filesmod_timestamp());
 		
 	//INITIALIZE COMPILER
 	require_once "scssphp/scss.inc.php";
@@ -160,16 +160,5 @@ function picostrap_get_active_scss_variables_array(){
 // FORCE CSS REBUILD UPON ENABLING CHILD THEME 
 add_action( 'after_switch_theme', 'picostrap_force_css_rebuilding', 10, 2 ); 
 function picostrap_force_css_rebuilding() {   
-    remove_theme_mod("picostrap_scss_last_filesmod_timestamp");
+    remove_theme_mod("picostrap_scss_last_filesmod_timestamp_v2");
 }
-
-
-// MIGRATE TO NEW SAVING MECHANISM:: FORCE CSS REBUILD UPON upgrading from <1.3 
-add_action( 'init', 'picostrap_migrate_to_new_saving_check', 10, 2 ); 
-function picostrap_migrate_to_new_saving_check() { 
-	if ( get_theme_mod("picostrap_css_bundle_wp_relative_upload_path")):
-    	remove_theme_mod("picostrap_scss_last_filesmod_timestamp");
-		remove_theme_mod("picostrap_css_bundle_wp_relative_upload_path");
-	endif;
-}
-

@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 //SUPPORT FUNCTIONS FOR DETERMINING THE RIGHT CSS BUNDLE FILENAME AND LOCATION
 function picostrap_get_css_url (){
     //onboarding
-    if(get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)==0) return get_stylesheet_directory_uri() . '/'. picostrap_get_css_optional_subfolder_name() . picostrap_get_base_css_filename(); 
+    if(get_theme_mod("picostrap_scss_last_filesmod_timestamp_v2",0)==0) return get_stylesheet_directory_uri() . '/'. picostrap_get_css_optional_subfolder_name() . picostrap_get_base_css_filename(); 
 
     //standard case
     return get_stylesheet_directory_uri() . '/' . picostrap_get_css_optional_subfolder_name() . picostrap_get_complete_css_filename(); 
@@ -18,7 +18,7 @@ if (!function_exists('picostrap_get_css_optional_subfolder_name')):
 endif;
 
 if (!function_exists('picostrap_get_base_css_filename')):
-    function picostrap_get_base_css_filename() { return "styles-bundle.css"; }
+    function picostrap_get_base_css_filename() { return "bundle.css"; }
 endif;
 
 if (!function_exists('picostrap_get_complete_css_filename')):

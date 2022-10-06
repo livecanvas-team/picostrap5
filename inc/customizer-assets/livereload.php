@@ -28,13 +28,13 @@ add_action("wp_ajax_picostrap_check_for_sass_changes", function (){
     check_ajax_referer('picostrap_livereload', 'nonce');
 
     //onboarding
-    if(get_theme_mod("picostrap_scss_last_filesmod_timestamp", 0) == 0) { echo "<YES>"; die(); } //set_theme_mod("picostrap_scss_last_filesmod_timestamp", picostrap_get_scss_last_filesmod_timestamp());
+    if(get_theme_mod("picostrap_scss_last_filesmod_timestamp_v2", 0) == 0) { echo "<YES>"; die(); } //set_theme_mod("picostrap_scss_last_filesmod_timestamp_v2", picostrap_get_scss_last_filesmod_timestamp());
     
     //DEBUG 
-    //echo get_theme_mod("picostrap_scss_last_filesmod_timestamp",0)."<br>".picostrap_get_scss_last_filesmod_timestamp(); die;
+    //echo get_theme_mod("picostrap_scss_last_filesmod_timestamp_v2",0)."<br>".picostrap_get_scss_last_filesmod_timestamp(); die;
 
     //check if timestamps differ 
-    if (get_theme_mod("picostrap_scss_last_filesmod_timestamp", 0) != picostrap_get_scss_last_filesmod_timestamp()) echo "<YES>"; else echo "<NO>";
+    if (get_theme_mod("picostrap_scss_last_filesmod_timestamp_v2", 0) != picostrap_get_scss_last_filesmod_timestamp()) echo "<YES>"; else echo "<NO>";
     
     wp_die();
  
