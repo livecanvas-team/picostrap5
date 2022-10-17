@@ -1069,7 +1069,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 						<br><br>
 						In case you break things up while editing, you can manually regenerate the code <a href="#" id="regenerate-font-loading-code">clicking here</a>.
 						<br><br>
-						For further information, please refer to our <a target="_blank" href="">multiple font weights video tutorial</a> and to the <a target="_blank" href="https://fonts.google.com/">Google Fonts website</a>.
+						For further information, and to understand how to enable multiple font weights,  please refer to our <a target="_blank" href="https://www.youtube.com/watch?v=dmsUpFJwDW8&t=200s">video documentation</a> and to the <a target="_blank" href="https://fonts.google.com/">Google Fonts website</a>.
 						')
 			)
     ));

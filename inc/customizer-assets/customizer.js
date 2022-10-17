@@ -464,9 +464,9 @@
 		pico_add_video_link("section-footer", "https://youtu.be/jvaK12m5tVQ&t=26s");
 		pico_add_video_link("panel-widgets", "https://youtu.be/jvaK12m5tVQ&t=125s");
 		pico_add_video_link("section-static_front_page", "https://youtu.be/jvaK12m5tVQ&t=203s");
-		pico_add_video_link("section-singleposts", "#");
-		pico_add_video_link("section-addcode", "#");
-		pico_add_video_link("section-extras", "#");
+		pico_add_video_link("section-singleposts", "https://www.youtube.com/watch?v=dmsUpFJwDW8");
+		pico_add_video_link("section-addcode", "https://www.youtube.com/watch?v=dmsUpFJwDW8&t=100s");
+		pico_add_video_link("section-extras", "https://www.youtube.com/watch?v=dmsUpFJwDW8&t=411s");
 
 		
 		///COLOR PALETTE GENERATOR /////
