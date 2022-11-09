@@ -136,7 +136,7 @@ if ( ! function_exists( 'picostrap_custom_excerpt_more' ) ) {
 	 * @return string
 	 */
 	function picostrap_custom_excerpt_more( $more ) {
-		if ( ! is_admin() ) {
+		if ( ! is_admin()  OR ( isset($_POST['action']) && $_POST['action'] == 'lc_process_dynamic_templating_shortcode') ) {
 			$more = '';
 		}
 		return $more;
@@ -154,7 +154,7 @@ if ( ! function_exists( 'picostrap_all_excerpts_get_more_link' ) ) {
 	 * @return string
 	 */
 	function picostrap_all_excerpts_get_more_link( $post_excerpt ) {
-		if ( ! is_admin() ) {
+		if ( ! is_admin() OR ( isset($_POST['action']) && $_POST['action'] == 'lc_process_dynamic_templating_shortcode') ) {
 			$post_excerpt = $post_excerpt . '...<p class="text-end"><a class="btn btn-outline-secondary picostrap-read-more-link mt-3" href="' . esc_url( get_permalink( get_the_ID() ) ) . '">' . __(
 				'Read More...',
 				'picostrap'
