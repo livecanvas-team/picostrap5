@@ -29,4 +29,5 @@ function picostrap_deregister_gstyles() {
 	//De - enqueue GT styles
     wp_dequeue_style( 'wp-block-library' );
     wp_dequeue_style( 'wp-block-library-theme' ); 
+    wp_dequeue_style( 'classic-theme-styles' );
 }
