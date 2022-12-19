@@ -446,14 +446,14 @@ function custom_background_size( $wp_customize ) {
 
 	// Add your control box.
 	$wp_customize->add_control( 'background-image-size', array(
-		'label'      => __( 'Background Image Size',"picostrap" ),
+		'label'      => __( 'Background Image Size','picostrap5' ),
 		'section'    => 'background_image', 
 		'priority'   => 200,
 		'type' => 'radio',
 		'choices' => array(
-			'cover' => __( 'Cover',"picostrap" ),
-			'contain' => __( 'Contain' ,"picostrap"),
-			'inherit' => __( 'Inherit' ,"picostrap"),
+			'cover' => __( 'Cover','picostrap5' ),
+			'contain' => __( 'Contain' ,'picostrap5'),
+			'inherit' => __( 'Inherit' ,'picostrap5'),
 		)
 	) );
 }
@@ -483,22 +483,22 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	//COLORS section is already built, so lets define the other ones
 		 
 	$wp_customize->add_section("typography", array(
-        "title" => __("Typography", "picostrap"),
+        "title" => __("Typography", 'picostrap5'),
         "priority" => 50,
     ));
 	 
 	$wp_customize->add_section("components", array(
-        "title" => __("Global Options", "picostrap"),
+        "title" => __("Global Options", 'picostrap5'),
         "priority" => 50,
     ));
 	
 	$wp_customize->add_section("buttons-forms", array(
-        "title" => __("Forms", "picostrap"),
+        "title" => __("Forms", 'picostrap5'),
         "priority" => 50,
     ));
 
 	$wp_customize->add_section("buttons", array(
-        "title" => __("Buttons", "picostrap"),
+        "title" => __("Buttons", 'picostrap5'),
         "priority" => 50,
     ));
 	
@@ -526,7 +526,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 					$wp_customize,
 					$variable_slug, //give it an ID
 					array(
-						'label' => __( $variable_pretty_format_name, 'picostrap' ), //set the label to appear in the Customizer
+						'label' => __( $variable_pretty_format_name, 'picostrap5' ), //set the label to appear in the Customizer
 						'description' => $optional_grouptitle. " (<span class='variable-name'>".$variable_name."</span>) ".$optional_comment, 
 						'section' => $section_slug, //select the section for it to appear under  
 						)
@@ -543,7 +543,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 					$wp_customize,
 					$variable_slug,
 					array(
-						'label' => __( $variable_pretty_format_name, 'picostrap' ), //set the label to appear in the Customizer
+						'label' => __( $variable_pretty_format_name, 'picostrap5' ), //set the label to appear in the Customizer
 						'description' => $optional_grouptitle.  " (<span class='variable-name'>".$variable_name."</span>) " .$optional_comment, 
 						'section' => $section_slug, //select the section for it to appear under
 						'type' => 'checkbox'
@@ -565,7 +565,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 					$wp_customize,
 					$variable_slug,
 					array(
-						'label' => __( $variable_pretty_format_name, 'picostrap' ), //set the label to appear in the Customizer
+						'label' => __( $variable_pretty_format_name, 'picostrap5' ), //set the label to appear in the Customizer
 						'description' => $optional_grouptitle. " <!-- (".$variable_name.") -->".$placeholder_html." ". $optional_comment,  
 						'section' => $section_slug, //select the section for it to appear under
 						'type' => 'text',
@@ -593,7 +593,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 		$wp_customize,
 		'picostrap_header_chrome_color', //give it an ID
 		array(
-			'label' => __( 'Header Color in Android Chrome', 'picostrap' ), //set the label to appear in the Customizer
+			'label' => __( 'Header Color in Android Chrome', 'picostrap5' ), //set the label to appear in the Customizer
 			'section' => 'colors', //select the section for it to appear under 
 			'description' =>" <span hidden class='cs-option-group-title'>Extra</span>", //to implement a divisor
 			'type' => 'color'  
@@ -609,7 +609,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         'header_disable_tagline',
         array(
-            'label' => __('Hide Tagline', 'picostrap'),
+            'label' => __('Hide Tagline', 'picostrap5'),
             'section' => 'title_tagline',  
             'type'     => 'checkbox',
 			)
@@ -617,7 +617,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	
     //   NAVBAR SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("nav", array(
-        "title" => __("Main Navigation Bar", "picostrap"),
+        "title" => __("Main Navigation Bar", 'picostrap5'),
         "priority" => 60,
     ));
 	
@@ -630,10 +630,10 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_header_navbar_expand",
         array(
-            'label' => __('Navbar Expansion', 'picostrap'),
+            'label' => __('Navbar Expansion', 'picostrap5'),
             'section' => 'nav',
             'type'     => 'radio',
-			'description' => __('Navbar is Collapsed on mobile, and expands to a full blown menubar on chosen breakpoint', 'picostrap'),
+			'description' => __('Navbar is Collapsed on mobile, and expands to a full blown menubar on chosen breakpoint', 'picostrap5'),
 			'choices'  => array(
 				'navbar-expand-none'  => 'Never expand, keep always collapsed', 
 				'navbar-expand-sm'  => 'Expand on SM and upper',
@@ -654,7 +654,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_header_navbar_position",
         array(
-            'label' => __('Navbar Position', 'picostrap'),
+            'label' => __('Navbar Position', 'picostrap5'),
             'section' => 'nav',
             'type'     => 'radio',
 			'choices'  => array(
@@ -675,8 +675,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "enable_detect_page_scroll",
         array(
-            "label" => __("Enable Page Scrolling Detection", "picostrap"),
-			"description" => __("Publish and exit the Customizer to see the effect. Adds a scroll-position-at-top / scroll-position-not-at-top class to the BODY element according to scroll position. Customize via CSS. Use with Navbar Position set to Fixed for best results. <!--  <a target='_blank' href='#'>Tutorial Coming Soon</a> --> ", "picostrap"),
+            "label" => __("Enable Page Scrolling Detection", 'picostrap5'),
+			"description" => __("Publish and exit the Customizer to see the effect. Adds a scroll-position-at-top / scroll-position-not-at-top class to the BODY element according to scroll position. Customize via CSS. Use with Navbar Position set to Fixed for best results. <!--  <a target='_blank' href='#'>Tutorial Coming Soon</a> --> ", 'picostrap5'),
             "section" => "nav", 
             'type'     => 'checkbox',
 			)
@@ -692,7 +692,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_header_navbar_color_choice",
         array(
-            'label' => __('Navbar Background Color', 'picostrap'),
+            'label' => __('Navbar Background Color', 'picostrap5'),
             'section' => 'nav',
             'type'     => 'radio',
 			'choices'  => array(
@@ -718,7 +718,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_header_navbar_color_scheme",
         array(
-            'label' => __('Color Scheme (Menubar links)', 'picostrap'),
+            'label' => __('Color Scheme (Menubar links)', 'picostrap5'),
             'section' => 'nav',
 			'type'     => 'radio',
 			'choices'  => array(
@@ -738,7 +738,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "enable_search_form",
         array(
-            "label" => __("Enable Search Form", "picostrap"),
+            "label" => __("Enable Search Form", 'picostrap5'),
             "section" => "nav", 
             'type'     => 'checkbox',
 			)
@@ -747,7 +747,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 	//  TOPBAR SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("topbar", array(
-        "title" => __("Optional Topbar", "picostrap"),
+        "title" => __("Optional Topbar", 'picostrap5'),
         "priority" => 60,
     ));
 	
@@ -760,8 +760,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "enable_topbar",
         array(
-            "label" => __("Enable Topbar", "picostrap"),
-			"description" => __("Requires Navbar position set to 'Standard static top'", "picostrap"),
+            "label" => __("Enable Topbar", 'picostrap5'),
+			"description" => __("Requires Navbar position set to 'Standard static top'", 'picostrap5'),
             "section" => "topbar", 
             'type'     => 'checkbox',
 			)
@@ -776,7 +776,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "topbar_content",
         array(
-            "label" => __("Topbar Text / HTML", "picostrap"),
+            "label" => __("Topbar Text / HTML", 'picostrap5'),
             "section" => "topbar",
             'type'     => 'textarea',
         )
@@ -791,7 +791,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "topbar_bg_color_choice",
         array(
-            'label' => __('Topbar Background Color', 'picostrap'),
+            'label' => __('Topbar Background Color', 'picostrap5'),
             'section' => 'topbar',
             'type'     => 'radio',
 			'choices'  => array(
@@ -817,7 +817,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "topbar_text_color_choice",
         array(
-            'label' => __('Topbar Text Color', 'picostrap'),
+            'label' => __('Topbar Text Color', 'picostrap5'),
             'section' => 'topbar',
             'type'     => 'radio',
 			'choices'  => array(
@@ -836,7 +836,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	
 	//ADD SECTION FOR FOOTER  //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("footer", array(
-        "title" => __("Footer", "picostrap"),
+        "title" => __("Footer", 'picostrap5'),
         "priority" => 100,
     ));
 	
@@ -849,7 +849,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_footer_text",
         array(
-			"label" => __("Footer Text", "picostrap"),
+			"label" => __("Footer Text", 'picostrap5'),
 			"description"  => "THIS SIMPLE FIELD can contain HTML and is displayed into the 'colophon', the very bottom of the site. <br><br>TO BUILD A MORE COMPLEX FOOTER, USE THE WIDGETED AREA. <br>To enable it, populate it from the backend's <a target='_blank' href='".admin_url('widgets.php')."'>Widgets page</a>",
             "section" => "footer",
             'type'     => 'textarea',
@@ -859,7 +859,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	
 	// ADD SECTION FOR SINGLE POST & ARCHIVES //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("singleposts", array(
-        "title" => __("Single Post & Archives", "picostrap"),
+        "title" => __("Single Post & Archives", 'picostrap5'),
         "priority" => 160,
     ));
 		
@@ -872,8 +872,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "singlepost_disable_entry_cats",
         array(
-            "label" => __("Hide Categories", "picostrap"),
-			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+            "label" => __("Hide Categories", 'picostrap5'),
+			//"description" => __("Publish and exit the Customizer to see the effect", 'picostrap5'),
             "section" => "singleposts", 
             'type'     => 'checkbox',
 			)
@@ -889,8 +889,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 		$wp_customize,
 		"singlepost_disable_entry_meta",
 		array(
-			"label" => __("Hide Post Metas: Date and Author", "picostrap"),
-			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+			"label" => __("Hide Post Metas: Date and Author", 'picostrap5'),
+			//"description" => __("Publish and exit the Customizer to see the effect", 'picostrap5'),
 			"section" => "singleposts", 
 			'type'     => 'checkbox',
 			)
@@ -906,8 +906,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 		$wp_customize,
 		"singlepost_disable_author",
 		array(
-			"label" => __("Hide Post Author", "picostrap"),
-			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+			"label" => __("Hide Post Author", 'picostrap5'),
+			//"description" => __("Publish and exit the Customizer to see the effect", 'picostrap5'),
 			"section" => "singleposts", 
 			'type'     => 'checkbox',
 			)
@@ -922,8 +922,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 		$wp_customize,
 		"singlepost_disable_date",
 		array(
-			"label" => __("Hide Post Date", "picostrap"),
-			//"description" => __("Publish and exit the Customizer to see the effect", "picostrap"),
+			"label" => __("Hide Post Date", 'picostrap5'),
+			//"description" => __("Publish and exit the Customizer to see the effect", 'picostrap5'),
 			"section" => "singleposts", 
 			'type'     => 'checkbox',
 			)
@@ -938,8 +938,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "enable_sharing_buttons",
         array(
-            "label" => __("Enable Sharing Buttons after the Content", "picostrap"),
-			"description" => __("Pure HTML only, SVG inline icons, zero bloat", "picostrap"),
+            "label" => __("Enable Sharing Buttons after the Content", 'picostrap5'),
+			"description" => __("Pure HTML only, SVG inline icons, zero bloat", 'picostrap5'),
             "section" => "singleposts", 
             'type'     => 'checkbox',
 			)
@@ -949,7 +949,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	/* 
 	// ADD A SECTION FOR ARCHIVES ///////////////////////////////
 	$wp_customize->add_section("archives", array(
-        "title" => __("Archive Templates", "picostrap"),
+        "title" => __("Archive Templates", 'picostrap5'),
         "priority" => 160,
     ));
 	
@@ -964,7 +964,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "archives_template",
         array(
-            "label" => __("Template", "picostrap"),
+            "label" => __("Template", 'picostrap5'),
             "section" => "archives",
             "settings" => "archives_template",
             'type'     => 'select',
@@ -981,7 +981,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	
 	// ADD A SECTION FOR HEADER & FOOTER CODE /////////////////////////////////////
 	$wp_customize->add_section("addcode", array(
-        "title" => __("Header / Footer Code", "picostrap"),
+        "title" => __("Header / Footer Code", 'picostrap5'),
         "priority" => 180,
     ));
 	
@@ -994,7 +994,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_header_code",
         array(
-            "label" => __("Add code to Header", "picostrap"),
+            "label" => __("Add code to Header", 'picostrap5'),
             "section" => "addcode",
             'type'     => 'textarea',
 			'description' =>'Will be added to the &lt;HEAD&gt; of all site pages'
@@ -1010,7 +1010,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_footer_code",
         array(
-            "label" => __("Add code to Footer", "picostrap"),
+            "label" => __("Add code to Footer", 'picostrap5'),
             "section" => "addcode",
             'type'     => 'textarea',
 			'description' =>'Will be added before closing the &lt;BODY&gt;  of all site pages'
@@ -1026,7 +1026,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "body_font_object",
         array(
-            "label" => __("body_font_object", "picostrap"),
+            "label" => __("body_font_object", 'picostrap5'),
             "section" => "addcode",
             'type'     => 'textarea',
 			'description' =>'<b>Not editable</b> - Internal purpose only.'
@@ -1042,7 +1042,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "headings_font_object",
         array(
-            "label" => __("headings_font_object", "picostrap"),
+            "label" => __("headings_font_object", 'picostrap5'),
             "section" => "addcode",
             'type'     => 'textarea',
 			'description' =>'<b>Not editable</b> - Internal purpose only.'
@@ -1059,7 +1059,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_fonts_header_code",
         array(
-            "label" => __("Font Loading Header code", "picostrap"),
+            "label" => __("Font Loading Header code", 'picostrap5'),
             "section" => "addcode",
             'type'     => 'textarea',
 			'description' =>__('
@@ -1083,9 +1083,9 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_fonts_use_alternative_font_source",
         array(
-            "label" => __("Load Google Fonts anonymously", "picostrap"),
+            "label" => __("Load Google Fonts anonymously", 'picostrap5'),
 			"description" =>  __("<b>Google Fonts can be an issue for GDPR compliance in Europe. </b>").
-			__("Checking this option, Google fonts will be loaded from the privacy compliant <a target='_blank' href='https://fonts.coollabs.io/'>Coollabs Font repository</a>. ", "picostrap"),
+			__("Checking this option, Google fonts will be loaded from the privacy compliant <a target='_blank' href='https://fonts.coollabs.io/'>Coollabs Font repository</a>. ", 'picostrap5'),
             "section" => "addcode", 
             'type'     => 'checkbox',
 			)
@@ -1100,9 +1100,9 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_fonts_header_code_disable",
         array(
-            "label" => __("Disable the Font Loading in Header", "picostrap"),
+            "label" => __("Disable the Font Loading in Header", 'picostrap5'),
 			"description" =>  __("<b>Keep this unchecked, unless you really want. </b>").__("Prevents the code of 
-			the textarea above from being served in the site's &lt;head&gt;. ", "picostrap"),
+			the textarea above from being served in the site's &lt;head&gt;. ", 'picostrap5'),
             "section" => "addcode", 
             'type'     => 'checkbox',
 			)
@@ -1111,7 +1111,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 	// ADD A SECTION FOR EXTRAS /////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("extras", array(
-        "title" => __("Global Utilities", "picostrap"),
+        "title" => __("Global Utilities", 'picostrap5'),
         "priority" => 190,
     ));
 	
@@ -1124,8 +1124,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "disable_gutenberg",
         array(
-            "label" => __("Disable the Gutenberg Content Editor", "picostrap"),
-			"description" => __("Disables the Gutenberg content editor on all post types. De-enqueues its CSS styles as well.", "picostrap"),
+            "label" => __("Disable the Gutenberg Content Editor", 'picostrap5'),
+			"description" => __("Disables the Gutenberg content editor on all post types. De-enqueues its CSS styles as well.", 'picostrap5'),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -1140,8 +1140,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "disable_widgets_block_editor",
         array(
-            "label" => __("Disable the Block-based Widgets Editor", "picostrap"),
-			"description" => __("Disables the Block-based Widgets Editor and restores the classic widgets editor.", "picostrap"),
+            "label" => __("Disable the Block-based Widgets Editor", 'picostrap5'),
+			"description" => __("Disables the Block-based Widgets Editor and restores the classic widgets editor.", 'picostrap5'),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -1156,8 +1156,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "singlepost_disable_comments",
         array(
-            "label" => __("Disable WordPress Comments", "picostrap"),
-			"description" => __("Will completely disable the entire WP comments feature.", "picostrap"),
+            "label" => __("Disable WordPress Comments", 'picostrap5'),
+			"description" => __("Will completely disable the entire WP comments feature.", 'picostrap5'),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -1172,8 +1172,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "disable_xml_rpc",
         array(
-            "label" => __("Disable XML - RPC", "picostrap"),
-			"description" => __("Disabling XML-RPC will close one more door that a potential hacker may try to exploit to hack your website.", "picostrap"),
+            "label" => __("Disable XML - RPC", 'picostrap5'),
+			"description" => __("Disabling XML-RPC will close one more door that a potential hacker may try to exploit to hack your website.", 'picostrap5'),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -1188,8 +1188,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_disable_livereload",
         array(
-            "label" => __("Disable  SCSS Autocompile / LiveReload ", "picostrap"),
-			"description" => __("If you're not editing the SCSS files, you can check this option. Makes a difference for site admins only.", "picostrap"),
+            "label" => __("Disable  SCSS Autocompile / LiveReload ", 'picostrap5'),
+			"description" => __("If you're not editing the SCSS files, you can check this option. Makes a difference for site admins only.", 'picostrap5'),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -1204,8 +1204,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "enable_back_to_top",
         array(
-            "label" => __("Add a 'Back to Top' button to site", "picostrap"),
-			"description" => __("Very light implementation. To see the button, you will also need to Publish, exit the Customizer, and scroll down a long page", "picostrap"),
+            "label" => __("Add a 'Back to Top' button to site", 'picostrap5'),
+			"description" => __("Very light implementation. To see the button, you will also need to Publish, exit the Customizer, and scroll down a long page", 'picostrap5'),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
@@ -1220,8 +1220,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "enable_lightbox",
         array(
-            "label" => __("Enable Lightbox", "picostrap"),
-			"description" => __("Will lazily add a JS and a CSS file from cdn.jsdelivr.net before closing the BODY of the page, to use   <a target='_blank' href='https://github.com/biati-digital/glightbox'>gLightBox</a>: a very lightweight lightbox implementation. <br><br>The lightbox will be enabled on all images matching the selector: main#theme-main a:not(.nolightbox) img<br><br>This means that any image linked to something will open a lightbox.<br><br>To force the lightbox on an element, add the <b>glightbox</b> class to it.<br><br> To prevent the lightbox on a linked image, add the <b>nolightbox</b> class to it.", "picostrap"),
+            "label" => __("Enable Lightbox", 'picostrap5'),
+			"description" => __("Will lazily add a JS and a CSS file from cdn.jsdelivr.net before closing the BODY of the page, to use   <a target='_blank' href='https://github.com/biati-digital/glightbox'>gLightBox</a>: a very lightweight lightbox implementation. <br><br>The lightbox will be enabled on all images matching the selector: main#theme-main a:not(.nolightbox) img<br><br>This means that any image linked to something will open a lightbox.<br><br>To force the lightbox on an element, add the <b>glightbox</b> class to it.<br><br> To prevent the lightbox on a linked image, add the <b>nolightbox</b> class to it.", 'picostrap5'),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)

@@ -99,7 +99,7 @@ if ( ! function_exists( 'picostrap_comment_form_comments_closed' ) ) {
 	function picostrap_comment_form_comments_closed() {
 		if ( get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) {
 			?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'picostrap' ); ?></p>
+			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'picostrap5' ); ?></p>
 			<?php
 		}
 	}

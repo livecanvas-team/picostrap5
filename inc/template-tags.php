@@ -9,7 +9,7 @@ if(!function_exists('picostrap_site_info')):
 		?>
 			<div class="site-info small">
 				<?php if (strlen($footer_text_setting) > 0) echo $footer_text_setting; ?>
-				<?php if (current_user_can("administrator") && strlen($footer_text_setting) <= 0): ?> You can edit this footer text using the WordPress Customizer.<?php endif ?>
+				<?php if (current_user_can("administrator") && strlen($footer_text_setting) <= 0) _e( 'You can edit this footer text using the WordPress Customizer.', 'picostrap5' ); ?>
 			</div>
 						
 		<?php
@@ -26,7 +26,7 @@ if(!function_exists('picostrap_the_sharing_buttons')):
 		<div class="picostrap-sharing-buttons mt-4 mb-5" >
 		
 			<!-- Basic Share Links -->
-			<span class="d-block mb-3 h4"><?php _e( 'Share this post', 'picostrap' ); ?>: &nbsp; </span>
+			<span class="d-block mb-3 h4"><?php _e( 'Share this post', 'picostrap5' ); ?>: &nbsp; </span>
 		
 			<!-- Facebook (url) -->
 			<a class="btn btn-outline-dark btn-sm btn-facebook" href="https://www.facebook.com/sharer.php?u=<?php echo $url_to_share ?>" target="_blank" rel="nofollow" title="Share on Facebook">

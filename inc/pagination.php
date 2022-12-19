@@ -50,11 +50,11 @@ if ( ! function_exists( 'picostrap_pagination' ) ) {
 			array(
 				'mid_size'           => 2,
 				'prev_next'          => true,
-				'prev_text'          => __( '&laquo;', 'picostrap' ),
-				'next_text'          => __( '&raquo;', 'picostrap' ),
+				'prev_text'          => __( '&laquo;', 'picostrap5' ),
+				'next_text'          => __( '&raquo;', 'picostrap5' ),
 				'type'               => 'array',
 				'current'            => max( 1, get_query_var( 'paged' ) ),
-				'screen_reader_text' => __( 'Posts navigation', 'picostrap' ),
+				'screen_reader_text' => __( 'Posts navigation', 'picostrap5' ),
 			)
 		);
 

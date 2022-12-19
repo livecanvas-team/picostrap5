@@ -27,10 +27,10 @@ if ( ! function_exists( 'picostrap_setup' ) ) {
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.
-		 * If you're building a theme based on picostrap, use a find and replace
-		 * to change 'picostrap' to the name of your theme in all the template files
+		 * If you're building a theme based on this one, use a find and replace
+		 * to change 'picostrap5' to the name of your theme in all the template files
 		 */
-		load_theme_textdomain( 'picostrap', get_template_directory() . '/languages' );
+		load_theme_textdomain( 'picostrap5', get_template_directory() . '/languages' );
 
 		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
@@ -46,8 +46,8 @@ if ( ! function_exists( 'picostrap_setup' ) ) {
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'primary' => __( 'Primary Menu', 'picostrap' ),
-				'secondary' => __( 'Secondary Menu', 'picostrap' ),
+				'primary' => __( 'Primary Menu', 'picostrap5' ),
+				'secondary' => __( 'Secondary Menu', 'picostrap5' ),
 			)
 		);
 
@@ -157,7 +157,7 @@ if ( ! function_exists( 'picostrap_all_excerpts_get_more_link' ) ) {
 		if ( ! is_admin() OR ( isset($_POST['action']) && $_POST['action'] == 'lc_process_dynamic_templating_shortcode') ) {
 			$post_excerpt = $post_excerpt . '...<p class="text-end"><a class="btn btn-outline-secondary picostrap-read-more-link mt-3" href="' . esc_url( get_permalink( get_the_ID() ) ) . '">' . __(
 				'Read More...',
-				'picostrap'
+				'picostrap5'
 			) . '</a></p>';
 		}
 		return $post_excerpt;
