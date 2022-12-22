@@ -1,0 +1,540 @@
+# Copyright (C) 2022 The picostrap Team
+# This file is distributed under the GPL-2.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: picostrap5 2.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/picostrap5\n"
+"POT-Creation-Date: 2022-12-19T14:45:13+00:00\n"
+"PO-Revision-Date: 2022-12-20 19:28+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Domain: picostrap5\n"
+
+#. Theme Name of the theme
+#, fuzzy
+msgid "picostrap5"
+msgstr "Picostrap5"
+
+#. Theme URI of the theme
+#. Author URI of the theme
+#, fuzzy
+msgid "https://picostrap.com"
+msgstr "https://picostrap.com"
+
+#. Description of the theme
+#, fuzzy
+msgid ""
+"The fastest Bootstrap 5 WordPress starter theme. Experience the power of "
+"SASS, merged with the WordPress Customizer. Implementing Bootstrap 5.2.3. "
+"Please  <a target=\"_blank\" href=\"https://youtu.be/nrHFh_08w78\">watch the "
+"introduction video</a> to get started."
+msgstr ""
+"De snelste Bootstrap 5 WordPress starter thema. Ervaar de kracht van SASS, "
+"samengevoegd met de WordPress Customizer. Bootstrap 5.2.3 implementeren. "
+"Bekijk  <a target=\"_blank\" href=\"https://youtu.be/nrHFh_08w78\">de "
+"introductievideo</a> om aan de slag te gaan."
+
+#. Author of the theme
+#, fuzzy
+msgid "The picostrap Team"
+msgstr "Het picostrap Team"
+
+#: 404.php:78
+msgid "Page not found"
+msgstr "Pagina niet gevonden"
+
+#: 404.php:80
+#, fuzzy
+msgid "Perhaps you would like to go to our home page?"
+msgstr "Misschien wilt u naar onze homepage?"
+
+#. translators: %s: post title
+#: comments.php:37
+msgctxt "comments title"
+msgid "One thought on &ldquo;%s&rdquo;"
+msgstr "Eén reactie op &ldquo;%s&rdquo;"
+
+#. translators: 1: number of comments, 2: post title
+#: comments.php:44
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s reactie op &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s reacties op &ldquo;%2$s&rdquo;"
+
+#: comments.php:64 comments.php:99
+msgid "Comment navigation"
+msgstr "Navigatie door reacties"
+
+#: comments.php:68 comments.php:103
+msgid "&larr; Older Comments"
+msgstr "&larr; Oudere reacties"
+
+#: comments.php:74 comments.php:109
+msgid "Newer Comments &rarr;"
+msgstr "Nieuwere reacties &rarr;"
+
+#: header.php:40
+msgid "Skip to content"
+msgstr "Ga naar de inhoud"
+
+#: inc/custom-comments.php:102
+msgid "Comments are closed."
+msgstr "Reacties zijn gesloten."
+
+#: inc/customizer-assets/customizer.php:449
+msgid "Background Image Size"
+msgstr "Formaat achtergrond afbeelding"
+
+#: inc/customizer-assets/customizer.php:454
+msgid "Cover"
+msgstr "Cover"
+
+#: inc/customizer-assets/customizer.php:455
+msgid "Contain"
+msgstr "Bevatten"
+
+#: inc/customizer-assets/customizer.php:456
+msgid "Inherit"
+msgstr "Overnemen"
+
+#: inc/customizer-assets/customizer.php:486
+msgid "Typography"
+msgstr "Typografie"
+
+#: inc/customizer-assets/customizer.php:491
+msgid "Global Options"
+msgstr "Globale opties"
+
+#: inc/customizer-assets/customizer.php:496
+msgid "Forms"
+msgstr "Formulieren"
+
+#: inc/customizer-assets/customizer.php:501
+msgid "Buttons"
+msgstr "Knoppen"
+
+#: inc/customizer-assets/customizer.php:596
+#, fuzzy
+msgid "Header Color in Android Chrome"
+msgstr "Header Kleur in Android Chrome"
+
+#: inc/customizer-assets/customizer.php:612
+msgid "Hide Tagline"
+msgstr "Verberg de sub-titel"
+
+#: inc/customizer-assets/customizer.php:620
+#, fuzzy
+msgid "Main Navigation Bar"
+msgstr "Hoofdnavigatiebalk"
+
+#: inc/customizer-assets/customizer.php:633
+#, fuzzy
+msgid "Navbar Expansion"
+msgstr "Navbar Uitbreiding"
+
+#: inc/customizer-assets/customizer.php:636
+#, fuzzy
+msgid ""
+"Navbar is Collapsed on mobile, and expands to a full blown menubar on chosen "
+"breakpoint"
+msgstr ""
+"Navbar is samengevouwen op mobiel en wordt uitgebreid naar een volledige "
+"menubalk op het gekozen breekpunt"
+
+#: inc/customizer-assets/customizer.php:657
+msgid "Navbar Position"
+msgstr "Navbar positie"
+
+#: inc/customizer-assets/customizer.php:678
+#, fuzzy
+msgid "Enable Page Scrolling Detection"
+msgstr "Detectie van paginaschuiven inschakelen"
+
+#: inc/customizer-assets/customizer.php:679
+#, fuzzy
+msgid ""
+"Publish and exit the Customizer to see the effect. Adds a scroll-position-at-"
+"top / scroll-position-not-at-top class to the BODY element according to "
+"scroll position. Customize via CSS. Use with Navbar Position set to Fixed "
+"for best results. <!--  <a target='_blank' href='#'>Tutorial Coming Soon</a> "
+"--> "
+msgstr ""
+"Publiceer en sluit de Customizer af om het effect te zien. Voegt een scroll-"
+"position-at-top / scroll-position-not-at-top klasse toe aan het BODY-element "
+"op basis van de scrollpositie. Aanpassen via CSS. Gebruik met Navbar-positie "
+"ingesteld op Vast voor de beste resultaten. <!--  <a target='_blank' "
+"href='#'>Tutorial Coming Soon</a> --> "
+
+#: inc/customizer-assets/customizer.php:695
+msgid "Navbar Background Color"
+msgstr "Achtergrondkleur navigatiebalk"
+
+#: inc/customizer-assets/customizer.php:721
+#, fuzzy
+msgid "Color Scheme (Menubar links)"
+msgstr "Kleurenschema (koppelingen naar menubalk)"
+
+#: inc/customizer-assets/customizer.php:741
+msgid "Enable Search Form"
+msgstr "Zoeken inschakelen"
+
+#: inc/customizer-assets/customizer.php:750
+#, fuzzy
+msgid "Optional Topbar"
+msgstr "Optionele topbar"
+
+#: inc/customizer-assets/customizer.php:763
+#, fuzzy
+msgid "Enable Topbar"
+msgstr "Topbar inschakelen"
+
+#: inc/customizer-assets/customizer.php:764
+#, fuzzy
+msgid "Requires Navbar position set to 'Standard static top'"
+msgstr "Vereist navbar positie ingesteld op 'Standaard statische top'"
+
+#: inc/customizer-assets/customizer.php:779
+#, fuzzy
+msgid "Topbar Text / HTML"
+msgstr "Tekst / HTML in de bovenste balk"
+
+#: inc/customizer-assets/customizer.php:794
+msgid "Topbar Background Color"
+msgstr "Topbar Achtergrondkleur"
+
+#: inc/customizer-assets/customizer.php:820
+msgid "Topbar Text Color"
+msgstr "Tekstkleur bovenbalk"
+
+#: inc/customizer-assets/customizer.php:839
+msgid "Footer"
+msgstr "Footer"
+
+#: inc/customizer-assets/customizer.php:852
+msgid "Footer Text"
+msgstr "Footer Tekst"
+
+#: inc/customizer-assets/customizer.php:862
+#, fuzzy
+msgid "Single Post & Archives"
+msgstr "Single Post &Archief"
+
+#: inc/customizer-assets/customizer.php:875
+msgid "Hide Categories"
+msgstr "Verberg categorieën"
+
+#: inc/customizer-assets/customizer.php:909
+msgid "Hide Post Author"
+msgstr "Bericht auteur verbergen"
+
+#: inc/customizer-assets/customizer.php:925
+msgid "Hide Post Date"
+msgstr "Verberg berichtdatum"
+
+#: inc/customizer-assets/customizer.php:941
+#, fuzzy
+msgid "Enable Sharing Buttons after the Content"
+msgstr "Deelknoppen inschakelen na de inhoud"
+
+#: inc/customizer-assets/customizer.php:942
+#, fuzzy
+msgid "Pure HTML only, SVG inline icons, zero bloat"
+msgstr "Alleen pure HTML, SVG inline pictogrammen, geen bloat"
+
+#: inc/customizer-assets/customizer.php:984
+#, fuzzy
+msgid "Header / Footer Code"
+msgstr "Koptekst/voettekstcode"
+
+#: inc/customizer-assets/customizer.php:997
+#, fuzzy
+msgid "Add code to Header"
+msgstr "Code toevoegen aan koptekst"
+
+#: inc/customizer-assets/customizer.php:1013
+#, fuzzy
+msgid "Add code to Footer"
+msgstr "Code toevoegen aan voettekst"
+
+#: inc/customizer-assets/customizer.php:1029
+#, fuzzy
+msgid "body_font_object"
+msgstr "body_font_object"
+
+#: inc/customizer-assets/customizer.php:1045
+#, fuzzy
+msgid "headings_font_object"
+msgstr "headings_font_object"
+
+#: inc/customizer-assets/customizer.php:1062
+#, fuzzy
+msgid "Font Loading Header code"
+msgstr "Headercode voor het laden van lettertypen"
+
+#: inc/customizer-assets/customizer.php:1086
+#, fuzzy
+msgid "Load Google Fonts anonymously"
+msgstr "Google Fonts anoniem laden"
+
+#: inc/customizer-assets/customizer.php:1088
+#, fuzzy
+msgid ""
+"Checking this option, Google fonts will be loaded from the privacy compliant "
+"<a target='_blank' href='https://fonts.coollabs.io/'>Coollabs Font "
+"repository</a>. "
+msgstr ""
+"Als u deze optie inschakelt, worden Google-lettertypen geladen vanuit de "
+"privacyconforme <a target='_blank' href='https://fonts.coollabs."
+"io/'>Coollabs Font-repository</a>. "
+
+#: inc/customizer-assets/customizer.php:1103
+#, fuzzy
+msgid "Disable the Font Loading in Header"
+msgstr "Het laden van lettertypen in de koptekst uitschakelen"
+
+#: inc/customizer-assets/customizer.php:1104
+#, fuzzy
+msgid ""
+"Prevents the code of \n"
+"\t\t\tthe textarea above from being served in the site's &lt;head&gt;. "
+msgstr ""
+"Voorkomt de code van \n"
+"\t\t\thet bovenstaande tekstgebied wordt geserveerd in de &lt;kop&gt; van de "
+"site. "
+
+#: inc/customizer-assets/customizer.php:1114
+#, fuzzy
+msgid "Global Utilities"
+msgstr "Wereldwijde hulpprogramma's"
+
+#: inc/customizer-assets/customizer.php:1127
+#, fuzzy
+msgid "Disable the Gutenberg Content Editor"
+msgstr "De Gutenberg Content Editor uitschakelen"
+
+#: inc/customizer-assets/customizer.php:1128
+#, fuzzy
+msgid ""
+"Disables the Gutenberg content editor on all post types. De-enqueues its CSS "
+"styles as well."
+msgstr ""
+"Hiermee schakelt u de Gutenberg-inhoudseditor uit voor alle berichttypen. De-"
+"enqueues ook zijn CSS-stijlen."
+
+#: inc/customizer-assets/customizer.php:1143
+#, fuzzy
+msgid "Disable the Block-based Widgets Editor"
+msgstr "De editor voor op blokken gebaseerde widgets uitschakelen"
+
+#: inc/customizer-assets/customizer.php:1144
+#, fuzzy
+msgid ""
+"Disables the Block-based Widgets Editor and restores the classic widgets "
+"editor."
+msgstr ""
+"Hiermee schakelt u de editor voor op blokken gebaseerde widgets uit en "
+"herstelt u de editor voor klassieke widgets."
+
+#: inc/customizer-assets/customizer.php:1159
+#, fuzzy
+msgid "Disable WordPress Comments"
+msgstr "Schakel WordPress-reacties uit"
+
+#: inc/customizer-assets/customizer.php:1160
+#, fuzzy
+msgid "Will completely disable the entire WP comments feature."
+msgstr "Zal de volledige WP-opmerkingenfunctie volledig uitschakelen."
+
+#: inc/customizer-assets/customizer.php:1175
+#, fuzzy
+msgid "Disable XML - RPC"
+msgstr "XML uitschakelen - RPC"
+
+#: inc/customizer-assets/customizer.php:1176
+#, fuzzy
+msgid ""
+"Disabling XML-RPC will close one more door that a potential hacker may try "
+"to exploit to hack your website."
+msgstr ""
+"Het uitschakelen van XML-RPC zal nog een deur sluiten die een potentiële "
+"hacker kan proberen te misbruiken om uw website te hacken."
+
+#: inc/customizer-assets/customizer.php:1191
+#, fuzzy
+msgid "Disable  SCSS Autocompile / LiveReload "
+msgstr "Scss autocompile / LiveReload uitschakelen "
+
+#: inc/customizer-assets/customizer.php:1192
+#, fuzzy
+msgid ""
+"If you're not editing the SCSS files, you can check this option. Makes a "
+"difference for site admins only."
+msgstr ""
+"Als u de SCSS-bestanden niet bewerkt, kunt u deze optie aanvinken. Maakt "
+"alleen een verschil voor sitebeheerders."
+
+#: inc/customizer-assets/customizer.php:1207
+#, fuzzy
+msgid "Add a 'Back to Top' button to site"
+msgstr "Voeg een knop 'Terug naar boven' toe aan de site"
+
+#: inc/customizer-assets/customizer.php:1208
+#, fuzzy
+msgid ""
+"Very light implementation. To see the button, you will also need to Publish, "
+"exit the Customizer, and scroll down a long page"
+msgstr ""
+"Zeer lichte implementatie. Als u de knop wilt zien, moet u ook publiceren, "
+"de Customizer afsluiten en een lange pagina naar beneden scrollen"
+
+#: inc/customizer-assets/customizer.php:1223
+msgid "Enable Lightbox"
+msgstr "Lightbox inschakelen"
+
+#: inc/customizer-assets/customizer.php:1224
+#, fuzzy
+msgid ""
+"Will lazily add a JS and a CSS file from cdn.jsdelivr.net before closing the "
+"BODY of the page, to use   <a target='_blank' href='https://github.com/biati-"
+"digital/glightbox'>gLightBox</a>: a very lightweight lightbox "
+"implementation. <br><br>The lightbox will be enabled on all images matching "
+"the selector: main#theme-main a:not(.nolightbox) img<br><br>This means that "
+"any image linked to something will open a lightbox.<br><br>To force the "
+"lightbox on an element, add the <b>glightbox</b> class to it.<br><br> To "
+"prevent the lightbox on a linked image, add the <b>nolightbox</b> class to "
+"it."
+msgstr ""
+"Voegt lui een JS- en een CSS-bestand van cdn.jsdelivr.net toe voordat u de "
+"BODY van de pagina sluit, om   <a target='_blank' href='https://github.com/"
+"biati-digital/glightbox'>gLightBox</a> te gebruiken: een zeer lichtgewicht "
+"lightbox-implementatie. <br><br>De lightbox wordt ingeschakeld op alle "
+"afbeeldingen die overeenkomen met de selector: main#theme-main a:not(."
+"nolightbox) img<br><br>Dit betekent dat elke afbeelding die aan iets is "
+"gekoppeld, een lightbox opent.<br><br>Als u de lightbox op een element wilt "
+"forceren, voegt u de klasse <b>glightbox</b> eraan toe.<br><br> Als u wilt "
+"voorkomen dat de lightbox op een gekoppelde afbeelding wordt weergegeven, "
+"voegt u de klasse <b>nolightbox</b> eraan toe."
+
+#: inc/pagination.php:53
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: inc/pagination.php:54
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: inc/pagination.php:57
+msgid "Posts navigation"
+msgstr "Berichten navigatie"
+
+#: inc/setup.php:49
+msgid "Primary Menu"
+msgstr "Hoofdmenu"
+
+#: inc/setup.php:50
+msgid "Secondary Menu"
+msgstr "Secundair menu"
+
+#: inc/setup.php:158
+msgid "Read More..."
+msgstr "Lees verder…"
+
+#: inc/template-tags.php:12
+#, fuzzy
+msgid "You can edit this footer text using the WordPress Customizer."
+msgstr "U kunt deze voettekst bewerken met behulp van de WordPress Customizer."
+
+#: inc/template-tags.php:29
+msgid "Share this post"
+msgstr "Deel dit bericht"
+
+#: inc/widgets.php:147
+msgid "Main Sidebar"
+msgstr "Hoofd Sidebar"
+
+#: inc/widgets.php:149
+#, fuzzy
+msgid "Main sidebar widget area"
+msgstr "Widgetgebied hoofdzijbalk"
+
+#: inc/widgets.php:160
+msgid "Footer Full"
+msgstr "Voettekst Volledige"
+
+#: inc/widgets.php:162
+#, fuzzy
+msgid "Full sized footer widget with dynamic grid"
+msgstr "Full-size voettekstwidget met dynamisch raster"
+
+#: inc/widgets.php:173
+#, fuzzy
+msgid "WooCommerce Shop Sidebar"
+msgstr "WooCommerce Winkel Sidebar"
+
+#: inc/widgets.php:175
+#, fuzzy
+msgid "Shop sidebar widget area"
+msgstr "Widgetgebied winkelzijbalk"
+
+#. Template Name of the theme
+#, fuzzy
+msgid "Blank NoFooter Page Template"
+msgstr "Lege NoFooter-paginasjabloon"
+
+#. Template Name of the theme
+#, fuzzy
+msgid "Blank Page Template"
+msgstr "Lege paginasjabloon"
+
+#. Template Name of the theme
+#, fuzzy
+msgid "Bootstrap Demo Template"
+msgstr "Bootstrap Demo Sjabloon"
+
+#. Template Name of the theme
+#, fuzzy
+msgid "Default Without Jumbotron"
+msgstr "Standaard zonder Jumbotron"
+
+#. Template Name of the theme
+#, fuzzy
+msgid "Empty Page Template"
+msgstr "Sjabloon lege pagina"
+
+#. Template Name of the theme
+#, fuzzy
+msgid "Page with Sidebar on the Left"
+msgstr "Pagina met zijbalk aan de linkerkant"
+
+#. Template Name of the theme
+#, fuzzy
+msgid "Page with Sidebar on the Right"
+msgstr "Pagina met sidebar aan de rechterkant"
+
+#. translators: %s: query term
+#: search.php:16
+msgid "Search Results for: %s"
+msgstr "Zoekresultaten voor: %s"
+
+#: single.php:29
+msgid "Categories"
+msgstr "Categorieën"
+
+#: single.php:50
+msgid "by"
+msgstr "door"
+
+#: single.php:66
+msgid "Edit this post"
+msgstr "Bewerk pagina / bericht"
+
+#: single.php:82
+msgid "Sorry, no posts matched your criteria."
+msgstr "Sorry er zijn geen berichten gevonden."
