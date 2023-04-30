@@ -21,7 +21,7 @@ get_header();
 </section>
 
 <section class="album py-5">
-  <div class="container">
+  <div id="container-content-archive" class="container">
     <div class="row">
     <?php 
         if ( have_posts() ) : 

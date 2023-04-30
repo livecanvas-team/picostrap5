@@ -12,7 +12,7 @@ get_header();
   </div>
 </div>
 
-<div class="container">
+<div id="container-content-page" class="container">
     <div class="row">
         <div class="col-md-10 offset-md-1 py-5">
             <?php 
