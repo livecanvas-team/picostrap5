@@ -8,17 +8,17 @@ add_action('wp', 'pico_alter_content_filters', PHP_INT_MAX);
 function pico_alter_content_filters() {
 
 	// IF LC PLUGIN IS TURNED ON, EARLY EXIT
-	if ( pico_is_plugin_active( 'livecanvas/livecanvas-plugin-index.php' ) ) return;
+	if (function_exists('lc_post_is_using_livecanvas') ) return;
 
-	// for a double security: in case lc_alter_content_filters is defined, lc plugin exists:exit
-	if (function_exists('lc_alter_content_filters') ) return;
+	//ACT ONLY ON SINGLE (POSTS / PAGES / CPT)
+	if (!is_singular()) return;
 	
 	//IF PAGE IS NOT USING LIVECANVAS, and isnt a lc cpt,  EXIT FUNCTION
 	$page_id = get_queried_object_id();  
-	if (!pico_post_is_using_livecanvas($page_id))	return;
+	if (!is_numeric($page_id) OR get_post_meta($page_id, '_lc_livecanvas_enabled', true) != '1')	return;
 	
 	//as a quick test
-	//die('test');
+	//die('this will be executed');
 
 	//Got this list from core wp /wp-includes/default-filters.php - might be useful to update it in the future. Wp is now 572
 	remove_filter( 'the_content', 'do_blocks', 9 );
@@ -43,16 +43,6 @@ function pico_alter_content_filters() {
 }
 
 
-//FUNCTION TO DETERMINE IF POST IS USING LIVECANVAS
-function pico_post_is_using_livecanvas($post_id) {
-	
-	return (
-		in_array(get_post_type($post_id), array('lc_block', 'lc_section', 'lc_partial', 'lc_dynamic_template')) OR 
-		get_post_meta($post_id, '_lc_livecanvas_enabled', true) == '1'
-	);
-
-}
-
 
 function pico_strip_lc_attributes($html){
 	$html = str_replace(' editable="inline"', "", $html);
@@ -70,20 +60,4 @@ function pico_strip_lc_attributes($html){
 	return $html;
 }
 
-//SUPPORT FUNCTIONS
-function pico_is_plugin_active_for_network( $plugin ) {
-	if ( ! is_multisite() ) {
-		return false;
-	}
 
-	$plugins = get_site_option( 'active_sitewide_plugins' );
-	if ( isset( $plugins[ $plugin ] ) ) {
-		return true;
-	}
-
-	return false;
-}
-
-function pico_is_plugin_active( $plugin ) {
-	return in_array( $plugin, (array) get_option( 'active_plugins', array() ), true ) || pico_is_plugin_active_for_network( $plugin );
-}
