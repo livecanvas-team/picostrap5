@@ -1221,12 +1221,30 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         "enable_lightbox",
         array(
             "label" => __("Enable Lightbox", 'picostrap5'),
-			"description" => __("Will lazily add a JS and a CSS file from cdn.jsdelivr.net before closing the BODY of the page, to use   <a target='_blank' href='https://github.com/biati-digital/glightbox'>gLightBox</a>: a very lightweight lightbox implementation. <br><br>The lightbox will be enabled on all images matching the selector: main#theme-main a:not(.nolightbox) img<br><br>This means that any image linked to something will open a lightbox.<br><br>To force the lightbox on an element, add the <b>glightbox</b> class to it.<br><br> To prevent the lightbox on a linked image, add the <b>nolightbox</b> class to it.", 'picostrap5'),
+			"description" => __("Will lazily add one JS and one CSS file from cdn.jsdelivr.net before closing the BODY of the page, to let you use  <a target='_blank' href='https://github.com/biati-digital/glightbox'>gLightBox</a>: a very lightweight lightbox implementation. <br><br>The lightbox will be triggered on single posts and pages, automatically adding the <b>glightbox</b> class to each IMG in an A element.<br><br>To add the lightbox to other elements arbitrarily, add the <b>glightbox</b> class.<br><br> To prevent the lightbox on a linked image, add the <b>nolightbox</b> class.<br><br>To lightbox all images inside a DIV, add the <b>autolightbox</b> class.", 'picostrap5'),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
 	));
 	
+
+
+	//TOOLTIPS
+	$wp_customize->add_setting("enable_tooltips", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "enable_tooltips",
+        array(
+            "label" => __("Enable Tooltips", 'picostrap5'),
+			"description" => __("Adds inline <a target='_blank' href='https://getbootstrap.com/docs/5.2/components/tooltips/#enable-tooltips'>two rows of JavaScript</a> to enable Boostrap 5 tooltips. Publish and exit the Customizer to see the change.", 'picostrap5'),
+            "section" => "extras", 
+            'type'     => 'checkbox',
+			)
+	));
+
 
 
 } //end function

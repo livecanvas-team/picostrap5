@@ -43,6 +43,9 @@ if (get_theme_mod("enable_back_to_top") ) require_once locate_template('/inc/opt
 //OPTIONAL: LIGHTBOX  
 if (get_theme_mod("enable_lightbox") ) require_once locate_template('/inc/opt-in/lightbox.php');
 	
+//OPTIONAL: TOOLTIPS  
+if (get_theme_mod("enable_tooltips") ) require_once locate_template('/inc/opt-in/initialize-tooltips.php');
+	
 //OPTIONAL: DETECT PAGE SCROLL
 if (get_theme_mod("enable_detect_page_scroll") ) require_once locate_template('/inc/opt-in/detect-page-scroll.php');
 
