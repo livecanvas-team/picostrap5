@@ -46,7 +46,7 @@ add_action( 'wp_enqueue_scripts',  function  () {
 //enqueue js in footer, async
 add_action( 'wp_enqueue_scripts', function() {
 
-    //want to override file in child theme? use get_stylesheet_directory_uri in place of get_template_directory_uri
+    //want to override file in child theme? use get_stylesheet_directory_uri in place of get_template_directory_uri 
     //this was done for compatibility reasons towards older child themes
     wp_enqueue_script( 'bootstrap5', get_template_directory_uri() . "/js/bootstrap.bundle.min.js#asyncload", array(), null, true );
     
@@ -77,8 +77,8 @@ function picostrap_add_header_chrome_color() {
 	<?php endif;
 }
 
-
-//JS ASYNC ENQUEUE: add an async load option as per https://ikreativ.com/async-with-wordpress-enqueue/
+//Utils for ASYNC / DEFER. Read more at https://pagespeedchecklist.com/async-and-defer
+//JS ASYNC ENQUEUE: add an async load option 
 function picostrap_async_scripts($url){
     if ( strpos( $url, '#asyncload') === false )
         return $url;
@@ -88,6 +88,17 @@ function picostrap_async_scripts($url){
 	return str_replace( '#asyncload', '', $url )."' async='async"; 
     }
 add_filter( 'clean_url', 'picostrap_async_scripts', 11, 1 );
+
+//JS defer ENQUEUE: add an defer load option 
+function picostrap_defer_scripts($url){
+    if ( strpos( $url, '#deferload') === false )
+        return $url;
+    else if ( is_admin() )
+        return str_replace( '#deferload', '', $url );
+    else
+	return str_replace( '#deferload', '', $url )."' defer='defer"; 
+    }
+add_filter( 'clean_url', 'picostrap_defer_scripts', 11, 1 );
 
 
 //UNRENDER-BLOCK CSS 
