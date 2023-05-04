@@ -33,23 +33,25 @@
 ///ALIGN RESPONSIVELY
 
 .alignleft {
-	display: inline; 
-	margin-right: 1.5em;
+	display: block; 
+	margin-bottom: 1.5em;
 }
 
 .alignright {
-	display: inline; 
-	margin-left: 1.5em;
+	display: block;
+	margin-bottom: 1.5em;
 }
 
-@include media-breakpoint-up(lg) {
+@include media-breakpoint-up(sm) {
 	
 	.alignleft {
 		float: left;
+		margin-right: 1.5em;
 	}
 
 	.alignright {
 		float: right;
+		margin-left: 1.5em;
 	}
   }
 
