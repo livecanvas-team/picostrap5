@@ -86,7 +86,7 @@ function picostrap_recompile_sass(){
                 
                 //un-cache the frontend css
                 url = document.getElementById('picostrap-styles-css').href;
-                document.getElementById('picostrap-styles-css').href = url;
+                document.getElementById('picostrap-styles-css').href = url + '&bust_cache=' + (Math.floor(Math.random() * 100) + 1);
 
                 //retrigger the woodpecker
                 setTimeout(function(){ picostrap_livereload_woodpecker(); }, picostrap_livereload_timeout/4);
