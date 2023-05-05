@@ -1,9 +1,15 @@
 <?php
+/**
+ * Bootstrap 5 WordPress navbar walker menu 1.3.4
+ * https://github.com/AlexWebLab/bootstrap-5-wordpress-navbar-walker
+ * Includes 2 custom patches for submenus on BootStrap 5.1 
+ *
+ * @package picostrap5
+ */
 
-// Bootstrap 5 WordPress navbar walker menu 1.3.4
-// https://github.com/AlexWebLab/bootstrap-5-wordpress-navbar-walker
-// bootstrap 5 wp_nav_menu walker 
-// Includes 2 custom patches for submenus on BootStrap 5.1 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
 
 class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_menu
 {

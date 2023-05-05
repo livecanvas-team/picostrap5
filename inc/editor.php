@@ -1,8 +1,8 @@
 <?php
 /**
- * picostrap modify editor
+ * Modify editor
  *
- * @package picostrap
+ * @package picostrap5
  */
 
 // Exit if accessed directly.

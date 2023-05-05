@@ -2,7 +2,7 @@
 /**
  * Comment layout
  *
- * @package UnderStrap
+ * @package picostrap5
  */
 
 // Exit if accessed directly.

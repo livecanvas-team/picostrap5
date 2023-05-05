@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * Removes all the not-so-necessary tags that WP adds to the header
+ *
+ * @package picostrap5
+ */
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 

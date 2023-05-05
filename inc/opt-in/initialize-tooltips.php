@@ -6,7 +6,7 @@
  
 
 
-// INITIALIZE BOOTSTRAP TOOLTIPS (move to pico theme)
+// INITIALIZE BOOTSTRAP TOOLTIPS 
 add_action('wp_footer',function(){
     ?>
     <script>

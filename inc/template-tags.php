@@ -1,5 +1,12 @@
 <?php
+/**
+ * Declare some custom template tags
+ *
+ * @package picostrap5
+ */
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 
 //FOOTER TEXT CUSTOMIZATION

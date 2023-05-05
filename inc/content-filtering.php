@@ -1,6 +1,14 @@
 <?php
-//TO ALLOW LC SITES TO BE RENDERED PERFECTLY EVEN IF PLUGIN IS DEACTIVATED
-//JUST REMOVES SOME WORDPRESS FILTERS ON LC-PAGES
+
+/**
+ * Allow LC - powered sites to be rendered perfectly, also if LC plugin is deactivated.
+ * Just remove some WP default content filtering on LC-pages
+ *
+ * @package picostrap5
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 
 /// ALTER CONTENT FILTERING ON PAGES WHERE LIVECANVAS IS ENABLED

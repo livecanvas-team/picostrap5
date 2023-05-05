@@ -2,7 +2,7 @@
 /**
  * Add WooCommerce support
  *
- * @package UnderStrap
+ * @package picostrap5
  */
 
 // Exit if accessed directly.

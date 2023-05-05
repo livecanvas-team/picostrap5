@@ -1,4 +1,9 @@
 <?php
+/**
+ * Enqueue the CSS and JS files
+ *
+ * @package picostrap5
+ */
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;

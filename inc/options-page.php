@@ -1,4 +1,12 @@
 <?php
+/**
+ * Add Theme Options Page
+ *
+ * @package picostrap5
+ */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 //GET PARENT THEME VERSION
 function pico_get_parent_theme_version(){

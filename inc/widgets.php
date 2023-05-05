@@ -2,7 +2,7 @@
 /**
  * Declaring widgets
  *
- * @package picostrap
+ * @package picostrap5
  */
 
 // Exit if accessed directly.
