@@ -41,6 +41,8 @@ $enable-text-bg-shades: false !default;
 
 
 // Primary ////////////////////////
+$primary-25: tint-color($primary, 95%) !default;
+$primary-50: tint-color($primary, 90%) !default;
 $primary-100: tint-color($primary, 80%) !default;
 $primary-200: tint-color($primary, 60%) !default;
 $primary-300: tint-color($primary, 40%) !default;
@@ -53,6 +55,8 @@ $primary-900: shade-color($primary, 80%) !default;
 
 
 $primarys: (
+  "primary-25": $primary-25,
+  "primary-50": $primary-50,
   "primary-100": $primary-100,
   "primary-200": $primary-200,
   "primary-300": $primary-300,
