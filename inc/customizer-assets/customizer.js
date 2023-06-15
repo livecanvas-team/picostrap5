@@ -198,7 +198,12 @@
 			//console.log(setting.id + " has changed value");
 
 			//if some field containing scssvar is changed, we'll have to recompile
-			if (setting.id.includes("SCSSvar")) scss_recompile_is_necessary = true;
+			if (setting.id.includes("SCSSvar")) {
+				scss_recompile_is_necessary = true;
+				variable_name = setting.id.replace("SCSSvar_","");
+				console.log(variable_name);
+				console.log(setting.get);
+			}
 
 		});
 

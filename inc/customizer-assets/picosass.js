@@ -59,7 +59,7 @@ export async function Compile(sassParams = {  /* style: "compressed" */ }) {
     if (!sassParams.importers) sassParams.importers = [{ canonicalize, load }];
 
     //get the sass code to be compiled: if no source element, alert
-    if (!document.querySelector("#the-scss")) document.querySelector("#picosass-output-feedback").innerHTML = " No SCSS element... ";
+    if (!document.querySelector("#the-scss")) document.querySelector("#picosass-output-feedback").innerHTML = " No SCSS element to compile... ";
     
     const theCode = document.querySelector("#the-scss").innerHTML;  
 
@@ -90,7 +90,8 @@ export async function Compile(sassParams = {  /* style: "compressed" */ }) {
 
 }
 
-////// ON DOM CONTENT LOADED: RUN ONCE //////////////
+
+////// ON DOM CONTENT LOADED: COMPILE ONCE //////////////
 window.addEventListener("DOMContentLoaded", (event) => {
 
     //prepare a space for the new CSS
@@ -101,7 +102,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     //run  the compiler, unless a special class is added to the body
     if (!document.querySelector("body").classList.contains("prevent-sass-autocompile")) Compile();
-
 
     //attach observer to detect on-page scss code changes 
     //TODO: this is not working inside theme, yet

@@ -1313,6 +1313,11 @@ add_action( 'wp_head', function  () {
 
 		<!-- End picoSASS JS -->
 
+		
+		<!-- add interface -->
+		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass-control.js"></script>
+
+
 		<template id="the-scss">
 			
 			$primary:yellow;
@@ -1335,6 +1340,8 @@ add_action( 'wp_head', function  () {
 			//@import 'wp-content/themes/picostrap5/sass/main'; 
 
 		</template>
+
+		 
  
 
 	<?php
