@@ -22,7 +22,7 @@ function picoWoodpecker() {
 
 
 // DISABLE THE LIBRARY'S AUTOCOMPILE 
-document.querySelector("body").classList.add("prevent-sass-autocompile");
+//document.querySelector("body").classList.add("prevent-sass-autocompile");
 
 ////// ON DOM CONTENT LOADED //////////////
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     //attach listener so we will be programmatically able to launch compiling
     //just calling: document.querySelector('#picosass-output-feedback').click();
-
+    
     document.addEventListener('click', function (event) {
 
         // If the clicked element doesn't have the right selector, bail

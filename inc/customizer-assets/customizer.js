@@ -25,7 +25,6 @@
         
     }
 	
-	
 	function ps_recompile_css_bundle(){
 		//SAVE PREVIEW IFRAME SRC
 		preview_iframe_src=$("#customize-preview iframe").attr("src");
@@ -192,22 +191,60 @@
 		
 		//////////////////// LISTEN TO CUSTOMIZER CHANGES ////////////////////////
 
-		//ON CHANGES OF CUSTOMIZER, FOR RELEVANT FIELDS, UPDATE SCSS OR FONT SNIPPET ///////////////////
+		//upon changing of widgets that refer to SCSS variables, trigger a function to updateScssPreview
 		wp.customize.bind('change', function (setting) {
-
-			//console.log(setting.id + " has changed value");
-
-			//if some field containing scssvar is changed, we'll have to recompile
 			if (setting.id.includes("SCSSvar")) {
-				scss_recompile_is_necessary = true;
-				variable_name = setting.id.replace("SCSSvar_","");
-				console.log(variable_name);
-				console.log(setting.get);
+				const myTimeout = setTimeout(updateScssPreview, 50);
 			}
-
 		});
 
-		//CLEANEST VANILLA EXAMPLE FOR INTERCEPTING MORE CUSTOMIZER CHANGES, FOR FUTURE REFERENCE
+		//BUILD THE SCSS CODE FROM THE WIDGETS VALUES, THEN update the-scss AND RETRIGGER COMPILER
+		function updateScssPreview() {
+
+			var sass = '';
+
+			var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input[type='text']`);
+
+			for (var i = 0; i < els.length; i++) {
+
+				if (els[i].value) {
+
+					let name = els[i].closest("li").getAttribute("id").replace("customize-control-SCSSvar_", "");
+
+					//console.log(name + " " + els[i].value);
+					
+					if ( 
+						name.includes('font-family')
+						|| 0
+					) {	
+						sass += `$${name}: '${els[i].value}'; `;
+					}
+					else {
+
+						sass += `$${name}: ${els[i].value}; `; 
+					}
+
+				} //end if value 
+
+			}
+
+			console.log('sasscode:'+sass);
+
+			//update sass
+			var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
+
+			var newsass = sass + iframeDoc.querySelector('#the-scss-original').innerHTML;
+
+			iframeDoc.querySelector('#the-scss').innerHTML = newsass;
+
+			//launch the compiler
+			iframeDoc.querySelector('#picosass-output-feedback').click();
+
+		}
+
+
+
+		//CLEANEST VANILLA EXAMPLE FOR INTERCEPTING SPECIFIC CUSTOMIZER CHANGES, FOR FUTURE REFERENCE
 		/*
 		wp.customize('picostrap_fonts_header_code', function (value) {
 			value.bind(function (newval) {
