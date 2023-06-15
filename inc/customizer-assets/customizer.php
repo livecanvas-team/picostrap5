@@ -1285,3 +1285,40 @@ add_action( 'wp_head', function  () {
 	<?php
 } );
  
+
+
+
+
+/////////// LIVE CUSTOMIZER HELPER FOR NEW FRONTEND BASED SCSS COMPILER ///////////
+
+ 
+
+add_action( 'wp_head', function  () {
+	if (!current_user_can('administrator') OR !isset($_GET['customize_theme'])) return;
+    ?>
+		<!-- Start picoSASS JS -->
+		<script type="importmap">
+			{
+				"imports": {
+				"immutable": "https://unpkg.com/immutable@^4.0.0",
+				"sass": "https://unpkg.com/sass@^1.63.0/sass.default.js"
+				}
+			}
+		</script>
+
+		<!-- Support browsers like Safari 16.3 without import maps support. -->
+		<script async src="https://unpkg.com/es-module-shims@^1.7.0" crossorigin="anonymous"></script>
+
+		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass.js"></script>
+
+		<!-- End picoSASS JS -->
+
+		<template id="the-scss">
+			$primary:lime;
+			@import '<?php  //echo get_template_directory() ?>wp-content/themes/picostrap5/sass/main'; 
+		</template>
+ 
+
+	<?php
+} );
+ 
