@@ -194,7 +194,7 @@
 		//upon changing of widgets that refer to SCSS variables, trigger a function to updateScssPreview
 		wp.customize.bind('change', function (setting) {
 			if (setting.id.includes("SCSSvar")) {
-				const myTimeout = setTimeout(updateScssPreview, 50);
+				const myTimeout = setTimeout(updateScssPreview, 5050);
 			}
 		});
 
@@ -203,7 +203,7 @@
 
 			var sass = '';
 
-			var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input[type='text']`);
+			var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input[type='text']:not(.cs-fontpicker-input)`);
 
 			for (var i = 0; i < els.length; i++) {
 
@@ -228,14 +228,20 @@
 
 			}
 
-			console.log('sasscode:'+sass);
+			//console.log('sass code: '+sass);
 
 			//update sass
 			var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
 
-			var newsass = sass + iframeDoc.querySelector('#the-scss-original').innerHTML;
+			var newsass = sass + " @import 'wp-content/themes/picostrap5/sass/main'; "; //iframeDoc.querySelector('#the-scss-original').innerHTML;
+
+			console.log('full sass code: ' + newsass); 
+			//iframeDoc.querySelector("#the-scss").remove();
+			//iframeDoc.querySelector("html").insertAdjacentHTML("afterbegin", `<template id="the-scss"> ${newsass} </div> `);
 
 			iframeDoc.querySelector('#the-scss').innerHTML = newsass;
+			//iframeDoc.querySelector('#the-scss').textContent = "prova";
+			//$("#customize-preview iframe").contents().find("#the-scss").val('hello');
 
 			//launch the compiler
 			iframeDoc.querySelector('#picosass-output-feedback').click();
