@@ -1314,8 +1314,26 @@ add_action( 'wp_head', function  () {
 		<!-- End picoSASS JS -->
 
 		<template id="the-scss">
-			$primary:lime;
-			@import '<?php  //echo get_template_directory() ?>wp-content/themes/picostrap5/sass/main'; 
+			
+			$primary:yellow;
+
+
+			<?php 
+				//determine wp_content_folder_name
+				$arr = explode( '/', WP_CONTENT_DIR ); 
+				$wp_content_folder_name = $arr[sizeof($arr)-1];
+				
+				//determine relative theme path
+				$arr = explode( $wp_content_folder_name, get_template_directory_uri() );
+				$theme_path = $wp_content_folder_name . $arr[1];
+			?> 
+			
+			//dynamic take
+			@import '<?php echo $theme_path; ?>/sass/main'; 
+			
+			//static take
+			//@import 'wp-content/themes/picostrap5/sass/main'; 
+
 		</template>
  
 
