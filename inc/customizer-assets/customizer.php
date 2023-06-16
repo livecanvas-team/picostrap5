@@ -4,6 +4,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // ADD CUSTOM JS & CSS TO CUSTOMIZER //////////////////////////////////////////////////////////////////////////////////////////////////////////
+add_action( 'customize_controls_enqueue_scripts', 'picostrap_customize_enqueue' );
 function picostrap_customize_enqueue() {
 	wp_enqueue_script( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
 	 
@@ -16,8 +17,6 @@ function picostrap_customize_enqueue() {
 		)
 	);
 	
-	
-	
 	wp_enqueue_script( 'custom-customize-lib', get_template_directory_uri() . '/inc/customizer-assets/customizer-vars.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
 	wp_enqueue_style( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.css', array(), rand(0,1000)   );
 	
@@ -25,9 +24,10 @@ function picostrap_customize_enqueue() {
 	wp_enqueue_script( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
 	wp_enqueue_style( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.css', array(), rand(0,1000) );
 }
-add_action( 'customize_controls_enqueue_scripts', 'picostrap_customize_enqueue' );
+
 
 //one more file for live preview
+/*
 add_action( 'customize_preview_init', function(){
 	wp_enqueue_script( 
 		  'picostrap-themecustomizer',			//Give the script an ID
@@ -37,7 +37,7 @@ add_action( 'customize_preview_init', function(){
 		  true						//Put script in footer?
 	);
 });
-
+*/
 
 //ADD BODY CLASSES  //////////////////////////////////////////////////////////////////////////////////////////////////////////
 add_filter( 'body_class', 'picostrap_config_body_classes' );
@@ -63,11 +63,15 @@ function picostrap_filter_head() {
 ///MAIN SETTING: DECLARE ALL SCSS VARIABLES TO HANDLE IN THE CUSTOMIZER
 if(!function_exists("picostrap_get_scss_variables_array")):
 	function picostrap_get_scss_variables_array(){
+		
 		$live_preview_message = '
 		<span class="lpa">
 			<svg viewBox="0 0 24 24"> <path fill="currentColor" d="M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z" /></svg>
 			Live Preview
 		</span>';
+		
+		$live_preview_message=''; //disable it
+
 		return array(
 			"colors" => array( //  $variable_name => $variable_props
 				'$body-bg' => array('type' => 'color', 'comment' => $live_preview_message),
@@ -1253,8 +1257,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 
 
-
-/////////// LIVE CUSTOMIZER HELPER FOR CSS  VARIABLES ///////////
+/*
+/////////// LIVE CUSTOMIZER HELPER FOR CSS  VARIABLES - now unused ///////////
 
 // if we are in customizer preview iframe,
 // add some CSS that alters the bootstrap css variables,
@@ -1273,7 +1277,7 @@ add_action( 'wp_head', function  () {
 				--bs-body-font-family: "<?php echo get_theme_mod("SCSSvar_font-family-base") ?>" !important;
 			<?php endif ?>
 
-		} /* close :root */
+		}  
 		
 		h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 			<?php if (get_theme_mod("SCSSvar_headings-font-family")): ?>
@@ -1284,14 +1288,12 @@ add_action( 'wp_head', function  () {
 	</style>
 	<?php
 } );
- 
+*/
 
 
 
 
 /////////// LIVE CUSTOMIZER HELPER FOR NEW FRONTEND BASED SCSS COMPILER ///////////
-
- 
 
 add_action( 'wp_head', function  () {
 	if (!current_user_can('administrator') OR !isset($_GET['customize_theme'])) return;
@@ -1329,23 +1331,11 @@ add_action( 'wp_head', function  () {
 		?> 
 		
 		<template id="the-scss">
- 			
-			//dynamic take
-			@import '<?php echo $theme_path; ?>/sass/main'; 
-			
-			//static take
-			//@import 'wp-content/themes/picostrap5/sass/main'; 
 
 		</template>
 
-		<template id="the-scss-original">
- 			
-			//dynamic take
-			@import '<?php echo $theme_path; ?>/sass/main'; 
-			
-			//static take
-			//@import 'wp-content/themes/picostrap5/sass/main'; 
-
+		<template id="the-scss-main-import"> 
+			@import '<?php echo $theme_path; ?>/sass/main';  //@import 'wp-content/themes/picostrap5/sass/main'; 
 		</template>
 
 	<?php

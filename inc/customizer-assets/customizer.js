@@ -1,5 +1,28 @@
 (function($) {
 
+	//DEBOUNCE UTILITY
+	function debounce(func, wait, immediate) {
+		var timeout;
+
+		return function executedFunction() {
+			var context = this;
+			var args = arguments;
+
+			var later = function () {
+				timeout = null;
+				if (!immediate) func.apply(context, args);
+			};
+
+			var callNow = immediate && !timeout;
+
+			clearTimeout(timeout);
+
+			timeout = setTimeout(later, wait);
+
+			if (callNow) func.apply(context, args);
+		};
+	};
+
 	//FUNCTION TO LOOP ALL COLOR WIDGETS AND SHOW CURRENT COLOR grabbing the exposed css variable from page
 	function ps_get_page_colors(){
         
@@ -24,8 +47,9 @@
         }); //end each
         
     }
-	
+	/*
 	function ps_recompile_css_bundle(){
+
 		//SAVE PREVIEW IFRAME SRC
 		preview_iframe_src=$("#customize-preview iframe").attr("src");
 		if (preview_iframe_src===undefined) preview_iframe_src=$("#customize-preview iframe").attr("data-src");
@@ -86,7 +110,7 @@
 		scss_recompile_is_necessary=false;
 			
 	} //END FUNCTION ps_recompile_css_bundle
-
+	*/
 		
 	function ps_is_a_google_font(fontFamilyName){
 		const google_fonts = JSON.parse(google_fonts_json);
@@ -144,12 +168,84 @@
 	} // end function 
 		
 	
+	//FUNCTION TO INTERCEPT THE REFRESHING OF THE PREVIEW IFRAME: Upon refreshing, recompile SCSS 
+	// this is for the options that need Selective Refresh and server side processing, as those do a full iframe refresh
+	function thePreviewRefreshBinder() {
+		setTimeout(function () {
 
+			$("#customize-preview iframe").on("load", function () {
+				console.log('Preview iframe has loaded');
+				updateScssPreviewDebounced();
+			});
+			
+			thePreviewRefreshBinder();
+
+		}, 100);
+	}
+
+	// FUNCTION TO PREPARE THE SCSS CODE assigning all the variables according to  THE WIDGETS VALUES
+	function buildScssVariablesPart() {
+
+		var sass = '';
+		
+		// loop all widgets that have values matched to SCSS vars
+		var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input[type='text']:not(.cs-fontpicker-input)`);
+
+		for (var i = 0; i < els.length; i++) {
+
+			//for debug purpose, give them a bg color 
+			//els[i].style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+			if (els[i].value) {
+
+				let name = els[i].closest("li").getAttribute("id").replace("customize-control-SCSSvar_", "");
+
+				//console.log(name + " " + els[i].value);
+
+				if ( name.includes('font-family') || 0 ) {
+					
+					sass += `$${name}: '${els[i].value}'; `;
+				}
+				else {
+					
+					sass += `$${name}: ${els[i].value}; `;
+				}
+
+			} //end if value 
+
+		}
+
+		//console.log('sass code: '+sass);
+
+		return sass;
+	}
+
+	// FUNCTION TO REUPDATE THE SCSS FIELD AND RETRIGGER COMPILER
+	function updateScssPreview() {
+
+		var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
+
+		//build the full SASS with variables and main import
+		var newsass = buildScssVariablesPart() + iframeDoc.querySelector('#the-scss-main-import').innerHTML;
+
+		console.log('Full sass code: \n' + newsass);
+
+		iframeDoc.querySelector('#the-scss').innerHTML = newsass;
+
+		//launch the compiler
+		iframeDoc.querySelector('#picosass-output-feedback').click();
+
+	}
+
+	//DEBOUNCED VERSION OF THE ABOVE
+	var updateScssPreviewDebounced = debounce(function () {
+		updateScssPreview();
+	}, 250);
 
 	////////////////////////////////////////// DOCUMENT READY //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$(document).ready(function() {
 		
-		//TESTBED
+		//TESTBED for G fontsx
 		//console.log(ps_is_a_google_font("ABeeZee"));
 		//console.log(ps_is_a_google_font("Nunito"));
 
@@ -157,9 +253,9 @@
 		scss_recompile_is_necessary=false;
 				
 		//ADD COMPILING WINDOW AND LOADING MESSAGE TO HTML BODY
-		var the_loader='<div class="cs-chase">  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div></div>';
-		var html = "<div id='cs-compiling-window' hidden> <span class='cs-closex'>Close X</span> <div id='cs-loader'> " + the_loader +" </div> <div id='cs-recompiling-target'></div></div>";
-		$("body").append(html);
+		//var the_loader='<div class="cs-chase">  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div></div>';
+		//var html = "<div id='cs-compiling-window' hidden> <span class='cs-closex'>Close X</span> <div id='cs-loader'> " + the_loader +" </div> <div id='cs-recompiling-target'></div></div>";
+		//$("body").append(html);
 		
 		//hide useless bg color widget
 		$("#customize-control-background_color").hide();
@@ -180,7 +276,7 @@
 			
 		//ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)  
 		$("body").on("mousedown", "#customize-save-button-wrapper #save", function() {
-			console.log("Clicked Publish");
+			console.log("Clicked Publish"); 
 		});			
 
 		//CHECK IF USING VINTAGE GOOGLE FONTS API V1, REBUILD FONT IMPORT CODE
@@ -191,90 +287,17 @@
 		
 		//////////////////// LISTEN TO CUSTOMIZER CHANGES ////////////////////////
 
-		//upon changing of widgets that refer to SCSS variables, trigger a function to updateScssPreview
+		//listen to preview iframe new instances
+		thePreviewRefreshBinder();
+
+ 		//upon changing of widgets that refer to SCSS variables, trigger a function to updateScssPreview
 		//these options use postMessage and all is handled by us in JS
 		wp.customize.bind('change', function (setting) {
 			if (setting.id.includes("SCSSvar")) {
-				//todo: add debounce
-				const myTimeout = setTimeout(updateScssPreview, 50);
+				updateScssPreviewDebounced();
 			}
 		});
 		
-		//intercept preview iframe refresh. Upon refreshing, recompile SCSS preview
-		// this is for the options that need Selective Refresh and server side processing
-		function theBinder(){
-			setTimeout(function () {
-				
-				$("#customize-preview iframe").on("load", function () {
-					console.log('Preview iframe has loaded');
-
-					const myTimeout = setTimeout(updateScssPreview, 100);
-				});
-
-				theBinder();
-
-			}, 100);
-		}
-		
-		theBinder();
-
- 
-		
-		//BUILD THE SCSS CODE FROM THE WIDGETS VALUES, THEN update the-scss AND RETRIGGER COMPILER
-		function updateScssPreview() {
-
-			var sass = '';
-
-			var els = document.querySelectorAll(`[id^='customize-control-SCSSvar']:not([id^=customize-control-SCSSvar_font-family]) input[type='text']:not(.cs-fontpicker-input)`);
-
-			for (var i = 0; i < els.length; i++) {
-
-				//give it a color so we can inspect
-				els[i].style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
-				if (els[i].value) {
-
-					let name = els[i].closest("li").getAttribute("id").replace("customize-control-SCSSvar_", "");
-
-					//console.log(name + " " + els[i].value);
-					
-					if ( 
-						name.includes('font-family')
-						|| 0
-					) {	
-						sass += `$${name}: '${els[i].value}'; `;
-					}
-					else {
-
-						sass += `$${name}: ${els[i].value}; `; 
-					}
-
-				} //end if value 
-
-			}
-
-			//console.log('sass code: '+sass);
-
-			//update sass
-			var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
-
-			var newsass = sass + " @import 'wp-content/themes/picostrap5/sass/main'; "; //iframeDoc.querySelector('#the-scss-original').innerHTML;
-
-			console.log('full sass code: ' + newsass); 
-			//iframeDoc.querySelector("#the-scss").remove();
-			//iframeDoc.querySelector("html").insertAdjacentHTML("afterbegin", `<template id="the-scss"> ${newsass} </div> `);
-
-			iframeDoc.querySelector('#the-scss').innerHTML = newsass;
-			//iframeDoc.querySelector('#the-scss').textContent = "prova";
-			//$("#customize-preview iframe").contents().find("#the-scss").val('hello');
-
-			//launch the compiler
-			iframeDoc.querySelector('#picosass-output-feedback').click();
-
-		}
-
-
-
 		//CLEANEST VANILLA EXAMPLE FOR INTERCEPTING SPECIFIC CUSTOMIZER CHANGES, FOR FUTURE REFERENCE
 		/*
 		wp.customize('picostrap_fonts_header_code', function (value) {
@@ -317,9 +340,9 @@
 		});	
 		
 		//AFTER PUBLISHING CUSTOMIZER CHANGES, RECOMPILE SCSS
-		wp.customize.bind('saved', function( /* data */ ) {
-			if (scss_recompile_is_necessary)  ps_recompile_css_bundle();
-		});
+		//wp.customize.bind('saved', function( /* data */ ) {
+		//	if (scss_recompile_is_necessary)  ps_recompile_css_bundle();
+		//});
 				
 		// USER CLICKS ON COLORS SECTION: run  get page colors routine
 		$("body").on("click", "#accordion-section-colors", function() {
@@ -327,10 +350,9 @@
 		});
 			
 		//USER CLICKS CLOSE COMPILING WINDOW
-		$("body").on("click",".cs-close-compiling-window,.cs-closex, #compile-error",function(){
-			//$(".customize-controls-close").click();
-			$("#cs-compiling-window").fadeOut();
-		});
+		//$("body").on("click",".cs-close-compiling-window,.cs-closex, #compile-error",function(){ 
+		//	$("#cs-compiling-window").fadeOut();
+		//});
 		
 		//USER CLICKS ENABLE TOPBAR: SET A NICE HTML DEFAULT
 		$("body").on("click","#customize-control-enable_topbar",function(){
@@ -567,42 +589,4 @@
 
 
 	
-	
-
-	
-
-	/*
-
-	function picostrap_make_customizations_to_customizer(){
-
-		//$("#sub-accordion-section-colors").append("HEELLLOO");
-
-		$('iframe').on('load', function(){
-			picostrap_highlight_menu();
-		});
-
-	}
-
-	function picostrap_highlight_menu() {
-
-		if($("iframe").contents().find("body").hasClass("archive")) {
-			jQuery("li#accordion-section-archives h3").css("background","#ffcc99");
-		}
-
-		if($("iframe").contents().find("body").hasClass("single-post")) {
-			jQuery("li#accordion-section-singleposts h3").css("background","#ffcc99");
-		}
-	}
-
-	setTimeout(function(){
-		picostrap_make_customizations_to_customizer();
-
-	}, 1000);
-
-
-	*/
- 
-	
-	
- 
 })(jQuery);

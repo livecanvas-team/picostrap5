@@ -22,7 +22,7 @@ function picoWoodpecker() {
 
 
 // DISABLE THE LIBRARY'S AUTOCOMPILE 
-//document.querySelector("body").classList.add("prevent-sass-autocompile");
+document.querySelector("body").classList.add("prevent-sass-autocompile");
 
 ////// ON DOM CONTENT LOADED //////////////
 window.addEventListener("DOMContentLoaded", (event) => {
