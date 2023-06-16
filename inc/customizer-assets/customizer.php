@@ -1319,13 +1319,13 @@ add_action( 'wp_head', function  () {
 
 
 		<?php 
-				//determine wp_content_folder_name
-				$arr = explode( '/', WP_CONTENT_DIR ); 
-				$wp_content_folder_name = $arr[sizeof($arr)-1];
-				
-				//determine relative theme path
-				$arr = explode( $wp_content_folder_name, get_template_directory_uri() );
-				$theme_path = $wp_content_folder_name . $arr[1];
+		//determine wp_content_folder_name
+		$arr = explode( '/', WP_CONTENT_DIR ); 
+		$wp_content_folder_name = $arr[sizeof($arr)-1];
+		
+		//determine relative theme path
+		$arr = explode( $wp_content_folder_name, get_template_directory_uri() );
+		$theme_path = $wp_content_folder_name . $arr[1];
 		?> 
 		
 		<template id="the-scss">

@@ -192,20 +192,45 @@
 		//////////////////// LISTEN TO CUSTOMIZER CHANGES ////////////////////////
 
 		//upon changing of widgets that refer to SCSS variables, trigger a function to updateScssPreview
+		//these options use postMessage and all is handled by us in JS
 		wp.customize.bind('change', function (setting) {
 			if (setting.id.includes("SCSSvar")) {
-				const myTimeout = setTimeout(updateScssPreview, 5050);
+				//todo: add debounce
+				const myTimeout = setTimeout(updateScssPreview, 50);
 			}
 		});
+		
+		//intercept preview iframe refresh. Upon refreshing, recompile SCSS preview
+		// this is for the options that need Selective Refresh and server side processing
+		function theBinder(){
+			setTimeout(function () {
+				
+				$("#customize-preview iframe").on("load", function () {
+					console.log('Preview iframe has loaded');
 
+					const myTimeout = setTimeout(updateScssPreview, 100);
+				});
+
+				theBinder();
+
+			}, 100);
+		}
+		
+		theBinder();
+
+ 
+		
 		//BUILD THE SCSS CODE FROM THE WIDGETS VALUES, THEN update the-scss AND RETRIGGER COMPILER
 		function updateScssPreview() {
 
 			var sass = '';
 
-			var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input[type='text']:not(.cs-fontpicker-input)`);
+			var els = document.querySelectorAll(`[id^='customize-control-SCSSvar']:not([id^=customize-control-SCSSvar_font-family]) input[type='text']:not(.cs-fontpicker-input)`);
 
 			for (var i = 0; i < els.length; i++) {
+
+				//give it a color so we can inspect
+				els[i].style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 
 				if (els[i].value) {
 
