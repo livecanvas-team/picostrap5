@@ -561,7 +561,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 				$wp_customize->add_setting($variable_slug, array(
 					"default" => $default,
-					"transport" => (in_array($variable_slug, array('SCSSvar_font-family-base','SCSSvar_headings-font-family')) )  ? "refresh" : "postMessage",
+					"transport" => (0 && in_array($variable_slug, array('SCSSvar_font-family-base','SCSSvar_headings-font-family')) )  ? "refresh" : "postMessage",
 					//"default" => "1rem",
 					//'sanitize_callback' => 'picostrap_sanitize_rem'
 				));
@@ -1024,7 +1024,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	//ADD BODY FONT OBJECT - hidden by CSS
 	$wp_customize->add_setting("body_font_object", array(
         "default" => "",
-		"transport" => "refresh",
+		"transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -1040,7 +1040,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	//ADD HEADINGS FONT OBJECT - hidden by CSS
 	$wp_customize->add_setting("headings_font_object", array(
         "default" => "",
-		"transport" => "refresh",
+		"transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -1056,8 +1056,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	//ADD FONT LOADING HEADER CODE  
 	$wp_customize->add_setting("picostrap_fonts_header_code", array(
         "default" => "",
-		"transport" => "refresh",
-        //"transport" => "postMessage", // and no custom js is added: so no live page update is done, how it should be - but causes unstable behaviour
+		//"transport" => "refresh",
+        "transport" => "postMessage", // and no custom js is added: so no live page update is done, how it should be - but causes unstable behaviour
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,

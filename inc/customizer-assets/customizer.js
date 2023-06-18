@@ -150,9 +150,10 @@
 			var separator_char = ""; 
 			if (first_part != "" && second_part != "") separator_char = "&"; 
 
+			window.fontLoadingUrl = 'https://fonts.googleapis.com/css2?' + first_part + separator_char + second_part +'&display=swap'
 			html_code += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
 			html_code += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
-			html_code += '<link href="https://fonts.googleapis.com/css2?'+first_part+separator_char+second_part+'&display=swap" rel="stylesheet">\n';
+			html_code += '<link href="' + window.fontLoadingUrl + '" rel="stylesheet">\n';
 			
 			//an example: https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
 		}
@@ -160,7 +161,7 @@
 		//disable alternative font source checkbox
 		$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked",false);
 
-		console.log(html_code);
+		//console.log(html_code);
 		
 		//populate the textarea with the result
 		$("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
@@ -188,7 +189,7 @@
 
 		var sass = '';
 		
-		// loop all widgets that have values matched to SCSS vars
+		// loop all input text widgets that have values matched to SCSS vars
 		var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input[type='text']:not(.cs-fontpicker-input)`);
 
 		for (var i = 0; i < els.length; i++) {
@@ -215,7 +216,25 @@
 
 		}
 
-		//console.log('sass code: '+sass);
+		// loop all checkbox text widgets that have values matched to SCSS vars
+		var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input[type='checkbox']`);
+
+		for (var i = 0; i < els.length; i++) {
+
+			//for debug purpose, give them a bg color 
+			//els[i].style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+			if (1) {
+
+				let name = els[i].closest("li").getAttribute("id").replace("customize-control-SCSSvar_", "");
+				 
+				sass += `$${name}: ${(els[i].checked ? 'true' : 'false')}; `;
+
+			} //end if value 
+
+		}
+
+		console.log('sass code: '+sass);
 
 		return sass;
 	}
@@ -234,6 +253,13 @@
 
 		//launch the compiler
 		iframeDoc.querySelector('#picosass-output-feedback').click();
+
+		//update font loading code as well
+		var style = document.createElement('link');
+		style.href = window.fontLoadingUrl;
+		style.type = 'text/css';
+		style.rel = 'stylesheet';
+		iframeDoc.head.append(style);
 
 	}
 
@@ -293,6 +319,10 @@
  		//upon changing of widgets that refer to SCSS variables, trigger a function to updateScssPreview
 		//these options use postMessage and all is handled by us in JS
 		wp.customize.bind('change', function (setting) {
+
+			//save last preview css
+			//window.last_preview_css = document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('#picosass-injected-style').innerHTML;
+
 			if (setting.id.includes("SCSSvar")) {
 				updateScssPreviewDebounced();
 			}
