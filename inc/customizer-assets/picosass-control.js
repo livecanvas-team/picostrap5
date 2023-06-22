@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     //attach listener so we will be programmatically able to launch compiling
     //just calling: document.querySelector('#picosass-output-feedback').click();
-    
+    /*
     document.addEventListener('click', function (event) {
 
         // If the clicked element doesn't have the right selector, bail
@@ -41,9 +41,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
         //event.preventDefault();
 
         //compile
-        const compiled = picosass.Compile({  /* style: "compressed" */ });
+        const compiled = picosass.Compile({   });
 
     }, false);
+    */
 
 
 });

@@ -1330,9 +1330,9 @@ add_action( 'wp_head', function  () {
 		$theme_path = $wp_content_folder_name . $arr[1];
 		?> 
 		
-		<template id="the-scss">
+		<div hidden id="the-scss">
 
-		</template>
+		</div>
 
 		<template id="the-scss-main-import"> 
 			@import '<?php echo $theme_path; ?>/sass/main';  //@import 'wp-content/themes/picostrap5/sass/main'; 

@@ -112,8 +112,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         Compile();
     }
     
-    //attach observer to detect on-page scss code changes 
-    //TODO: this is not working inside theme, yet
+    //attach observer to detect on-page scss code changes  
     let observer = new MutationObserver(mutationRecords => {
         //console.log(mutationRecords); 
         Compile();
