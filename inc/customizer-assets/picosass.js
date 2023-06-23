@@ -17,7 +17,7 @@ const replaceLast = (str, pattern, replacement) => {
 
 
 function canonicalize(url) {
-    //console.log('canonicalize '+url);
+    console.log('canonicalize '+url);
 
     //if it's not the main file, or the main bs file, add underscores in front of scss file names
     if (!url.endsWith("/main") && !url.endsWith("/bootstrap")) {
@@ -25,7 +25,7 @@ function canonicalize(url) {
     }
 
     //create URL object to be consumed by the compiler
-    return new URL(url+'.scss', window.location.toString())
+    return new URL(url+'.scss', window.location.toString()) //is it right to add here extension?
     
 }
 

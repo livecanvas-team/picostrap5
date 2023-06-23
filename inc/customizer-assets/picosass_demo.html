@@ -37,20 +37,20 @@
 			$primary:red; @import '../../sass/main';
 		</div>
 
-		<!-- possible alternative syntax -->
+		<!-- possible alternative syntax. The good: it is ignored by the browser, by default. The bad: in theory, type attr is deprecated -->
 		<style type="text/scss">
-
+			body {border:2px solid red}
 		</style>
 
-		<!-- possible alternative syntax -->
-		<scss>
+		<!-- possible alternative syntax. The good: easy to write. The bad: less semantic, and requires hidden attr -->
+		<style-scss hidden>
 
-		</scss>
+		</style-scss>
 		  
 		<!-- how to ?-->
 		<script>
 
-		//we should be able to programmatically invoke compiling
+		//we should be able to programmatically invoke compiling, or maybe not, as mutation obs makes a good job
 		//picosass.recompile(syntax: "minify");
 
 		</script>
