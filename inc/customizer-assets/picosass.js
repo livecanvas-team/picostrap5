@@ -24,8 +24,8 @@ function canonicalize(url) {
         url = replaceLast(url, '/', '/_');
     }
 
-    //create URL object to be consumed by the compiler
-    return new URL(url+'.scss', window.location.toString()) //is it right to add here extension?
+    //create URL object to be consumed by the compiler. Here we added .scss violently
+    return new URL(url + '.scss', window.location.toString())  
     
 }
 

@@ -15,7 +15,7 @@
 			{
 				"imports": {
 				"immutable": "https://unpkg.com/immutable@^4.0.0",
-				"sass": "https://unpkg.com/sass@^1.63.0/sass.default.js"
+				"sass": "https://unpkg.com/sass@^1.63.6/sass.default.js"
 				}
 			}
 		</script>
@@ -23,6 +23,16 @@
 		<!-- Support browsers like Safari 16.3 without import maps support. -->
 		<script async src="https://unpkg.com/es-module-shims@^1.7.0" crossorigin="anonymous"></script>
 
+		<script type="module">
+			import * as sass from 'sass';
+
+			console.log(sass.compileString(`
+		    .box {
+		      width: 10px + 15px;
+		    }
+		  `));
+		</script>
+		
 		<script type="module" src="picosass.js"></script>
 
 		<!-- End picoSASS JS -->
@@ -35,6 +45,7 @@
 
 		<div id="the-scss" hidden>
 			$primary:red; @import '../../sass/main';
+			//@import "https://livecanvas.com/wp-content/themes/livecanvas-5/sass/main.scss";
 		</div>
 
 		<!-- possible alternative syntax. The good: it is ignored by the browser, by default. The bad: in theory, type attr is deprecated -->
