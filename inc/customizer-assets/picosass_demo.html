@@ -23,6 +23,7 @@
 		<!-- Support browsers like Safari 16.3 without import maps support. -->
 		<script async src="https://unpkg.com/es-module-shims@^1.7.0" crossorigin="anonymous"></script>
 
+		<!--
 		<script type="module">
 			import * as sass from 'sass';
 
@@ -32,7 +33,8 @@
 		    }
 		  `));
 		</script>
-		
+		-->
+
 		<script type="module" src="picosass.js"></script>
 
 		<!-- End picoSASS JS -->
@@ -44,8 +46,8 @@
 		 <!-- OPTIONALLY, As an editing demo, add contenteditable = "true" style = "z-index: 999999; position:fixed; right:0;bottom:40%;width:200px;min-height: 300px;background: aqua;" -->
 
 		<div id="the-scss" hidden>
-			$primary:red; @import '../../sass/main';
-			//@import "https://livecanvas.com/wp-content/themes/livecanvas-5/sass/main.scss";
+			$primary:red; 
+			@import '../../sass/main';
 		</div>
 
 		<!-- possible alternative syntax. The good: it is ignored by the browser, by default. The bad: in theory, type attr is deprecated -->

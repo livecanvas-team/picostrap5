@@ -25,8 +25,8 @@ function canonicalize(url) {
     }
 
     //create URL object to be consumed by the compiler. Here we added .scss violently
-    return new URL(url + '.scss', window.location.toString())  
-    
+    const base = document.querySelector("#the-scss").getAttribute("baseurl") ?? window.location.toString();
+    return new URL(url + '.scss', base);
 }
 
 function load(canonicalUrl) {

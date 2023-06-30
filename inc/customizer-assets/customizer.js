@@ -234,7 +234,7 @@
 
 		}
 
-		console.log('sass code: '+sass);
+		//console.log('Variables Sass code: ' + sass);
 
 		return sass;
 	}
@@ -245,21 +245,21 @@
 		var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
 
 		//build the full SASS with variables and main import
-		var newsass = buildScssVariablesPart() + iframeDoc.querySelector('#the-scss-main-import').innerHTML;
+		var newsass = buildScssVariablesPart() + " @import 'sass/main'; ";
 
-		console.log('Full sass code: \n' + newsass);
+		console.log('Update SASS code to: \n' + newsass);
 
-		iframeDoc.querySelector('#the-scss').innerHTML = newsass;
+		iframeDoc.querySelector('#the-scss').innerHTML = newsass; //this triggers automatically the compiler
 
-		//launch the compiler programmatically: no more necessary as changes are sensed automatically
-		//iframeDoc.querySelector('#picosass-output-feedback').click();
-
-		//update font loading code as well
-		var style = document.createElement('link');
-		style.href = window.fontLoadingUrl;
-		style.type = 'text/css';
-		style.rel = 'stylesheet';
-		iframeDoc.head.append(style);
+		//update font loading code as well, if necessary
+		if (window.fontLoadingUrl){
+			console.log("Update font loading code to add " + window.fontLoadingUrl);
+			var style = document.createElement('link');
+			style.href = window.fontLoadingUrl;
+			style.type = 'text/css';
+			style.rel = 'stylesheet';
+			iframeDoc.head.append(style);
+		}
 
 	}
 

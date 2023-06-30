@@ -1319,24 +1319,9 @@ add_action( 'wp_head', function  () {
 		<!-- add interface -->
 		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass-control.js"></script>
 
-
-		<?php 
-		//determine wp_content_folder_name
-		$arr = explode( '/', WP_CONTENT_DIR ); 
-		$wp_content_folder_name = $arr[sizeof($arr)-1];
 		
-		//determine relative theme path
-		$arr = explode( $wp_content_folder_name, get_template_directory_uri() );
-		$theme_path = $wp_content_folder_name . $arr[1];
-		?> 
-		
-		<div hidden id="the-scss">
-
+		<div hidden id="the-scss" baseurl="<?php echo get_template_directory_uri() ?>/">
 		</div>
-
-		<template id="the-scss-main-import"> 
-			@import '<?php echo $theme_path; ?>/sass/main';  //@import 'wp-content/themes/picostrap5/sass/main'; 
-		</template>
 
 	<?php
 } );
