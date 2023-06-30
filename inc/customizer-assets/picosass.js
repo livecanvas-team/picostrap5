@@ -54,7 +54,7 @@ function load(canonicalUrl) {
 }
  
 
-export function Compile(sassParams = {  /* style: "compressed" */ }) {
+export function Compile(sassParams = {    style: "compressed"   }) {
 
     //show feedback message: we are compiling ....
     document.querySelector("#picosass-output-feedback").innerHTML = " Compiling SCSS... ";
@@ -82,8 +82,9 @@ export function Compile(sassParams = {  /* style: "compressed" */ }) {
     
     //console.log(compiled); 
 
-    //add the resulting CSS to the page 
-    document.querySelector('#picosass-injected-style').innerHTML = compiled.css;
+    //add the resulting CSS to the page  
+    //the replace is there to kill a strange symbol which is prepended when compiling w/ style: "compressed"
+    document.querySelector('#picosass-injected-style').innerHTML = compiled.css.replace(/\uFEFF/g, " "); 
 
     //remove initial static CSS 
     document.querySelector("#picostrap-styles-css")?.setAttribute("disabled", "true");
