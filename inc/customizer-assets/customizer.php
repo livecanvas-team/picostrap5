@@ -1303,7 +1303,7 @@ add_action( 'wp_head', function  () {
 			{
 				"imports": {
 				"immutable": "https://unpkg.com/immutable@^4.0.0",
-				"sass": "https://unpkg.com/sass@^1.63.0/sass.default.js"
+				"sass": "https://unpkg.com/sass@^1.63.6/sass.default.js"
 				}
 			}
 		</script>
