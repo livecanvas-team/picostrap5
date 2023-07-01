@@ -17,7 +17,7 @@ const replaceLast = (str, pattern, replacement) => {
 
 
 function canonicalize(url) {
-    console.log('canonicalize '+url);
+    console.log('canonicalize ' + url);
 
     //if it's not the main file, or the main bs file, add underscores in front of scss file names
     if (!url.endsWith("/main") && !url.endsWith("/bootstrap")) {
@@ -32,7 +32,16 @@ function canonicalize(url) {
 function load(canonicalUrl) {
     console.log(`Importing ${canonicalUrl} (sync)`)
     const request = new XMLHttpRequest();
-    if (  canonicalUrl.pathname.includes('cache')){
+
+    request.onreadystatechange = () => {
+        if (request.readyState === 4 && request.status !== 200)
+            throw new Error(`Failed to fetch ${canonicalUrl}: ${request.status} (${request.statusText})`);
+    };
+
+    request.open("GET", canonicalUrl, false);
+
+    //does this really work? meh
+    if (canonicalUrl.pathname.includes('cache')) {
         //force usage of a cache
         request.setRequestHeader('Cache-Control', 'max-age=3600');
     } else {
@@ -41,31 +50,30 @@ function load(canonicalUrl) {
         //request.setRequestHeader('Expires', 'Thu, 1 Jan 1970 00:00:00 GMT');
         //request.setRequestHeader('Pragma', 'no-cache');
     }
-    request.onreadystatechange = () => {
-        if (request.readyState === 4 && request.status !== 200)
-            throw new Error(`Failed to fetch ${canonicalUrl}: ${request.status} (${request.statusText})`);
-    };
-    request.open("GET", canonicalUrl, false);
+
     request.send();
     return {
         contents: request.responseText,
         syntax: canonicalUrl.pathname.endsWith('.sass') ? 'indented' : 'scss'
     };
 }
- 
 
-export function Compile(sassParams = {    style: "compressed"   }) {
+
+export function Compile(sassParams = { style: "compressed" }) {
 
     //show feedback message: we are compiling ....
-    document.querySelector("#picosass-output-feedback").innerHTML = " Compiling SCSS... ";
+    try {
+        document.querySelector("#picosass-output-feedback").innerHTML = " Compiling SCSS... ";
+    } catch (err) {
 
+    }
     //set default importers
     if (!sassParams.importers) sassParams.importers = [{ canonicalize, load }];
 
     //get the sass code to be compiled: if no source element, alert
     if (!document.querySelector("#the-scss")) document.querySelector("#picosass-output-feedback").innerHTML = " No SCSS element to compile... ";
-    
-    const theCode = document.querySelector("#the-scss").innerHTML;  
+
+    const theCode = document.querySelector("#the-scss").innerHTML;
 
     let compiled = "";
 
@@ -73,18 +81,18 @@ export function Compile(sassParams = {    style: "compressed"   }) {
     try {
 
         compiled = sass.compileString(theCode, sassParams);
-    
+
     } catch (err) {
 
         //show error in output feedback 
         document.querySelector("#picosass-output-feedback").innerHTML = err;
     }
-    
+
     //console.log(compiled); 
 
     //add the resulting CSS to the page  
     //the replace is there to kill a strange symbol which is prepended when compiling w/ style: "compressed"
-    document.querySelector('#picosass-injected-style').innerHTML = compiled.css.replace(/\uFEFF/g, " "); 
+    document.querySelector('#picosass-injected-style').innerHTML = compiled.css.replace(/\uFEFF/g, " ");
 
     //remove initial static CSS 
     document.querySelector("#picostrap-styles-css")?.setAttribute("disabled", "true");
@@ -105,14 +113,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
     if (!document.querySelector("#picosass-injected-style")) document.head.insertAdjacentHTML("beforeend", `<style id="picosass-injected-style"> </style>`);
 
     //if not present, add a DIV and some styling TO SHOW COMPILER MESSAGES / OUTPUT FEEDBACK 
-    if (!document.querySelector("#picosass-output-feedback")) document.querySelector("html").insertAdjacentHTML("afterbegin", `<div id='picosass-output-feedback'></div> <style> #picosass-output-feedback { position: fixed; z-index: 99999999; font-size:30px; background:#212337; color:lime; font-family:courier; border:8px solid red; padding:15px; display:block; user-select: none; } #picosass-output-feedback:empty {display:none} </style> `);
+    if (!document.querySelector("#picosass-output-feedback")) document.querySelector("html").insertAdjacentHTML("afterbegin", `<div id='picosass-output-feedback'></div> <style> #picosass-output-feedback { position: fixed; z-index: 99999999; font-size:30px; background:#212337; color:lime; font-family:courier; border:8px solid red; padding:15px; display:block;   } #picosass-output-feedback:empty {display:none} </style> `);
 
     //run  the compiler, unless a special class is added to the body
     if (!document.querySelector("body").classList.contains("prevent-sass-autocompile")) {
         console.log("run compile");
         Compile();
     }
-    
+
     //attach observer to detect on-page scss code changes  
     let observer = new MutationObserver(mutationRecords => {
         //console.log(mutationRecords); 
@@ -125,5 +133,5 @@ window.addEventListener("DOMContentLoaded", (event) => {
         subtree: true, // and lower descendants too
         characterDataOldValue: true // pass old data to callback
     });
-    
+
 }); //end onDOMContentLoaded
