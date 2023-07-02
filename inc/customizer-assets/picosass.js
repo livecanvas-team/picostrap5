@@ -61,12 +61,9 @@ function load(canonicalUrl) {
 
 export function Compile(sassParams = { style: "compressed" }) {
 
-    //show feedback message: we are compiling ....
-    try {
-        document.querySelector("#picosass-output-feedback").innerHTML = " Compiling SCSS... ";
-    } catch (err) {
-
-    }
+    //show feedback message: we are compiling ....QUESTION: why is this action "delayed"? 
+    document.querySelector("#picosass-output-feedback").innerHTML = " Compiling SCSS... ";
+    
     //set default importers
     if (!sassParams.importers) sassParams.importers = [{ canonicalize, load }];
 
