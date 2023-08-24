@@ -1295,34 +1295,31 @@ add_action( 'wp_head', function  () {
 
 /////////// LIVE CUSTOMIZER HELPER FOR NEW FRONTEND BASED SCSS COMPILER ///////////
 
+
 add_action( 'wp_head', function  () {
 	if (!current_user_can('administrator') OR !isset($_GET['customize_theme'])) return;
     ?>
-		<!-- Start picoSASS JS -->
-		<script type="importmap">
-			{
-				"imports": {
-				"immutable": "https://unpkg.com/immutable@^4.0.0",
-				"sass": "https://unpkg.com/sass@^1.63.6/sass.default.js"
-				}
-			}
-		</script>
-
-		<!-- Support browsers like Safari 16.3 without import maps support. -->
-		<script async src="https://unpkg.com/es-module-shims@^1.7.0" crossorigin="anonymous"></script>
-
-		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass.js"></script>
-
-		<!-- End picoSASS JS -->
-
 		
-		<!-- add interface -->
-		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass-control.js"></script>
+		<!-- add picoSASS JS --> 
+		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass/picosass.js"></script>
 
 		
 		<div hidden id="the-scss" baseurl="<?php echo get_template_directory_uri() ?>/">
 		</div>
 
+	<?php
+} );
+ 
+
+add_action( 'wp_footer', function  () {
+	if (!current_user_can('administrator') OR !isset($_GET['customize_theme'])) return;
+    ?>
+		
+		<script>
+			//set a flag to disable autocompile
+			document.querySelector("body").classList.add("prevent-sass-autocompile");
+		</script>
+		
 	<?php
 } );
  

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,200;1,200&family=Bacasime+Antique&family=Black+Ops+One&display=swap"
+        rel="stylesheet">
+
+        
+    <!-- <link class="picostrap-provisional-css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
+            
+
+    <script type="module" src="picosass.js"></script>
+
+    <template id="the-scss">
+
+        //set your custom variables
+        $primary: fuchsia;
+        $headings-font-family: "Black Ops One";
+
+        //import your local scss folder, including Bootstrap
+        @import "scss/main";
+
+        //add your additional sCSS
+        body { border:13px solid red !important;}
+
+    </template>
+
+</head>
+
+<body>
+    <div class="container bg-light">
+        <div class="row py-5  text-center">
+            <div class="col bg-primary">
+                <h1 class="display-1 text-warning">Hello, picosass!</h1>
+                <h1 class="display-1 text-danger" >Hello, picosass!</h1>
+                <h2>Hello, picosass!</h2>
+                <h3>Hello, picosass!</h3>
+            </div>
+        </div>
+    </div>
+   
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

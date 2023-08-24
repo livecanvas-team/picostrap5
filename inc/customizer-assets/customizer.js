@@ -176,7 +176,7 @@
 
 			$("#customize-preview iframe").on("load", function () {
 				console.log('Preview iframe has loaded');
-				updateScssPreviewDebounced();
+				//updateScssPreviewDebounced(); //not necessary in theory
 			});
 			
 			thePreviewRefreshBinder();
@@ -249,8 +249,11 @@
 
 		console.log('Update SASS code to: \n' + newsass);
 
-		iframeDoc.querySelector('#the-scss').innerHTML = newsass; //this triggers automatically the compiler
-
+		iframeDoc.querySelector('#the-scss').innerHTML = newsass; 
+		
+		//trigger picosass compiler //TODO: add debounce
+		document.querySelector('#customize-preview iframe').contentWindow.Picosass.Compile(); 
+	
 		//update font loading code as well, if necessary
 		if (window.fontLoadingUrl){
 			console.log("Update font loading code to add " + window.fontLoadingUrl);
