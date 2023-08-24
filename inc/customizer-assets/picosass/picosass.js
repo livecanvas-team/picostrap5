@@ -47,21 +47,21 @@ async function load(canonicalUrl) {
     }
 }
 
-async function runScssCompiler(theCode, sassParams = { style: "compressed"} ) {
+async function runScssCompiler(theCode, sassParams ) {
+
+    //set default output
+    if (!sassParams.style) sassParams.style = "compressed";
 
     //set default importers
     if (!sassParams.importers) sassParams.importers = [{ canonicalize, load }];
 
     //set default charset
-    sassParams.charset = false;
+    if (!sassParams.charset) sassParams.charset = false;
 
     return await sass.compileStringAsync(theCode, sassParams)
 }
 
-export function Compile(sassParams) {
-
-    //if not present, prepare a space for the new CSS
-    if (!document.querySelector("#picosass-injected-style")) document.head.insertAdjacentHTML("beforeend", `<style id="picosass-injected-style"> </style>`);
+export function Compile(sassParams = {}) {
 
     //if not present, add a DIV and some styling TO SHOW COMPILER MESSAGES / OUTPUT FEEDBACK 
     if (!document.querySelector("#picosass-output-feedback")) document.querySelector("html").insertAdjacentHTML("afterbegin", `
@@ -73,7 +73,7 @@ export function Compile(sassParams) {
         </style>
         `);
     
-    //is a similar process already running? if so, abort
+    //is a Compile process already running? if so, abort
     //TODO:: make it cleaner
     if(document.querySelector("#picosass-output-feedback").innerHTML!='') {
         console.log("PicoSASS task is already running, aborting");
@@ -81,16 +81,19 @@ export function Compile(sassParams) {
         return false;
     }
 
-    //show the first feedback message: Compiling .... 
-    document.querySelector("#picosass-output-feedback").innerHTML = ` Compiling SCSS... <span></span>`; 
-    console.log("Running Compiler...");
-
-    //if no SCSS source element, show message: No SCSS element to compile...
+    //if no SCSS source element is on the page, show message: No SCSS element to compile...
     if (!document.querySelector(theScssSelector)) document.querySelector("#picosass-output-feedback").innerHTML = ` No SCSS element to compile... `;
 
     //if SCSS source element is empty, exit
     const theCode = document.querySelector(theScssSelector).innerHTML;
-    if (theCode.trim() == '')  return false; 
+    if (theCode.trim() == '')  {
+        console.log("Empty SCSS source, aborting");
+        return false; 
+    }
+
+    //show the first feedback message: Compiling .... 
+    document.querySelector("#picosass-output-feedback").innerHTML = ` Compiling SCSS... <span></span>`;
+    console.log("Running Compiler...");
 
     //run the compiler
     runScssCompiler(theCode, sassParams)
@@ -98,7 +101,10 @@ export function Compile(sassParams) {
         .then((compiled) => {
             console.log(compiled);
 
-            //add the resulting CSS to the page
+            //if not present, add a new CSS element
+            if (!document.querySelector("#picosass-injected-style")) document.head.insertAdjacentHTML("beforeend", `<style id="picosass-injected-style"> </style>`);
+
+            //populate the element with the new CSS
             //Note: Before changing compiler charset setting to false, //.replace(/\uFEFF/g, " "); was necessarily to be appended.
             document.querySelector('#picosass-injected-style').innerHTML = compiled.css;
 
@@ -119,8 +125,10 @@ export function Compile(sassParams) {
         })
 }
 
-//make the Compile function available in the outside world 
-//via window.Picosass.Compile();
+//MAKE THE COMPILE FUNCTION  GLOBALLY AVAILABLE
+//eg: window.Picosass.Compile();
+//or: window.Picosass.Compile({style: "expanded"});
+
 window.Picosass = {
     Compile: Compile,
     Run: runScssCompiler
