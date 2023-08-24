@@ -99,24 +99,20 @@ export function Compile(sassParams = {}) {
     runScssCompiler(theCode, sassParams)
 
         .then((compiled) => {
+            console.log("SCSS compiled successfully.");
             console.log(compiled);
 
             //if not present, add a new CSS element
             if (!document.querySelector("#picosass-injected-style")) document.head.insertAdjacentHTML("beforeend", `<style id="picosass-injected-style"> </style>`);
 
             //populate the element with the new CSS
-            //Note: Before changing compiler charset setting to false, //.replace(/\uFEFF/g, " "); was necessarily to be appended.
             document.querySelector('#picosass-injected-style').innerHTML = compiled.css;
 
             //remove initial static CSS 
-            document.querySelector("#picostrap-styles-css")?.setAttribute("disabled", "true");
             document.querySelector(".picostrap-provisional-css")?.setAttribute("disabled", "true");
 
             //as there are no errors, clear the output feedback
             document.querySelector("#picosass-output-feedback").innerHTML = '';
-
-            //return for additional processing or saving 
-            //return compiled.css; //cant we have a string ?
         })
 
         .catch((error) => {

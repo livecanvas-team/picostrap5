@@ -1293,7 +1293,7 @@ add_action( 'wp_head', function  () {
 
 
 
-/////////// LIVE CUSTOMIZER HELPER FOR NEW FRONTEND BASED SCSS COMPILER ///////////
+/////////// INTEGRATE PICOSASS JS FOR LIVE PREVIEWING ///////////
 
 
 add_action( 'wp_head', function  () {
@@ -1318,6 +1318,10 @@ add_action( 'wp_footer', function  () {
 		<script>
 			//set a flag to disable autocompile
 			document.querySelector("body").classList.add("prevent-sass-autocompile");
+
+			//mark the normal CSS as provisional
+			document.querySelector("#picostrap-styles-css").classList.add("picostrap-provisional-css");
+
 		</script>
 		
 	<?php
