@@ -262,7 +262,7 @@
 		}); //end each
 		
 		//ADD H1 SUBTITLE for BS COLORS
-		$("#customize-control-SCSSvar_primary h1").css("padding-bottom", "0").append('<p class="pico-text-suggestion" >Live Preview is not possible for Bootstrap Theme Colors. Click the Publish button to view the changes.</p>');
+		//$("#customize-control-SCSSvar_primary h1").css("padding-bottom", "0").append('<p class="pico-text-suggestion" >Live Preview is not possible for Bootstrap Theme Colors. Click the Publish button to view the changes.</p>');
  
 		//ADD COLORS HEADING 
 		$("#customize-control-enable_back_to_top").prepend(" <h1>Opt-in extra features</h1><hr> ");

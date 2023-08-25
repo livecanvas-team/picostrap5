@@ -1130,7 +1130,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 	*/
-	
+
 	// ADD A SECTION FOR EXTRAS /////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("extras", array(
         "title" => __("Global Utilities", 'picostrap5'),
@@ -1357,7 +1357,7 @@ add_action("wp_ajax_picostrap_save_css_bundle", function (){
     check_ajax_referer('picostrap_livereload', 'nonce');
 
 	//ADD SOME COMMENT
-	$compiled_css = $_POST['css']." /* DO NOT ADD YOUR CSS HERE. ADD IT TO SASS/_CUSTOM.SCSS */ ";
+	$compiled_css = stripslashes($_POST['css'])." /* DO NOT ADD YOUR CSS HERE. ADD IT TO SASS/_CUSTOM.SCSS */ ";
 
 	//INIT WP FILESYSTEM 
 	global $wp_filesystem;
