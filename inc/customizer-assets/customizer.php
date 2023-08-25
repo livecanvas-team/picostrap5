@@ -1113,6 +1113,24 @@ function picostrap_theme_customize_register_extras($wp_customize) {
     ));
 	
 
+	//ADD SCSS MAIN  FIELD - to hide by CSS
+	/*
+	$wp_customize->add_setting("scss_main", array(
+        "default" => "",
+		"transport" => "postMessage",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "scss_main",
+        array(
+            "label" => __("scss_main", 'picostrap5'),
+            "section" => "addcode",
+            'type'     => 'textarea',
+			'description' =>'<b>Not editable</b> - Internal purpose only.'
+			)
+    ));
+	*/
+	
 	// ADD A SECTION FOR EXTRAS /////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("extras", array(
         "title" => __("Global Utilities", 'picostrap5'),
@@ -1314,7 +1332,8 @@ add_action( 'wp_head', function  () {
 add_action( 'wp_footer', function  () {
 	if (!current_user_can('administrator') OR !isset($_GET['customize_theme'])) return;
     ?>
-		
+		<button style="position:fixed;top:0;right:20px;" onclick="window.Picosass.Compile()">Recompile SASS</button>
+
 		<script>
 			//set a flag to disable autocompile
 			document.querySelector("body").classList.add("prevent-sass-autocompile");
@@ -1327,3 +1346,51 @@ add_action( 'wp_footer', function  () {
 	<?php
 } );
  
+ 
+//HANDLE ACTION for AJAX REQUEST: picostrap_recompile_sass
+add_action("wp_ajax_picostrap_save_css_bundle", function (){
+    
+	//exit if unlogged or non admin
+	if(!is_user_logged_in() OR !current_user_can("administrator")  ) return; 
+	
+    //check nonce
+    check_ajax_referer('picostrap_livereload', 'nonce');
+
+	//ADD SOME COMMENT
+	$compiled_css = $_POST['css']." /* DO NOT ADD YOUR CSS HERE. ADD IT TO SASS/_CUSTOM.SCSS */ ";
+
+	//INIT WP FILESYSTEM 
+	global $wp_filesystem;
+	if (empty($wp_filesystem)) {
+		require_once (ABSPATH . '/wp-admin/includes/file.php');
+		WP_Filesystem();
+	}
+
+	//SAVE THE FILE
+	$saving_operation = $wp_filesystem->put_contents( get_stylesheet_directory() . '/' . picostrap_get_css_optional_subfolder_name() . picostrap_get_complete_css_filename(), $compiled_css, FS_CHMOD_FILE ); // , 0644 ?
+	
+	if ($saving_operation) { // IF UPLOAD WAS SUCCESSFUL 
+
+		//STORE CSS BUNDLE VERSION NUMBER
+		$current_version_number = get_theme_mod ('css_bundle_version_number');
+		if (!is_numeric($current_version_number)) $current_version_number=rand(1,1000);
+		set_theme_mod ('css_bundle_version_number', $current_version_number+1);
+
+		//GIVE POSITIVE FEEDBACK	
+		echo "<compiler-success>";
+		echo "<h1>New CSS bundle successfully generated</h1>";
+		echo "<a href='".picostrap_get_css_url()."' target='new'>View File</a>";
+		echo "<br><br><b>Size: </b><br>".round(mb_strlen($compiled_css, '8bit')/1000)." kB - ".round(mb_strlen(gzcompress($compiled_css), '8bit')/1000)." kB gzipped";
+		echo "</compiler-success>";
+		return TRUE;
+
+	} else {
+		//GIVE NEGATIVE FEEDBACK
+		echo "<compiler-error>";
+		echo  "<h1>Error writing CSS file</h1>";
+		echo "</compiler-error>";
+		return FALSE;
+	}
+  
+    wp_die();
+});

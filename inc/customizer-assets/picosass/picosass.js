@@ -67,7 +67,7 @@ export function Compile(sassParams = {}) {
     if (!document.querySelector("#picosass-output-feedback")) document.querySelector("html").insertAdjacentHTML("afterbegin", `
         <div id='picosass-output-feedback'></div> 
         <style> 
-            #picosass-output-feedback { position: fixed; top:5px; z-index: 99999999; width:80%;font-size:30px; background:#212337; color:lime; font-family:courier; border:12px solid red; padding:15px; display:block;   } 
+            #picosass-output-feedback { position: fixed; top:5px; z-index: 99999999; width:80%;font-size:30px; background:#212337; color:lime; font-family:courier; border:12px solid red; padding:15px; display:block;    word-wrap: break-word;   } 
             #picosass-output-feedback span{display:block; font-size:16px;}
             #picosass-output-feedback:empty {display:none}
         </style>
@@ -75,9 +75,9 @@ export function Compile(sassParams = {}) {
     
     //is a Compile process already running? if so, abort
     //TODO:: make it cleaner
-    if(document.querySelector("#picosass-output-feedback").innerHTML!='') {
+    if(document.querySelector("#picosass-output-feedback").innerHTML.includes('Compiling')) {
         console.log("PicoSASS task is already running, aborting");
-        //wait a bit and retrigger
+        //TO DO: abort and retrigger
         return false;
     }
 

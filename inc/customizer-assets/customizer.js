@@ -47,26 +47,19 @@
         }); //end each
         
     }
-	/*
-	function ps_recompile_css_bundle(){
+	
+	function ps_save_css_bundle(){
 
-		//SAVE PREVIEW IFRAME SRC
-		preview_iframe_src=$("#customize-preview iframe").attr("src");
-		if (preview_iframe_src===undefined) preview_iframe_src=$("#customize-preview iframe").attr("data-src");
-		//console.log("Preview iFrame URL: "+preview_iframe_src); //for debug
-		
-		//SHOW WINDOW	
-		$("#cs-compiling-window").fadeIn();
-		$('#cs-loader').show();
-				
-		$("#cs-recompiling-target").html("<h1 style='display:block;text-align:center'>Recompiling SASS...</h1>"); 
-		
-		//AJAX CALL
-
-		//build the request
+		//build the request to send via AJAX POST
 		const formdata = new FormData();
+		const theCss = document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('#picosass-injected-style').innerHTML;
+		if (theCss.trim() == '') {
+			console.log("Empty CSS, aborting");
+			return false;
+		}
 		formdata.append("nonce", picostrap_ajax_obj.nonce);
-		formdata.append("action", "picostrap_recompile_sass");
+		formdata.append("action", "picostrap_save_css_bundle");
+		formdata.append("css", theCss);
 		fetch(picostrap_ajax_obj.ajax_url, {
 			method: "POST",
 			credentials: "same-origin",
@@ -77,40 +70,14 @@
 		}).then(response => response.text())
 			.then(response => {
 				
-				//hide preload
-				$('#cs-loader').hide();
-
-				//show feedback
-				var theCloseButton =" <button style='font-size:30px;width:100%' class='cs-close-compiling-window'>OK </button> ";
-				$("#cs-recompiling-target").html(response + theCloseButton);
-
-				//reload preview iframe 
-				$("#customize-preview iframe").attr("src", preview_iframe_src);
-
-				//upon preview iframe loaded, fetch colors
-				$("#customize-preview iframe").on("load", function () {
-					console.log('Preview iframe loaded');
-
-					//reload the CSS, bust the cache
-					var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
-					url = iframeDoc.querySelector('#picostrap-styles-css').href;
-					iframeDoc.querySelector('#picostrap-styles-css').href = url;
-
-					//get page colors and paint UX
-					ps_get_page_colors();
-				});
+				console.log("Saved successfully: " + response);
 				 
-
 			}).catch(function (err) {
-				console.log("picostrap_recompile_sass Error: "+err);
+				console.log("ps_save_css_bundle Error: "+err);
 			}); 
-
-		
-		//RESET FLAG
-		scss_recompile_is_necessary=false;
 			
 	} //END FUNCTION ps_recompile_css_bundle
-	*/
+	
 		
 	function ps_is_a_google_font(fontFamilyName){
 		const google_fonts = JSON.parse(google_fonts_json);
@@ -372,10 +339,10 @@
 			}
 		});	
 		
-		//AFTER PUBLISHING CUSTOMIZER CHANGES, RECOMPILE SCSS
-		//wp.customize.bind('saved', function( /* data */ ) {
-		//	if (scss_recompile_is_necessary)  ps_recompile_css_bundle();
-		//});
+		//AFTER PUBLISHING CUSTOMIZER CHANGES, SAVE SCSS & CSS
+		wp.customize.bind('saved', function( /* data */ ) {
+			ps_save_css_bundle();
+		});
 				
 		// USER CLICKS ON COLORS SECTION: run  get page colors routine
 		$("body").on("click", "#accordion-section-colors", function() {
