@@ -1315,25 +1315,28 @@ add_action( 'wp_head', function  () {
 
 
 add_action( 'wp_head', function  () {
-	if (!current_user_can('administrator') OR !isset($_GET['customize_theme'])) return;
+	if (!current_user_can('administrator') ) return;
+	if (!isset($_GET['customize_theme']) && !isset($_GET['picosass'])) return;
     ?>
 		
 		<!-- add picoSASS JS --> 
 		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass/picosass.js"></script>
 
-		
-		<div hidden id="the-scss" baseurl="<?php echo get_template_directory_uri() ?>/">
-		</div>
+		<!-- add the SCSS code --> 
+		<template id="the-scss" baseurl="<?php echo get_template_directory_uri() ?>/">
+		</template>
 
 	<?php
 } );
  
 
 add_action( 'wp_footer', function  () {
-	if (!current_user_can('administrator') OR !isset($_GET['customize_theme'])) return;
+	
+	if (!current_user_can('administrator') ) return;
+	if (!isset($_GET['customize_theme']) && !isset($_GET['picosass'])) return;
     ?>
-		<button style="position:fixed;top:0;right:20px;" onclick="window.Picosass.Compile()">Recompile SASS</button>
-
+		<!-- <button style="position:fixed;top:0;right:20px;" onclick="window.Picosass.Compile()">Recompile SASS</button> -->
+		 
 		<script>
 			//set a flag to disable autocompile
 			document.querySelector("body").classList.add("prevent-sass-autocompile");
@@ -1342,7 +1345,6 @@ add_action( 'wp_footer', function  () {
 			document.querySelector("#picostrap-styles-css").classList.add("picostrap-provisional-css");
 
 		</script>
-		
 	<?php
 } );
  

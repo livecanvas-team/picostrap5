@@ -170,14 +170,14 @@
 
 				//console.log(name + " " + els[i].value);
 
-				if ( name.includes('font-family') || 0 ) {
-					
-					sass += `$${name}: '${els[i].value}'; `;
-				}
-				else {
-					
+				//if ( name.includes('font-family') || 0 ) {
+				//
+				//	sass += `$${name}: '${els[i].value}'; `;
+				//}
+				//else {
+				//	
 					sass += `$${name}: ${els[i].value}; `;
-				}
+				//}
 
 			} //end if value 
 

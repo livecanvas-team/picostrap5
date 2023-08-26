@@ -55,6 +55,8 @@ span.lpa svg  {
 	margin-right: 20px;
 }
 
+
+/*
 #cs-compiling-window {
   min-width: 300px;
   max-width: 600px;
@@ -65,12 +67,9 @@ span.lpa svg  {
   padding: 10px;
   text-align: left;
   background: #212337;
-  border: 3px solid #8e8e8e;
-  /* box-shadow: 0 0 0 2038px rgba(0, 0, 0, .7); */
-  height: 100%;
-  /* width: 50vw; */
-  overflow: visible;
-  /* margin: auto; */
+  border: 3px solid #8e8e8e; 
+  height: 100%; 
+  overflow: visible; 
   top: 0px;
   font-family: courier;
   bottom: 0;
@@ -100,6 +99,7 @@ span.lpa svg  {
 	cursor: pointer;
 	
 }
+*/
 
 #cs-recompiling-target {color: #b4b7b6;}
 #cs-recompiling-target a {word-break: break-all;}
@@ -124,7 +124,7 @@ div#compile-error:hover{
 }
 
 /*  SPINNING LOADER */
-
+/*
 .cs-chase {
   width: 40px;
   height: 40px;
@@ -180,24 +180,24 @@ div#compile-error:hover{
     transform: scale(1.0); 
   } 
 }
-
+*/
 /* FONT PICKER MODAL */
 body .font-picker .fp-modal {
-    display: none;
-    flex-flow: column;
-    position: fixed;
-    height: 100vh;
-    max-height: 100%; 
-    width: 400px;
-    max-width: 100%;
-    background: #fff;
-    z-index: 999999999;
-    box-shadow: 0 4px 5px rgba(0,0,0,.15);
-    border-radius: 4px;
-    left: 201px;
-    transform: translateX(-50%);
-    top: 0px;
-    bottom: 15px;
+  display: none;
+  flex-flow: column;
+  position: fixed;
+  height: 100vh;
+  max-height: 100%; 
+  width: 400px;
+  max-width: 100%;
+  background: #fff;
+  z-index: 999999999;
+  box-shadow: 0 4px 5px rgba(0,0,0,.15);
+  border-radius: 4px;
+  left: 201px;
+  transform: translateX(-50%);
+  top: 0px;
+  bottom: 15px;
 }
 /* hide italic font selection */
 body span.fp-pill.italic { display: none} 
@@ -266,3 +266,21 @@ body span.fp-pill.italic { display: none}
 .video-tutorial-link:focus {
   box-shadow: none;
 }
+
+#the-scss-viewing-glassdoor {
+  position: fixed; 
+  top:5px; 
+  right:0;
+  z-index: 99999999;
+  width:40%;
+  height:60%;
+  overflow: scroll;
+  font-size:11px; background:#212337;
+  color:lime;
+  font-family:courier;
+  border:12px solid red; 
+  padding:15px 10px;
+  display:block;  
+  word-wrap: break-word; 
+
+  }
