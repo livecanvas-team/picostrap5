@@ -14,9 +14,7 @@
 			};
 
 			var callNow = immediate && !timeout;
-
 			clearTimeout(timeout);
-
 			timeout = setTimeout(later, wait);
 
 			if (callNow) func.apply(context, args);
@@ -36,7 +34,6 @@
 
             color_name = $(el).find(".customize-control-description .variable-name").text().replace("(", "").replace(")", "").replace("$", "--bs-");
             var color_value = getComputedStyle(document.querySelector("#customize-preview iframe").contentWindow.document.documentElement).getPropertyValue(color_name);
-
             //console.log(color_name+color_value);
 
 			//append if not already present add a small widget for feedback
@@ -135,21 +132,6 @@
 
 	} // end function 
 		
-	
-	//FUNCTION TO INTERCEPT THE REFRESHING OF THE PREVIEW IFRAME: Upon refreshing, recompile SCSS 
-	// this is for the options that need Selective Refresh and server side processing, as those do a full iframe refresh
-	function thePreviewRefreshBinder() {
-		setTimeout(function () {
-
-			$("#customize-preview iframe").on("load", function () {
-				console.log('Preview iframe has loaded');
-				//updateScssPreviewDebounced(); //not necessary in theory
-			});
-			
-			thePreviewRefreshBinder();
-
-		}, 100);
-	}
 
 	// FUNCTION TO PREPARE THE SCSS CODE assigning all the variables according to  THE WIDGETS VALUES
 	function buildScssVariablesPart() {
@@ -169,16 +151,9 @@
 				let name = els[i].closest("li").getAttribute("id").replace("customize-control-SCSSvar_", "");
 
 				//console.log(name + " " + els[i].value);
-
-				//if ( name.includes('font-family') || 0 ) {
-				//
-				//	sass += `$${name}: '${els[i].value}'; `;
-				//}
-				//else {
-				//	
-					sass += `$${name}: ${els[i].value}; `;
-				//}
-
+				
+				sass += `$${name}: ${els[i].value}; `;
+				
 			} //end if value 
 
 		}
@@ -191,14 +166,9 @@
 			//for debug purpose, give them a bg color 
 			//els[i].style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 
-			if (1) {
-
-				let name = els[i].closest("li").getAttribute("id").replace("customize-control-SCSSvar_", "");
-				 
-				sass += `$${name}: ${(els[i].checked ? 'true' : 'false')}; `;
-
-			} //end if value 
-
+			let name = els[i].closest("li").getAttribute("id").replace("customize-control-SCSSvar_", "");
+				
+			sass += `$${name}: ${(els[i].checked ? 'true' : 'false')}; `;
 		}
 
 		//console.log('Variables Sass code: ' + sass);
@@ -244,14 +214,6 @@
 		//TESTBED for G fontsx
 		//console.log(ps_is_a_google_font("ABeeZee"));
 		//console.log(ps_is_a_google_font("Nunito"));
-
-		//SET DEFAULT
-		scss_recompile_is_necessary=false;
-				
-		//ADD COMPILING WINDOW AND LOADING MESSAGE TO HTML BODY
-		//var the_loader='<div class="cs-chase">  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div>  <div class="cs-chase-dot"></div></div>';
-		//var html = "<div id='cs-compiling-window' hidden> <span class='cs-closex'>Close X</span> <div id='cs-loader'> " + the_loader +" </div> <div id='cs-recompiling-target'></div></div>";
-		//$("body").append(html);
 		
 		//hide useless bg color widget
 		$("#customize-control-background_color").hide();
@@ -273,6 +235,11 @@
 		//ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)  
 		$("body").on("mousedown", "#customize-save-button-wrapper #save", function() {
 			console.log("Clicked Publish"); 
+			const compilerFeedback = document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('#picosass-output-feedback').innerHTML;
+			if (compilerFeedback.includes('Compiling')) {
+				alert("Please publish after compilation has completed.");
+				return false;
+			}
 		});			
 
 		//CHECK IF USING VINTAGE GOOGLE FONTS API V1, REBUILD FONT IMPORT CODE
@@ -283,29 +250,14 @@
 		
 		//////////////////// LISTEN TO CUSTOMIZER CHANGES ////////////////////////
 
-		//listen to preview iframe new instances
-		thePreviewRefreshBinder();
-
  		//upon changing of widgets that refer to SCSS variables, trigger a function to updateScssPreview
 		//these options use postMessage and all is handled by us in JS
 		wp.customize.bind('change', function (setting) {
-
-			//save last preview css
-			//window.last_preview_css = document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('#picosass-injected-style').innerHTML;
 
 			if (setting.id.includes("SCSSvar")) {
 				updateScssPreviewDebounced();
 			}
 		});
-		
-		//CLEANEST VANILLA EXAMPLE FOR INTERCEPTING SPECIFIC CUSTOMIZER CHANGES, FOR FUTURE REFERENCE
-		/*
-		wp.customize('picostrap_fonts_header_code', function (value) {
-			value.bind(function (newval) {
-				console.log(newval);
-			});
-		});
-		*/
 
 		//////////// USER ACTIONS / UX HELPERS /////////////////
 		
@@ -348,11 +300,6 @@
 		$("body").on("click", "#accordion-section-colors", function() {
 			ps_get_page_colors();
 		});
-			
-		//USER CLICKS CLOSE COMPILING WINDOW
-		//$("body").on("click",".cs-close-compiling-window,.cs-closex, #compile-error",function(){ 
-		//	$("#cs-compiling-window").fadeOut();
-		//});
 		
 		//USER CLICKS ENABLE TOPBAR: SET A NICE HTML DEFAULT
 		$("body").on("click","#customize-control-enable_topbar",function(){
@@ -448,8 +395,6 @@
 			ps_update_fonts_import_code_snippet();
 		});
 
-		
-		
 		//FONT PICKER ///////////////////////////////////////////////////////////////////
 
 		var csFontPickerOptions = ({
@@ -460,7 +405,7 @@
 
 		var csFontPickerButton = " <button class='cs-open-fontpicker button button-secondary' style='float:right;'>Font Picker...</button>";
 
-		//INIT FONTPICKERs
+		//INITIALIZE FONTPICKERs
 
 		//append field and initialize Fontpicker for BASE FONT
 		$("label[for=_customize-input-SCSSvar_font-family-base]").append(csFontPickerButton).closest(".customize-control").append("<div hidden><input id='cs-fontpicker-input-base' class='cs-fontpicker-input' type='text' value=''></div>");
