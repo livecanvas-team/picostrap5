@@ -74,10 +74,10 @@ export function Compile(sassParams = {}) {
         `);
     
     //is a Compile process already running? if so, abort
-    //TODO:: make it cleaner
+    //TODO: make it cleaner, this is just a dirty implementation
     if(document.querySelector("#picosass-output-feedback").innerHTML.includes('Compiling')) {
-        console.log("PicoSASS task is already running, aborting");
-        //TO DO: abort and retrigger
+        console.log("PicoSASS task is already running, retrying in 6 secs.");
+        setTimeout(Compile(sassParams()), 6000);
         return false;
     }
 
