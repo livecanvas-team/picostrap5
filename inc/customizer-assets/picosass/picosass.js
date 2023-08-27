@@ -92,7 +92,7 @@ export function Compile(sassParams = {}) {
     }
 
     //show the first feedback message: Compiling .... 
-    document.querySelector("#picosass-output-feedback").innerHTML = ` Compiling SCSS... <span></span>`;
+    document.querySelector("#picosass-output-feedback").innerHTML = `Compiling SCSS... <span></span>`;
     console.log("Running Compiler...");
 
     //run the compiler
@@ -117,7 +117,7 @@ export function Compile(sassParams = {}) {
 
         .catch((error) => {
             //show error in output feedback 
-            document.querySelector("#picosass-output-feedback").innerHTML = error;
+            document.querySelector("#picosass-output-feedback").innerHTML = `SCSS error <span> ${error} </span> `;
         })
 }
 

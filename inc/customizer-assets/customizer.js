@@ -134,7 +134,7 @@
 		
 
 	// FUNCTION TO PREPARE THE SCSS CODE assigning all the variables according to  THE WIDGETS VALUES
-	function buildScssVariablesPart() {
+	function getMainSass() {
 
 		var sass = '';
 		
@@ -173,7 +173,7 @@
 
 		//console.log('Variables Sass code: ' + sass);
 
-		return sass;
+		return sass + " @import 'sass/main'; ";
 	}
 
 	// FUNCTION TO REUPDATE THE SCSS FIELD AND RETRIGGER COMPILER
@@ -182,7 +182,7 @@
 		var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
 
 		//build the full SASS with variables and main import
-		var newsass = buildScssVariablesPart() + " @import 'sass/main'; ";
+		var newsass = getMainSass();
 
 		console.log('Update SASS code to: \n' + newsass);
 

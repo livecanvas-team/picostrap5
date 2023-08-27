@@ -1113,24 +1113,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
     ));
 	
 
-	//ADD SCSS MAIN  FIELD - to hide by CSS
-	/*
-	$wp_customize->add_setting("scss_main", array(
-        "default" => "",
-		"transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "scss_main",
-        array(
-            "label" => __("scss_main", 'picostrap5'),
-            "section" => "addcode",
-            'type'     => 'textarea',
-			'description' =>'<b>Not editable</b> - Internal purpose only.'
-			)
-    ));
-	*/
-
 	// ADD A SECTION FOR EXTRAS /////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("extras", array(
         "title" => __("Global Utilities", 'picostrap5'),
@@ -1311,19 +1293,20 @@ add_action( 'wp_head', function  () {
 
 
 
-/////////// INTEGRATE PICOSASS JS FOR LIVE PREVIEWING ///////////
+/////////// INTEGRATE PICOSASS JS FOR LIVE PREVIEWING in Customizer, and in manual recompile trigger ///////////
 
 
 add_action( 'wp_head', function  () {
 	if (!current_user_can('administrator') ) return;
 	if (!isset($_GET['customize_theme']) && !isset($_GET['picosass'])) return;
     ?>
-		
+
 		<!-- add picoSASS JS --> 
 		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass/picosass.js"></script>
 
-		<!-- add the SCSS code --> 
+		<!-- add the SCSS source code --> 
 		<template id="the-scss" baseurl="<?php echo get_template_directory_uri() ?>/">
+			<?php echo ps_get_main_sass() ?>
 		</template>
 
 	<?php
@@ -1338,8 +1321,10 @@ add_action( 'wp_footer', function  () {
 		<!-- <button style="position:fixed;top:0;right:20px;" onclick="window.Picosass.Compile()">Recompile SASS</button> -->
 		 
 		<script>
+			<?php if (isset($_GET['customize_theme'])): ?>
 			//set a flag to disable autocompile
 			document.querySelector("body").classList.add("prevent-sass-autocompile");
+			<?php endif ?>
 
 			//mark the normal CSS as provisional
 			document.querySelector("#picostrap-styles-css").classList.add("picostrap-provisional-css");
@@ -1348,8 +1333,34 @@ add_action( 'wp_footer', function  () {
 	<?php
 } );
  
- 
-//HANDLE ACTION for AJAX REQUEST: picostrap_recompile_sass
+//BUILD SASS MAIN CODE FROM VARIABLES & VALUES IN THEME MODS, AND AND main SCSS FILE
+function ps_get_main_sass(){
+	
+	$sass='';
+	
+	if (get_theme_mods()) foreach(get_theme_mods() as $theme_mod_name => $theme_mod_value):
+		
+		//check we are treating a scss variable, or skip
+		if(substr($theme_mod_name,0,8) != "SCSSvar_") continue;
+
+		//for boolean vars
+		if( strpos($theme_mod_name, 'enable-') !== false  ) $theme_mod_value = ($theme_mod_value == 1) ?  'true' : 'false'; 
+
+		//skip empty values to prevent compiler error
+		if($theme_mod_value == "" ) continue;
+		
+		//get the real sass variable name from theme_mod_name, getting rid of our custom prefix
+		$variable_name = str_replace("SCSSvar_", "$", $theme_mod_name);
+		
+		//add to output array sass += `$${name}: ${els[i].value}; `;
+		$sass .= $variable_name . ': '.$theme_mod_value . '; ';
+		
+	endforeach;
+	
+	return $sass . " @import 'sass/main'; "; 
+}
+
+//HANDLE ACTION for AJAX REQUEST FOR SAVING CSS BUNDLE
 add_action("wp_ajax_picostrap_save_css_bundle", function (){
     
 	//exit if unlogged or non admin
@@ -1396,3 +1407,26 @@ add_action("wp_ajax_picostrap_save_css_bundle", function (){
   
     wp_die();
 });
+
+
+
+// ADD RECOMPILE TRIGGER LINK TO ADMIN BAR
+add_action('admin_bar_menu', 'ps_add_toolbar_items', 100);
+function ps_add_toolbar_items($admin_bar) {
+
+	//check if user has rights 
+	if (!current_user_can("administrator")) return;
+	
+	//if (is_admin())	return; //ONLY IN FRONTEND
+	
+	global $wp_admin_bar;
+	
+	$wp_admin_bar->add_node(array(
+			'id' => 'ps-recompile-sass',
+			'title' => __('Recompile SASS', 'picostrap'),
+			'href' => add_query_arg(array(
+				'picosass' => '1'
+			))
+		));
+		 
+} //end func
