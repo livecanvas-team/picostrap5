@@ -1305,7 +1305,7 @@ add_action( 'wp_head', function  () {
 		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass/picosass.js"></script>
 
 		<!-- add the SCSS source code --> 
-		<template id="the-scss" baseurl="<?php echo get_stylesheet_directory_uri() ?>/">
+		<template id="the-scss" class="prevent-autocompile" baseurl="<?php echo get_stylesheet_directory_uri() ?>/">
 			<?php echo ps_get_main_sass() ?>
 		</template>
 
@@ -1318,19 +1318,16 @@ add_action( 'wp_footer', function  () {
 	if (!current_user_can('administrator') ) return;
 	if (!isset($_GET['customize_theme']) && !isset($_GET['compile_sass'])) return;
     ?>
-		<!-- <button style="position:fixed;top:0;right:20px;" onclick="window.Picosass.Compile()">Recompile SASS</button> -->
-		 
+		
 		<script>
-
-			//set a flag to disable autocompile
-			document.querySelector("body").classList.add("prevent-sass-autocompile");
+ 
 
 			//mark the normal CSS as provisional
 			document.querySelector("#picostrap-styles-css").classList.add("picostrap-provisional-css");
 
 			<?php if ( isset($_GET['compile_sass'])): ?>
 			//DEFINE CALLBACK
-			function compilingSassFinished(compiled) { 
+			function compilingSassFinishedCallback(compiled) { 
 				console.log("compiling Finished. TODO saving");
 
 				//TODO SAVING /// 
@@ -1369,9 +1366,8 @@ add_action( 'wp_footer', function  () {
 			/////// ON DOM CONTENT LOADED 
 			window.addEventListener("DOMContentLoaded", (event) => {
 
-				window.Picosass.Compile({}, compilingSassFinished);
+				window.Picosass.Compile({}, compilingSassFinishedCallback);
 				 
-
 			}); //end onDOMContentLoaded
 
 			<?php endif ?>

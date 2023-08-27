@@ -145,9 +145,11 @@ window.Picosass = {
 window.addEventListener("DOMContentLoaded", (event) => {
 
     //run  the compiler, unless a special class is added to the body
-    if (!document.querySelector("body").classList.contains("prevent-sass-autocompile")) {
+    if (!document.querySelector(theScssSelector).classList.contains("prevent-autocompile")) {
         Compile();
-    } 
+    } else {
+        console.log("Automatic SASS Compilation disabled.");
+    }
 
     /*
     //attach observer to detect on-page scss code changes  
