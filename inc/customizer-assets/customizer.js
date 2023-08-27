@@ -188,8 +188,17 @@
 
 		iframeDoc.querySelector('#the-scss').innerHTML = newsass; 
 		
-		//trigger picosass compiler //TODO: add debounce
-		document.querySelector('#customize-preview iframe').contentWindow.Picosass.Compile(); 
+		function compilingFinished(compiled) { 
+			//console.log(compiled);
+			// show publishing action buttons
+			document.querySelector('#customize-save-button-wrapper').removeAttribute('hidden');
+		}
+
+		//hide publishing action buttons
+		document.querySelector('#customize-save-button-wrapper').setAttribute('hidden', '');
+
+		//trigger picosass compiler
+		document.querySelector('#customize-preview iframe').contentWindow.Picosass.Compile({}, compilingFinished); 
 	
 		//update font loading code as well, if necessary
 		if (window.fontLoadingUrl){
@@ -228,8 +237,9 @@
 		
 		//add codemirror to header field - does not work
 		//wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
-			
-		//ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)  
+
+		//NOW UNUSED -- ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)
+		/*
 		$("body").on("mousedown", "#customize-save-button-wrapper #save", function() {
 			console.log("Clicked Publish"); 
 			const compilerFeedback = document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('#picosass-output-feedback').innerHTML;
@@ -238,6 +248,7 @@
 				return false;
 			}
 		});			
+		*/
 
 		//CHECK IF USING VINTAGE GOOGLE FONTS API V1, REBUILD FONT IMPORT CODE
 		if ($("#_customize-input-picostrap_fonts_header_code").val().includes('https://fonts.googleapis.com/css?')){

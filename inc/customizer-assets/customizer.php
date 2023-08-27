@@ -1321,13 +1321,60 @@ add_action( 'wp_footer', function  () {
 		<!-- <button style="position:fixed;top:0;right:20px;" onclick="window.Picosass.Compile()">Recompile SASS</button> -->
 		 
 		<script>
-			<?php if (isset($_GET['customize_theme'])): ?>
+
 			//set a flag to disable autocompile
 			document.querySelector("body").classList.add("prevent-sass-autocompile");
-			<?php endif ?>
 
 			//mark the normal CSS as provisional
 			document.querySelector("#picostrap-styles-css").classList.add("picostrap-provisional-css");
+
+			<?php if ( isset($_GET['compile_sass'])): ?>
+			//DEFINE CALLBACK
+			function compilingSassFinished(compiled) { 
+				console.log("compiling Finished. TODO saving");
+
+				//TODO SAVING /// 
+				//maybe first of all check if it's needed
+				return;
+				
+				//build the request to send via AJAX POST
+				const formdata = new FormData();
+				const theCss = compiled.css;
+				if (theCss.trim() == '') {
+					console.log("Empty CSS, aborting");
+					return false;
+				}
+				formdata.append("nonce", picostrap_ajax_obj.nonce);
+				formdata.append("action", "picostrap_save_css_bundle");
+				formdata.append("css", theCss);
+				fetch(picostrap_ajax_obj.ajax_url, {
+					method: "POST",
+					credentials: "same-origin",
+					headers: {
+						"Cache-Control": "no-cache",
+					},
+					body: formdata
+				}).then(response => response.text())
+					.then(response => {
+						
+						console.log("Saved successfully: " + response);
+						
+					}).catch(function (err) {
+						console.log("ps_save_css_bundle Error: "+err);
+					}); 
+					
+
+			}
+
+			/////// ON DOM CONTENT LOADED 
+			window.addEventListener("DOMContentLoaded", (event) => {
+
+				window.Picosass.Compile({}, compilingSassFinished);
+				 
+
+			}); //end onDOMContentLoaded
+
+			<?php endif ?>
 
 		</script>
 	<?php
@@ -1417,19 +1464,29 @@ function ps_add_toolbar_items($admin_bar) {
 	//check if user has rights 
 	if (!current_user_can("administrator")) return;
 	
-	if (is_admin())	return; //ONLY IN FRONTEND
+	if (is_admin())	return; //ALLOW ONLY ON FRONTEND
 	
-	if (!is_child_theme()) return;
+	//if (!is_child_theme()) return; // KEEP COMMENTED - UNCOMMENT TO TEST ON ORIG THEME FOR CONSISTENCY
 
 	global $wp_admin_bar;
-	
+
 	$wp_admin_bar->add_node(array(
 		'id' => 'ps-recompile-sass',
 		'title' => __('Recompile SASS', 'picostrap'),
 		'href' => add_query_arg(array(
 			'compile_sass' => '1',
-			'sass_nocache '=> '1',
+			'sass_nocache'=> '1',
 		))
-	));
-		 
-} //end func
+	));		 
+	
+	if (!isset($_GET['compile_sass'])) return;
+
+	$wp_admin_bar->add_node(array(
+		'id' => 'ps-recompile-sass-finish',
+		'title' => __('Finish Editing', 'picostrap'),
+		'href' => add_query_arg(array(
+			'compile_sass' => false,
+			'sass_nocache'=> false,
+		))
+	));		 
+} 

@@ -33,7 +33,7 @@ function canonicalize(url) {
 
 async function load(canonicalUrl) {
 
-    console.log(`Importing ${canonicalUrl} (async)`);
+    //console.log(`Importing ${canonicalUrl} (async)`);
     
     //show some feedback about the file that is loaded
     document.querySelector("#picosass-output-feedback span").innerHTML = `Importing ${canonicalUrl}`;
@@ -55,6 +55,8 @@ async function load(canonicalUrl) {
 
 async function runScssCompiler(theCode, sassParams ) {
 
+    //SMART DEFAULTS FOR THE COMPILER
+
     //set default output
     if (!sassParams.style) sassParams.style = "compressed";
 
@@ -67,7 +69,7 @@ async function runScssCompiler(theCode, sassParams ) {
     return await sass.compileStringAsync(theCode, sassParams)
 }
 
-export function Compile(sassParams = {}) {
+export function Compile(sassParams = {}, theCallback = () => {} ) {
 
     //if not present, add a DIV and some styling TO SHOW COMPILER MESSAGES / OUTPUT FEEDBACK 
     if (!document.querySelector("#picosass-output-feedback")) document.querySelector("html").insertAdjacentHTML("afterbegin", `
@@ -105,8 +107,8 @@ export function Compile(sassParams = {}) {
     runScssCompiler(theCode, sassParams)
 
         .then((compiled) => {
-            console.log("SCSS compiled successfully.");
-            console.log(compiled);
+            //console.log("SCSS compiled successfully.");
+            //console.log(compiled);
 
             //if not present, add a new CSS element
             if (!document.querySelector("#picosass-injected-style")) document.head.insertAdjacentHTML("beforeend", `<style id="picosass-injected-style"> </style>`);
@@ -119,6 +121,9 @@ export function Compile(sassParams = {}) {
 
             //as there are no errors, clear the output feedback
             document.querySelector("#picosass-output-feedback").innerHTML = '';
+
+            //run callback
+            theCallback(compiled);
         })
 
         .catch((error) => {
