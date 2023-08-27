@@ -32,10 +32,16 @@ function canonicalize(url) {
 
 
 async function load(canonicalUrl) {
-    //console.log(`Importing ${canonicalUrl} (async)`);
+
+    console.log(`Importing ${canonicalUrl} (async)`);
+    
+    //show some feedback about the file that is loaded
     document.querySelector("#picosass-output-feedback span").innerHTML = `Importing ${canonicalUrl}`;
 
-    const response = await fetch(canonicalUrl)
+    //build the request options: if nocache parameter is set, declare it, or just have an empty one
+    const options = (((new URL(document.location)).searchParams).get("sass_nocache")) ? { cache: "no-cache" } : {}
+
+    const response = await fetch(canonicalUrl, options)
     if (!response.ok) {
         document.querySelector("#picosass-output-feedback").innerHTML = `Error reading   SCSS file:  ${canonicalUrl}`;
         throw new Error(`Failed to fetch ${canonicalUrl}: ${response.status} (${response.statusText})`);
