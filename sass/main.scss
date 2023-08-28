@@ -1,7 +1,19 @@
-@import "theme_variables"; 
-@import "bootstrap5/bootstrap";
-//@import "bootstrap-loader";        
+//IMPORT BOOTSTRAP ////// 
+
+//SIMPLE VINTAGE WAY
+//@import "theme_variables"; //now in bs loader
+//@import "bootstrap5/bootstrap";
+
+
+//NEW CUSTOM WAY
+@import "bootstrap-loader"; 
+
+
+// THE THEME STUFF 
+
 @import "wp_basic_styles";      
 @import "picostrap";  
 @import "woocommerce";
+
+
 //body {opacity: 0.2;}

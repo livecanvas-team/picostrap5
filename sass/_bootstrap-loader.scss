@@ -5,6 +5,7 @@
 @import "bootstrap5/functions";
 
 // 2. Include any default variable overrides here
+@import "theme_variables"; 
 
 // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
 @import "bootstrap5/variables";
@@ -24,6 +25,31 @@
 @import "bootstrap5/images";
 @import "bootstrap5/containers";
 @import "bootstrap5/grid";
+@import "bootstrap5/tables";
+@import "bootstrap5/forms";
+@import "bootstrap5/buttons";
+@import "bootstrap5/transitions";
+@import "bootstrap5/dropdown";
+@import "bootstrap5/button-group";
+@import "bootstrap5/nav";
+@import "bootstrap5/navbar";
+@import "bootstrap5/card";
+@import "bootstrap5/accordion";
+@import "bootstrap5/breadcrumb";
+@import "bootstrap5/pagination";
+@import "bootstrap5/badge";
+@import "bootstrap5/alert";
+@import "bootstrap5/progress";
+@import "bootstrap5/list-group";
+@import "bootstrap5/close";
+@import "bootstrap5/toasts";
+@import "bootstrap5/modal";
+@import "bootstrap5/tooltip";
+@import "bootstrap5/popover";
+@import "bootstrap5/carousel";
+@import "bootstrap5/spinners";
+@import "bootstrap5/offcanvas";
+@import "bootstrap5/placeholders";
 @import "bootstrap5/helpers";
 
 // 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
