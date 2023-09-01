@@ -19,11 +19,11 @@ add_action( 'wp_head', function  () {
 	<?php
 } );
  
-
+// FOR THE MANUAL CSS RECOMPILE / NOT FOR CUSTOMIZER
 add_action( 'wp_footer', function  () {
 	
 	if (!current_user_can('administrator') ) return;
-	if (!isset($_GET['customize_theme']) && !isset($_GET['compile_sass'])) return;
+	if (isset($_GET['customize_theme']) OR  !isset($_GET['compile_sass'])) return;
     ?>
 		
 		<script>
@@ -138,18 +138,13 @@ add_action("wp_ajax_picostrap_save_css_bundle", function (){
 		set_theme_mod ('css_bundle_version_number', $current_version_number+1);
 
 		//GIVE POSITIVE FEEDBACK	
-		echo "<compiler-success>";
-		echo "<h1>New CSS bundle successfully generated</h1>";
-		echo "<a href='".picostrap_get_css_url()."' target='new'>View File</a>";
-		echo "<br><br><b>Size: </b><br>".round(mb_strlen($compiled_css, '8bit')/1000)." kB - ".round(mb_strlen(gzcompress($compiled_css), '8bit')/1000)." kB gzipped";
-		echo "</compiler-success>";
+		echo "New CSS bundle successfully saved. ";
+		echo "Server - calculated size:  ".round(mb_strlen($compiled_css, '8bit')/1000)." kB - ".round(mb_strlen(gzcompress($compiled_css), '8bit')/1000)." kB gzipped";
 		return TRUE;
 
 	} else {
 		//GIVE NEGATIVE FEEDBACK
-		echo "<compiler-error>";
-		echo  "<h1>Error writing CSS file</h1>";
-		echo "</compiler-error>";
+		echo  "Error writing CSS file";
 		return FALSE;
 	}
   
