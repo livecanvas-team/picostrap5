@@ -56,6 +56,20 @@ $utilities: map-merge(
           )
         )
       )
-    )
+    ),
+    "min-viewport-height": ( 
+      property: min-height,
+      class: min-vh,
+      responsive: true,
+      values: ( 
+        25: 25vh,
+        50: 50vh,
+        75: 75vh,
+        100: 100vh,
+      )
+    ),
+    //"another-prop"
   )
 );
+
+ 

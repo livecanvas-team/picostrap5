@@ -18,19 +18,3 @@ $spacers: (
 
 //ENABLE NEGATIVE MARGIN UTILITY CLASSES
 $enable-negative-margins: true;
-
-//CUSTOMIZE UTILITIES VIA UTILITIES API
-$utilities: (
-  "min-viewport-height": ( //ADD min-vh CLASSES
-    property: min-height,
-    class: min-vh,
-    responsive: true,
-    values: ( 
-      25: 25vh,
-      50: 50vh,
-      75: 75vh,
-      100: 100vh,
-    )
-  ),
-   
-);
