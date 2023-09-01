@@ -139,13 +139,10 @@ add_action("wp_ajax_picostrap_save_css_bundle", function (){
 
 		//GIVE POSITIVE FEEDBACK	
 		echo "New CSS bundle successfully saved. ";
-		echo "Server - calculated size:  ".round(mb_strlen($compiled_css, '8bit')/1000)." kB - ".round(mb_strlen(gzcompress($compiled_css), '8bit')/1000)." kB gzipped";
-		return TRUE;
 
 	} else {
 		//GIVE NEGATIVE FEEDBACK
 		echo  "Error writing CSS file";
-		return FALSE;
 	}
   
     wp_die();

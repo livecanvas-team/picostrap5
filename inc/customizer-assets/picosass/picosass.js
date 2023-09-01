@@ -120,7 +120,7 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
             document.querySelector(".picostrap-provisional-css")?.setAttribute("disabled", "true");
 
             //show compiled size
-            document.querySelector("#picosass-output-feedback").innerHTML = `<h2>Successfully generated a CSS bundle of approx. ${measureStringSizeInKB(compiled.css)} KB (${measureEstimatedGzippedSizeInKB(compiled.css)} KB gZipped) </h2>`;
+            document.querySelector("#picosass-output-feedback").innerHTML = `Success! <span>Approx. CSS bundle size:  ${measureStringSizeInKB(compiled.css)} KB (${measureEstimatedGzippedSizeInKB(compiled.css)} KB gZipped) </span>`;
 
             //as there are no errors, clear the output feedback
             const myTimeout = setTimeout(() => { document.querySelector("#picosass-output-feedback").innerHTML = ''; }, 2500);

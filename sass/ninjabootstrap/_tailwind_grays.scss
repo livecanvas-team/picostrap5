@@ -72,7 +72,7 @@ $colors: map-merge(
   )
 );
 
-// Add custom text color utilities //da spostare
+// Add custom text color utilities //da spostare, agg bg
 @each $color, $shades in $colors {
   @each $shade, $value in $shades {
     @if $value != null {
