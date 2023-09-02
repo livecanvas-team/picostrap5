@@ -49,9 +49,9 @@
 
 		//build the request to send via AJAX POST
 		const formdata = new FormData();
-		const theCss = document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('#picosass-injected-style').innerHTML;
-		if (theCss.trim() == '') {
-			console.log("Empty CSS, aborting");
+		const theCss = document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('#picosass-injected-style')?.innerHTML;
+		if (   !theCss  || theCss.trim() == '') {
+			console.log("No CSS saving necessary, aborting ps_save_css_bundle");
 			return false;
 		}
 		formdata.append("nonce", picostrap_ajax_obj.nonce);
@@ -181,10 +181,10 @@
 
 		var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
 
-		//build the full SASS with variables and main import
+		//build the full SCSS with variables and main import
 		var newsass = getMainSass();
 
-		console.log('Update SASS code to: \n' + newsass);
+		console.log('Update SCSS code to: \n' + newsass);
 
 		iframeDoc.querySelector('#the-scss').innerHTML = newsass; 
 		

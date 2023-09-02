@@ -101,7 +101,7 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
 
     //show the first feedback message: Compiling .... 
     document.querySelector("#picosass-output-feedback").innerHTML = `Compiling SCSS... <span></span>`;
-    console.log("Running Compiler...");
+    console.log("Compiling SCSS...");
 
     //run the compiler
     runScssCompiler(theCode, sassParams)
@@ -120,7 +120,9 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
             document.querySelector(".picostrap-provisional-css")?.setAttribute("disabled", "true");
 
             //show compiled size
-            document.querySelector("#picosass-output-feedback").innerHTML = `Success! <span>Approx. CSS bundle size:  ${measureStringSizeInKB(compiled.css)} KB (${measureEstimatedGzippedSizeInKB(compiled.css)} KB gZipped) </span>`;
+            const theFeedback = `SCSS compiled successfully. <span>Approx. CSS bundle size:  ${measureStringSizeInKB(compiled.css)} KB (${measureEstimatedGzippedSizeInKB(compiled.css)} KB gzipped) </span>`;
+            document.querySelector("#picosass-output-feedback").innerHTML= theFeedback;
+            console.log(theFeedback.replace(/(<([^>]+)>)/ig, ''));
 
             //as there are no errors, clear the output feedback
             const myTimeout = setTimeout(() => { document.querySelector("#picosass-output-feedback").innerHTML = ''; }, 2500);
@@ -198,9 +200,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //run  the compiler, unless a special class is added to the body
     if (!document.querySelector(theScssSelector).classList.contains("prevent-autocompile")) {
         Compile();
-    } else {
-        console.log("Automatic SASS Compilation disabled.");
     }
+    
 
     /*
     //attach observer to detect on-page scss code changes  
