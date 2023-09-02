@@ -163,9 +163,9 @@ function measureEstimatedGzippedSizeInKB(str) {
     const compressedBytes = basicGzip(bytes);
 
     // Calculate an estimated size in kilobytes based on a factor (e.g., 0.1)
-    const sizeInKB = (compressedBytes.length / 1024) * 0.1; // Adjust the factor as needed
+    const sizeInKB = (compressedBytes.length / 1024) * 0.074; // Adjust the factor as needed
 
-    return Math.floor(sizeInKB*0.74);
+    return Math.floor(sizeInKB);
 }
 
 function basicGzip(inputBytes) {

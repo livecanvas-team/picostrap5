@@ -13,7 +13,7 @@ function picostrap_customize_enqueue() {
 		'picostrap_ajax_obj',
 		array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
-			'nonce'    => wp_create_nonce( 'picostrap_livereload' ),
+			'nonce'    => wp_create_nonce( 'picostrap_save_css_bundle' ),
 		)
 	);
 	
