@@ -89,10 +89,12 @@ add_action( 'wp_footer', function  () {
 				 
 			}); //end onDOMContentLoaded
 
- 
-
-
 		</script>
+		<style>
+			#picosass-output-feedback {
+    			top: 32px !important;
+			}
+		</style>
 	<?php
 } );
  
