@@ -37,32 +37,49 @@ add_action( 'wp_footer', function  () {
     ?>
 		<script>
 
+			//init var
+			let lastCssBundle='';
+
 			//DEFINE CALLBACK FOR SAVING AFTER COMPILING
 			function compilingSassFinishedCallback(compiled) { 
-				console.log("Let's go saving the CSS bundle");
-				
-				//TODO: check if it's needed or return
-				
-				//build the request to send via AJAX POST
-				const formdata = new FormData();
-				formdata.append("nonce", "<?php echo wp_create_nonce("picostrap_save_css_bundle") ?>");
-				formdata.append("action", "picostrap_save_css_bundle");
-				formdata.append("css", compiled.css);
-				fetch("<?php echo admin_url( 'admin-ajax.php' ) ?>", {
-					method: "POST",
-					credentials: "same-origin",
-					headers: {
-						"Cache-Control": "no-cache",
-					},
-					body: formdata
-				}).then(response => response.text())
-					.then(response => {
-						
-						console.log("Saved successfully: " + response);
-						
-					}).catch(function (err) {
-						console.log("ps_save_css_bundle Error: "+err);
-					}); 
+				//console.log("About to save the CSS bundle");
+			 
+				// check if saving is needed or return
+				if (lastCssBundle!=compiled.css) {
+
+					//build the request to send via AJAX POST for saving css
+					const formdata = new FormData();
+					formdata.append("nonce", "<?php echo wp_create_nonce("picostrap_save_css_bundle") ?>");
+					formdata.append("action", "picostrap_save_css_bundle");
+					formdata.append("css", compiled.css);
+					fetch("<?php echo admin_url( 'admin-ajax.php' ) ?>", {
+						method: "POST",
+						credentials: "same-origin",
+						headers: {
+							"Cache-Control": "no-cache",
+						},
+						body: formdata
+					}).then(response => response.text())
+						.then(response => {
+							
+							console.log("Saved successfully: " + response);
+							
+						}).catch(function (err) {
+							console.log("ps_save_css_bundle Error: "+err);
+						}); 
+
+					lastCssBundle=compiled.css;
+				}
+
+				//check if browser tab has focus, retrigger
+				if (document.visibilityState === 'visible') {
+					//schedule for later
+					setTimeout(function () { 
+						window.Picosass.Compile({}, compilingSassFinishedCallback);
+					 }, 7000);
+					return;
+				}
+
 			}
 
 			/////// ON DOM CONTENT LOADED, RUN COMPILER
@@ -71,6 +88,9 @@ add_action( 'wp_footer', function  () {
 				window.Picosass.Compile({}, compilingSassFinishedCallback);
 				 
 			}); //end onDOMContentLoaded
+
+ 
+
 
 		</script>
 	<?php
