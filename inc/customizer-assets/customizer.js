@@ -516,7 +516,96 @@
 		pico_add_video_link("section-addcode", "https://www.youtube.com/watch?v=dmsUpFJwDW8&t=100s");
 		pico_add_video_link("section-extras", "https://www.youtube.com/watch?v=dmsUpFJwDW8&t=411s");
 
+		//ADD LINK TO RESET BOOTSTRAP/ SCSS VARS
+		$("li#accordion-section-themes").after(`
 		
+			<div id='bs-tools'>
+				<span>Bootstrap Vars:</span>
+				<a class='reset-scss-vars' href='#'> Reset </a> 
+				<a class='download-scss-vars' href='#'> Download JSON </a> 
+				<a class='upload-scss-vars' href='#'> Upload JSON </a> 
+			</div>
+
+			<style>
+				#bs-tools {
+					margin:10px 0 20px 5px;
+					background:#fff;
+					padding:10px 5px;
+					display:block
+				}
+				#bs-tools span {
+					display:block
+				}
+				#bs-tools a {
+					display:inline-block; margin:0 5px 0 0;
+				}
+				 
+
+			</style>
+		
+		`);
+
+		//ON CLICK OF BOOTSTRAP RESET VARS LINK
+		$("body").on("click", ".reset-scss-vars", function (e) {
+			e.preventDefault();			
+			
+			// Get all registered customizer widget controls
+			var customizerControls = wp.customize.control._value;
+
+			// Loop through each control and reset it
+			for (var widgetId in customizerControls) {
+				if (!widgetId.includes("SCSSvar")) continue;
+				//console.log(widgetId);
+				if (customizerControls.hasOwnProperty(widgetId)) {
+					resetCustomizerWidget(widgetId);
+				}
+			}  
+			 
+		});// end onClick of button
+
+		
+		function resetCustomizerWidget(controlId) {
+			var control = wp.customize.control(controlId);
+
+			if (typeof control !== 'undefined') {
+				var controlType = control.params.type;
+				var defaultValue = control.params.default;
+
+				switch (controlType) {
+					case 'text':
+					case 'textarea':
+					case 'number':
+					case 'email':
+						control.setting.set(defaultValue);
+						break;
+
+					case 'checkbox':
+						control.setting.set(defaultValue === '1' ? true : false);
+						break;
+
+					case 'radio':
+					case 'select':
+						control.setting.set(defaultValue);
+						break;
+
+					case 'color':
+						control.setting.set(defaultValue);
+						control.preview.send('change');
+						break;
+
+					default:
+						console.error('Unsupported control type: ' + controlType);
+						break;
+				}
+			} else {
+				console.error('Control with ID ' + controlId + ' does not exist.');
+			}
+		}
+
+
+ 
+ 
+
 		///COLOR PALETTE GENERATOR /////
 		/*
 		//ADD COLOR PALETTE GENERATOR
