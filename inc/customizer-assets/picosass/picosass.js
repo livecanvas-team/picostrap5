@@ -36,7 +36,9 @@ async function load(canonicalUrl) {
     //console.log(`Importing ${canonicalUrl} (async)`);
     
     //show some feedback about the file that is loaded
-    document.querySelector("#picosass-output-feedback span").innerHTML = `Importing ${canonicalUrl}`;
+    if (document.querySelector("#picosass-output-feedback span")) {
+        document.querySelector("#picosass-output-feedback span").innerHTML = `Importing ${canonicalUrl}`;
+    }
 
     //build the request options: if nocache parameter is set, declare it, or just have an empty one
     const options = (((new URL(document.location)).searchParams).get("sass_nocache")) ? { cache: "no-cache" } : {}
