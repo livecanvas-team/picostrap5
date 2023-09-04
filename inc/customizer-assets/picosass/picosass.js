@@ -41,7 +41,15 @@ async function load(canonicalUrl) {
     //build the request options: if nocache parameter is set, declare it, or just have an empty one
     const options = (((new URL(document.location)).searchParams).get("sass_nocache")) ? { cache: "no-cache" } : {}
 
-    const response = await fetch(canonicalUrl, options)
+    let response = await fetch(canonicalUrl, options);
+
+    if (!response.ok && response.status == 404) {
+        //if file is not found, let's see in the other folder
+        const canonicalUrl2 = canonicalUrl.href.replace('picostrap5-child-base', 'picostrap5');
+        console.log('Since ' + canonicalUrl.href + ' cannot be found, we look for ' + canonicalUrl2);
+        response = await fetch(canonicalUrl2, options);
+    }
+
     if (!response.ok) {
         document.querySelector("#picosass-output-feedback").innerHTML = `Error reading   SCSS file:  ${canonicalUrl}`;
         throw new Error(`Failed to fetch ${canonicalUrl}: ${response.status} (${response.statusText})`);

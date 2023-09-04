@@ -1,10 +1,10 @@
 ///////// PARAMETERS //////////////
 $wc_color1: $primary;
 $wc_color2: $secondary;
-$wc_color1_lighter: $primary-100;
-$wc_color2_lighter: $secondary-100;
-$wc_color1_stronger: $primary-700;
-$wc_color2_stronger: $secondary-800;
+$wc_color1_lighter: tint-color($primary, 80%) !default;
+$wc_color2_lighter: tint-color($secondary, 80%) !default;
+$wc_color1_stronger: shade-color($primary, 40%) !default;
+$wc_color2_stronger: shade-color($secondary, 60%) !default;
 
  
 //BUTTONS
@@ -230,5 +230,4 @@ figure.woocommerce-product-gallery__wrapper {
 
 //fix quantity input in cart
 .woocommerce-cart-form input.qty {display: inline;}
-  
 
