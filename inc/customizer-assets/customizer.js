@@ -173,7 +173,7 @@
 
 		//console.log('Variables Sass code: ' + sass);
 
-		return sass + " @import 'sass/main'; ";
+		return sass + " @import 'main'; ";
 	}
 
 	// FUNCTION TO REUPDATE THE SCSS FIELD AND RETRIGGER COMPILER

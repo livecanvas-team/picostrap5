@@ -11,7 +11,9 @@ add_action( 'wp_head', function  () {
 		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass/picosass.js"></script>
 
 		<!-- add the SCSS source code --> 
-		<template id="the-scss" class="prevent-autocompile" baseurl="<?php echo get_stylesheet_directory_uri() ?>/">
+		<template id="the-scss" class="prevent-autocompile" baseurl="<?php echo get_stylesheet_directory_uri() ?>/sass/"
+		<?php if (is_child_theme()): ?> fallback_baseurl="<?php echo get_template_directory_uri() ?>/sass/" <?php endif ?>
+		>
 			<?php echo ps_get_main_sass() ?>
 		</template>
 	<?php
@@ -122,7 +124,7 @@ function ps_get_main_sass(){
 		
 	endforeach;
 	
-	return $sass . " @import 'sass/main'; "; 
+	return $sass . " @import 'main'; "; 
 }
 
 //HANDLE AJAX ACTION FOR SAVING CSS BUNDLE
