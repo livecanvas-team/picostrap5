@@ -97,11 +97,13 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
     
     //is a Compile process already running? if so, abort
     //TODO: make it cleaner, this is just a dirty implementation
+    
     if(document.querySelector("#picosass-output-feedback").innerHTML.includes('Compiling')) {
         console.log("PicoSASS task is already running, retrying in 6 secs.");
-        setTimeout(Compile(sassParams()), 6000);
+        setTimeout(Compile(sassParams, theCallback), 6000);
         return false;
     }
+    
 
     //if no SCSS source element is on the page, show message: No SCSS element to compile...
     if (!document.querySelector(theScssSelector)) document.querySelector("#picosass-output-feedback").innerHTML = ` No SCSS element to compile... `;

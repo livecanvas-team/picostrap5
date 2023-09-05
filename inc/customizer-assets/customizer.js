@@ -192,6 +192,7 @@
 			//console.log(compiled);
 			// show publishing action buttons
 			document.querySelector('#customize-save-button-wrapper').removeAttribute('hidden');
+			ps_get_page_colors(); 
 		}
 
 		//hide publishing action buttons
@@ -523,7 +524,11 @@
 				<span>Bootstrap Vars:</span>
 				<a class='reset-scss-vars' href='#'> Reset All</a> 
 				<a class='download-scss-vars' href='#'> Download JSON </a> 
-				<a class='upload-scss-vars' href='#'> Upload JSON </a> 
+				<a class='upload-scss-vars' href='#' > Upload JSON </a>
+				
+				<input type="file" id="fileInput" accept=".json" style="display: none;">
+
+
 			</div>
 
 			<style>
@@ -575,7 +580,7 @@
 				els[i].dispatchEvent(new Event('change'));
 			}	
 
-			updateScssPreview();
+			updateScssPreviewDebounced();
 	 
 		});// end onClick  
 
@@ -583,10 +588,7 @@
 		$("body").on("click", ".download-scss-vars", function (e) {
 			e.preventDefault();
 
-
 			let sass = getMainSass().replace("@import 'main'; ","");
-			console.log(sass);
-
  
 			// Step 1: Parse SASS variable into a JavaScript object
 			const sassObject = {};
@@ -624,7 +626,60 @@
 		//ON CLICK ON DOWNLOAD VARS AS JSON
 		$("body").on("click", ".upload-scss-vars", function (e) {
 			e.preventDefault();
+			fileInput.click();
 		});// end onClick    
+
+		//HANDLE WHEN FILE UPLOADED
+		document.querySelector('#fileInput').addEventListener('change', (event) => {
+			document.querySelector(".reset-scss-vars").click();
+			const selectedFile = event.target.files[0];
+			if (selectedFile) {
+				const reader = new FileReader();
+
+				reader.onload = function (event) {
+					//try {
+					const jsonData = JSON.parse(event.target.result.replaceAll('SCSSvar_','$'));				 
+
+						// Loop through each property in the parsed JSON data
+						for (const property in jsonData) {
+							if (jsonData.hasOwnProperty(property)) {
+								// Perform an action for each property
+								console.log( `${property}: ${jsonData[property]}`);
+								const theInputEl = document.querySelector('#' + property.replace('$', 'customize-control-SCSSvar_') + ' input');
+								if (!theInputEl) continue;	
+								switch (theInputEl.getAttribute("type")) {
+									case 'text':
+									case 'textarea':
+									case 'number':
+										theInputEl.value = jsonData[property];
+										break;
+
+									case 'checkbox':
+										theInputEl.checked = (jsonData[property]=='true') ? true : false;
+										break;
+
+									default: 
+										break;
+								}
+
+								theInputEl.dispatchEvent(new Event('change'));
+							}
+						}
+
+						updateScssPreviewDebounced();
+						ps_update_fonts_import_code_snippet();
+						 
+
+					//} catch (error) {						alert('Error parsing JSON file.');					}
+				};
+
+				reader.readAsText(selectedFile);
+			}
+
+			// Reset the file input to allow re-uploading the same file
+			event.target.value = null;
+		});
+
 
 		 
  
