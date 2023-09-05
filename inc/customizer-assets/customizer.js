@@ -553,6 +553,7 @@
 		//ON CLICK OF BOOTSTRAP RESET VARS LINK
 		$("body").on("click", ".reset-scss-vars", function (e) {
 			e.preventDefault();		 
+			console.log("reset scss vars");
 			// loop all input text widgets that have values matched to SCSS vars
 			var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input`);
 
@@ -581,6 +582,7 @@
 			}	
 
 			updateScssPreviewDebounced();
+			ps_update_fonts_import_code_snippet();
 	 
 		});// end onClick  
 
@@ -615,7 +617,7 @@
 
 			// Step 6: Trigger a click event on the <a> element to initiate download
 			a.href = url;
-			a.download = 'sass_config.json';
+			a.download = 'picostrap_bs_variables.json';
 			a.click();
 
 			// Clean up by revoking the URL
@@ -661,7 +663,7 @@
 									default: 
 										break;
 								}
-
+								
 								theInputEl.dispatchEvent(new Event('change'));
 							}
 						}

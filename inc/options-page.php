@@ -134,7 +134,7 @@ function theme_option_page() {
                 Hit "<b>Publish</b>" and picostrap will recompile the Bootstrap SCSS code "on the fly" (and optionally include YOUR additional CSS / SCSS files). </p>
                 <p>A <b>single, minified <a href="<?php echo picostrap_get_css_url() ?>" target="_blank">CSS file</a></b> is generated and served. </p>
                 <p><small>If you're not a fan of the Customizer, you can alternatively edit the <b> sass/_theme-variables.scss </b> file too, inside  your child theme folder. 
-				Changes will be automatically "picked".</small></p>
+				Then launch compiler from the topbar while visiting the site.</small></p>
                  
 
                 
@@ -153,7 +153,7 @@ function theme_option_page() {
 							
                     </div>
 
-                    <div class="pico-column">
+                    <div class="pico-column"  hidden>
 
                         <h3>Secondary Utilities</h3>
 
@@ -237,7 +237,7 @@ function theme_option_page() {
 
 
 
-    <div class="wrap">
+    <div class="wrap" hidden>
 		<h2> Import / Export Theme Settings</h2>
 
 		<div class="metabox-holder">

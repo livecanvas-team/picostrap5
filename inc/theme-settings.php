@@ -52,7 +52,7 @@ function lc_theme_is_livecanvas_friendly(){}
 
 
 // expose to the livecanvas plugin the active Bootstrap version
-function lc_theme_bootstrap_version(){return 5;}
+function lc_theme_bootstrap_version(){return 5.3;}
 
 
 //submenu for adminBar in customizer
