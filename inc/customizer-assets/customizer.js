@@ -521,7 +521,7 @@
 		$("li#accordion-section-themes").after(`
 		
 			<div id='bs-tools'>
-				<span>Bootstrap Vars:</span>
+				<span>Bootstrap Variables:</span>
 				<a class='reset-scss-vars' href='#'> Reset All</a> 
 				<a class='download-scss-vars' href='#'> Download JSON </a> 
 				<a class='upload-scss-vars' href='#' > Upload JSON </a>
@@ -539,7 +539,7 @@
 					display:block
 				}
 				#bs-tools span {
-					display:block
+					display:block;margin-bottom:2px;
 				}
 				#bs-tools a {
 					display:inline-block; margin:0 5px 0 0;
@@ -564,9 +564,12 @@
 
 				switch (els[i].getAttribute("type")) {
 					case 'text':
-					case 'textarea':
-					case 'number':
-						els[i].value = '';
+					case 'textarea': 
+						//trick to revive color picker					
+						els[i].value = "#fff";
+						els[i].dispatchEvent(new Event('change'));
+
+						els[i].value = ''; 
 						break;
 
 					case 'checkbox':
@@ -651,8 +654,11 @@
 								if (!theInputEl) continue;	
 								switch (theInputEl.getAttribute("type")) {
 									case 'text':
-									case 'textarea':
-									case 'number':
+									case 'textarea': 
+										//trick to revive color picker	
+										theInputEl.value ="#fff";
+										theInputEl.dispatchEvent(new Event('change'));
+										
 										theInputEl.value = jsonData[property];
 										break;
 
