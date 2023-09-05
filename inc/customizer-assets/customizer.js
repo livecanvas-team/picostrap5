@@ -73,7 +73,7 @@
 				console.log("ps_save_css_bundle Error: "+err);
 			}); 
 			
-	} //END FUNCTION ps_recompile_css_bundle
+	} //END FUNCTION  
 	
 		
 	function ps_is_a_google_font(fontFamilyName){
@@ -521,7 +521,7 @@
 		
 			<div id='bs-tools'>
 				<span>Bootstrap Vars:</span>
-				<a class='reset-scss-vars' href='#'> Reset </a> 
+				<a class='reset-scss-vars' href='#'> Reset All</a> 
 				<a class='download-scss-vars' href='#'> Download JSON </a> 
 				<a class='upload-scss-vars' href='#'> Upload JSON </a> 
 			</div>
@@ -547,62 +547,86 @@
 
 		//ON CLICK OF BOOTSTRAP RESET VARS LINK
 		$("body").on("click", ".reset-scss-vars", function (e) {
-			e.preventDefault();			
-			
-			// Get all registered customizer widget controls
-			var customizerControls = wp.customize.control._value;
+			e.preventDefault();		 
+			// loop all input text widgets that have values matched to SCSS vars
+			var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input`);
 
-			// Loop through each control and reset it
-			for (var widgetId in customizerControls) {
-				if (!widgetId.includes("SCSSvar")) continue;
-				//console.log(widgetId);
-				if (customizerControls.hasOwnProperty(widgetId)) {
-					resetCustomizerWidget(widgetId);
-				}
-			}  
-			 
-		});// end onClick of button
+			for (var i = 0; i < els.length; i++) {
 
-		
-		function resetCustomizerWidget(controlId) {
-			var control = wp.customize.control(controlId);
+				//for debug purpose, give them a bg color 
+				//els[i].style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 
-			if (typeof control !== 'undefined') {
-				var controlType = control.params.type;
-				var defaultValue = control.params.default;
-
-				switch (controlType) {
+				switch (els[i].getAttribute("type")) {
 					case 'text':
 					case 'textarea':
 					case 'number':
-					case 'email':
-						control.setting.set(defaultValue);
+						els[i].value = '';
 						break;
 
 					case 'checkbox':
-						control.setting.set(defaultValue === '1' ? true : false);
-						break;
-
-					case 'radio':
-					case 'select':
-						control.setting.set(defaultValue);
-						break;
-
-					case 'color':
-						control.setting.set(defaultValue);
-						control.preview.send('change');
+						els[i].checked = (els[i].id.includes('enable-rfs') || els[i].id.includes('enable-rounded') || els[i].id.includes('enable-text-shades') || els[i].id.includes('enable-bg-shades')) ? true : false;
 						break;
 
 					default:
-						console.error('Unsupported control type: ' + controlType);
+						//console.error('Unsupported control  : ' + els[i].id);
 						break;
 				}
-			} else {
-				console.error('Control with ID ' + controlId + ' does not exist.');
-			}
-		}
+
+				els[i].dispatchEvent(new Event('change'));
+			}	
+
+			updateScssPreview();
+	 
+		});// end onClick  
+
+		//ON CLICK ON DOWNLOAD VARS AS JSON
+		$("body").on("click", ".download-scss-vars", function (e) {
+			e.preventDefault();
 
 
+			let sass = getMainSass().replace("@import 'main'; ","");
+			console.log(sass);
+
+ 
+			// Step 1: Parse SASS variable into a JavaScript object
+			const sassObject = {};
+			sass.split(';').forEach(pair => {
+				const [key, value] = pair.split(':');
+				if (key && value) {
+					sassObject[key.trim()] = value.trim();
+				}
+			});
+
+			// Step 2: Convert JavaScript object to JSON string
+			const jsonContent = JSON.stringify(sassObject, null, 2);
+
+			// Step 3: Create a Blob with JSON data
+			const blob = new Blob([jsonContent], { type: 'application/json' });
+
+			// Step 4: Create a URL for the Blob
+			const url = URL.createObjectURL(blob);
+
+			// Step 5: Create an invisible <a> element
+			const a = document.createElement('a');
+			a.style.display = 'none';
+			document.body.appendChild(a);
+
+			// Step 6: Trigger a click event on the <a> element to initiate download
+			a.href = url;
+			a.download = 'sass_config.json';
+			a.click();
+
+			// Clean up by revoking the URL
+			URL.revokeObjectURL(url);
+
+		});// end onClick  
+
+		//ON CLICK ON DOWNLOAD VARS AS JSON
+		$("body").on("click", ".upload-scss-vars", function (e) {
+			e.preventDefault();
+		});// end onClick    
+
+		 
  
  
 
