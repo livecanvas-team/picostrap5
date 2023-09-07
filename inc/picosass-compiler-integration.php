@@ -207,29 +207,33 @@ function ps_add_toolbar_items($admin_bar) {
 		$wp_admin_bar->add_node(array(
 			'id' => 'ps-recompile-sass', 
 			'title' => '<span id="icon-picostrap-sass"></span>' . __(' Compiler', 'picostrap'),
-			'href' => '#',
-		));		 
-
-		//ADD CHILDREN
-		$wp_admin_bar->add_node(array(
-				'id' => 'ps-recompile-sass-once',
-				'parent' => 'ps-recompile-sass',
-				'title' =>  __('Recompile Once', 'livecanvas'),
-				'href' => add_query_arg(array(
+			'href' => add_query_arg(array(
 					'compile_sass' => '1',
 					'sass_nocache'=> '1',
 					'autorecompile'=> FALSE,
 				)),
+		));		 
+
+		//ADD CHILDREN
+		$wp_admin_bar->add_node(array(
+			'id' => 'ps-recompile-sass-once',
+			'parent' => 'ps-recompile-sass',
+			'title' =>  __('Recompile Once', 'livecanvas'),
+			'href' => add_query_arg(array(
+				'compile_sass' => '1',
+				'sass_nocache'=> '1',
+				'autorecompile'=> FALSE,
+				)),
 		));
 
 		$wp_admin_bar->add_node(array(
-				'id' => 'ps-recompile-sass-automatic',
-				'parent' => 'ps-recompile-sass',
-				'title' =>  __('Recompile Continuously', 'livecanvas'),
-				'href' => add_query_arg(array(
-					'compile_sass' => '1',
-					'sass_nocache'=> '1',
-					'autorecompile'=> '1',
+			'id' => 'ps-recompile-sass-automatic',
+			'parent' => 'ps-recompile-sass',
+			'title' =>  __('Recompile Continuously', 'livecanvas'),
+			'href' => add_query_arg(array(
+				'compile_sass' => '1',
+				'sass_nocache'=> '1',
+				'autorecompile'=> '1',
 				)),
 		));
 
