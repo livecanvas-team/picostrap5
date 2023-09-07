@@ -1,6 +1,8 @@
+//THIS IS THE MAIN SCSS PIPELINE START
+
 //IMPORT BOOTSTRAP ////// 
 
-//SIMPLE VINTAGE WAY
+//SIMPLE IMPORT
 //@import "theme_variables"; //now in bs loader
 //@import "bootstrap5/bootstrap";
 
@@ -10,10 +12,14 @@
 
 
 // THE THEME STUFF 
-
 @import "wp_basic_styles";      
 @import "picostrap";  
 @import "woocommerce";
 
 
+// CUSTOM CSS : THE CHILD THEME STUFF, IF ITS THERE
+@import "custom";
+
+
+//AS A QUICK EXPERIMENT
 //body {opacity: 0.2;}
