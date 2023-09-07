@@ -206,7 +206,7 @@ function ps_add_toolbar_items($admin_bar) {
 		//MAIN MENU ELEMENT
 		$wp_admin_bar->add_node(array(
 			'id' => 'ps-recompile-sass', 
-			'title' => '<span id="icon-picostrap-sass"></span>' . __('SASS Compiler', 'picostrap'),
+			'title' => '<span id="icon-picostrap-sass"></span>' . __(' Compiler', 'picostrap'),
 			'href' => '#',
 		));		 
 
@@ -237,7 +237,7 @@ function ps_add_toolbar_items($admin_bar) {
 		//sass autorecompile is active, print button to shutdown
 		$wp_admin_bar->add_node(array(
 			'id' => 'ps-recompile-sass', 
-			'title' => '<span id="icon-picostrap-sass"></span>' . __('Stop SASS Compiler', 'picostrap'),
+			'title' => '<span id="icon-picostrap-sass"></span>' . __('Stop Compiler', 'picostrap'),
 			'href' => add_query_arg(array(
 					'compile_sass' => FALSE,
 					'sass_nocache'=> FALSE,
@@ -258,11 +258,8 @@ function ps_print_launch_icon_styles() {
 	if (!current_user_can("administrator")) return;
 ?>
 	<style> 
-		#icon-picostrap-sass:before {
-			position: relative;    float: right;    content: ' ';    min-width: 36px;    height: 24px;    margin-right: 6px;
-			margin-top: 9px;    margin-left: 4px;    background-size: contain;    background-repeat: no-repeat;
-			background-image: url('<?php echo get_template_directory_uri() ?>/inc/picosass/sass-logo.svg'); 
-		}	
+		#icon-picostrap-sass:after {
+			display:inline-block; margin: 0 2px 0 0; vertical-align:middle; position: relative; content: ' ';  width: 24px;    height: 24px; background-size: contain; background-repeat: no-repeat; background-image: url('<?php echo get_template_directory_uri() ?>/inc/picosass/sass-logo.svg'); }	
 	</style>
 	<?php
 }
