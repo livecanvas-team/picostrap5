@@ -14,7 +14,6 @@ $picostrap_includes = array(
 	'/pagination.php',                      // Custom pagination for this theme.
 	//'/hooks.php',                           // Custom hooks.
 	//'/extras.php',                          // Custom functions that act independently of the theme templates.
-	//'/customizer.php',                      // Customizer additions.
 	'/custom-comments.php',                 // Custom Comments file.
 	//'/jetpack.php',                         // Load Jetpack compatibility file.
 	'/bootstrap-navwalker.php',    			// Load custom WordPress nav walker. 
@@ -22,8 +21,7 @@ $picostrap_includes = array(
 	'/editor.php',                          // Load Editor functions. 
 	'/customizer-assets/customizer.php',	//Defines Customizer options
 	'/picosass-compiler-integration.php',	//To interface the Customizer with the SCSS js compiler
-	'/scssphp-legacy-compiler-integration.php', //To interface the Customizer with the SCSS php compiler	 
-	//'/customizer-assets/livereload.php', //To automatically trigger SCSS compiling when source sass changes	 
+	'/scssphp-legacy-compiler-integration.php', //To interface the Customizer with the SCSS php compiler
 	'/options-page.php',                  // Load theme options page. 
 	'/content-filtering.php',				//for LC compatibility when shutting down plugin
 

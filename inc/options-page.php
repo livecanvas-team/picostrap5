@@ -25,16 +25,7 @@ function add_picostrap_theme_page() {
 add_action( 'admin_menu', 'add_picostrap_theme_page' );
  
 function theme_option_page() {
-	if (isset($_GET['successful-import'])){
-		?> 
-			<div class='wrap' style="padding: 20px;    font-size: 18px;    background: azure;    margin-top: 10px;     ">Settings imported from file.</div> 
-			<script>
-				jQuery('document').ready(function(){
-					ps_recompile_sass_in_admin();
-				});
-			</script>
-		<?php 
-    }
+	
 	?>
 	
 	<div id='ps-panel-actions-loading-target' class="wrap" style="padding: 20px;    font-size: 18px;    background: lightgoldenrodyellow;    margin-top: 10px;    display: none;"></div>
@@ -77,47 +68,7 @@ function theme_option_page() {
 
 	</style>
     
-	<script>
-		function ps_recompile_sass_in_admin() {
-			jQuery('#ps-panel-actions-loading-target').text('Rebuilding CSS. Please wait...').show(); 
-			jQuery.ajax({
-				url: ajaxurl, // this will point to admin-ajax.php
-				type: 'POST',
-				data: {
-					'action': 'picostrap_recompile_sass',  
-					'nonce': '<?php echo wp_create_nonce( 'picostrap_livereload' ) ?>' 
-				}, 
-				success: function (response) {
-					jQuery('#ps-panel-actions-loading-target').html(response);
-				}
-			});	
-
-		} //end function definition
-
-
-
-		
-		function ps_reset_theme_settings() {
-			if(!confirm('This will DESTROY all your Customizer settings. Are you sure?')) return FALSE;
-			jQuery('#ps-panel-actions-loading-target').text('Resetting options and rebuilding CSS. Please wait...').show(); 
-			jQuery.ajax({
-				url: ajaxurl, // this will point to admin-ajax.php
-				type: 'POST',
-				data: {
-					'action': 'picostrap_reset_theme_options',  
-					'nonce': '<?php echo wp_create_nonce( 'picostrap_livereload' ) ?>' 
-				}, 
-				success: function (response) {
-					jQuery('#ps-panel-actions-loading-target').html(response);
-				}
-			});	
-
-		} //end function definition
-
-	</script>
-	
-	
-	
+ 
 	<div class="pico-wrap">
 
         <div class="pico-welcome-panel">
@@ -134,10 +85,9 @@ function theme_option_page() {
                 Hit "<b>Publish</b>" and picostrap will recompile the Bootstrap SCSS code "on the fly" (and optionally include YOUR additional CSS / SCSS files). </p>
                 <p>A <b>single, minified <a href="<?php echo picostrap_get_css_url() ?>" target="_blank">CSS file</a></b> is generated and served. </p>
                 <p><small>If you're not a fan of the Customizer, you can alternatively edit the <b> sass/_theme-variables.scss </b> file too, inside  your child theme folder. 
-				Then launch compiler from the topbar while visiting the site.</small></p>
+				Then launch the SASS compiler from the topbar while visiting the site.</small></p>
                  
-
-                
+               
                 <div class="pico-container">
                     
 					<div class="pico-column" style="width:55%;">
@@ -212,19 +162,19 @@ function theme_option_page() {
 		<div class="metabox-holder">
 			<div class="postbox" style="padding: 0 10px;"> 
 				<?php 
-				if (get_template_directory() === get_stylesheet_directory()) {
+				if (  get_template_directory() === get_stylesheet_directory()) {
 					echo '
-					<p style="font-style:italic"><b style="font-family:Courier;font-size:20px;">Please do not edit directly the picostrap theme folder. </b></p>
+					<h2>Please do not edit directly the picostrap theme folder. </h2>
 					
-					<p>To add your own [SASSy] CSS code, you need to enable a child theme (free at picostrap.com). </p>
+					<p>To add your own [SASSy] CSS code, you need to enable a child theme. Download our child theme starter for free at <a target="_new" href="https://picostrap.com/#downloads">picostrap.com</a>. </p>
 					
 					';
 					} else {
 					echo '<p>You can freely edit the <b style="font-family:Courier;font-size:20px;"> sass/_custom.scss </b> file inside your child theme folder.</p>
-					<p>Open this file with your favourite text editor, save, and view the page as admin in your browser:<br>
-					A new CSS bundle will be built and served via ajax after a few seconds.<br> So while working on your CSS / SCSS code, you can immediately see the "results" of your new styling edits without reloading the page.</p>
+					<p>Open this file with your favourite text editor, save. Then, launch the SASS compiler from the topbar while visiting the site. <br>
+					A new CSS bundle will be generated. </p>
 					
-					<p style="font-style:italic" >Stop hitting cmd-R like a drunken monkey!</p>';
+				 ';
 					}
 				?>
 			</div><!-- .postbox -->
@@ -235,148 +185,7 @@ function theme_option_page() {
 
 
 
-
-
-    <div class="wrap" hidden>
-		<h2> Import / Export Theme Settings</h2>
-
-		<div class="metabox-holder">
-			<div class="postbox">
-				<h3><span><?php _e( 'Export Settings' ); ?></span></h3>
-				<div class="inside">
-					<p><?php _e( 'Export the theme settings for this site as a .json file. This allows you to easily import the configuration into another site.' ); ?></p>
-					<form method="post">
-						<p><input type="hidden" name="pico_action" value="export_settings" /></p>
-						<p>
-							<?php wp_nonce_field( 'pico_export_nonce', 'pico_export_nonce' ); ?>
-							<?php submit_button( __( 'Export' ), 'secondary', 'submit', false ); ?>
-						</p>
-					</form>
-				</div><!-- .inside -->
-			</div><!-- .postbox -->
-
-			<div class="postbox">
-				<h3><span><?php _e( 'Import Settings' ); ?></span></h3>
-				<div class="inside">
-					<p><?php _e( 'Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.' ); ?></p>
-					<form method="post" enctype="multipart/form-data">
-						<p>
-							<input type="file" name="import_file"/>
-						</p>
-						<p>
-							<input type="hidden" name="pico_action" value="import_settings" />
-							<?php wp_nonce_field( 'pico_import_nonce', 'pico_import_nonce' ); ?>
-							<?php submit_button( __( 'Import' ), 'secondary', 'submit', false ); ?>
-						</p>
-					</form>
-				</div><!-- .inside -->
-			</div><!-- .postbox -->
-		</div><!-- .metabox-holder -->
-
-	</div><!--end .wrap-->
-
-
-
+ 
 
     <?php
 }
-
-
-///EXPORT AS JSON FILE
-function pico_process_settings_export() {
-
-	if( empty( $_POST['pico_action'] ) || 'export_settings' != $_POST['pico_action'] )
-		return;
-
-	if( ! wp_verify_nonce( $_POST['pico_export_nonce'], 'pico_export_nonce' ) )
-		return;
-
-	if( ! current_user_can( 'manage_options' ) )
-		return;
-
-	$settings = array();
-
-	//add version
-	$settings['theme_version'] = pico_get_parent_theme_version();
-
-    foreach (get_theme_mods() as $setting_name => $setting_value):
-		if ($setting_name=="picostrap_scss_last_filesmod_timestamp") continue;
-        if ($setting_name=="picostrap_scss_last_filesmod_timestamp_v2") continue;
-        if ($setting_name=="custom_css_post_id") continue;
-        $settings[$setting_name]=$setting_value;
-    endforeach;
-
-
-	ignore_user_abort( true );
-
-	nocache_headers();
-	header( 'Content-Type: application/json; charset=utf-8' );
-	header( 'Content-Disposition: attachment; filename=pico-settings-export-' . date( 'm-d-Y' ) . '.json' );
-	header( "Expires: 0" );
-
-	echo json_encode( $settings );
-	exit;
-}
-add_action( 'admin_init', 'pico_process_settings_export' );
-
-
-
-
-//IMPORT FROM JSON
-
-function pico_process_settings_import() {
-
-	if( empty( $_POST['pico_action'] ) || 'import_settings' != $_POST['pico_action'] )
-		return;
-
-	if( ! wp_verify_nonce( $_POST['pico_import_nonce'], 'pico_import_nonce' ) )
-		return;
-
-	if( ! current_user_can( 'manage_options' ) )
-		return;
-
-	@$extension = end( explode( '.', $_FILES['import_file']['name'] ) );
-
-	if( $extension != 'json' ) {
-		wp_die( __( 'Please upload a valid .json file' ) );
-	}
-
-	$import_file = $_FILES['import_file']['tmp_name'];
-
-	if( empty( $import_file ) ) {
-		wp_die( __( 'Please upload a file to import' ) );
-	}
-
-	// Retrieve the settings from the file and convert the json object to an array.
-	$settings = (array) json_decode( file_get_contents( $import_file ), TRUE );
-
-	//version check - should not be necessary anymore, so its disabled
-	//if (!isset($settings['theme_version']) OR $settings['theme_version']!=pico_get_parent_theme_version()) wp_die("<h1>Invalid JSON format</h1><h4> You can only import json exported from the same version of the theme</h4>");
-
-	//should we choose to whitelist only some values, some example code
-	/*
-	// eliminate non - string / boolean values like nav_menu_locations as they break the customizer after importing
-	foreach($settings as $setting_name => $setting_value):
-
-		if (!is_string($setting_value) && !is_bool($setting_value)) {
-			//echo ("eliminate ".$setting_name."<br><br>"); //for debug only
-			unset ($settings[$setting_name]);
-		}
-
-	endforeach; 
-
-	//var_dump ($settings); die; // for debug only
-
-	*/
-
-	$theme = get_option( 'stylesheet' );
-
-	update_option( "theme_mods_$theme", $settings );
-    wp_safe_redirect( admin_url( 'themes.php?page=picostrap-theme-options&successful-import' ) ); 
-    
-    exit;
-
-}
-add_action( 'admin_init', 'pico_process_settings_import' );
-
-
