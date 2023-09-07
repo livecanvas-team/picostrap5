@@ -125,6 +125,9 @@ async function runScssCompiler(theCode, sassParams ) {
 
 export function Compile(sassParams = {}, theCallback = () => {} ) {
 
+    //for debug
+    console.log("PicoSASS Compile launched");
+
     //if not present, add a DIV and some styling TO SHOW COMPILER MESSAGES / OUTPUT FEEDBACK 
     if (!document.querySelector("#picosass-output-feedback")) document.querySelector("html").insertAdjacentHTML("afterbegin", `
         <div id='picosass-output-feedback'></div> 
@@ -138,8 +141,11 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
     //is a Compile process already running? if so, abort
     //TODO: make it cleaner, this is just a dirty implementation
     if(document.querySelector("#picosass-output-feedback").innerHTML.includes('Compiling')) {
-        console.log("PicoSASS task is already running, retrying in 6 secs.");
-        setTimeout(Compile(sassParams, theCallback), 6000);
+        console.log("PicoSASS task is already running, retrying in a few secs."); 
+        setTimeout(function () {
+            Compile(sassParams, theCallback);
+        }, 2000);  
+        
         return false;
     }
 
