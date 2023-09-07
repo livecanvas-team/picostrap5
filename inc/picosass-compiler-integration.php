@@ -14,7 +14,7 @@ add_action( 'wp_head', function  () {
 	if (!isset($_GET['customize_theme']) && !isset($_GET['compile_sass'])) return;
     ?>
 		<!-- add picoSASS JS --> 
-		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass/picosass.js"></script>
+		<script type="module" src="<?php echo get_template_directory_uri() ?>/inc/picosass/picosass.js"></script>
 
 		<!-- add the SCSS source code --> 
 		<template id="the-scss" class="prevent-autocompile" baseurl="<?php echo get_stylesheet_directory_uri() ?>/sass/"
@@ -261,9 +261,10 @@ function ps_print_launch_icon_styles() {
 		#icon-picostrap-sass:before {
 			position: relative;    float: right;    content: ' ';    min-width: 36px;    height: 24px;    margin-right: 6px;
 			margin-top: 9px;    margin-left: 4px;    background-size: contain;    background-repeat: no-repeat;
-			background-image: url('<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass/sass-logo.svg'); 
+			background-image: url('<?php echo get_template_directory_uri() ?>/inc/picosass/sass-logo.svg'); 
 		}	
 	</style>
 	<?php
 }
+
 

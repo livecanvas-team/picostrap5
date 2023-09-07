@@ -21,8 +21,8 @@ $picostrap_includes = array(
 	'/woocommerce.php',                     // Load WooCommerce functions.
 	'/editor.php',                          // Load Editor functions. 
 	'/customizer-assets/customizer.php',	//Defines Customizer options
-	'/customizer-assets/picosass-integration.php',	//To interface the Customizer with the SCSS js compiler
-	'/customizer-assets/scssphp-legacy-integration.php', //To interface the Customizer with the SCSS php compiler	 
+	'/picosass-compiler-integration.php',	//To interface the Customizer with the SCSS js compiler
+	'/scssphp-legacy-compiler-integration.php', //To interface the Customizer with the SCSS php compiler	 
 	//'/customizer-assets/livereload.php', //To automatically trigger SCSS compiling when source sass changes	 
 	'/options-page.php',                  // Load theme options page. 
 	'/content-filtering.php',				//for LC compatibility when shutting down plugin
