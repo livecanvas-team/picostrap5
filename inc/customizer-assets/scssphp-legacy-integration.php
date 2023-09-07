@@ -1,16 +1,20 @@
 <?php
 /*
-SCSS Compiler interface 
+SCSSPhp Compiler interface (legacy backend compiler)
 */
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-//CHECK URL PARAMETERS AND REACT ACCORDINGLY
-add_action("admin_init", function (){
+/// ACTIONS ////
+
+//COMPILE SCSS WITH SCSSPHP WHEN  ?recompile_scss_backend
+add_action("init", function (){
 	if (!current_user_can("administrator")) return; //ADMINS ONLY
-	if (isset($_GET['ps_show_mods'])){ print_r(get_theme_mods()); wp_die();	}
+	if (isset($_GET['recompile_scss_backend'])){ picostrap_generate_css(); wp_die(); }
 });
+
+/// LOGIC ///
 
 // USE LEAFO's SCSSPHP LIBRARY
 use ScssPhp\ScssPhp\Compiler; //https://scssphp.github.io/scssphp/docs/
@@ -40,12 +44,11 @@ function picostrap_get_active_scss_code(){
 }
 
 
- 
 /////FUNCTION TO RECOMPILE THE CSS ///////
 function picostrap_generate_css(){
 	
-	//SET TIMESTAMP
-	set_theme_mod("picostrap_scss_last_filesmod_timestamp_v2", picostrap_get_scss_last_filesmod_timestamp());
+	//SET TIMESTAMP - was used in v2
+	//set_theme_mod("picostrap_scss_last_filesmod_timestamp_v2", picostrap_get_scss_last_filesmod_timestamp());
 		
 	//INITIALIZE COMPILER
 	require_once "scssphp/scss.inc.php";
@@ -154,11 +157,4 @@ function picostrap_get_active_scss_variables_array(){
 	endforeach;
 	
 	return $output_array; 
-}
-
-
-// FORCE CSS REBUILD UPON ENABLING CHILD THEME 
-add_action( 'after_switch_theme', 'picostrap_force_css_rebuilding', 10, 2 ); 
-function picostrap_force_css_rebuilding() {   
-    remove_theme_mod("picostrap_scss_last_filesmod_timestamp_v2");
 }

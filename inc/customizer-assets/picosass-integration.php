@@ -2,6 +2,12 @@
 
 ////   PICOSASS JS INTEGRATION ////
 
+// TODO: FORCE CSS REBUILD UPON ENABLING CHILD THEME //has to be updated to new logic
+add_action( 'after_switch_theme', 'picostrap_force_css_rebuilding', 10, 2 ); 
+function picostrap_force_css_rebuilding() {   
+    //remove_theme_mod("picostrap_scss_last_filesmod_timestamp_v2"); //no, we should force recompiling differently, eg show nag and link recompile
+}
+
 //FOR THE CUSTOMIZER AND FRONTEND SCSS COMPILER: ADD TO HEADER 
 add_action( 'wp_head', function  () {
 	if (!current_user_can('administrator') ) return;
@@ -73,6 +79,8 @@ add_action( 'wp_footer', function  () {
 					lastCssBundle=compiled.css;
 				}
 
+				<?php if (isset($_GET['autorecompile'])): ?>
+
 				//check if browser tab has focus, retrigger
 				if (document.visibilityState === 'visible') {
 					//schedule for later
@@ -81,6 +89,8 @@ add_action( 'wp_footer', function  () {
 					 }, 7000);
 					return;
 				}
+
+				<?php endif ?>
 
 			}
 
@@ -100,6 +110,15 @@ add_action( 'wp_footer', function  () {
 	<?php
 } );
  
+
+
+// USEFUL FOR INSPECTING: SHOW THEME MODS WHEN  ?ps_show_mods
+add_action("init", function (){
+	if (!current_user_can("administrator")) return; //ADMINS ONLY
+	if (isset($_GET['ps_show_mods'])){ print_r(get_theme_mods()); wp_die();	}
+});
+
+
 //BUILD SASS MAIN CODE FROM VARIABLES & VALUES IN THEME MODS, AND AND main SCSS FILE
 function ps_get_main_sass(){
 	
@@ -182,23 +201,38 @@ function ps_add_toolbar_items($admin_bar) {
 
 	global $wp_admin_bar;
 
-	$wp_admin_bar->add_node(array(
-		'id' => 'ps-recompile-sass',
-		'title' => __('Recompile SASS', 'picostrap'),
-		'href' => add_query_arg(array(
-			'compile_sass' => '1',
-			'sass_nocache'=> '1',
-		))
-	));		 
+	if (!isset($_GET['compile_sass'])) {
+		$wp_admin_bar->add_node(array(
+			'id' => 'ps-recompile-sass', 
+			'title' => '<span id="icon-picostrap-sass"></span>' . __('SASS Compiler', 'picostrap'),
+			'href' => add_query_arg(array(
+				'compile_sass' => '1',
+				'sass_nocache'=> '1',
+			))
+		));		 
+	} else {
+		//sass is active, print button to disable it
+	}
 	
-	if (!isset($_GET['compile_sass'])) return;
 
-	$wp_admin_bar->add_node(array(
-		'id' => 'ps-recompile-sass-finish',
-		'title' => __('Finish Editing', 'picostrap'),
-		'href' => add_query_arg(array(
-			'compile_sass' => false,
-			'sass_nocache'=> false,
-		))
-	));		 
+ 	 
 } 
+
+
+/////// ICON IN TOOLBAR STYLING ///////////////////////////////////////////////////
+add_action('admin_head', 'ps_print_launch_icon_styles'); // on backend area
+add_action('wp_head', 'ps_print_launch_icon_styles'); // on frontend area
+function ps_print_launch_icon_styles() {
+	if (!is_user_logged_in())
+		return;
+?>
+	<style> 
+		#icon-picostrap-sass:before {
+			position: relative;    float: right;    content: ' ';    min-width: 186px;    height: 24px;    margin-right: 6px;
+			margin-top: 9px;    margin-left: 4px;    background-size: contain;    background-repeat: no-repeat;
+			background-image: url('<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass/sass-logo.svg'); 
+		}	
+	</style>
+	<?php
+}
+

@@ -40,7 +40,7 @@ async function load(canonicalUrl) {
         document.querySelector("#picosass-output-feedback span").innerHTML = `Importing ${canonicalUrl}`;
     }
 
-    //build the request options: if nocache parameter is set, declare it, or just have an empty one
+    //build the request options: if nocache parameter is set, declare it, or just have an empty one. Seems like default browser is no cache anyway.
     const options = (((new URL(document.location)).searchParams).get("sass_nocache")) ? { cache: "no-cache" } : {}
 
     //fetch the URL
