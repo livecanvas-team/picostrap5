@@ -8,10 +8,10 @@ defined( 'ABSPATH' ) || exit;
 
 /// ACTIONS ////
 
-//COMPILE SCSS WITH SCSSPHP WHEN  ?recompile_scss_backend
+//COMPILE SCSS WITH SCSSPHP WHEN  ?compile_sass_on_server
 add_action("init", function (){
 	if (!current_user_can("administrator")) return; //ADMINS ONLY
-	if (isset($_GET['recompile_scss_backend'])){ picostrap_generate_css(); wp_die(); }
+	if (isset($_GET['compile_sass_on_server'])){ picostrap_generate_css(); wp_die(); }
 });
 
 /// LOGIC ///

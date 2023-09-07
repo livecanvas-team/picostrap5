@@ -1183,7 +1183,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 
-	//DISABLE LIVERELOAD
+	//DISABLE LIVERELOAD (no more necessary)
+	/*
 	$wp_customize->add_setting("picostrap_disable_livereload", array(
         "default" => "",
         "transport" => "refresh",
@@ -1198,6 +1199,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             'type'     => 'checkbox',
 			)
 	));
+	*/
 
 	//BACK TO TOP
 	$wp_customize->add_setting("enable_back_to_top", array(

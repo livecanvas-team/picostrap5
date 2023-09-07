@@ -30,9 +30,13 @@ add_action( 'wp_footer', function  () {
 	if (!current_user_can('administrator') ) return;
 	if (!isset($_GET['customize_theme']) && !isset($_GET['compile_sass'])) return;
     ?>
-		<!-- mark the static theme CSS as provisional --> 
 		<script>
+			//mark the static theme CSS as provisional 
 			document.querySelector("#picostrap-styles-css").classList.add("picostrap-provisional-css");
+
+			//check there is a connection to the internet
+			if (!navigator.onLine) {alert("You need to be online to be able to use the frontend SCSS compiler"); throw new Error("No network");}
+
 		</script>
 	<?php
 } );
@@ -81,18 +85,14 @@ add_action( 'wp_footer', function  () {
 
 				<?php if (isset($_GET['autorecompile'])): ?>
 
-				//check if browser tab has focus, retrigger
-				if (document.visibilityState === 'visible') {
-					//schedule for later
-					setTimeout(function () { 
-						window.Picosass.Compile({}, compilingSassFinishedCallback);
-					 }, 7000);
-					return;
-				}
+				//recompile in a few seconds
+				setTimeout(function () {
+					window.Picosass.Compile({}, compilingSassFinishedCallback);
+				}, 7000);
 
 				<?php endif ?>
+			} //end function compilingSassFinishedCallback
 
-			}
 
 			/////// ON DOM CONTENT LOADED, RUN COMPILER
 			window.addEventListener("DOMContentLoaded", (event) => {
@@ -138,7 +138,7 @@ function ps_get_main_sass(){
 		//get the real sass variable name from theme_mod_name, getting rid of our custom prefix
 		$variable_name = str_replace("SCSSvar_", "$", $theme_mod_name);
 		
-		//add to output array sass += `$${name}: ${els[i].value}; `;
+		//add to output array. In JS that is sass += `$${name}: ${els[i].value}; `;
 		$sass .= $variable_name . ': '.$theme_mod_value . '; ';
 		
 	endforeach;
@@ -197,21 +197,53 @@ function ps_add_toolbar_items($admin_bar) {
 	
 	if (is_admin())	return; //ALLOW ONLY ON FRONTEND
 	
-	//if (!is_child_theme()) return; // KEEP COMMENTED - UNCOMMENT TO TEST ON ORIG THEME FOR CONSISTENCY
+	//if (!is_child_theme()) return; // COMMENT TO TEST ON ORIG THEME FOR CONSISTENCY
 
 	global $wp_admin_bar;
 
-	if (!isset($_GET['compile_sass'])) {
+	if (!isset($_GET['autorecompile'])) {
+
+		//MAIN MENU ELEMENT
 		$wp_admin_bar->add_node(array(
 			'id' => 'ps-recompile-sass', 
 			'title' => '<span id="icon-picostrap-sass"></span>' . __('SASS Compiler', 'picostrap'),
-			'href' => add_query_arg(array(
-				'compile_sass' => '1',
-				'sass_nocache'=> '1',
-			))
+			'href' => '#',
 		));		 
+
+		//ADD CHILDREN
+		$wp_admin_bar->add_node(array(
+				'id' => 'ps-recompile-sass-once',
+				'parent' => 'ps-recompile-sass',
+				'title' =>  __('Recompile Once', 'livecanvas'),
+				'href' => add_query_arg(array(
+					'compile_sass' => '1',
+					'sass_nocache'=> '1',
+					'autorecompile'=> FALSE,
+				)),
+		));
+
+		$wp_admin_bar->add_node(array(
+				'id' => 'ps-recompile-sass-automatic',
+				'parent' => 'ps-recompile-sass',
+				'title' =>  __('Recompile Continuously', 'livecanvas'),
+				'href' => add_query_arg(array(
+					'compile_sass' => '1',
+					'sass_nocache'=> '1',
+					'autorecompile'=> '1',
+				)),
+		));
+
 	} else {
-		//sass is active, print button to disable it
+		//sass autorecompile is active, print button to shutdown
+		$wp_admin_bar->add_node(array(
+			'id' => 'ps-recompile-sass', 
+			'title' => '<span id="icon-picostrap-sass"></span>' . __('Stop SASS Compiler', 'picostrap'),
+			'href' => add_query_arg(array(
+					'compile_sass' => FALSE,
+					'sass_nocache'=> FALSE,
+					'autorecompile'=> FALSE,
+				)),
+		));	
 	}
 	
 
@@ -223,12 +255,11 @@ function ps_add_toolbar_items($admin_bar) {
 add_action('admin_head', 'ps_print_launch_icon_styles'); // on backend area
 add_action('wp_head', 'ps_print_launch_icon_styles'); // on frontend area
 function ps_print_launch_icon_styles() {
-	if (!is_user_logged_in())
-		return;
+	if (!current_user_can("administrator")) return;
 ?>
 	<style> 
 		#icon-picostrap-sass:before {
-			position: relative;    float: right;    content: ' ';    min-width: 186px;    height: 24px;    margin-right: 6px;
+			position: relative;    float: right;    content: ' ';    min-width: 36px;    height: 24px;    margin-right: 6px;
 			margin-top: 9px;    margin-left: 4px;    background-size: contain;    background-repeat: no-repeat;
 			background-image: url('<?php echo get_template_directory_uri() ?>/inc/customizer-assets/picosass/sass-logo.svg'); 
 		}	

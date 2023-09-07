@@ -530,23 +530,7 @@
 
 
 			</div>
-
-			<style>
-				#bs-tools {
-					margin:10px 0 20px 5px;
-					background:#fff;
-					padding:10px 5px;
-					display:block
-				}
-				#bs-tools span {
-					display:block;margin-bottom:2px;
-				}
-				#bs-tools a {
-					display:inline-block; margin:0 5px 0 0;
-				}
-				 
-
-			</style>
+ 
 		
 		`);
 
