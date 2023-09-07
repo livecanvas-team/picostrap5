@@ -27,8 +27,9 @@
         //import Bootstrap from the CDN
         @import "bootstrap";
 
-        //add your additional sCSS
-        body { border:13px solid red !important;}
+        //add your additional sCSS.
+        //As a test, try uncommenting this line
+        //body { border:13px solid red !important;}
 
     </template>
 
@@ -37,11 +38,18 @@
 <body>
     <div class="container bg-light">
         <div class="row py-5  text-center">
-            <div class="col bg-primary">
+            <div class="col">
                 <h1 class="display-1 text-warning">Hello, picosass!</h1>
-                <h1 class="display-1 text-danger" >Hello, picosass!</h1>
-                <h2>Hello, picosass!</h2>
-                <h3>Hello, picosass!</h3>
+                <img src="sass-logo.svg" width="500">
+                <h2>Hello, picosass!</h2> 
+                <p class="lead">This page compiles SCSS code in the browser. In detail, it compiles the full Bootstrap 5.3.1 CSS library, reading SCSS files hosted on the CDN.</p>
+                <p class="lead">Of course, this is not for production use. You should always "staticize" your CSS bundle.</p>
+                <p class="lead">We built this module for Picostrap, a starter theme implementing SASS and Bootstrap for WordPress.</p>
+                <h2>How to compile SCSS in the browser on my own web page / app</h2>
+                
+                <p class="lead">View this page source code. It's really easy! </p>
+                <p class="lead">Just add the < script> import tag, and some < template id = "the-scss" > element containing the SCSS to be
+                    compiled.</p >
             </div>
         </div>
     </div>

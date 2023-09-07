@@ -30,7 +30,27 @@
 
     </template>
  
+    <script>
+        
+            /*
 
+            //for other experiments
+            
+            //attach observer to detect on-page scss code changes  
+            let observer = new MutationObserver(mutationRecords => {
+                //console.log(mutationRecords); 
+                Compile();
+            });
+        
+            // observe everything except attributes
+            observer.observe(document.querySelector('#the-scss'), {
+                childList: true, // observe direct children
+                subtree: true, // and lower descendants too
+                characterDataOldValue: true // pass old data to callback
+            });
+        
+            */
+    </script>
 </head>
 
 <body>

@@ -5,6 +5,7 @@ import * as sass from 'https://jspm.dev/sass'; //import SASS module
 
 const theScssSelector = '#the-scss'; //the selector for the element containing the SCSS code element
 
+//SUPPORT FUNCTION 
 const replaceLast = (str, pattern, replacement) => {
     const match =
         typeof pattern === 'string'
@@ -17,6 +18,46 @@ const replaceLast = (str, pattern, replacement) => {
         : str;
 };
 
+//SUPPORT FUNCTIONS FOR STRING MEASURING
+function measureStringSizeInKB(str) {
+    const encoder = new TextEncoder('utf-8');
+    const bytes = encoder.encode(str);
+    const sizeInKB = bytes.length / 1024; // Convert bytes to kilobytes
+    return Math.floor(sizeInKB);
+}
+function measureEstimatedGzippedSizeInKB(str) {
+    // Convert the string to bytes
+    const encoder = new TextEncoder('utf-8');
+    const bytes = encoder.encode(str);
+
+    // Create a basic "gzip-like" compression (run-length encoding)
+    const compressedBytes = basicGzip(bytes);
+
+    // Calculate an estimated size in kilobytes based on a factor (e.g., 0.1)
+    const sizeInKB = (compressedBytes.length / 1024) * 0.074; // Adjust the factor as needed
+
+    return Math.floor(sizeInKB);
+}
+function basicGzip(inputBytes) {
+    // Create a basic "gzip-like" compression (just simple run-length encoding)
+    let compressedBytes = [];
+    let currentByte = inputBytes[0];
+    let count = 1;
+
+    for (let i = 1; i < inputBytes.length; i++) {
+        if (inputBytes[i] === currentByte && count < 255) {
+            count++;
+        } else {
+            compressedBytes.push(count, currentByte);
+            currentByte = inputBytes[i];
+            count = 1;
+        }
+    }
+    compressedBytes.push(count, currentByte);
+    return new Uint8Array(compressedBytes);
+}
+
+//FUNCTIONS TO ALLOW COMPILER TO READ FILES FROM THE WEB 
 function canonicalize(url) {
     //console.log('canonicalize ' + url);
 
@@ -29,7 +70,6 @@ function canonicalize(url) {
     const base = document.querySelector(theScssSelector).getAttribute("baseurl") ?? window.location.toString();
     return new URL(url + '.scss', base);
 }
-
 
 async function load(canonicalUrl) {
 
@@ -160,53 +200,6 @@ window.Picosass = {
     Run: runScssCompiler
 }
 
-//SUPPORT FUNCTIONS FOR STRING MEASURING
-
-function measureStringSizeInKB(str) {
-    const encoder = new TextEncoder('utf-8');
-    const bytes = encoder.encode(str);
-    const sizeInKB = bytes.length / 1024; // Convert bytes to kilobytes
-    return Math.floor(sizeInKB);
-}
-function measureEstimatedGzippedSizeInKB(str) {
-    // Convert the string to bytes
-    const encoder = new TextEncoder('utf-8');
-    const bytes = encoder.encode(str);
-
-    // Create a basic "gzip-like" compression (run-length encoding)
-    const compressedBytes = basicGzip(bytes);
-
-    // Calculate an estimated size in kilobytes based on a factor (e.g., 0.1)
-    const sizeInKB = (compressedBytes.length / 1024) * 0.074; // Adjust the factor as needed
-
-    return Math.floor(sizeInKB);
-}
-
-function basicGzip(inputBytes) {
-    // Create a basic "gzip-like" compression (just simple run-length encoding)
-    let compressedBytes = [];
-    let currentByte = inputBytes[0];
-    let count = 1;
-
-    for (let i = 1; i < inputBytes.length; i++) {
-        if (inputBytes[i] === currentByte && count < 255) {
-            count++;
-        } else {
-            compressedBytes.push(count, currentByte);
-            currentByte = inputBytes[i];
-            count = 1;
-        }
-    }
-
-    compressedBytes.push(count, currentByte);
-
-    return new Uint8Array(compressedBytes);
-}
-
- 
- 
- 
-
 
 /////////////////////////////// ON DOM CONTENT LOADED: COMPILE ONCE & OBSERVE CHANGES TO SOURCE SCSS //////////////
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -214,24 +207,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //run  the compiler, unless a special class is added to the body
     if (!document.querySelector(theScssSelector).classList.contains("prevent-autocompile")) {
         Compile();
-    }
-    
-
-    /*
-    //attach observer to detect on-page scss code changes  
-    let observer = new MutationObserver(mutationRecords => {
-        //console.log(mutationRecords); 
-        Compile();
-    });
-
-    // observe everything except attributes
-    observer.observe(document.querySelector(theScssSelector), {
-        childList: true, // observe direct children
-        subtree: true, // and lower descendants too
-        characterDataOldValue: true // pass old data to callback
-    });
-
-    */
+    } 
 
 }); //end onDOMContentLoaded
- 
