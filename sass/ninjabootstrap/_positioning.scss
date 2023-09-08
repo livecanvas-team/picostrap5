@@ -5,6 +5,10 @@ $utilities: map-merge(
       map-get($utilities, "position"),
       ( responsive: true ),
     ),
+    "translate-middle": map-merge(
+      map-get($utilities, "translate-middle"),
+      ( responsive: true ),
+    ),
     "top": map-merge(
       map-get($utilities, "top"),
       (
