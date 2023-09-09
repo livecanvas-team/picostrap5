@@ -506,7 +506,6 @@
 		pico_add_video_link("section-typography", "https://youtu.be/SwDrR-FmzkE&t=86s");
 		pico_add_video_link("section-components", "https://youtu.be/SwDrR-FmzkE&t=149s");
 		pico_add_video_link("section-buttons", "https://youtu.be/SwDrR-FmzkE&t=169s");
-		//pico_add_video_link("section-buttons-forms", "https://youtu.be/SwDrR-FmzkE&t=169s");
 		pico_add_video_link("section-nav", "https://youtu.be/aY7JmxBe76Y&t=26s");
 		pico_add_video_link("section-topbar", "https://youtu.be/aY7JmxBe76Y&t=225s");
 		pico_add_video_link("panel-nav_menus", "https://youtu.be/aY7JmxBe76Y&t=325s");
@@ -533,6 +532,24 @@
  
 		
 		`);
+
+
+		/// STYLE GUIDE LINKS ////////////////////////
+
+		function pico_add_styleguide_link(section_name, hash) {
+			const theIcon = '<svg style="vertical-align: middle; height:13px; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" viewBox="0 0 16 16" style="" lc-helper="svg-icon"><path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"></path><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path></svg>';
+			$("#sub-accordion-" + section_name + " li:first ").after("<a class='style-guide-link' href='" + hash + "'>" + theIcon + "View Style Guide</a> ");
+		}
+
+		pico_add_styleguide_link("section-colors", "https://youtu.be/SwDrR-FmzkE&t=63s");
+		pico_add_styleguide_link("section-typography", "https://youtu.be/SwDrR-FmzkE&t=86s");
+		pico_add_styleguide_link("section-components", "https://youtu.be/SwDrR-FmzkE&t=149s");
+		pico_add_styleguide_link("section-buttons", "https://youtu.be/SwDrR-FmzkE&t=169s");
+		//pico_add_styleguide_link("section-buttons-forms", "https://youtu.be/SwDrR-FmzkE&t=169s");
+		pico_add_styleguide_link("section-nav", "https://youtu.be/aY7JmxBe76Y&t=26s");
+
+		//// BOOTSTRAP VARS TOOLBOX
+
 
 		//ON CLICK OF BOOTSTRAP RESET VARS LINK
 		$("body").on("click", ".reset-scss-vars", function (e) {

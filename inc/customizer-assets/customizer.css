@@ -267,24 +267,24 @@ body span.fp-pill.italic { display: none}
   box-shadow: none;
 }
 
-#the-scss-viewing-glassdoor {
-  position: fixed; 
-  top:5px; 
-  right:0;
-  z-index: 99999999;
-  width:40%;
-  height:60%;
-  overflow: scroll;
-  font-size:11px; background:#212337;
-  color:lime;
-  font-family:courier;
-  border:12px solid red; 
-  padding:15px 10px;
-  display:block;  
-  word-wrap: break-word; 
+/* STYLE GUIDE LINKS  */
 
+.style-guide-link {
+  display:block;
+  text-align:right;
+  font-size: 12px;
+  margin:0 10px 10px;
 }
 
+.style-guide-link:hover {
+  color:red
+}
+
+.style-guide-link:focus {
+  box-shadow: none;
+}
+
+ 
 
 /* TOOLBAR TO RESET, DOWNLOAD, UPLOAD */
 #bs-tools {
