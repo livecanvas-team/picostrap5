@@ -1,3 +1,5 @@
+// adds classes eg text-slate-100 or bg-zinc-500
+
 $slates: (
 	"50": #f8fafc,
 	"100": #f1f5f9,
@@ -60,7 +62,6 @@ $stones: (
 );
 
 
-// Extend Bootstrap's color map with your tailwind grays
 $colors: map-merge(
   $colors,
   (
@@ -72,12 +73,15 @@ $colors: map-merge(
   )
 );
 
-// Add custom text color utilities //da spostare, agg bg
+// create classes eg text-slate-100 or bg-zinc-500
 @each $color, $shades in $colors {
   @each $shade, $value in $shades {
     @if $value != null {
       .text-#{$color}-#{$shade} {
         color: $value !important;
+      }
+	  .bg-#{$color}-#{$shade} {
+        background-color: $value !important;
       }
     }
   }

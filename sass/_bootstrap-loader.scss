@@ -14,6 +14,10 @@
 
 // 4. Include any default map overrides here
 
+//eg optional remove theme colors:
+//$theme-colors: map-remove($theme-colors, "info", "warning", "danger");
+
+
 // 5. Include remainder of required parts
 @import "bootstrap5/maps";
 @import "bootstrap5/mixins";
@@ -60,6 +64,7 @@
 @import "ninjabootstrap/letter-spacing";
 @import "ninjabootstrap/borders";
 @import "ninjabootstrap/tailwind_grays";
+@import "ninjabootstrap/bootstrap_all_colors";
 @import "ninjabootstrap/color_shades";
 
 @import "bootstrap5/utilities/api";
