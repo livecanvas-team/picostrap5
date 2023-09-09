@@ -516,22 +516,6 @@
 		pico_add_video_link("section-addcode", "https://www.youtube.com/watch?v=dmsUpFJwDW8&t=100s");
 		pico_add_video_link("section-extras", "https://www.youtube.com/watch?v=dmsUpFJwDW8&t=411s");
 
-		//ADD LINK TO RESET BOOTSTRAP/ SCSS VARS
-		$("li#accordion-section-themes").after(`
-		
-			<div id='bs-tools'>
-				<span>Bootstrap Variables:</span>
-				<a class='reset-scss-vars' href='#'> Reset All</a> 
-				<a class='download-scss-vars' href='#'> Download JSON </a> 
-				<a class='upload-scss-vars' href='#' > Upload JSON </a>
-				
-				<input type="file" id="fileInput" accept=".json" style="display: none;">
-
-
-			</div>
- 
-		
-		`);
 
 
 		/// STYLE GUIDE LINKS ////////////////////////
@@ -541,15 +525,46 @@
 			$("#sub-accordion-" + section_name + " li:first ").after("<a class='style-guide-link' href='" + hash + "'>" + theIcon + "View Style Guide</a> ");
 		}
 
-		pico_add_styleguide_link("section-colors", "https://youtu.be/SwDrR-FmzkE&t=63s");
-		pico_add_styleguide_link("section-typography", "https://youtu.be/SwDrR-FmzkE&t=86s");
-		pico_add_styleguide_link("section-components", "https://youtu.be/SwDrR-FmzkE&t=149s");
-		pico_add_styleguide_link("section-buttons", "https://youtu.be/SwDrR-FmzkE&t=169s");
+		pico_add_styleguide_link("section-colors", "colors");
+		pico_add_styleguide_link("section-typography", "typography");
+		pico_add_styleguide_link("section-components", "examples");
+		pico_add_styleguide_link("section-buttons", "examples");
 		//pico_add_styleguide_link("section-buttons-forms", "https://youtu.be/SwDrR-FmzkE&t=169s");
-		pico_add_styleguide_link("section-nav", "https://youtu.be/aY7JmxBe76Y&t=26s");
+		pico_add_styleguide_link("section-nav", "nav");
 
-		//// BOOTSTRAP VARS TOOLBOX
+		$("body").on("click", ".style-guide-link", function (e) {
+			e.preventDefault();
+			const theID = $(this).attr("href");
+			
+			const url= "../wp-content/themes/picostrap5/inc/customizer-assets/style-guide-body.html";
+		 
+			$.get(url, function (response) {
+				console.log(response);
 
+				//insert response in body
+				document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('body').innerHTML = response;
+				
+				//scroll to anchor
+				document.querySelector('#customize-preview iframe').contentWindow.document.getElementById(theID).scrollIntoView();
+
+			});
+		});	
+
+
+		//// BOOTSTRAP VARIABLES TOOLBOX ////
+
+		//ADD TOOLS MINIPANEL TO RESET / LOAD / DOWNLOAD BOOTSTRAP / SCSS VARS
+		$("li#accordion-section-themes").after(`
+		
+			<div id='bs-tools'>
+				<span>Bootstrap Variables:</span>
+				<a class='reset-scss-vars' href='#'> Reset All</a> 
+				<a class='download-scss-vars' href='#'> Download JSON </a> 
+				<a class='upload-scss-vars' href='#' > Upload JSON </a>
+				
+				<input type="file" id="fileInput" accept=".json" style="display: none;">
+			</div>
+		`);
 
 		//ON CLICK OF BOOTSTRAP RESET VARS LINK
 		$("body").on("click", ".reset-scss-vars", function (e) {
