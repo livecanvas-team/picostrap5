@@ -95,6 +95,8 @@ defined( 'ABSPATH' ) || exit;
                   </form> 
                 <?php endif ?>
 
+                <?php if (  get_theme_mod('enable_dark_mode_switch')) include ('inc/dark-mode-switch.php'); ?>
+
               </div> <!-- .collapse -->
             </div> <!-- .container -->
           </nav> <!-- .site-navigation -->

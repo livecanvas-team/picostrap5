@@ -748,6 +748,21 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
 	));
 
+	//DARK MODE SWITCH
+	$wp_customize->add_setting("enable_dark_mode_switch", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "enable_dark_mode_switch",
+        array(
+            "label" => __("Enable Dark Mode Switch", 'picostrap5'),
+            "section" => "nav", 
+            'type'     => 'checkbox',
+			)
+	));
+
 
 	//  TOPBAR SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("topbar", array(
