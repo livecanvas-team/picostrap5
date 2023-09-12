@@ -1,23 +1,16 @@
-// Generates utility classes to have lighter and darker variations of theme colors
+// Generates additional classes to have lighter and darker variations of your colors
 // EG: 
 // text-primary-100 ... text-primary-900
 // bg-primary-100 ... bg-primary-900
+// text-bg-primary-100 ... // text-bg-primary-900
 
 // Define your flags with default values
 $enable-text-shades: true !default;
 $enable-bg-shades: true !default;
+$enable-text-bg-shades: true !default;
 
- 
 // Loop through each color in an extended set of colors
-@each $color-name, $color-value in (
-  map-merge(
-      $theme-colors, (
-        "light": $light,
-        "dark": $dark
-      )
-    )
-  ) {
-  // Define custom percentages based on your provided reference
+@each $color-name, $color-value in map-merge($theme-colors, ("light": $light, "dark": $dark)) {
   $custom-percentages: (
     25: 95%,
     50: 90%,
@@ -25,37 +18,59 @@ $enable-bg-shades: true !default;
     200: 60%,
     300: 40%,
     400: 20%,
-    600: 20%,  // Shade percentages
+    600: 20%,  
     700: 40%,  
     800: 60%,  
     900: 80%  
   );
 
-  // Generate tints and shades based on custom percentages
+  // Generate classes for default mode
   @each $percentage, $custom-percentage in $custom-percentages {
-    $new-color: $color-value;
-
-    // If the $percentage is less than 500, generate a tint
-    @if $percentage < 500 {
-      $new-color: tint-color($color-value, $custom-percentage);
-    } 
-    // Otherwise, generate a shade
-    @else {
-      $new-color: shade-color($color-value, $custom-percentage);
-    }
-
-    // Generate text utility classes if $enable-text-shades is true
+    $new-color: if($percentage < 500, tint-color($color-value, $custom-percentage), shade-color($color-value, $custom-percentage));
+    
     @if $enable-text-shades {
       .text-#{$color-name}-#{$percentage} {
         color: $new-color !important;
       }
     }
 
-    // Generate background utility classes if $enable-bg-shades is true
     @if $enable-bg-shades {
       .bg-#{$color-name}-#{$percentage} {
         background-color: $new-color !important;
       }
     }
+    @if $enable-text-bg-shades {
+      .text-bg-#{$color-name}-#{$percentage} {
+        background-color: $new-color !important;
+        color: color-contrast($new-color) !important;
+      }
+    }
   }
+  
+  // Generate classes for dark mode
+  [data-bs-theme='dark'] {
+    @each $percentage, $custom-percentage in $custom-percentages {
+      $new-color: if($percentage >= 500, tint-color($color-value, $custom-percentage), shade-color($color-value, $custom-percentage));
+      
+      @if $enable-text-shades {
+        .text-#{$color-name}-#{$percentage} {
+          color: $new-color !important;
+        }
+      }
+      
+      @if $enable-bg-shades {
+        .bg-#{$color-name}-#{$percentage} {
+          background-color: $new-color !important;
+        }
+      }
+      
+      @if $enable-text-bg-shades {
+        .text-bg-#{$color-name}-#{$percentage} {
+          background-color: $new-color !important;
+          color: color-contrast($new-color) !important;
+        }
+      }
+    }
+  }
+  
 }
