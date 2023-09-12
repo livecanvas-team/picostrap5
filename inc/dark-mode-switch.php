@@ -1,7 +1,7 @@
 <label class="ui-switch">
 	<input type="checkbox" id="theme-toggle">
-	<div class="slider">
-		<div class="circle"></div>
+	<div class="tt-slider">
+		<div class="tt-circle"></div>
 	</div>
 </label>
 <style>
@@ -22,7 +22,7 @@
 	display: none;
 }
 
-.slider {
+.tt-slider {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
@@ -34,7 +34,7 @@
 	cursor: pointer;
 }
 
-.slider .circle {
+.tt-slider .tt-circle {
 	top: calc(var(--circle-inset) * -1);
 	left: 0;
 	width: var(--circle-diameter);
@@ -61,7 +61,7 @@
 	;
 }
 
-.slider .circle::before {
+.tt-slider .tt-circle::before {
 	content: "";
 	position: absolute;
 	width: 100%;
@@ -76,12 +76,12 @@
 
 /* actions */
 
-.ui-switch input:checked+.slider .circle {
+.ui-switch input:checked+.tt-slider .tt-circle {
 	left: calc(100% - var(--circle-diameter));
 	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjAiIHdpZHRoPSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiCiAgICAgICAgZD0iTTQuMiAyLjVsLS43IDEuOC0xLjguNyAxLjguNy43IDEuOC42LTEuOEw2LjcgNWwtMS45LS43LS42LTEuOHptMTUgOC4zYTYuNyA2LjcgMCAxMS02LjYtNi42IDUuOCA1LjggMCAwMDYuNiA2LjZ6IiAvPgo8L3N2Zz4=");
 }
 
-.ui-switch input:active+.slider .circle::before {
+.ui-switch input:active+.tt-slider .tt-circle::before {
 	-webkit-transition: 0s;
 	-o-transition: 0s;
 	transition: 0s;
@@ -92,6 +92,7 @@
 </style>
 
 <script>
+
 (() => {
   'use strict';
 
@@ -128,10 +129,16 @@
     }
   };
 
-  setTheme(getPreferredTheme());
-
   const showActiveTheme = (theme, focus = false) => {
-    // Add code to show the active theme
+    const themeToggle = document.querySelector('#theme-toggle');
+    if (theme === 'dark') {
+      themeToggle.checked = true;
+    } else {
+      themeToggle.checked = false;
+    }
+    if (focus) {
+      themeToggle.focus();
+    }
   };
 
   const themeToggle = document.querySelector('#theme-toggle');
@@ -147,11 +154,14 @@
   });
 
   window.addEventListener('DOMContentLoaded', () => {
-    showActiveTheme(getPreferredTheme());
+    const preferredTheme = getPreferredTheme();
+    setTheme(preferredTheme);
+    showActiveTheme(preferredTheme);
 
     // Add code to handle theme toggle button click event
   });
 })();
+
 
 
 </script>
