@@ -19,24 +19,18 @@
 //set to menubar height if customizing menubar
 body.picostrap_header_navbar_position_fixed-top section[id] {	scroll-margin-top: 63px;}
 
-//FOR LEGACY COMPATIBILITY WITH OLDER CHILD THEMES, INCLUDE COLOR SHADES IF NECESSARY, TO BE REVIEWED, it adds useless weight apparently, eg if not using child theme. Still an experiment, //TODO
-$color_shades_needed: false;
-@if not variable-exists('primary-100'){
-	$color_shades_needed: true; 
-} 
-//conditional file import trick
+//FOR LEGACY COMPATIBILITY WITH OLDER CHILD THEMES, INCLUDE COLOR SHADES IF NECESSARY 
+//conditional file import trick, as SASS conditional imports are not possible
 %loadFile {
 	@import "ninjabootstrap/theme_colors_shades"; 
-	}
+}
 html {
-	@if $color_shades_needed == true {
+	@if not variable-exists('primary-text-emphasis-dark') { //if using bs<= 5.2 - not 5.3 - so on legacy child themes
 		@extend %loadFile;
-		//body {BORDER:10PX SOLID RED} //for testing if file loaded
+		//body {border:5px solid lime} //to test if code is being executed
 	}
 }
-
-
-
+ 
 /* ============ THEME TWEAKS  ============ */
 
 // WHEN HEADER NAVBAR IS FIXED TOP, unless it's transparent, MOVE CONTENT DOWN so it's not hidden by the menubar
