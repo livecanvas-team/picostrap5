@@ -19,14 +19,14 @@
 //set to menubar height if customizing menubar
 body.picostrap_header_navbar_position_fixed-top section[id] {	scroll-margin-top: 63px;}
 
-//FOR LEGACY COMPATIBILITY WITH OLDER CHILD THEMES, INCLUDE COLOR SHADES IF NECESSARY 
+//FOR LEGACY COMPATIBILITY WITH OLDER CHILD THEMES, INCLUDE COLOR SHADES IF NECESSARY, TO BE REVIEWED, it adds useless weight apparently, eg if not using child theme. Still an experiment, //TODO
 $color_shades_needed: false;
 @if not variable-exists('primary-100'){
 	$color_shades_needed: true; 
 } 
 //conditional file import trick
 %loadFile {
-	@import "ninjabootstrap/color_shades"; 
+	@import "ninjabootstrap/theme_colors_shades"; 
 	}
 html {
 	@if $color_shades_needed == true {
