@@ -1,210 +1,61 @@
-
-// Generates additional classes to have lighter and darker variations of your colors
+// Generates utility classes to have lighter and darker variations of theme colors
 // EG: 
 // text-primary-100 ... text-primary-900
 // bg-primary-100 ... bg-primary-900
-// and optionally
-// text-bg-primary-100
 
-
-//set variable defaults
+// Define your flags with default values
 $enable-text-shades: true !default;
 $enable-bg-shades: true !default;
-$enable-text-bg-shades: false !default;
 
+ 
+// Loop through each color in an extended set of colors
+@each $color-name, $color-value in (
+  map-merge(
+      $theme-colors, (
+        "light": $light,
+        "dark": $dark
+      )
+    )
+  ) {
+  // Define custom percentages based on your provided reference
+  $custom-percentages: (
+    25: 95%,
+    50: 90%,
+    100: 80%,
+    200: 60%,
+    300: 40%,
+    400: 20%,
+    600: 20%,  // Shade percentages
+    700: 40%,  
+    800: 60%,  
+    900: 80%  
+  );
 
-//Define general mixin
-@mixin define-color-classes($colors_array) {
-  @each $key, $value in $colors_array {
-    
-    @if $enable-bg-shades  {
-      .bg-#{$key}{
-        background-color: $value !important;
+  // Generate tints and shades based on custom percentages
+  @each $percentage, $custom-percentage in $custom-percentages {
+    $new-color: $color-value;
+
+    // If the $percentage is less than 500, generate a tint
+    @if $percentage < 500 {
+      $new-color: tint-color($color-value, $custom-percentage);
+    } 
+    // Otherwise, generate a shade
+    @else {
+      $new-color: shade-color($color-value, $custom-percentage);
+    }
+
+    // Generate text utility classes if $enable-text-shades is true
+    @if $enable-text-shades {
+      .text-#{$color-name}-#{$percentage} {
+        color: $new-color !important;
       }
     }
 
-    @if $enable-text-shades  {
-      .text-#{$key}{
-        color: $value !important;
-      }
-    }
-
-    @if $enable-text-bg-shades  {
-      .text-bg-#{$key}{
-        background-color: $value !important;
-        color: color-contrast($value);
+    // Generate background utility classes if $enable-bg-shades is true
+    @if $enable-bg-shades {
+      .bg-#{$color-name}-#{$percentage} {
+        background-color: $new-color !important;
       }
     }
   }
 }
-
-
-
-// Primary ////////////////////////
-$primary-25: tint-color($primary, 95%) !default;
-$primary-50: tint-color($primary, 90%) !default;
-$primary-100: tint-color($primary, 80%) !default;
-$primary-200: tint-color($primary, 60%) !default;
-$primary-300: tint-color($primary, 40%) !default;
-$primary-400: tint-color($primary, 20%) !default;
-$primary-500: $primary !default;
-$primary-600: shade-color($primary, 20%) !default;
-$primary-700: shade-color($primary, 40%) !default;
-$primary-800: shade-color($primary, 60%) !default;
-$primary-900: shade-color($primary, 80%) !default;
-
-
-$primarys: (
-  "primary-25": $primary-25,
-  "primary-50": $primary-50,
-  "primary-100": $primary-100,
-  "primary-200": $primary-200,
-  "primary-300": $primary-300,
-  "primary-400": $primary-400,
-  "primary-500": $primary-500,
-  "primary-600": $primary-600,
-  "primary-700": $primary-700,
-  "primary-800": $primary-800,
-  "primary-900": $primary-900
-) !default;
-
-
-@include define-color-classes($primarys);
-
-
-// Secondary ////////////////////////
-$secondary-100: tint-color($secondary, 80%) !default;
-$secondary-200: tint-color($secondary, 60%) !default;
-$secondary-300: tint-color($secondary, 40%) !default;
-$secondary-400: tint-color($secondary, 20%) !default;
-$secondary-500: $secondary !default;
-$secondary-600: shade-color($secondary, 20%) !default;
-$secondary-700: shade-color($secondary, 40%) !default;
-$secondary-800: shade-color($secondary, 60%) !default;
-$secondary-900: shade-color($secondary, 80%) !default;
-
-
-$secondarys: (
-  "secondary-100": $secondary-100,
-  "secondary-200": $secondary-200,
-  "secondary-300": $secondary-300,
-  "secondary-400": $secondary-400,
-  "secondary-500": $secondary-500,
-  "secondary-600": $secondary-600,
-  "secondary-700": $secondary-700,
-  "secondary-800": $secondary-800,
-  "secondary-900": $secondary-900
-) !default;
-
-
-@include define-color-classes($secondarys);
-
-// Success ////////////////////////
-$success-100: tint-color($success, 80%) !default;
-$success-200: tint-color($success, 60%) !default;
-$success-300: tint-color($success, 40%) !default;
-$success-400: tint-color($success, 20%) !default;
-$success-500: $success !default;
-$success-600: shade-color($success, 20%) !default;
-$success-700: shade-color($success, 40%) !default;
-$success-800: shade-color($success, 60%) !default;
-$success-900: shade-color($success, 80%) !default;
-
-
-$successes: (
-  "success-100": $success-100,
-  "success-200": $success-200,
-  "success-300": $success-300,
-  "success-400": $success-400,
-  "success-500": $success-500,
-  "success-600": $success-600,
-  "success-700": $success-700,
-  "success-800": $success-800,
-  "success-900": $success-900
-) !default;
-
-
-@include define-color-classes($successes);
-
-// Danger ////////////////////////
-$danger-100: tint-color($danger, 80%) !default;
-$danger-200: tint-color($danger, 60%) !default;
-$danger-300: tint-color($danger, 40%) !default;
-$danger-400: tint-color($danger, 20%) !default;
-$danger-500: $danger !default;
-$danger-600: shade-color($danger, 20%) !default;
-$danger-700: shade-color($danger, 40%) !default;
-$danger-800: shade-color($danger, 60%) !default;
-$danger-900: shade-color($danger, 80%) !default;
-
-
-$dangers: (
-  "danger-100": $danger-100,
-  "danger-200": $danger-200,
-  "danger-300": $danger-300,
-  "danger-400": $danger-400,
-  "danger-500": $danger-500,
-  "danger-600": $danger-600,
-  "danger-700": $danger-700,
-  "danger-800": $danger-800,
-  "danger-900": $danger-900
-) !default;
-
-
-@include define-color-classes($dangers);
-
-// warning ////////////////////////
-$warning-100: tint-color($warning, 80%) !default;
-$warning-200: tint-color($warning, 60%) !default;
-$warning-300: tint-color($warning, 40%) !default;
-$warning-400: tint-color($warning, 20%) !default;
-$warning-500: $warning !default;
-$warning-600: shade-color($warning, 20%) !default;
-$warning-700: shade-color($warning, 40%) !default;
-$warning-800: shade-color($warning, 60%) !default;
-$warning-900: shade-color($warning, 80%) !default;
-
-
-$warnings: (
-  "warning-100": $warning-100,
-  "warning-200": $warning-200,
-  "warning-300": $warning-300,
-  "warning-400": $warning-400,
-  "warning-500": $warning-500,
-  "warning-600": $warning-600,
-  "warning-700": $warning-700,
-  "warning-800": $warning-800,
-  "warning-900": $warning-900
-) !default;
-
-
-@include define-color-classes($warnings);
-
-
-// info ////////////////////////
-$info-100: tint-color($info, 80%) !default;
-$info-200: tint-color($info, 60%) !default;
-$info-300: tint-color($info, 40%) !default;
-$info-400: tint-color($info, 20%) !default;
-$info-500: $info !default;
-$info-600: shade-color($info, 20%) !default;
-$info-700: shade-color($info, 40%) !default;
-$info-800: shade-color($info, 60%) !default;
-$info-900: shade-color($info, 80%) !default;
-
-
-$infos: (
-  "info-100": $info-100,
-  "info-200": $info-200,
-  "info-300": $info-300,
-  "info-400": $info-400,
-  "info-500": $info-500,
-  "info-600": $info-600,
-  "info-700": $info-700,
-  "info-800": $info-800,
-  "info-900": $info-900
-) !default;
-
-
-@include define-color-classes($infos);
-  
