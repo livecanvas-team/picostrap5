@@ -57,7 +57,7 @@ add_action( 'wp_enqueue_scripts', function() {
     wp_enqueue_script( 'bootstrap5', get_template_directory_uri() . "/js/bootstrap.bundle.min.js#deferload", array(), null, true );
 
     //DARK MODE SWITCH SUPPORT
-    wp_enqueue_script( 'dark-mode-switch', get_stylesheet_directory_uri() . "/js/dark-mode-switch.js#deferload", array(), null, true );
+    if (get_theme_mod('enable_dark_mode_switch')) wp_enqueue_script( 'dark-mode-switch', get_template_directory_uri() . "/js/dark-mode-switch.js#deferload", array(), null, true );
     
 } ,100);
 
