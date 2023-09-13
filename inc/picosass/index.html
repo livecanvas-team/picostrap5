@@ -5,29 +5,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PicoSASS demo: Compile Bootstrap from CDN</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,200;1,200&family=Bacasime+Antique&family=Black+Ops+One&display=swap"
-        rel="stylesheet">
+   
 
         
-    <!-- <link class="picostrap-provisional-css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
+    <!-- HOW TO ADD PICOSASS TO YOUR OWN HTML WEB PAGE -->
+    <!-- THIS WILL COMPILE YOUR SCSS CODE IN THE BROWSER. OF COURSE, DOES NOT MAKE SENSE FOR PRODUCTION SITES. -->
+
+    <!-- STEP 01: COPY THE FILE picosass.js to your project folder -->
             
 
+    <!-- STEP 02: ADD THE SCRIPT TYPE="MODULE" TAG TO RECALL THE FILE -->
+
     <script type="module" src="picosass.js"></script>
+
+
+    <!-- STEP 03: LAST, ADD YOUR SCSS CODE IN A TEMPLATE ELEMENT WITH ID "the-scss" -->
+    
+    <!-- You can also @import files. -->
+    <!-- Locally hosted files are accessible by default. Filenames should start with underscores. -->
+    <!-- You can optionally specify a "baseurl" parameter to allow the compiler to access remotely hosted files. -->
 
     <template id="the-scss" baseurl="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/scss/">
 
         //set your custom variables
-        $primary: fuchsia;
-        $headings-font-family: "Black Ops One";
+        $primary: #ce6799;
 
         //import Bootstrap from the CDN
         @import "bootstrap";
 
-        //add your additional sCSS.
+        //add your additional sCSS CODE
         //As a test, try uncommenting this line
         //body { border:13px solid red !important;}
 
@@ -37,19 +43,31 @@
 
 <body>
     <div class="container bg-light">
-        <div class="row py-5  text-center">
-            <div class="col">
-                <h1 class="display-1 text-warning">Hello, picosass!</h1>
-                <img src="sass-logo.svg" width="500">
-                <h2>Hello, picosass!</h2> 
-                <p class="lead">This page compiles SCSS code in the browser. In detail, it compiles the full Bootstrap 5.3.1 CSS library, reading SCSS files hosted on the CDN.</p>
-                <p class="lead">Of course, this is not for production use. You should always "staticize" your CSS bundle.</p>
-                <p class="lead">We built this module for Picostrap, a starter theme implementing SASS and Bootstrap for WordPress.</p>
-                <h2>How to compile SCSS in the browser on my own web page / app</h2>
+        <div class="row     ">
+            <div class="col-8 offset-2">
+                 
+                <img class=" my-3" src="sass-logo.svg" width="200">
+                <h2 class="text-primary">Hello, <i>picosass</i>. <br>Finally, easy SASS compiling in the browser.</h2> 
+                <p class="lead">This page is a simple demo to show how to compile SCSS code in the browser. 
+                    
+                    <br>In detail, upon loading, it compiles the full Bootstrap 5.3.1 CSS library, reading SCSS files hosted on CDN.</p>
+
+                <p class="lead fst-italic">Of course, this is not for production use. You should always "staticize" your CSS bundle before serving it to visitors.</p>
+                <p class="lead">We originally built this module for <a href="https://picostrap.com/">Picostrap</a>, a WordPress starter theme implementing SASS and Bootstrap.</p>
+                <h2 class="text-primary">How do I use this on my own web page or app?</h2>
                 
-                <p class="lead">View this page source code. It's really easy! </p>
-                <p class="lead">Just add the < script> import tag, and some < template id = "the-scss" > element containing the SCSS to be
-                    compiled.</p >
+                <p class="lead">View the source code of this demo page. It's really easy! Just one SCRIPT tag to add. </p>
+            
+
+                <h2 class="text-primary">How does it work?</h2>
+                
+                <p class="lead">Picosass does use the <a href="https://github.com/sass/dart-sass">DART SASS compiler</a> (the reference implementation of Sass), loading it via <a href="https://jspm.dev/">JSPM</a>. </p>
+
+                <h2 class="text-primary">License</h2>
+                
+                <p class="lead">Picosass is <a href="https://opensource.org/license/mit/">MIT licensed</a>, but we'd love you to credit our work if possible. </p>
+
+
             </div>
         </div>
     </div>
