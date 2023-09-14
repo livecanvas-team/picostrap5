@@ -83,14 +83,28 @@ add_action( 'wp_footer', function  () {
 					lastCssBundle=compiled.css;
 				}
 
-				<?php if (isset($_GET['autorecompile'])): ?>
+				<?php if (isset($_GET['autorecompile'])){ ?>
 
-				//recompile in a few seconds
+				//Recompile in a few seconds
 				setTimeout(function () {
 					window.Picosass.Compile({}, compilingSassFinishedCallback);
 				}, 7000);
 
-				<?php endif ?>
+				<?php } else { ?>
+				
+				//Done. Redirect away in a while to exit
+				setTimeout(function () {
+					// Create a URL object from the current URL
+					const url = new URL(window.location.href);
+
+					// Remove all query parameters
+					url.search = "";
+
+					// Redirect to the new URL
+					window.location.href = url.href;
+				}, 3000);
+ 
+				<?php } ?>
 			} //end function compilingSassFinishedCallback
 
 
