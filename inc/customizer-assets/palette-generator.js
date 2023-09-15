@@ -1,5 +1,8 @@
 const palette_generator_html =`
 
+<style>
+    .result-palettes > DIV:hover {cursor:pointer}
+</style>
 
     <div style="background-color: #f8f9fa;  top: 15px; right: 0; border: 1px solid #dee2e6;">
         <div style="background-color: #007bff; padding: 1rem 1.5rem; border-bottom: 1px solid #dee2e6;">
@@ -133,25 +136,24 @@ const palette_generator_html =`
                 "palette": lockedColors,
             };
 
+            // Empty the results container and give feedback
+            document.querySelector(".result-palettes").innerHTML = '<div id="pg-feedback">Working...</div>';
+
             // Make the AJAX request
-            // Crea una nuova richiesta XMLHttpRequest
             const xhr = new XMLHttpRequest();
 
-            // Configura la richiesta
             xhr.open("POST", "https://api.huemint.com/color", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-
             // Definisci la funzione di gestione della risposta
             xhr.onload = function () {
+                document.querySelector(".result-palettes").innerHTML = '';
                 if (xhr.status >= 200 && xhr.status < 300) {
                     const response = JSON.parse(xhr.responseText);
                     console.log(response); // Log the entire API response
 
                     // Check if response.results is defined and is an array
-                    if (response && Array.isArray(response.results)) {
-                        // Get the container element where palettes will be displayed
-                        const paletteContainer = document.querySelector(".result-palettes");
+                    if (response && Array.isArray(response.results)) { 
 
                         // Loop through each result and create HTML elements for palettes
                         response.results.forEach((result, index) => {
@@ -172,6 +174,8 @@ const palette_generator_html =`
                                 colorBoxDiv.style.display = "flex";
                                 colorBoxDiv.style.alignItems = "center";
                                 colorBoxDiv.style.gap = "0.2rem";
+                                colorBoxDiv.setAttribute("data-color", color);
+                                colorBoxDiv.setAttribute("data-index", colorIndex);
 
                                 // Create a div for displaying the color
                                 const colorDiv = document.createElement("div");
@@ -199,7 +203,7 @@ const palette_generator_html =`
                             });
 
                             // Append the palette div to the container
-                            paletteContainer.appendChild(paletteDiv);
+                            document.querySelector(".result-palettes").appendChild(paletteDiv);
                         });
                     } else {
                         // Handle the case where response.results is undefined or not an array
@@ -211,15 +215,41 @@ const palette_generator_html =`
                 }
             };
 
-            // Definisci la funzione di gestione degli errori
+            // Error Handling
             xhr.onerror = function () {
                 resultPalette.value = "Error: AJAX request failed.";
             };
 
-            // Invia la richiesta con i dati JSON
+            // Send request with JSON data
             xhr.send(JSON.stringify(jsonData));
         });
 
+
+        //ON CLICK OF A PALETTE
+        $("body").on("click", ".result-palettes > DIV", function (e) {
+            e.preventDefault();
+            console.log("chosen palette");
+            
+            function setColorWidget(theSuffix = 'body-bg', theValue="#ffcc99") {
+                document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).value = theValue;
+                document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).dispatchEvent(new Event('change'));
+            }
+ 
+            setColorWidget("body-color", $(this).find("> DIV:eq(0)").attr("data-color"));
+            setColorWidget("body-bg", $(this).find("> DIV:eq(1)").attr("data-color"));
+            setColorWidget("light", $(this).find("> DIV:eq(2)").attr("data-color"));
+            setColorWidget("dark", $(this).find("> DIV:eq(3)").attr("data-color"));
+            setColorWidget("primary", $(this).find("> DIV:eq(4)").attr("data-color"));
+            setColorWidget("secondary", $(this).find("> DIV:eq(5)").attr("data-color"));
+            setColorWidget("success", $(this).find("> DIV:eq(6)").attr("data-color"));
+            setColorWidget("danger", $(this).find("> DIV:eq(7)").attr("data-color"));
+            setColorWidget("warning", $(this).find("> DIV:eq(8)").attr("data-color"));
+            setColorWidget("info", $(this).find("> DIV:eq(9)").attr("data-color"));
+             
+            updateScssPreviewDebounced();
+            ps_update_fonts_import_code_snippet();
+
+        });// end onClick  
 
 
 
@@ -228,7 +258,4 @@ const palette_generator_html =`
 })(jQuery);
 
 
-
-document.addEventListener('DOMContentLoaded', function () { 
-    
-});
+ 
