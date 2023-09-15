@@ -20,6 +20,10 @@ function picostrap_customize_enqueue() {
 	wp_enqueue_script( 'custom-customize-lib', get_template_directory_uri() . '/inc/customizer-assets/customizer-vars.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
 	wp_enqueue_style( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.css', array(), rand(0,1000)   );
 	
+	//palette generator
+	wp_enqueue_script( 'palette-generator', get_template_directory_uri() . '/inc/customizer-assets/palette-generator.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
+	wp_enqueue_style( 'palette-generator', get_template_directory_uri() . '/inc/customizer-assets/palette-generator.css', array(), rand(0,1000)   );
+	
 	//fontpicker
 	wp_enqueue_script( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
 	wp_enqueue_style( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.css', array(), rand(0,1000) );
