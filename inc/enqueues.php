@@ -10,8 +10,8 @@ defined( 'ABSPATH' ) || exit;
 
 //SUPPORT FUNCTIONS FOR DETERMINING THE RIGHT CSS BUNDLE FILENAME AND LOCATION
 function picostrap_get_css_url (){
-    //onboarding
-    if(get_theme_mod("picostrap_scss_last_filesmod_timestamp_v2",0)==0) return get_stylesheet_directory_uri() . '/'. picostrap_get_css_optional_subfolder_name() . picostrap_get_base_css_filename(); 
+    //onboarding: if no CSS custom bundle was created, serve the default one
+    if (get_theme_mod("css_bundle_version_number", 0) == 0) return get_stylesheet_directory_uri() . '/'. picostrap_get_css_optional_subfolder_name() . picostrap_get_base_css_filename(); 
 
     //standard case
     return get_stylesheet_directory_uri() . '/' . picostrap_get_css_optional_subfolder_name() . picostrap_get_complete_css_filename(); 

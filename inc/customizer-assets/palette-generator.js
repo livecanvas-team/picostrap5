@@ -229,7 +229,7 @@ const palette_generator_html =`
         $("body").on("click", ".result-palettes > DIV", function (e) {
             e.preventDefault();
             console.log("chosen palette");
-            
+
             function setColorWidget(theSuffix = 'body-bg', theValue="#ffcc99") {
                 document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).value = theValue;
                 document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).dispatchEvent(new Event('change'));
@@ -247,7 +247,7 @@ const palette_generator_html =`
             setColorWidget("info", $(this).find("> DIV:eq(9)").attr("data-color"));
              
             updateScssPreviewDebounced();
-            ps_update_fonts_import_code_snippet();
+            //ps_update_fonts_import_code_snippet();
 
         });// end onClick  
 
