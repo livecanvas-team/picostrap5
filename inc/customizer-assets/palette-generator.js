@@ -128,12 +128,18 @@ const palette_generator_html =`
 
             // Construct the JSON data object
             const jsonData = {
-                "mode": mode,
-                "num_colors": numColors,
-                "temperature": temperature,
-                "num_results": 10,
-                "adjacency": adjacency.split(','),
-                "palette": lockedColors,
+              mode: mode,
+              num_colors: numColors,
+              temperature: temperature,
+              num_results: 10,
+              adjacency: adjacency.split(",").map(function (item, index, arr) {
+                if (index === 0 || index % 11 == 0) {
+                  return parseInt(item);
+                } else {
+                  return item.toString().trim();
+                }
+              }),
+              palette: [lockedColors[0], "-", "-", "-", "-", "-", "-", "-", "-", "-"],
             };
 
             // Empty the results container and give feedback
