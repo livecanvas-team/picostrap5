@@ -153,10 +153,28 @@ const palette_generator_html = `
                 </select>
             </div>
 
-            <div style="margin-bottom: 1rem;">
-                <label style="font-size: 0.875rem;display:block;margin-bottom:2px" for="locked_colors">Brand Color:</label>
+            <div style="margin-bottom: 1rem; border-bottom: 1px solid #dee2e6; padding-bottom: 1rem;">
+                <label style="font-size: 0.875rem;display:block;margin-bottom:2px" for="color_type_select">Choose a base color:</label>
+                <select style="font-size: 0.875rem; width: 100%;" type="select" id="color_type_select"
+                    name="color_type_select" required aria-label="Default select example">
+                      <option value="None">None</option>
+                      <option value="0">body-color</option>
+                      <option value="1">body-bg</option>
+                      <option value="2">light</option>
+                      <option value="3">dark</option>
+                      <option value="4">primary</option>
+                      <option value="5">secondary</option>
+                      <option value="6">success</option>
+                      <option value="7">danger</option>
+                      <option value="8">warning</option>
+                      <option value="9">info</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 1rem; display: none" id="color_selection">
+                <label style="font-size: 0.875rem;display:block;margin-bottom:2px" for="locked_colors">color:</label>
                 <input type="color" style="font-size: 0.875rem; width: 100%;" id="locked_colors" name="locked_colors"
-                    value="#563d7c" title="Choose your Brand Colors">
+                    value="#563d7c" title="Choose your colors">
             </div>
 
             <button
@@ -173,10 +191,29 @@ const palette_generator_html = `
     <div class="result-palettes" style="background-color: #fff;">
     </div>
 
+    <script>
+
+      const colorSelector = document.getElementById('color_selection');
+      const colorTypeSelector = document.getElementById('color_type_select');
+
+
+      colorTypeSelector.addEventListener('change', function () {
+        console.log(this.value);
+        if (this.value == 'None') {
+          colorSelector.style.display = 'none';
+        } else {
+          colorSelector.style.display = 'block';
+        }
+      })
+
+    </script>
+
 `;
 
 (function ($) {
   $(document).ready(function () {
+
+
     //ADD THE COLOR PALETTE GENERATOR HTML STRUCTURE
     $("li#accordion-section-themes").after(palette_generator_html);
 
@@ -190,9 +227,15 @@ const palette_generator_html = `
       const numColors = document.getElementById("num_colors").value;
       const temperature = document.getElementById("temperature").value;
       const adjacency = document.getElementById("adjacency_matrix").value;
-      const lockedColors = document
-        .getElementById("locked_colors")
-        .value.split(",");
+
+      const colorIndex = document.getElementById("color_type_select").value;
+      let palette = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"];
+
+      // if the color index chose isn't none, then set the color in the right position
+      if (colorIndex != "None") {
+        palette[colorIndex] = document.getElementById("locked_colors").value;
+      }
+
 
       // Construct the JSON data object
       const jsonData = {
@@ -207,7 +250,7 @@ const palette_generator_html = `
             return item.toString().trim();
           }
         }),
-        palette: [lockedColors[0], "-", "-", "-", "-", "-", "-", "-", "-", "-"],
+        palette: palette,
       };
 
       // Empty the results container and give feedback
