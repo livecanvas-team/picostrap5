@@ -8,6 +8,20 @@ function picostrap_force_css_rebuilding() {
     //remove_theme_mod("picostrap_scss_last_filesmod_timestamp_v2"); //no, we should force recompiling differently, eg show nag and link recompile
 }
 
+//FOR THE CUSTOMIZER SCSS COMPILER: ADD TO HEADER SOME PRELOADING FOR SCSS FILES
+add_action( 'wp_head', function  () {
+	if (!current_user_can('administrator') ) return;
+	if (!isset($_GET['customize_theme'])  ) return;
+	$bs_filenames_str = "bootstrap mixins/_banner _functions _variables _maps _mixins vendor/_rfs mixins/_deprecate mixins/_breakpoints mixins/_color-scheme mixins/_image mixins/_resize mixins/_visually-hidden mixins/_reset-text mixins/_text-truncate mixins/_utilities mixins/_alert mixins/_backdrop mixins/_buttons mixins/_caret mixins/_pagination mixins/_lists mixins/_list-group mixins/_forms mixins/_table-variants mixins/_border-radius mixins/_box-shadow mixins/_gradients mixins/_transition mixins/_clearfix mixins/_container mixins/_grid _tables _forms forms/_labels forms/_form-text forms/_form-control forms/_form-select forms/_form-check forms/_form-range forms/_floating-labels forms/_input-group forms/_validation _buttons _transitions _dropdown _button-group _nav _navbar _card _accordion _breadcrumb _pagination _badge _alert _progress _list-group _close _toasts _modal _tooltip _popover _carousel _spinners _offcanvas _placeholders _helpers helpers/_clearfix helpers/_color-bg helpers/_colored-links helpers/_ratio helpers/_position helpers/_stacks helpers/_visually-hidden helpers/_stretched-link helpers/_text-truncation helpers/_vr utilities/_api";
+	$bs_filenames_arr = explode (' ',$bs_filenames_str);
+	foreach($bs_filenames_arr as $bs_filename) {
+		?> 
+		<link rel="prefetch" href="<?php echo get_stylesheet_directory_uri()."/sass/bootstrap5/".$bs_filename ?>.scss" />
+		<?php
+	}
+} );
+
+
 //FOR THE CUSTOMIZER AND FRONTEND SCSS COMPILER: ADD TO HEADER 
 add_action( 'wp_head', function  () {
 	if (!current_user_can('administrator') ) return;
