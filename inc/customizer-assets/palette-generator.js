@@ -212,6 +212,10 @@ const palette_generator_html = `
 
           // Check if response.results is defined and is an array
           if (response && Array.isArray(response.results)) {
+
+            //write message into results div: Choose Palette
+            document.querySelector(".result-palettes").innerHTML = '<h2 style="font-size: 1.25rem; text-align:center;margin: 0 !important;padding: 12px; ">Choose Palette</h2>';
+
             // Loop through each result and create HTML elements for palettes
             response.results.forEach((result, index) => {
               // Create a new div for this palette
@@ -244,12 +248,12 @@ const palette_generator_html = `
 
                 // Create a div for displaying the color code
                 /*
-                                const colorCodeDiv = document.createElement("div");
-                                colorCodeDiv.style.fontSize = "0.875rem";
-                                colorCodeDiv.style.paddingLeft = "0.5rem";
-                                colorCodeDiv.style.paddingRight = "0.5rem";
-                                colorCodeDiv.textContent = color;
-                                */
+                const colorCodeDiv = document.createElement("div");
+                colorCodeDiv.style.fontSize = "0.875rem";
+                colorCodeDiv.style.paddingLeft = "0.5rem";
+                colorCodeDiv.style.paddingRight = "0.5rem";
+                colorCodeDiv.textContent = color;
+                */
 
                 // Append color and color code divs to the color box div
                 colorBoxDiv.appendChild(colorDiv);
@@ -259,9 +263,7 @@ const palette_generator_html = `
                 paletteDiv.appendChild(colorBoxDiv);
               });
 
-              //write message into results div: Choose Palette
-              document.querySelector(".result-palettes").innerHTML = '<h2 style="font-size: 1.25rem; text-align:center;margin: 0 !important;padding: 12px; ">Choose Palette</h2>';
-
+              
               // Append the palette div to the container
               document.querySelector(".result-palettes").appendChild(paletteDiv);
 
