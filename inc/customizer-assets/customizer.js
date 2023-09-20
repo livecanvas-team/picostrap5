@@ -538,8 +538,7 @@
 			
 			const url= "../wp-content/themes/picostrap5/inc/customizer-assets/style-guide-body.html";
 		 
-			$.get(url, function (response) {
-				console.log(response);
+			$.get(url, function (response) { 
 
 				//insert response in body
 				document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('body').innerHTML = response;
@@ -549,6 +548,22 @@
 
 			});
 		});	
+
+		//DOUBLE CLICK TO VIEW WEBSITE AGAIN
+		$("body").on("dblclick", ".style-guide-link", function (e) {
+			e.preventDefault();
+			const theID = $(this).attr("href");
+
+
+			const url = (document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('body').innerHTML.includes('Style Guide')) ? "../" : "../wp-content/themes/picostrap5/inc/customizer-assets/style-guide-body.html";
+
+			$.get(url, function (response) { 
+				//insert response in body
+				document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('body').innerHTML = response;
+ 
+			});
+		});	
+
 
 
 		//// BOOTSTRAP VARIABLES TOOLBOX ////

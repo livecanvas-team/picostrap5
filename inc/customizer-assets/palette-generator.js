@@ -321,9 +321,7 @@ const palette_generator_html = `
       setColorWidget("danger", $(this).find("> DIV:eq(7)").attr("data-color"));
       setColorWidget("warning", $(this).find("> DIV:eq(8)").attr("data-color"));
       setColorWidget("info", $(this).find("> DIV:eq(9)").attr("data-color"));
-
-      updateScssPreviewDebounced();
-      //ps_update_fonts_import_code_snippet();
+ 
     }); // end onClick
   }); //end doc ready
 })(jQuery);
