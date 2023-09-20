@@ -78,7 +78,7 @@ if(!function_exists("picostrap_get_scss_variables_array")):
 
 		return array(
 			"colors" => array( //  $variable_name => $variable_props
-				'$body-bg' => array('type' => 'color', 'comment' => $live_preview_message),
+				'$body-bg' => array('type' => 'color', 'newgroup' => 'Base Colors', 'comment' => $live_preview_message),
 				'$body-color' => array('type' => 'color', 'comment' => $live_preview_message),
 				'$link-color' => array('type' => 'color', 'comment' => $live_preview_message),
 				//'$link-decoration' => array('type' => 'text'),
