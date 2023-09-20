@@ -502,7 +502,7 @@
 			$("#sub-accordion-" + section_name + " li:first ").after("<a class='video-tutorial-link' href='" + video_url + "' target='_blank'>" + videoTutIcon + "Watch Video</a> ");
 		}
 
-		pico_add_video_link("section-colors", "https://youtu.be/SwDrR-FmzkE&t=63s");
+		//pico_add_video_link("section-colors", "https://youtu.be/SwDrR-FmzkE&t=63s");
 		pico_add_video_link("section-typography", "https://youtu.be/SwDrR-FmzkE&t=86s");
 		pico_add_video_link("section-components", "https://youtu.be/SwDrR-FmzkE&t=149s");
 		pico_add_video_link("section-buttons", "https://youtu.be/SwDrR-FmzkE&t=169s");
@@ -525,7 +525,7 @@
 			$("#sub-accordion-" + section_name + " li:first ").after("<a class='style-guide-link' href='" + hash + "'>" + theIcon + "View Style Guide</a> ");
 		}
 
-		pico_add_styleguide_link("section-colors", "colors");
+		//pico_add_styleguide_link("section-colors", "colors");
 		pico_add_styleguide_link("section-typography", "typography");
 		pico_add_styleguide_link("section-components", "examples");
 		pico_add_styleguide_link("section-buttons", "examples");

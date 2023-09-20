@@ -1,2 +1,71 @@
- 
- 
+.toggle-palette-generator {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    margin: 0 10px 10px;
+}
+
+
+.result-palettes > DIV:hover {
+    cursor: pointer;
+}
+
+#pg-feedback {
+    background-color: #1b1b1b;
+    color: white;
+    position: relative;
+    padding: 12px 24px;
+    font-family: monospace;
+    overflow: hidden;
+}
+#pg-feedback-bars {
+    background: -webkit-gradient(
+        linear,
+        left center,
+        right center,
+        from(#f74843),
+        color-stop(24%, #f74843),
+        color-stop(25%, #ffa067),
+        color-stop(49%, #ffa067),
+        color-stop(50%, #81d565),
+        color-stop(74%, #81d565),
+        color-stop(74%, #3a82e4),
+        color-stop(100%, #3a82e4)
+    );
+    width: 32px;
+    height: 128px;
+    transform: rotate(25deg);
+    position: absolute;
+    z-index: 1;
+    right: 12px;
+    top: -24px;
+}
+
+.pg-feedback-dot {
+    display: inline-block;
+    opacity: 0;
+    animation: dotAnimation 1s linear infinite;
+    }
+
+.pg-feedback-dot:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.pg-feedback-dot:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.pg-feedback-dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes dotAnimation {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+

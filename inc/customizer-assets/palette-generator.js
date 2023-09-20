@@ -1,73 +1,9 @@
 const palette_generator_html = `
 
-<style>
-    .result-palettes > DIV:hover {
-        cursor: pointer;
-    }
-    
-    #pg-feedback {
-        background-color: #1b1b1b;
-        color: white;
-        position: relative;
-        padding: 12px 24px;
-        font-family: monospace;
-        overflow: hidden;
-    }
-    #pg-feedback-bars {
-        background: -webkit-gradient(
-        linear,
-        left center,
-        right center,
-        from(#f74843),
-        color-stop(24%, #f74843),
-        color-stop(25%, #ffa067),
-        color-stop(49%, #ffa067),
-        color-stop(50%, #81d565),
-        color-stop(74%, #81d565),
-        color-stop(74%, #3a82e4),
-        color-stop(100%, #3a82e4)
-    );
-        width: 32px;
-        height: 128px;
-        transform: rotate(25deg);
-        position: absolute;
-        z-index: 1;
-        right: 12px;
-        top: -24px;
-    }
+    <a class="style-guide-link" href="colors"><svg style="vertical-align: middle; height:13px; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" viewBox="0 0 16 16" lc-helper="svg-icon"><path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"></path><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path></svg>View Style Guide</a>
+    <a class="toggle-palette-generator" href="#"><svg style="vertical-align: middle; height:13px; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" viewBox="0 0 16 16" lc-helper="svg-icon"><path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"></path><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path></svg>Color Palette Generator</a>
 
-    .pg-feedback-dot {
-        display: inline-block;
-        opacity: 0;
-        animation: dotAnimation 1s linear infinite;
-      }
-    
-      .pg-feedback-dot:nth-child(1) {
-        animation-delay: 0.2s;
-      }
-    
-      .pg-feedback-dot:nth-child(2) {
-        animation-delay: 0.4s;
-      }
-    
-      .pg-feedback-dot:nth-child(3) {
-        animation-delay: 0.6s;
-      }
-    
-      @keyframes dotAnimation {
-        0%, 100% {
-          opacity: 0;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-
-    
-</style>
-
-
-    <div style="background-color: #f8f9fa;  top: 15px; right: 0; border: 1px solid #dee2e6;">
+    <div id="color-palette-generator" hidden style="background-color: #f8f9fa;  top: 15px; right: 0; border: 1px solid #dee2e6;">
         <div style="background-color: #f0f0f1; padding: 1rem 1.5rem; border-bottom: 1px solid #dee2e6;">
             <a target="_blank" style="text-decoration:none" href="https://huemint.com/" title="Huemint Color Palette Generator">
                 <img src="https://huemint.com/assets/img/logo-icon.svg" style="width: 12px; height:auto">
@@ -179,7 +115,7 @@ const palette_generator_html = `
 
             <button
                 style="font-size: 0.875rem; background-color: #007bff; color: #fff; border: none; padding: 0.5rem 1rem; cursor: pointer;"
-                type="button" id="generate-button">Generate Palette</button>
+                type="button" id="generate-button">Generate Palettes</button>
         </form>
         <div class="result" style="margin-top: 1rem; padding: 0 1rem;">
             <textarea style="display: none; width: 100%; border: 1px solid #dee2e6; border-radius: 0.25rem;"
@@ -213,15 +149,18 @@ const palette_generator_html = `
 (function ($) {
   $(document).ready(function () {
 
+    //ADD THE COLOR PALETTE GENERATOR HTML STRUCTURE 
+    //$("li#accordion-section-themes").after(palette_generator_html); //for quicker testing
+    $("#sub-accordion-section-colors li:first ").after(palette_generator_html);
 
-    //ADD THE COLOR PALETTE GENERATOR HTML STRUCTURE
-    $("li#accordion-section-themes").after(palette_generator_html);
-
-    //DEFINE BEHAVIOURS
-    const generateButton = document.getElementById("generate-button");
+    //DEFINE BEHAVIOURS 
     const resultPalette = document.getElementById("result-palette");
 
-    generateButton.addEventListener("click", function () {
+    document.querySelector(".toggle-palette-generator").addEventListener("click", function () {
+      document.querySelector("#color-palette-generator").toggleAttribute("hidden");
+    });
+
+    document.getElementById("generate-button").addEventListener("click", function () {
       // Get input values
       const mode = document.getElementById("mode").value;
       const numColors = document.getElementById("num_colors").value;
@@ -320,10 +259,15 @@ const palette_generator_html = `
                 paletteDiv.appendChild(colorBoxDiv);
               });
 
+              //write message into results div: Choose Palette
+              document.querySelector(".result-palettes").innerHTML = '<h2 style="font-size: 1.25rem; text-align:center;margin: 0 !important;padding: 12px; ">Choose Palette</h2>';
+
               // Append the palette div to the container
+              document.querySelector(".result-palettes").appendChild(paletteDiv);
+
+              //scroll to it
               document
-                .querySelector(".result-palettes")
-                .appendChild(paletteDiv);
+                .querySelector(".result-palettes").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });;  
             });
           } else {
             // Handle the case where response.results is undefined or not an array
