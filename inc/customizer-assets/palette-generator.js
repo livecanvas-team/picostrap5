@@ -1,14 +1,14 @@
 const palette_generator_html = `
 
     <a class="style-guide-link" href="colors"><svg style="vertical-align: middle; height:13px; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" viewBox="0 0 16 16" lc-helper="svg-icon"><path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"></path><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path></svg>View Style Guide</a>
-    <a class="toggle-palette-generator" href="#"><svg style="vertical-align: middle; height:13px; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" viewBox="0 0 16 16" lc-helper="svg-icon"><path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"></path><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path></svg>Color Palette Generator</a>
+    <a class="toggle-palette-generator" href="#"><svg style="vertical-align: middle; height:13px; width: 13px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none"> <g clip-path="url(#clip0_1517_33)"> <path d="M128 128L128 85L85.3333 85V128H128Z" fill="#212121"/> <path d="M128 43L128 0L85.3333 0V43L128 43Z" fill="#525252"/> <path d="M128 85.3333L128 42.6666L85 42.6666V85.3333H128Z" fill="#363636"/> <path d="M85.3333 85.3333L85.3333 42.6666L42.3333 42.6666L42.3333 85.3333H85.3333Z" fill="#6F6F6F"/> <path d="M42.6667 43L42.6667 0L8.01086e-05 0L8.01086e-05 43L42.6667 43Z" fill="#B2B1B1"/> <path d="M42.6667 128L42.6667 85L7.62939e-05 85L7.62939e-05 128H42.6667Z" fill="#4A4A4A"/> <path d="M42.6667 85.3333L42.6667 42.6666L7.62939e-05 42.6666L7.62939e-05 85.3333H42.6667Z" fill="#9E9E9E"/> </g> <defs> <clipPath id="clip0_1517_33"> <rect width="128" height="128" fill="white"/> </clipPath> </defs> </svg>Color Palette Generator</a>
 
-    <div id="color-palette-generator" hidden style="background-color: #f8f9fa;  top: 15px; right: 0; border: 1px solid #dee2e6;">
-        <div style="background-color: #f0f0f1; padding: 1rem 1.5rem; border-bottom: 1px solid #dee2e6;">
-            <a target="_blank" style="text-decoration:none" href="https://huemint.com/" title="Huemint Color Palette Generator">
-                <img src="https://huemint.com/assets/img/logo-icon.svg" style="width: 12px; height:auto">
-            </a>
-            <h2 style="font-size: 1.25rem;margin-bottom: 0;color: #000;display: inline;">Palette Generator <sup style="background: #0071eb;font-size: 0.5rem;padding: 1px 5px;color: #f0f0f1;border-radius: 2px;">AI</sup></h2>
+    <div id="color-palette-generator" hidden style="background-color: #f8f9fa; border: 1px solid #dee2e6;margin-bottom:8px">
+        <div style="background-color: #f0f0f1; padding: 1rem ; border-bottom: 1px solid #dee2e6;">
+           
+            <h2 style="font-size: 1.25rem;margin-bottom: 0;color: #000;display: inline;">Palette Generator <sup style="background: #0071eb;font-size: 0.5rem;padding: 1px 5px;color: #f0f0f1;border-radius: 2px;">AI</sup> 
+            <a target="_blank" style="color:#bbc0c4;float:right" class="customize-help-toggle dashicons dashicons-editor-help" href="https://huemint.com/" title="Huemint Color Palette Generator"></a>
+            </h2>
         </div>
 
         <form id="color-palette-form" style="padding: 1rem; background-color: #fff;">
@@ -214,7 +214,7 @@ const palette_generator_html = `
           if (response && Array.isArray(response.results)) {
 
             //write message into results div: Choose Palette
-            document.querySelector(".result-palettes").innerHTML = '<h2 style="font-size: 1.25rem; text-align:center;margin: 0 !important;padding: 12px; ">Choose Palette</h2>';
+            document.querySelector(".result-palettes").innerHTML = '<h2 style="font-size: 1.25rem; margin: 0 !important; padding: 12px;">Choose Palette</h2>';
 
             // Loop through each result and create HTML elements for palettes
             response.results.forEach((result, index) => {
