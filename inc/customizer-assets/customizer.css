@@ -269,18 +269,20 @@ body span.fp-pill.italic { display: none}
 
 /* STYLE GUIDE LINKS  */
 
-.style-guide-link {
+.style-guide-link, .toggle-palette-generator {
   display:block;
   text-align:right;
   font-size: 12px;
   margin:0 10px 10px;
 }
 
-.style-guide-link:hover {
-  color:red
+.style-guide-link:hover, .toggle-palette-generator:hover{
+  color:red;
 }
 
-.style-guide-link:focus {
+ 
+
+.style-guide-link:focus, .toggle-palette-generator:focus {
   box-shadow: none;
 }
 
