@@ -409,7 +409,7 @@
 		var csFontPickerOptions = ({
 			variants: true,
 			onSelect: fontHasBeenSelected,
-			localFonts: theLocalFonts //defined in customizer-vars.js file
+			localFonts: theLocalFonts //defined in customizer-constants.js file
 		});
 
 		var csFontPickerButton = " <button class='cs-open-fontpicker button button-secondary' style='float:right;'>Font Picker...</button>";
