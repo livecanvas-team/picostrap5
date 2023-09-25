@@ -718,20 +718,20 @@ function picostrap_theme_customize_register_extras($wp_customize) {
     ));
 	
 	//HEADERNAVBAR COLOR SCHEME
-	$wp_customize->add_setting("picostrap_header_navbar_color_scheme", array(
-        'default' => '',
+	$wp_customize->add_setting("picostrap_header_navbar_color_scheme_attr", array(
+        'default' => 'dark',
         "transport" => "refresh",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
-        "picostrap_header_navbar_color_scheme",
+        "picostrap_header_navbar_color_scheme_attr",
         array(
             'label' => __('Color Scheme (Menubar links)', 'picostrap5'),
             'section' => 'nav',
 			'type'     => 'radio',
 			'choices'  => array(
 				'' => 'Light (Dark links)',
-				'data-bs-theme="dark"' => 'Dark (Light links)', 
+				'dark' => 'Dark (Light links)', 
 			)
         )
     ));
