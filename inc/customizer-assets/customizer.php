@@ -730,7 +730,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             'section' => 'nav',
 			'type'     => 'radio',
 			'choices'  => array(
-				'' => 'Light (Dark links)',
+				'' => 'None (Body color links)',
+				'light' => 'Light (Dark links)',
 				'dark' => 'Dark (Light links)', 
 			)
         )
