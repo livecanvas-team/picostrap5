@@ -17,7 +17,7 @@ function picostrap_customize_enqueue() {
 		)
 	);
 	
-	wp_enqueue_script( 'custom-customize-lib', get_template_directory_uri() . '/inc/customizer-assets/customizer-vars.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
+	wp_enqueue_script( 'custom-customize-lib', get_template_directory_uri() . '/inc/customizer-assets/customizer-constants.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
 	wp_enqueue_style( 'custom-customize', get_template_directory_uri() . '/inc/customizer-assets/customizer.css', array(), rand(0,1000)   );
 	
 	//palette generator
