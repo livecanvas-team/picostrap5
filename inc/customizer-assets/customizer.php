@@ -719,7 +719,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 	
 	//HEADERNAVBAR COLOR SCHEME
 	$wp_customize->add_setting("picostrap_header_navbar_color_scheme", array(
-        'default' => 'navbar-dark',
+        'default' => '',
         "transport" => "refresh",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
@@ -730,10 +730,9 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             'section' => 'nav',
 			'type'     => 'radio',
 			'choices'  => array(
-				''  => 'Default',
-				'navbar-light' => 'Light (Dark links)',
-				'navbar-dark' => 'Dark (Light links)', 
-				)
+				'' => 'Light (Dark links)',
+				'data-bs-theme="dark"' => 'Dark (Light links)', 
+			)
         )
     ));
 	
