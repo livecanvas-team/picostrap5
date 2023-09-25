@@ -702,16 +702,24 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         array(
             'label' => __('Navbar Background Color', 'picostrap5'),
             'section' => 'nav',
-            'type'     => 'radio',
+            'type'     => 'select',
 			'choices'  => array(
 				'bg-primary'	=> 'Primary',	
+				'bg-primary-subtle'	=> 'Primary Subtle',
 				'bg-secondary'	=> 'Secondary',	
+				'bg-secondary-subtle'	=> 'Secondary Subtle',	
 				'bg-success' 	=> 'Success', 	
-				'bg-info' 		=> 'Info', 		
+				'bg-success-subtle' 	=> 'Success Subtle', 	
+				'bg-info' 		=> 'Info', 	
+				'bg-info-subtle' 		=> 'Info Subtle', 		
 				'bg-warning' 	=> 'Warning', 	
-				'bg-danger' 	=> 'Danger', 	
-				'bg-light' 	=> 'Light', 	
-				'bg-dark' 		=> 'Dark', 		
+				'bg-warning-subtle' 	=> 'Warning Subtle', 
+				'bg-danger' 	=> 'Danger', 
+				'bg-danger-subtle' 	=> 'Danger Subtle', 	
+				'bg-light' 	=> 'Light', 
+				'bg-light-subtle' 	=> 'Light Subtle', 	
+				'bg-dark' 		=> 'Dark',
+				'bg-dark-subtle' 		=> 'Dark Subtle', 		
 				'bg-transparent' 		=> 'Transparent' 
 				)
         )
