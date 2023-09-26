@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 ?>
-<div class="py-6 bg-light">
+<div class="py-5 py-xl-6 bg-light-subtle text-dark-emphasis">
     <div class="container text-center">
         <h1 class="display-4"><?php the_title(); ?></h1>
         

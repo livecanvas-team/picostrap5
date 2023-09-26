@@ -8,8 +8,8 @@ get_header();
   
  
 
-<section class="py-6 bg-light text-center">
-  <div class="container">
+<section class="py-5 py-xl-6 bg-light-subtle text-dark-emphasis">
+  <div class="container text-center">
     <h1><?php the_archive_title() ?></h1>
     <div class="lead text-muted col-md-8 offset-md-2 archive-description"><?php echo category_description(); ?></div> 
  
