@@ -87,6 +87,14 @@ const palette_generator_html = `
 
     `;
 
+
+
+//SUPPORT FUNCTION
+function setColorWidget(theSuffix = "body-bg", theValue = "#ffcc99") {
+  document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).value = theValue;
+  document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).dispatchEvent(new Event("change"));
+}
+
 (function ($) {
   $(document).ready(function () {
     //ADD THE COLOR PALETTE GENERATOR HTML STRUCTURE
@@ -241,25 +249,14 @@ const palette_generator_html = `
     //ON CLICK OF A PALETTE, APPLY IT
     $("body").on("click", ".result-palettes > DIV", function (e) {
     e.preventDefault();
-    console.log("chosen palette");
 
-    function setColorWidget(theSuffix = "body-bg", theValue = "#ffcc99") {
-      document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).value = theValue;
-      document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).dispatchEvent(new Event("change"));
-    }
-
-    setColorWidget(
-      "body-bg",
-      $(this).find("> DIV:eq(0)").attr("data-color")
-    );
+    setColorWidget("body-bg", $(this).find("> DIV:eq(0)").attr("data-color"));
     setColorWidget("body-color", $(this).find("> DIV:eq(1)").attr("data-color"));
     setColorWidget("light", $(this).find("> DIV:eq(2)").attr("data-color"));
     setColorWidget("dark", $(this).find("> DIV:eq(3)").attr("data-color"));
     setColorWidget("primary", $(this).find("> DIV:eq(4)").attr("data-color"));
-    setColorWidget(
-      "secondary",
-      $(this).find("> DIV:eq(5)").attr("data-color")
-    );
+    setColorWidget("secondary", $(this).find("> DIV:eq(5)").attr("data-color"));
+
     /*setColorWidget("success", $(this).find("> DIV:eq(6)").attr("data-color"));
     setColorWidget("danger", $(this).find("> DIV:eq(7)").attr("data-color"));
     setColorWidget("warning", $(this).find("> DIV:eq(8)").attr("data-color"));
