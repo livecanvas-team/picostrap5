@@ -1,6 +1,6 @@
 const palette_generator_html = `
 
-    <a class="style-guide-link" href="#colors">${theStyleGuideIcon}View Style Guide</a>
+    <a class="style-guide-link" href="#website">${theStyleGuideIcon}View Style Guide</a>
     <a class="toggle-palette-generator" href="#"><svg style="vertical-align: middle; height:11px; width: 11px; margin-right: 5px; margin-top: -1px; " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none"> <g clip-path="url(#clip0_1517_33)"> <path d="M128 128L128 85L85.3333 85V128H128Z" fill="#212121"/> <path d="M128 43L128 0L85.3333 0V43L128 43Z" fill="#525252"/> <path d="M128 85.3333L128 42.6666L85 42.6666V85.3333H128Z" fill="#363636"/> <path d="M85.3333 85.3333L85.3333 42.6666L42.3333 42.6666L42.3333 85.3333H85.3333Z" fill="#6F6F6F"/> <path d="M42.6667 43L42.6667 0L8.01086e-05 0L8.01086e-05 43L42.6667 43Z" fill="#B2B1B1"/> <path d="M42.6667 128L42.6667 85L7.62939e-05 85L7.62939e-05 128H42.6667Z" fill="#4A4A4A"/> <path d="M42.6667 85.3333L42.6667 42.6666L7.62939e-05 42.6666L7.62939e-05 85.3333H42.6667Z" fill="#9E9E9E"/> </g> <defs> <clipPath id="clip0_1517_33"> <rect width="128" height="128" fill="white"/> </clipPath> </defs> </svg>Palette Generator</a>
 
     <div id="color-palette-generator" hidden style="background-color: #f8f9fa; border: 1px solid #dee2e6;margin-bottom:8px">

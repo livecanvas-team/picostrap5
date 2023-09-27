@@ -1,930 +1,1095 @@
 <style>
+    * {
+        scroll-margin-top: 53px;
+    }
 
-	* {	scroll-margin-top: 50px;}
+    code {
+        color: white !important;
+    }
 
-	code {
-		color: white !important;
-	}
+    .style_header {
+        background-color: var(--bs-primary-text-emphasis);
+        color: var(--bs-primary-bg-subtle)
+    }
 
-	.style_header {
-		background-color: var(--bs-primary-text-emphasis);
-		color: var(--bs-primary-bg-subtle)
-	}
+    .pantone_small {
+        width: 48px;
+        height: 48px;
+        border-radius: 0.2rem;
 
-	.pantone_small {
-		width: 48px;
-		height: 48px;
-		border-radius: 0.2rem;
+        >p {
+            font-size: 0.8rem;
+            text-align: center;
+            margin-bottom: 0;
+        }
+    }
 
-		>p {
-			font-size: 0.8rem;
-			text-align: center;
-			margin-bottom: 0;
-		}
-	}
+    .pantone {
+        width: 148px;
+        height: 48px;
+        border-radius: 0.2rem;
 
-	.pantone {
-		width: 148px;
-		height: 48px;
-		border-radius: 0.2rem;
+        >p {
+            font-size: 0.8rem;
+            text-align: center;
+            margin-bottom: 0;
+        }
+    }
 
-		>p {
-			font-size: 0.8rem;
-			text-align: center;
-			margin-bottom: 0;
-		}
-	}
+    .pantone_shades {
+        width: 48px;
+        height: 24px;
+        border-radius: 0.2rem;
+    }
 
-	.pantone_shades {
-		width: 48px;
-		height: 24px;
-		border-radius: 0.2rem;
-	}
+    .mw-48rem {
+        max-width: 48rem;
+    }
 
-	.mw-48rem {
-		max-width: 48rem;
-	}
+    .style_guide_mono::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bs-body-bg);
+        opacity: 0.2;
+        z-index: 2;
+    }
+
+
+    .style_guide_mono_gradient::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bs-body-bg);
+        opacity: 0.8;
+        background-image: linear-gradient(to bottom, var(--bs-primary), var(--bs-light));
+    }
 </style>
 
-<section class="sticky-top  bg-body-secondary">
-	<div class="container">
-		<nav class="navbar px-3">
-			<ul class="nav nav-pills mx-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="#colors">Colors</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#typography">Typography</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#readymades">Examples</a>
-				</li>
 
-			</ul>
-		</nav>
-	</div>
+<section id="website" class="py-6 bg-body position-relative overflow-hidden">
+
+    <span style="background-color:var(--bs-body-color);color:var(--bs-body-bg)"
+        class="badge position-absolute rfs-6 ms-2 top-0 mt-3">$body-bg</span>
+
+    <div class="mx-auto shadow d-flex min-vh-75 row-cols-2" style="max-width:1440px">
+        <div class="row border-end border-dark g-0 p-4">
+            <div class="lc-block mb-8">
+                <h1 class="fs-3 ls-3">BRAND<span style="background-color:var(--bs-body-color);color:var(--bs-body-bg)"
+                        class="badge position-absolute rfs-3 ls-0"> $body-color</span></h1>
+            </div>
+            <div class="col-xxl-7 offset-2 position-relative col-lg-9">
+                <h2 class="display-6 mb-4">Use <span class="text-primary position-relative">Primary color<span
+                            class="badge position-absolute rfs-3 mt-n2 text-bg-primary">$primary</span></span> to draw
+                    attention to important elements <span
+                        style="background-color:var(--bs-body-color);color:var(--bs-body-bg)"
+                        class="badge position-absolute rfs-3">$body-color</span></h2>
+                <p class="text-dark">You can use dark color to draw attention to important elements or to group elements
+                    that areconceptually relate <span class="badge position-absolute rfs-3 text-bg-dark">$dark</span>
+                </p>
+
+                <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptate consectetur
+                    numquam sint sit quod voluptas vero, <span class="position-relative"><a href="#">This is a link
+                            <span style="background-color:var(--bs-link-color)"
+                                class="badge position-absolute rfs-3">$link-color</span></a></span><br>
+                    Perferendis architecto libero reiciendis saepe qui iure beatae cum.</p>
+            </div>
+        </div>
+        <div class="row bg-body position-relative overflow-hidden g-0"><img class="w-100 position-absolute"
+                style="mix-blend-mode: difference; opacity: 0.3; -webkit-filter: grayscale(100%) contrast(100%); filter: grayscale(100%) contrast(100%);"
+                src="https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8M3x8YWJzdHJhY3R8ZW58MHwxfHx8MTY5NTc1MzkzNHww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                srcset="https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8M3x8YWJzdHJhY3R8ZW58MHwxfHx8MTY5NTc1MzkzNHww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080 1080w, https://images.unsplash.com/photo-1567359781514-3b964e2b04d6??crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8M3x8YWJzdHJhY3R8ZW58MHwxfHx8MTY5NTc1MzkzNHww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=150 150w, https://images.unsplash.com/photo-1567359781514-3b964e2b04d6??crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8M3x8YWJzdHJhY3R8ZW58MHwxfHx8MTY5NTc1MzkzNHww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300 300w, https://images.unsplash.com/photo-1567359781514-3b964e2b04d6??crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8M3x8YWJzdHJhY3R8ZW58MHwxfHx8MTY5NTc1MzkzNHww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=768 768w, https://images.unsplash.com/photo-1567359781514-3b964e2b04d6??crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8M3x8YWJzdHJhY3R8ZW58MHwxfHx8MTY5NTc1MzkzNHww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1024 1024w"
+                sizes="(max-width: 1080px) 100vw, 1080px" width="1080" height="" alt="Photo by Alex Perez">
+
+            <div class="text-center mx-auto pt-7 z-3 position-relative" style="width:17rem">
+                <svg style="fill:var(--bs-primary)" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50"></circle>
+                </svg>
+                <svg class="position-absolute top-70 start-50 z-n1" style="fill:var(--bs-secondary);width:10rem"
+                    viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50"></circle>
+                </svg>
+
+            </div>
+
+            <div class="p-4 mt-6 offset-2 z-2">
+                <div class="col-lg-9 col-xl-7 col-xxl-6 mb-4">
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<span
+                            style="background-color:var(--bs-body-color);color:var(--bs-body-bg)"
+                            class="badge position-absolute rfs-3"> $body-color</span></h3>
+                </div>
+                <div class="ms-auto col-xxl-6 z-2"><a class="btn btn-primary" href="#">$primary</a>
+                    <a class="btn btn-secondary" href="#">$secondary</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mx-auto shadow d-flex min-vh-75 row-cols-2" style="max-width:1440px;">
+        <div class="row bg-body position-relative overflow-hidden g-0 min-vh-75">
+            <div class="style_guide_mono">
+                <img class="opacity-50 w-100 position-absolute start-0 h-100" style="mix-blend-mode:multiply"
+                    src="https://images.unsplash.com/photo-1595411425732-e69c1abe2763?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTl8fGFic3RyYWN0fGVufDB8MXx8fDE2OTU3NTQwMTl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                    srcset="https://images.unsplash.com/photo-1595411425732-e69c1abe2763?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTl8fGFic3RyYWN0fGVufDB8MXx8fDE2OTU3NTQwMTl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080 1080w, https://images.unsplash.com/photo-1595411425732-e69c1abe2763??crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTl8fGFic3RyYWN0fGVufDB8MXx8fDE2OTU3NTQwMTl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=150 150w, https://images.unsplash.com/photo-1595411425732-e69c1abe2763??crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTl8fGFic3RyYWN0fGVufDB8MXx8fDE2OTU3NTQwMTl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300 300w, https://images.unsplash.com/photo-1595411425732-e69c1abe2763??crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTl8fGFic3RyYWN0fGVufDB8MXx8fDE2OTU3NTQwMTl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=768 768w, https://images.unsplash.com/photo-1595411425732-e69c1abe2763??crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTl8fGFic3RyYWN0fGVufDB8MXx8fDE2OTU3NTQwMTl8MA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1024 1024w"
+                    sizes="(max-width: 1080px) 100vw, 1080px" width="1080" height="" alt="Photo by Scott Webb">
+            </div>
+
+            <div class="text-center mx-auto align-self-center pt-8 z-2 position-relative" style="width:12rem">
+                <svg style="fill:var(--bs-dark)" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50"></circle>
+                </svg>
+                <svg class="position-absolute top-70 start-50 z-n1" style="fill:var(--bs-light);width:10rem"
+                    viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50"></circle>
+                </svg>
+                <span
+                    class="badge position-absolute rfs-6 translate-middle start-50 top-70 bg-body text-dark">$dark</span>
+                <span class="badge position-absolute rfs-6 start-90 top-100 bg-dark text-light">$light</span>
+            </div>
+
+            <div class="align-self-end pb-5 offset-2 z-1">
+                <div class="row row-cols-2">
+                    <div editable="rich">
+                        <h4 class="rfs-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suspendisse a lacus
+                            est.</h4>
+                    </div>
+                    <div class="align-self-end ms-auto ">
+                        <a href="#" class="btn btn-primary">$primary</a>
+                        <a href="#" class="btn btn-outline-secondary">$secondary</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-end border-dark g-0">
+
+            <div class="position-relative style_guide_mono_gradient mb-5">
+                <img class="img-fluid w-100 align-self-start"
+                    style="aspect-ratio:16/9;object-fit:cover;object-position:bottom;mix-blend-mode:screen"
+                    src="https://images.unsplash.com/photo-1551907234-4f794b152738?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTEwfHxmdXJuaXR1cmV8ZW58MHwwfHx8MTY5NTc1NjM3Mnww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=768"
+                    srcset="https://images.unsplash.com/photo-1551907234-4f794b152738?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTEwfHxmdXJuaXR1cmV8ZW58MHwwfHx8MTY5NTc1NjM3Mnww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=768 1080w, https://images.unsplash.com/photo-1551907234-4f794b152738??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTEwfHxmdXJuaXR1cmV8ZW58MHwwfHx8MTY5NTc1NjM3Mnww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=150 150w, https://images.unsplash.com/photo-1551907234-4f794b152738??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTEwfHxmdXJuaXR1cmV8ZW58MHwwfHx8MTY5NTc1NjM3Mnww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300 300w, https://images.unsplash.com/photo-1551907234-4f794b152738??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTEwfHxmdXJuaXR1cmV8ZW58MHwwfHx8MTY5NTc1NjM3Mnww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=768 768w, https://images.unsplash.com/photo-1551907234-4f794b152738??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTEwfHxmdXJuaXR1cmV8ZW58MHwwfHx8MTY5NTc1NjM3Mnww&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1024 1024w"
+                    sizes="(max-width: 1080px) 100vw, 1080px" width="1080" height="768" alt="Photo by Goashape">
+
+            </div>
+
+
+            <div class="lc-block px-5 offset-1 pb-6">
+                <div class="col-xxl-8" editable="rich">
+                    <h2 class="fs-1 mb-4">The quick brown fox jumps over the lazy dog</h2>
+
+                    <span class="badge  rfs-4 "
+                        style="background-color:var(--bs-body-color);color:var(--bs-body-bg)">$body-color</span>
+                    <span class="badge mb-2 rfs-4 ms-1"
+                        style="background-color:var(--bs-body-color);color:var(--bs-body-bg)">.opacity-50</span>
+                    <p class="opacity-50 mb-0">I'm body text color with an opacity-50 class.</p>
+                    <p class="opacity-50 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
+                        dolorum dolor quam, ut libero cumque! Nemo eius nulla, iusto libero.
+                    </p>
+
+
+                    <div class="bg-light p-4 position-relative border border-dark">
+                        <span class="badge position-xl-absolute rfs-4 bg-dark text-light end-0 me-3 mt-n2">$light</span>
+                        <span class="badge rfs-4 text-bg-dark">$dark</span>
+                        <p class="text-dark">
+                            I'm a <strong>dark</strong> text on a <strong>light</strong> background.<br> dolor sit amet,
+                            consectetur adipisicing elit. Optio a numquam nemo vitae commodi, obcaecati reprehenderit ea
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mx-auto shadow d-flex justify-content-between pt-5" style="max-width:1440px;">
+        <div class="lc-block p-5 col-xxl-5">
+            <div editable="rich">
+                <p class="small text-dark rfs-5"> Copyright notice or something down here. <br>Handcrafted with
+                    meticulous attention to detail.
+                </p>
+            </div>
+        </div>
+        <div class="lc-block align-self-end p-4 hstack gap-lg-4"><svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1.3em" height="1.3em"
+                viewBox="0 0 24 24" style="" lc-helper="svg-icon" fill="currentColor">
+                <path
+                    d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z">
+                </path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                width="1.3em" height="1.3em" viewBox="0 0 24 24" style="" lc-helper="svg-icon" fill="currentColor">
+                <path
+                    d="M2.6,10.59L8.38,4.8L10.07,6.5C9.83,7.35 10.22,8.28 11,8.73V14.27C10.4,14.61 10,15.26 10,16A2,2 0 0,0 12,18A2,2 0 0,0 14,16C14,15.26 13.6,14.61 13,14.27V9.41L15.07,11.5C15,11.65 15,11.82 15,12A2,2 0 0,0 17,14A2,2 0 0,0 19,12A2,2 0 0,0 17,10C16.82,10 16.65,10 16.5,10.07L13.93,7.5C14.19,6.57 13.71,5.55 12.78,5.16C12.35,5 11.9,4.96 11.5,5.07L9.8,3.38L10.59,2.6C11.37,1.81 12.63,1.81 13.41,2.6L21.4,10.59C22.19,11.37 22.19,12.63 21.4,13.41L13.41,21.4C12.63,22.19 11.37,22.19 10.59,21.4L2.6,13.41C1.81,12.63 1.81,11.37 2.6,10.59Z">
+                </path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                width="1.3em" height="1.3em" viewBox="0 0 24 24" style="" lc-helper="svg-icon" fill="currentColor">
+                <path
+                    d="M21.94 13.11L20.89 9.89C20.89 9.86 20.88 9.83 20.87 9.8L18.76 3.32C18.65 3 18.33 2.75 17.96 2.75C17.6 2.75 17.28 3 17.17 3.33L15.17 9.5H8.84L6.83 3.33C6.72 3 6.4 2.75 6.04 2.75H6.04C5.67 2.75 5.35 3 5.24 3.33L3.13 9.82C3.13 9.82 3.13 9.83 3.13 9.83L2.06 13.11C1.9 13.61 2.07 14.15 2.5 14.45L11.72 21.16C11.89 21.28 12.11 21.28 12.28 21.15L21.5 14.45C21.93 14.15 22.1 13.61 21.94 13.11M8.15 10.45L10.72 18.36L4.55 10.45M13.28 18.37L15.75 10.78L15.85 10.45H19.46L13.87 17.61M17.97 3.94L19.78 9.5H16.16M14.86 10.45L13.07 15.96L12 19.24L9.14 10.45M6.03 3.94L7.84 9.5H4.23M3.05 13.69C2.96 13.62 2.92 13.5 2.96 13.4L3.75 10.97L9.57 18.42M20.95 13.69L14.44 18.42L14.46 18.39L20.25 10.97L21.04 13.4C21.08 13.5 21.04 13.62 20.95 13.69">
+                </path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                width="1.3em" height="1.3em" viewBox="0 0 24 24" style="" lc-helper="svg-icon" fill="currentColor">
+                <path
+                    d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z">
+                </path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                width="1.3em" height="1.3em" viewBox="0 0 24 24" style="" lc-helper="svg-icon" fill="currentColor">
+                <path
+                    d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z">
+                </path>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<section class="sticky-top  bg-dark">
+    <div class="container">
+        <nav class="navbar px-3">
+            <ul class="nav nav-pills mx-auto text-uppercase h5 gap-xl-4">
+
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="#website">Website Example</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="#colors">Colors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="#typography">Typography</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link link-light" href="#sample-sections">Sample Sections</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
 </section>
 
 <section class="pt-4 border-top border-3 style_header" id="colors" style="">
-	<div class="container py-4">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="lc-block hstack align-items-baseline gap-2">
-					<svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" fill="currentColor"
-						class="bi bi-palette2" viewBox="0 0 16 16">
-						<path
-							d="M0 .5A.5.5 0 0 1 .5 0h5a.5.5 0 0 1 .5.5v5.277l4.147-4.131a.5.5 0 0 1 .707 0l3.535 3.536a.5.5 0 0 1 0 .708L10.261 10H15.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5H3a2.99 2.99 0 0 1-2.121-.879A2.99 2.99 0 0 1 0 13.044m6-.21 7.328-7.3-2.829-2.828L6 7.188v5.647zM4.5 13a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zM15 15v-4H9.258l-4.015 4H15zM0 .5v12.495V.5z">
-						</path>
-						<path d="M0 12.995V13a3.07 3.07 0 0 0 0-.005z"></path>
-					</svg>
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="lc-block hstack align-items-baseline gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" fill="currentColor"
+                        class="bi bi-palette2" viewBox="0 0 16 16">
+                        <path
+                            d="M0 .5A.5.5 0 0 1 .5 0h5a.5.5 0 0 1 .5.5v5.277l4.147-4.131a.5.5 0 0 1 .707 0l3.535 3.536a.5.5 0 0 1 0 .708L10.261 10H15.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5H3a2.99 2.99 0 0 1-2.121-.879A2.99 2.99 0 0 1 0 13.044m6-.21 7.328-7.3-2.829-2.828L6 7.188v5.647zM4.5 13a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zM15 15v-4H9.258l-4.015 4H15zM0 .5v12.495V.5z">
+                        </path>
+                        <path d="M0 12.995V13a3.07 3.07 0 0 0 0-.005z"></path>
+                    </svg>
 
 
-					<div editable="rich">
-						<h2>Color Style Guide</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <div editable="rich">
+                        <h2>Color Style Guide</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section class="">
-	<div class="container py-6">
-		<div class="row mb-4">
-			<div class="col">
-				<h3 class="fw-bolder rfs-9">Color Scheme</h3>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 col-lg-4 mb-4">
-				<p class="mb-4 d-block border-bottom">Body Colors</p>
-				<div class="row row-cols-2 g-4 rfs-4">
-					<div class="text-center hstack gap-2">
-						<div class="pantone_small border border-2 p-3 d-flex flex-column justify-content-center"></div>
-						<span>$body-bg</span>
-					</div>
-					<div class="text-center hstack gap-2">
-						<div style="background-color:var(--bs-body-color)"
-							class="pantone_small border border-2 p-3 d-flex flex-column justify-content-center"></div>
-						<span>$body-color</span>
-					</div>
-					<div class="text-center hstack gap-2">
-						<div style="background-color:var(--bs-link-color)"
-							class="pantone_small border border-2 p-3 d-flex flex-column justify-content-center"></div>
-						<span>($link-color)</span>
-					</div>
-					<div class="text-center hstack gap-2">
-						<div style="background-color:var(--bs-link-hover-color)"
-							class="pantone_small border border-2 p-3 d-flex flex-column justify-content-center"></div>
-						<span>($link-hover-color)</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-lg-4 mb-4  ">
-				<p class="mb-4 d-block border-bottom">Dark and Light Colors</p>
-				<div class="row row-cols-2 g-4 rfs-4">
-					<div class="text-center hstack gap-2">
-						<div
-							class="pantone_small bg-light border border-2 p-3 d-flex flex-column justify-content-center">
-						</div>
-						<span>$light</span>
-					</div>
-					<div class="text-center hstack gap-2">
-						<div
-							class="pantone_small bg-dark border border-2 p-3 d-flex flex-column justify-content-center">
-						</div>
-						<span>$dark</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<p class="mb-4 d-block border-bottom">Theme Colors</p>
-				<div class="row row-cols-2 g-4 rfs-4">
-					<div class="text-center hstack gap-2">
-						<div
-							class="pantone_small bg-primary border border-2 p-3 d-flex flex-column justify-content-center">
-						</div>
-						<span>$primary</span>
-					</div>
-					<div class="text-center hstack gap-2">
-						<div
-							class="pantone_small bg-secondary border border-2 p-3 d-flex flex-column justify-content-center">
-						</div>
-						<span>$secondary</span>
-					</div>
-					<div class="text-center hstack gap-2">
-						<div
-							class="pantone_small bg-success border border-2 p-3 d-flex flex-column justify-content-center">
-						</div>
-						<span>$success</span>
-					</div>
-					<div class="text-center hstack gap-2">
-						<div
-							class="pantone_small bg-info border border-2 p-3 d-flex flex-column justify-content-center">
-						</div>
-						<span>$info</span>
-					</div>
-					<div class="text-center hstack gap-2">
-						<div
-							class="pantone_small bg-warning border border-2 p-3 d-flex flex-column justify-content-center">
-						</div>
-						<span>$warning</span>
-					</div>
-					<div class="text-center hstack gap-2">
-						<div
-							class="pantone_small bg-danger border border-2 p-3 d-flex flex-column justify-content-center">
-						</div>
-						<span>$danger</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container py-6">
+        <div class="row mb-4">
+            <div class="col">
+                <h3 class="fw-bolder rfs-9">Color Scheme</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-lg-4 mb-4">
+                <p class="mb-4 d-block border-bottom">Body Colors</p>
+                <div class="row row-cols-2 g-4 rfs-4">
+                    <div class="text-center hstack gap-2">
+                        <div class="pantone_small border border-2 p-3 d-flex flex-column justify-content-center"></div>
+                        <span>$body-bg</span>
+                    </div>
+                    <div class="text-center hstack gap-2">
+                        <div style="background-color:var(--bs-body-color)"
+                            class="pantone_small border border-2 p-3 d-flex flex-column justify-content-center"></div>
+                        <span>$body-color</span>
+                    </div>
+                    <div class="text-center hstack gap-2">
+                        <div style="background-color:var(--bs-link-color)"
+                            class="pantone_small border border-2 p-3 d-flex flex-column justify-content-center"></div>
+                        <span>($link-color)</span>
+                    </div>
+                    <div class="text-center hstack gap-2">
+                        <div style="background-color:var(--bs-link-hover-color)"
+                            class="pantone_small border border-2 p-3 d-flex flex-column justify-content-center"></div>
+                        <span>($link-hover-color)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4  ">
+                <p class="mb-4 d-block border-bottom">Dark and Light Colors</p>
+                <div class="row row-cols-2 g-4 rfs-4">
+                    <div class="text-center hstack gap-2">
+                        <div
+                            class="pantone_small bg-light border border-2 p-3 d-flex flex-column justify-content-center">
+                        </div>
+                        <span>$light</span>
+                    </div>
+                    <div class="text-center hstack gap-2">
+                        <div
+                            class="pantone_small bg-dark border border-2 p-3 d-flex flex-column justify-content-center">
+                        </div>
+                        <span>$dark</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <p class="mb-4 d-block border-bottom">Theme Colors</p>
+                <div class="row row-cols-2 g-4 rfs-4">
+                    <div class="text-center hstack gap-2">
+                        <div
+                            class="pantone_small bg-primary border border-2 p-3 d-flex flex-column justify-content-center">
+                        </div>
+                        <span>$primary</span>
+                    </div>
+                    <div class="text-center hstack gap-2">
+                        <div
+                            class="pantone_small bg-secondary border border-2 p-3 d-flex flex-column justify-content-center">
+                        </div>
+                        <span>$secondary</span>
+                    </div>
+                    <div class="text-center hstack gap-2">
+                        <div
+                            class="pantone_small bg-success border border-2 p-3 d-flex flex-column justify-content-center">
+                        </div>
+                        <span>$success</span>
+                    </div>
+                    <div class="text-center hstack gap-2">
+                        <div
+                            class="pantone_small bg-info border border-2 p-3 d-flex flex-column justify-content-center">
+                        </div>
+                        <span>$info</span>
+                    </div>
+                    <div class="text-center hstack gap-2">
+                        <div
+                            class="pantone_small bg-warning border border-2 p-3 d-flex flex-column justify-content-center">
+                        </div>
+                        <span>$warning</span>
+                    </div>
+                    <div class="text-center hstack gap-2">
+                        <div
+                            class="pantone_small bg-danger border border-2 p-3 d-flex flex-column justify-content-center">
+                        </div>
+                        <span>$danger</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section>
-	<div class="container ">
-		<div class="row mb-4">
-			<div class="col">
-				<h3 class="fw-bolder rfs-9">Default Body, Dark and Light variants</h3>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-2 d-flex gap-3">
-				<div class="col mb-4 vstack gap-3">
-					<div class="pantone border p-3 d-flex flex-column justify-content-center">
-						<p class="small name_color">Body</p>
-						<p class="small hex_color mb-0"></p>
-					</div>
-					<div class="pantone bg-dark text-light border p-3 d-flex flex-column justify-content-center">
-						<p class="small name_color">Dark</p>
-						<p class="small hex_color mb-0"></p>
-					</div>
-					<div class="pantone bg-light text-dark border p-3 d-flex flex-column justify-content-center">
-						<p class="small name_color">Light</p>
-						<p class="small hex_color mb-0"></p>
-					</div>
+    <div class="container ">
+        <div class="row mb-4">
+            <div class="col">
+                <h3 class="fw-bolder rfs-9">Default Body, Dark and Light variants</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 d-flex gap-3">
+                <div class="col mb-4 vstack gap-3">
+                    <div class="pantone border p-3 d-flex flex-column justify-content-center">
+                        <p class="small name_color">Body</p>
+                        <p class="small hex_color mb-0"></p>
+                    </div>
+                    <div class="pantone bg-dark text-light border p-3 d-flex flex-column justify-content-center">
+                        <p class="small name_color">Dark</p>
+                        <p class="small hex_color mb-0"></p>
+                    </div>
+                    <div class="pantone bg-light text-dark border p-3 d-flex flex-column justify-content-center">
+                        <p class="small name_color">Light</p>
+                        <p class="small hex_color mb-0"></p>
+                    </div>
 
 
 
 
-				</div>
-			</div>
-			<div class="col-lg-9 offset-lg-1">
-				<div class="mw-48rem p-4 lc-block mb-4 border" style="">
-					<div editable="rich">
-						<span class="lead">This is .lead content</span>
-						<h2>This is an h2 Heading</h2>
+                </div>
+            </div>
+            <div class="col-lg-9 offset-lg-1">
+                <div class="mw-48rem p-4 lc-block mb-4 border" style="">
+                    <div editable="rich">
+                        <span class="lead">This is .lead content</span>
+                        <h2>This is an h2 Heading</h2>
 
-						<p>This is a paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a
-							lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus. Cras ornare
-							faucibus laoreet. Aenean vel nisi in ipsum congue fermentum et ut arcu. Proin leo diam,
-							vulputate eu tellus ac, mattis cursus nunc. In aliquet erat ac eros <a href="#">congue
-								maximus.</a></p>
-
-
-					</div>
-				</div>
-				<div class="mw-48rem p-4 lc-block mb-4 bg-dark text-light border" style="">
-					<div editable="rich">
-						<span class="badge bg-light text-dark float-end" title="Container element CSS classes">bg-dark,
-							text-light</span>
-						<span class="lead d-block">This is .lead content inside</span>
-						<h2>This is an h2 Heading</h2>
-
-						<p>This is a paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a
-							lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus. Cras ornare
-							faucibus laoreet. Aenean vel nisi in ipsum congue fermentum et ut arcu. Proin leo diam,
-							vulputate eu tellus ac, mattis cursus nunc. In aliquet erat ac eros <a href="#">congue
-								maximus.</a></p>
+                        <p>This is a paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a
+                            lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus. Cras ornare
+                            faucibus laoreet. Aenean vel nisi in ipsum congue fermentum et ut arcu. Proin leo diam,
+                            vulputate eu tellus ac, mattis cursus nunc. In aliquet erat ac eros <a href="#">congue
+                                maximus.</a></p>
 
 
-					</div>
-				</div>
-				<div class="mw-48rem p-4 lc-block mb-4 text-dark bg-light border" style="">
-					<div editable="rich">
-						<span class="badge bg-dark text-light float-end" title="Container element CSS classes">bg-light,
-							text-dark</span>
-						<span class="lead d-block">This is .lead content inside</span>
-						<h2>This is an h2 Heading</h2>
+                    </div>
+                </div>
+                <div class="mw-48rem p-4 lc-block mb-4 bg-dark text-light border" style="">
+                    <div editable="rich">
+                        <span class="badge bg-light text-dark float-end" title="Container element CSS classes">.bg-dark,
+                            .text-light</span>
+                        <span class="lead d-block">This is .lead content inside</span>
+                        <h2>This is an h2 Heading</h2>
 
-						<p>This is a paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a
-							lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus. Cras ornare
-							faucibus laoreet. Aenean vel nisi in ipsum congue fermentum et ut arcu. Proin leo diam,
-							vulputate eu tellus ac, mattis cursus nunc. In aliquet erat ac eros <a href="#">congue
-								maximus.</a></p>
-
-
-					</div>
-				</div>
-			</div>
-		</div>
+                        <p>This is a paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a
+                            lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus. Cras ornare
+                            faucibus laoreet. Aenean vel nisi in ipsum congue fermentum et ut arcu. Proin leo diam,
+                            vulputate eu tellus ac, mattis cursus nunc. In aliquet erat ac eros <a href="#">congue
+                                maximus.</a></p>
 
 
+                    </div>
+                </div>
+                <div class="mw-48rem p-4 lc-block mb-4 text-dark bg-light border" style="">
+                    <div editable="rich">
+                        <span class="badge bg-dark text-light float-end"
+                            title="Container element CSS classes">.bg-light, .text-dark</span>
+                        <span class="lead d-block">This is .lead content inside</span>
+                        <h2>This is an h2 Heading</h2>
 
-	</div>
+                        <p>This is a paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a
+                            lacus est. Etiam diam metus, lobortis non augue at, placerat viverra risus. Cras ornare
+                            faucibus laoreet. Aenean vel nisi in ipsum congue fermentum et ut arcu. Proin leo diam,
+                            vulputate eu tellus ac, mattis cursus nunc. In aliquet erat ac eros <a href="#">congue
+                                maximus.</a></p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
 </section>
 <section class="py-3">
-	<div class="container py-4">
-		<div class="row mb-3">
-			<div class="col">
-				<h3 class="fw-bolder rfs-9">Theme Colors with Shades</h3>
-			</div>
-		</div>
+    <div class="container py-4">
+        <div class="row mb-3">
+            <div class="col">
+                <h3 class="fw-bolder rfs-9">Theme Colors with Shades</h3>
+            </div>
+        </div>
 
-		<div id="master-colors-primary" class="row p-4 align-items-center border border-primary mb-4">
-			<div class="col-12">
-				<p class="text-primary h5">Primary Color: <span
-						class="ms-3 text-bg-primary p-3 rfs-4 align-middle rounded"
-						read-scss-var="$primary">#democolor</span></p>
-			</div>
-			<div class="col-lg-2 offset-xl-1">
-				<div class="lc-block">
-					<div class="col mb-4 vstack gap-3">
-						<h6>Text:</h6>
-						<div class="pantone text-primary border p-3 d-flex flex-column justify-content-center">
-							<p class="small ">text-primary</p>
-							<p class="small hex_color mb-0"></p>
-						</div>
-						<div
-							class="pantone text-primary-emphasis  border p-3 d-flex flex-column justify-content-center">
-							<p class="small">text-primary-emphasis </p>
-							<p class="small hex_color mb-0"></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="lc-block">
-					<div class="col mb-4 vstack gap-3">
-						<h6>Background:</h6>
-						<div class="pantone text-bg-primary border p-3 d-flex flex-column justify-content-center">
-							<p class="small ">bg-primary</p>
-							<p class="small hex_color mb-0"></p>
-						</div>
-						<div class="pantone bg-primary-subtle border p-3 d-flex flex-column justify-content-center">
-							<p class="small">bg-primary-subtle </p>
-							<p class="small hex_color mb-0"></p>
-						</div>
-
-
+        <div id="master-colors-primary" class="row p-4 align-items-center border border-primary mb-4">
+            <div class="col-12">
+                <p class="text-primary h5">Primary Color: <span
+                        class="ms-3 text-bg-primary p-3 rfs-4 align-middle rounded"
+                        read-scss-var="$primary">#democolor</span></p>
+            </div>
+            <div class="col-lg-2 offset-xl-1">
+                <div class="lc-block">
+                    <div class="col mb-4 vstack gap-3">
+                        <h6>Text:</h6>
+                        <div class="pantone text-primary border p-3 d-flex flex-column justify-content-center">
+                            <p class="small ">text-primary</p>
+                            <p class="small hex_color mb-0"></p>
+                        </div>
+                        <div
+                            class="pantone text-primary-emphasis  border p-3 d-flex flex-column justify-content-center">
+                            <p class="small">text-primary-emphasis </p>
+                            <p class="small hex_color mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="lc-block">
+                    <div class="col mb-4 vstack gap-3">
+                        <h6>Background:</h6>
+                        <div class="pantone text-bg-primary border p-3 d-flex flex-column justify-content-center">
+                            <p class="small ">bg-primary</p>
+                            <p class="small hex_color mb-0"></p>
+                        </div>
+                        <div class="pantone bg-primary-subtle border p-3 d-flex flex-column justify-content-center">
+                            <p class="small">bg-primary-subtle </p>
+                            <p class="small hex_color mb-0"></p>
+                        </div>
 
 
 
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="lc-block">
-					<div class="col mb-4 vstack gap-3">
-						<h6>Border:</h6>
-						<div class="pantone border-primary border p-3 d-flex flex-column justify-content-center">
-							<p class="small ">border-primary</p>
-							<p class="small hex_color mb-0"></p>
-						</div>
-						<div class="pantone border-primary-subtle border p-3 d-flex flex-column justify-content-center">
-							<p class="small">border-primary-subtle </p>
-							<p class="small hex_color mb-0"></p>
-						</div>
 
 
-					</div>
-				</div>
-			</div>
-			<div class="col offset-xl-1">
-				<p class="text-primary fw-bold">Shades:</p>
-				<div class="hstack gap-2 mb-2">
-					<div class="pantone_shades bg-primary-25 border d-flex flex-column justify-content-center"
-						title=".bg-primary-25 for background, or .text-primary-25 for text"></div>
-					<div class="pantone_shades bg-primary-50 border d-flex flex-column justify-content-center"></div>
-					<div class="pantone_shades bg-primary-100 border d-flex flex-column justify-content-center"></div>
-					<div class="pantone_shades bg-primary-200 border d-flex flex-column justify-content-center"></div>
-					<div class="pantone_shades bg-primary-300 border d-flex flex-column justify-content-center"></div>
-					<div class="pantone_shades bg-primary-400 border d-flex flex-column justify-content-center"></div>
-				</div>
-				<div class="hstack gap-2 mb-4">
-					<div class="pantone_shades text-center">25 </div>
-					<div class="pantone_shades text-center">50 </div>
-					<div class="pantone_shades text-center">100</div>
-					<div class="pantone_shades text-center">200</div>
-					<div class="pantone_shades text-center">300</div>
-					<div class="pantone_shades text-center">400</div>
-				</div>
-				<p class="text-primary fw-bold">Tint:</p>
-				<div class="hstack gap-2 mb-2">
-					<div class="pantone_shades bg-primary-600 border d-flex flex-column justify-content-center"></div>
-					<div class="pantone_shades bg-primary-700 border d-flex flex-column justify-content-center"></div>
-					<div class="pantone_shades bg-primary-800 border d-flex flex-column justify-content-center"></div>
-					<div class="pantone_shades bg-primary-900 border d-flex flex-column justify-content-center"></div>
-				</div>
-				<div class="hstack gap-2 mb-4">
-					<div class="pantone_shades text-center">600</div>
-					<div class="pantone_shades text-center">700</div>
-					<div class="pantone_shades text-center">800</div>
-					<div class="pantone_shades text-center">900</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="lc-block">
+                    <div class="col mb-4 vstack gap-3">
+                        <h6>Border:</h6>
+                        <div class="pantone border-primary border p-3 d-flex flex-column justify-content-center">
+                            <p class="small ">border-primary</p>
+                            <p class="small hex_color mb-0"></p>
+                        </div>
+                        <div class="pantone border-primary-subtle border p-3 d-flex flex-column justify-content-center">
+                            <p class="small">border-primary-subtle </p>
+                            <p class="small hex_color mb-0"></p>
+                        </div>
 
 
+                    </div>
+                </div>
+            </div>
+            <div class="col offset-xl-1">
+                <p class="text-primary fw-bold">Shades:</p>
+                <div class="hstack gap-2 mb-2">
+                    <div class="pantone_shades bg-primary-25 border d-flex flex-column justify-content-center"
+                        title=".bg-primary-25 for background, or .text-primary-25 for text"></div>
+                    <div class="pantone_shades bg-primary-50 border d-flex flex-column justify-content-center"></div>
+                    <div class="pantone_shades bg-primary-100 border d-flex flex-column justify-content-center"></div>
+                    <div class="pantone_shades bg-primary-200 border d-flex flex-column justify-content-center"></div>
+                    <div class="pantone_shades bg-primary-300 border d-flex flex-column justify-content-center"></div>
+                    <div class="pantone_shades bg-primary-400 border d-flex flex-column justify-content-center"></div>
+                </div>
+                <div class="hstack gap-2 mb-4">
+                    <div class="pantone_shades text-center">25 </div>
+                    <div class="pantone_shades text-center">50 </div>
+                    <div class="pantone_shades text-center">100</div>
+                    <div class="pantone_shades text-center">200</div>
+                    <div class="pantone_shades text-center">300</div>
+                    <div class="pantone_shades text-center">400</div>
+                </div>
+                <p class="text-primary fw-bold">Tint:</p>
+                <div class="hstack gap-2 mb-2">
+                    <div class="pantone_shades bg-primary-600 border d-flex flex-column justify-content-center"></div>
+                    <div class="pantone_shades bg-primary-700 border d-flex flex-column justify-content-center"></div>
+                    <div class="pantone_shades bg-primary-800 border d-flex flex-column justify-content-center"></div>
+                    <div class="pantone_shades bg-primary-900 border d-flex flex-column justify-content-center"></div>
+                </div>
+                <div class="hstack gap-2 mb-4">
+                    <div class="pantone_shades text-center">600</div>
+                    <div class="pantone_shades text-center">700</div>
+                    <div class="pantone_shades text-center">800</div>
+                    <div class="pantone_shades text-center">900</div>
 
-	<script>
-		// Define the Bootstrap colors array
-		const bootstrapColors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+                </div>
+            </div>
+        </div>
+    </div>
 
-		// Function to replace text with smart case
-		function smartCaseReplace(match, replacement) {
-			if (match === match.toLowerCase()) {
-				return replacement.toLowerCase();
-			}
-			if (match === match.toUpperCase()) {
-				return replacement.toUpperCase();
-			}
-			if (match[0] === match[0].toUpperCase()) {
-				return replacement.charAt(0).toUpperCase() + replacement.slice(1).toLowerCase();
-			}
-			return replacement;
-		}
-
-		// Grab the outer HTML content of the master div
-		const masterContent = document.getElementById('master-colors-primary').outerHTML;
-
-		// Iterate through the reversed Bootstrap colors array, skipping 'primary'
-		bootstrapColors.reverse().forEach(color => {
-			if (color === 'primary') return;
-
-			// Replace the word "primary" with the current color in the loop using smart case
-			const newContent = masterContent.replace(/primary|PRIMARY|Primary/g, match => smartCaseReplace(match, color));
-
-			// Create a new div element using the outer HTML
-			const tempElement = document.createElement('div');
-			tempElement.innerHTML = newContent;
-			const newDiv = tempElement.firstElementChild;
-
-			// Insert the new div above the master div
-			document.getElementById('master-colors-primary').insertAdjacentElement('afterend', newDiv);
-		});
-
-
-
-	</script>
 </section>
-<section class="py-3" id="">
-	<div class="container mt-5">
-		<div class="row mb-4">
-			<div class="col">
-				<h3 class="fw-bolder rfs-9">Navbars</h3>
-			</div>
-		</div>
+<section class="py-3" id="nav">
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col">
+                <h3 class="fw-bolder rfs-9">Navbars</h3>
+            </div>
+        </div>
 
-		<div class="vstack gap-3">
-			<nav class="navbar bg-light navbar-expand-md">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="#">Navbar Light</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Link</a>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-									aria-expanded="false">
-									Dropdown
-								</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="#">Action</a></li>
-									<li><a class="dropdown-item" href="#">Another action</a></li>
-									<li>
-										<hr class="dropdown-divider">
-									</li>
-									<li><a class="dropdown-item" href="#">Something else here</a></li>
-								</ul>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link disabled" aria-disabled="true">Disabled</a>
-							</li>
-						</ul>
-						<form class="d-flex" role="search">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-primary" type="submit">Search</button>
-						</form>
-					</div>
-				</div>
-			</nav>
-			<nav class="navbar bg-dark navbar-expand-md" data-bs-theme="dark">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="#">Navbar Dark</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Link</a>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-									aria-expanded="false">
-									Dropdown
-								</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="#">Action</a></li>
-									<li><a class="dropdown-item" href="#">Another action</a></li>
-									<li>
-										<hr class="dropdown-divider">
-									</li>
-									<li><a class="dropdown-item" href="#">Something else here</a></li>
-								</ul>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link disabled" aria-disabled="true">Disabled</a>
-							</li>
-						</ul>
-						<form class="d-flex" role="search">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-primary" type="submit">Search</button>
-						</form>
-					</div>
-				</div>
-			</nav>
+        <div class="vstack gap-3">
+            <nav class="navbar bg-light navbar-expand-md">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Navbar Light</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <nav class="navbar bg-dark navbar-expand-md" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Navbar Dark</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
 
-		</div>
+        </div>
 
-	</div>
+    </div>
 </section>
-<section class="py-3" id="">
-	<div class="container mt-5">
+<section class="py-3" id="buttons">
+    <div class="container mt-5">
 
 
-		<div class="row mb-4">
-			<div class="col">
-				<h3 class="fw-bolder rfs-9">Buttons</h3>
-			</div>
-		</div>
+        <div class="row mb-4">
+            <div class="col">
+                <h3 class="fw-bolder rfs-9">Buttons</h3>
+            </div>
+        </div>
 
 
-		<div class="row">
-			<div class="mb-4">
-				<p class="fw-bold">Simple</p>
-				<button type="button" class="btn mb-2 btn-primary">Primary</button>
-				<button type="button" class="btn mb-2 btn-secondary">Secondary</button>
-				<button type="button" class="btn mb-2 btn-success">Success</button>
-				<button type="button" class="btn mb-2 btn-danger">Danger</button>
-				<button type="button" class="btn mb-2 btn-warning">Warning</button>
-				<button type="button" class="btn mb-2 btn-info">Info</button>
-				<button type="button" class="btn mb-2 btn-light">Light</button>
-				<button type="button" class="btn mb-2 btn-dark">Dark</button>
-				<button type="button" class="btn mb-2 btn-link">Link</button>
-			</div>
+        <div class="row">
+            <div class="mb-4">
+                <p class="fw-bold">Simple</p>
+                <button type="button" class="btn mb-2 btn-primary">Primary</button>
+                <button type="button" class="btn mb-2 btn-secondary">Secondary</button>
+                <button type="button" class="btn mb-2 btn-success">Success</button>
+                <button type="button" class="btn mb-2 btn-danger">Danger</button>
+                <button type="button" class="btn mb-2 btn-warning">Warning</button>
+                <button type="button" class="btn mb-2 btn-info">Info</button>
+                <button type="button" class="btn mb-2 btn-light">Light</button>
+                <button type="button" class="btn mb-2 btn-dark">Dark</button>
+                <button type="button" class="btn mb-2 btn-link">Link</button>
+            </div>
 
-			<div class="mb-4">
-				<p class="fw-bold">Outline</p>
-				<button type="button" class="btn mb-2 btn-outline-primary">Primary</button>
-				<button type="button" class="btn mb-2 btn-outline-secondary">Secondary</button>
-				<button type="button" class="btn mb-2 btn-outline-success">Success</button>
-				<button type="button" class="btn mb-2 btn-outline-danger">Danger</button>
-				<button type="button" class="btn mb-2 btn-outline-warning">Warning</button>
-				<button type="button" class="btn mb-2 btn-outline-info">Info</button>
-				<button type="button" class="btn mb-2 btn-outline-light">Light</button>
-				<button type="button" class="btn mb-2 btn-outline-dark">Dark</button>
-			</div>
-
-
-			<div class="mb-4">
-				<p class="fw-bold">Sizes</p>
-				<button type="button" class="btn mb-3 btn-primary btn-sm">Small</button>
-				<button type="button" class="btn mb-3 btn-primary ">Normal button</button>
-				<button type="button" class="btn mb-3 btn-lg btn-primary">Large button</button>
-			</div>
+            <div class="mb-4">
+                <p class="fw-bold">Outline</p>
+                <button type="button" class="btn mb-2 btn-outline-primary">Primary</button>
+                <button type="button" class="btn mb-2 btn-outline-secondary">Secondary</button>
+                <button type="button" class="btn mb-2 btn-outline-success">Success</button>
+                <button type="button" class="btn mb-2 btn-outline-danger">Danger</button>
+                <button type="button" class="btn mb-2 btn-outline-warning">Warning</button>
+                <button type="button" class="btn mb-2 btn-outline-info">Info</button>
+                <button type="button" class="btn mb-2 btn-outline-light">Light</button>
+                <button type="button" class="btn mb-2 btn-outline-dark">Dark</button>
+            </div>
 
 
-			<div class="mb-4">
-				<p class="fw-bold">Group</p>
-				<div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
-					<div class="btn-group" role="group">
-						<button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Dropdown
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							<li><a class="dropdown-item" href="#">Dropdown link</a></li>
-							<li><a class="dropdown-item" href="#">Dropdown link</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
-					<div class="btn-group" role="group">
-						<button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Dropdown
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							<li><a class="dropdown-item" href="#">Dropdown link</a></li>
-							<li><a class="dropdown-item" href="#">Dropdown link</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
-					<div class="btn-group" role="group">
-						<button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Dropdown
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							<li><a class="dropdown-item" href="#">Dropdown link</a></li>
-							<li><a class="dropdown-item" href="#">Dropdown link</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
-					<div class="btn-group" role="group">
-						<button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Dropdown
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-							<li><a class="dropdown-item" href="#">Dropdown link</a></li>
-							<li><a class="dropdown-item" href="#">Dropdown link</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            <div class="mb-4">
+                <p class="fw-bold">Sizes</p>
+                <button type="button" class="btn mb-3 btn-primary btn-sm">Small</button>
+                <button type="button" class="btn mb-3 btn-primary ">Normal button</button>
+                <button type="button" class="btn mb-3 btn-lg btn-primary">Large button</button>
+            </div>
+
+
+            <div class="mb-4">
+                <p class="fw-bold">Group</p>
+                <div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                            <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section class="style_header pt-4 border-top border-3" id="typography">
-	<div class="container py-4">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="lc-block hstack align-items-baseline gap-2">
-					<svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" fill="currentColor"
-						viewBox="0 0 16 16">
-						<path
-							d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z">
-						</path>
-					</svg>
-					<div editable="rich">
-						<h2>Font Style Guide</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="lc-block hstack align-items-baseline gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z">
+                        </path>
+                    </svg>
+                    <div editable="rich">
+                        <h2>Typography Style Guide</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section class="">
-	<style>
-		.style_font_box {
-			width: 34rem;
-			min-height: 34rem
-		}
-	</style>
-	<div class="container py-6">
-		<div class="lc-block d-lg-flex d-grid gap-4 justify-content-evenly mb-5 py-3">
-			<div class="style_font_box lc-block border p-3 p-lg-5 p-xl-6 d-flex flex-column justify-content-evenly">
-				<span class="position-absolute end-0 me-3" read-scss-var="$font-size-base"></span>
-				<div>
-					<span class="text-muted fs-5">Font Family Base</span>
-					<p id="base-font-family" class="fw-bold display-4">Base Font</p>
+    <style>
+        .style_font_box {
+            width: 34rem;
+            min-height: 34rem
+        }
+    </style>
+    <div class="container py-6">
+        <div class="lc-block d-lg-flex d-grid gap-4 justify-content-evenly mb-5 py-3">
+            <div class="style_font_box lc-block border p-3 p-lg-5 p-xl-6 d-flex flex-column justify-content-evenly">
+                <span class="position-absolute end-0 me-3" read-scss-var="$font-size-base"></span>
+                <div>
+                    <span class="text-muted fs-5">Font Family Base</span>
+                    <p id="base-font-family" class="fw-bold display-4">Base Font</p>
 
-				</div>
-				<div>
-					<p class="fs-5 lh-1">1234567890 <br>abcdefghijklmnopqrstuvwxyz</p>
-				</div>
-				<div class="fs-1 hstack gap-2">
-					<span class="fw-lighter">Ad</span><span class="fw-light">Ad</span><span
-						class="fw-bold">Ad</span><span class="fw-bolder">Ad</span><span class="fst-italic">Ad</span>
-				</div>
-				<div class="text-bg-dark p-2">
-					<p class="fs-4">Imagine a world...</p>
-				</div>
-			</div>
-			<div class="lc-block style_font_box border p-3 p-lg-5 p-xl-6 d-flex flex-column justify-content-evenly"
-				style="">
-				<div>
-					<p class="text-muted h6 fs-5" id="type">Headings Font Family</p>
+                </div>
+                <div>
+                    <p class="fs-5 lh-1">1234567890 <br>abcdefghijklmnopqrstuvwxyz</p>
+                </div>
+                <div class="fs-1 hstack gap-2">
+                    <span class="fw-lighter">Ad</span><span class="fw-light">Ad</span><span
+                        class="fw-bold">Ad</span><span class="fw-bolder">Ad</span><span class="fst-italic">Ad</span>
+                </div>
+                <div class="text-bg-dark p-2">
+                    <p class="fs-4">Imagine a world...</p>
+                </div>
+            </div>
+            <div class="lc-block style_font_box border p-3 p-lg-5 p-xl-6 d-flex flex-column justify-content-evenly"
+                style="">
+                <div>
+                    <p class="text-muted h6 fs-5" id="type">Headings Font Family</p>
 
-					<p id="headings-font-family" class="fw-bold h1 display-4">Headings Font</p>
-				</div>
-				<div>
+                    <p id="headings-font-family" class="fw-bold h1 display-4">Headings Font</p>
+                </div>
+                <div>
 
-					<p class="h6 fs-5 lh-1">1234567890 <br>abcdefghijklmnopqrstuvwxyz</p>
-				</div>
+                    <p class="h6 fs-5 lh-1">1234567890 <br>abcdefghijklmnopqrstuvwxyz</p>
+                </div>
 
-				<div class="fs-1 hstack gap-2 h2">
-					<span class="fw-lighter">Ad</span><span class="fw-light">Ad</span><span
-						class="fw-bold">Ad</span><span class="fw-bolder">Ad</span><span class="fst-italic">Ad</span>
-				</div>
-				<div class="text-bg-dark p-3">
-					<p class="h6 fs-4">Imagine a world...</p>
-				</div>
-			</div>
-		</div>
-		<div class="row mb-4">
-			<div class="col-lg-6 mx-auto">
-				<div class="lc-block">
-					<span class="ls-3 fw-light small">Paragraph</span>
-					<h1>Article Headline</h1>
-				</div>
-				<div class="lc-block mb-4">
-					<p class="lead">This is a lead paragraph. It stands out from regular <a href="#">paragraphs</a>.</p>
-				</div>
-				<div class="lc-block">
+                <div class="fs-1 hstack gap-2 h2">
+                    <span class="fw-lighter">Ad</span><span class="fw-light">Ad</span><span
+                        class="fw-bold">Ad</span><span class="fw-bolder">Ad</span><span class="fst-italic">Ad</span>
+                </div>
+                <div class="text-bg-dark p-3">
+                    <p class="h6 fs-4">Imagine a world...</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-lg-6 mx-auto">
+                <div class="lc-block">
+                    <span class="ls-3 fw-light small">Paragraph</span>
+                    <h1>Article Headline</h1>
+                </div>
+                <div class="lc-block mb-4">
+                    <p class="lead">This is a lead paragraph. It stands out from regular <a href="#">paragraphs</a>.</p>
+                </div>
+                <div class="lc-block">
 
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et metus id ligula malesuada
-						placerat sit amet quis enim. Aliquam erat volutpat. In pellentesque scelerisque auctor. Ut porta
-						lacus eget nisi <a href="#">fermentum lobortis</a>. Vestibulum facilisis tempor
-						ipsum, ut rhoncus magna ultricies laoreet. Proin vehicula erat eget libero accumsan iaculis.
-					</p>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et metus id ligula malesuada
+                        placerat sit amet quis enim. Aliquam erat volutpat. In pellentesque scelerisque auctor. Ut porta
+                        lacus eget nisi <a href="#">fermentum lobortis</a>. Vestibulum facilisis tempor
+                        ipsum, ut rhoncus magna ultricies laoreet. Proin vehicula erat eget libero accumsan iaculis.
+                    </p>
 
-				</div>
-				<div class="lc-block mb-5 d-grid gap-3 d-sm-block"><a class="btn btn-sm btn-primary" href="#"
-						role="button">Call to Action</a>
-					<a class="btn btn-primary" href="#" role="button">Call to Action</a>
-					<a class="btn btn-lg btn-primary" href="#" role="button">Call to Action</a>
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+                <div class="lc-block mb-5 d-grid gap-3 d-sm-block"><a class="btn btn-sm btn-primary" href="#"
+                        role="button">Call to Action</a>
+                    <a class="btn btn-primary" href="#" role="button">Call to Action</a>
+                    <a class="btn btn-lg btn-primary" href="#" role="button">Call to Action</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="py-4">
-	<div class="container">
-		<div class="row mb-4">
-			<div class="col">
-				<h2 class="fw-bolder">Bootstrap Typography Classes</h2>
-			</div>
-		</div>
-		<div class="row ">
-			<div class="lc-block ">
-				<div editable="rich">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h2 class="fw-bolder">Bootstrap Typography Classes</h2>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="lc-block ">
+                <div editable="rich">
 
-					<h2>Heading </h2>
-					<p>All HTML headings are available.</p>
+                    <h2>Heading </h2>
+                    <p>All HTML headings are available.</p>
 
-				</div>
-			</div>
-		</div>
-		<div class="row mb-5 border">
-			<div class="col-12">
-				<div class="lc-block">
-					<div editable="rich">
-						<h1>h1. Heading 1</h1>
-						<h2>h2. Heading 2</h2>
-						<h3>h3. Heading 3</h3>
-						<h4>h4. Heading 4</h4>
-						<h5>h5. Heading 5</h5>
-						<h6>h6. Heading 6</h6>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 p-3 bg-black">
-				<div class="lc-block">
-					<pre><code class="language-html">&lt;h1&gt;h1. Heading 1&lt;/h1&gt; 
-&lt;h2&gt;h2. Heading 2&lt;/h2&gt; 
-&lt;h3&gt;h3. Heading 3&lt;/h3&gt; 
-&lt;h4&gt;h4. Heading 4&lt;/h4&gt; 
-&lt;h5&gt;h5. Heading 5&lt;/h5&gt; 
-&lt;h6&gt;h6. Heading 6&lt;/h6&gt;
-</code></pre>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="lc-block">
-				<div editable="rich">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5 border">
+            <div class="col-12">
+                <div class="lc-block">
+                    <div editable="rich">
+                        <h1>h1. Heading 1</h1>
+                        <h2>h2. Heading 2</h2>
+                        <h3>h3. Heading 3</h3>
+                        <h4>h4. Heading 4</h4>
+                        <h5>h5. Heading 5</h5>
+                        <h6>h6. Heading 6</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-3 bg-black">
+                <div class="lc-block">
+                    <pre>						<code class="language-html">&lt;h1&gt;h1. Heading 1&lt;/h1&gt; 
+						&lt;h2&gt;h2. Heading 2&lt;/h2&gt; 
+						&lt;h3&gt;h3. Heading 3&lt;/h3&gt; 
+						&lt;h4&gt;h4. Heading 4&lt;/h4&gt; 
+						&lt;h5&gt;h5. Heading 5&lt;/h5&gt; 
+						&lt;h6&gt;h6. Heading 6&lt;/h6&gt;
+						</code>
+					</pre>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="lc-block">
+                <div editable="rich">
 
-					<h2>Heading Classes<br></h2>
-					<p>.h1 through .h6 classes are also available, for when you want to match the font styling of a
-						heading but cannot use the associated HTML element.</p>
-				</div>
-			</div>
-		</div>
-		<div class="row mb-5 border">
-			<div class="col-12">
-				<div class="lc-block">
-					<div editable="rich">
-						<p class="h1">h1. Bootstrap heading</p>
-						<p class="h2">h2. Bootstrap heading</p>
-						<p class="h3">h3. Bootstrap heading</p>
-						<p class="h4">h4. Bootstrap heading</p>
-						<p class="h5">h5. Bootstrap heading</p>
-						<p class="h6">h6. Bootstrap heading</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 p-3 bg-black">
-				<div class="lc-block">
-					<pre><code class="language-html">&lt;p class="h1"&gt;h1. Bootstrap heading&lt;/p&gt;
+                    <h2>Heading Classes<br></h2>
+                    <p>.h1 through .h6 classes are also available, for when you want to match the font styling of a
+                        heading but cannot use the associated HTML element.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5 border">
+            <div class="col-12">
+                <div class="lc-block">
+                    <div editable="rich">
+                        <p class="h1">h1. Bootstrap heading</p>
+                        <p class="h2">h2. Bootstrap heading</p>
+                        <p class="h3">h3. Bootstrap heading</p>
+                        <p class="h4">h4. Bootstrap heading</p>
+                        <p class="h5">h5. Bootstrap heading</p>
+                        <p class="h6">h6. Bootstrap heading</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-3 bg-black">
+                <div class="lc-block">
+                    <pre><code class="language-html">&lt;p class="h1"&gt;h1. Bootstrap heading&lt;/p&gt;
 &lt;p class="h2"&gt;h2. Bootstrap heading&lt;/p&gt;
 &lt;p class="h3"&gt;h3. Bootstrap heading&lt;/p&gt;
 &lt;p class="h4"&gt;h4. Bootstrap heading&lt;/p&gt;
 &lt;p class="h5"&gt;h5. Bootstrap heading&lt;/p&gt;
 &lt;p class="h6"&gt;h6. Bootstrap heading&lt;/p&gt;
 </code></pre>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="lc-block">
-				<div editable="rich">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="lc-block">
+                <div editable="rich">
 
-					<h2>Display Classes<br></h2>
-					<p>Display headings
-						Traditional heading elements are designed to work best in the meat of your page content. When
-						you need a heading to stand out, consider using a display heading—a larger, slightly more
-						opinionated heading style.</p>
-				</div>
-			</div>
-		</div>
-		<div class="row mb-5 border">
-			<div class="col-12">
-				<div class="lc-block">
-					<div editable="rich">
-						<h1 class="display-1">Display 1</h1>
-						<h1 class="display-2">Display 2</h1>
-						<h1 class="display-3">Display 3</h1>
-						<h1 class="display-4">Display 4</h1>
-						<h1 class="display-5">Display 5</h1>
-						<h1 class="display-6">Display 6</h1>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 p-3 bg-black">
-				<div class="lc-block">
-					<pre><code class="language-html">&lt;h1 class="display-1"&gt;Display 1&lt;/h1&gt;
+                    <h2>Display Classes<br></h2>
+                    <p>Display headings
+                        Traditional heading elements are designed to work best in the meat of your page content. When
+                        you need a heading to stand out, consider using a display heading—a larger, slightly more
+                        opinionated heading style.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5 border">
+            <div class="col-12">
+                <div class="lc-block">
+                    <div editable="rich">
+                        <h1 class="display-1">Display 1</h1>
+                        <h1 class="display-2">Display 2</h1>
+                        <h1 class="display-3">Display 3</h1>
+                        <h1 class="display-4">Display 4</h1>
+                        <h1 class="display-5">Display 5</h1>
+                        <h1 class="display-6">Display 6</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-3 bg-black">
+                <div class="lc-block">
+                    <pre><code class="language-html">&lt;h1 class="display-1"&gt;Display 1&lt;/h1&gt;
 &lt;h1 class="display-2"&gt;Display 2&lt;/h1&gt;
 &lt;h1 class="display-3"&gt;Display 3&lt;/h1&gt;
 &lt;h1 class="display-4"&gt;Display 4&lt;/h1&gt;
 &lt;h1 class="display-5"&gt;Display 5&lt;/h1&gt;
 &lt;h1 class="display-6"&gt;Display 6&lt;/h1&gt;
 </code></pre>
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="lc-block">
-				<div editable="rich">
+        <div class="row">
+            <div class="lc-block">
+                <div editable="rich">
 
-					<h2>Responsive Font Size<br></h2>
-					<p>Control the font size of an element using the rfs-{size} utilities.<br></p>
-				</div>
-			</div>
-		</div>
-		<div class="row border mb-5">
-			<div class="col-12">
-				<div class="lc-block overflow-scroll" style="height:25vh">
-					<div editable="rich">
-						<p class="rfs-1">rfs-1</p>
-						<p class="rfs-2">rfs-2</p>
-						<p class="rfs-3">rfs-3</p>
-						<p class="rfs-4">rfs-4</p>
-						<p class="rfs-5">rfs-5</p>
-						<p class="rfs-6">rfs-6</p>
-						<p class="rfs-7">rfs-7</p>
-						<p class="rfs-8">rfs-8</p>
-						<p class="rfs-9">rfs-9</p>
-						<p class="rfs-10">rfs-10</p>
-						<p class="rfs-11">rfs-11</p>
-						<p class="rfs-12">rfs-12</p>
-						<p class="rfs-13">rfs-13</p>
-						<p class="rfs-14">rfs-14</p>
-						<p class="rfs-15">rfs-15</p>
-						<p class="rfs-16">rfs-16</p>
-						<p class="rfs-17">rfs-17</p>
-						<p class="rfs-18">rfs-18</p>
-						<p class="rfs-19">rfs-19</p>
-						<p class="rfs-20">rfs-20</p>
-						<p class="rfs-21">rfs-21</p>
-						<p class="rfs-22">rfs-22</p>
-						<p class="rfs-23">rfs-23</p>
-						<p class="rfs-24">rfs-24</p>
-						<p class="rfs-25">rfs-25</p>
-						<p class="rfs-30">rfs-30</p>
-						<p class="rfs-35">rfs-35</p>
-						<p class="rfs-40">rfs-40</p>
-						<p class="rfs-45">rfs-45</p>
-						<p class="rfs-50">rfs-50</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 p-3 bg-black">
-				<div class="lc-block">
-					<pre><code class="language-html" editable="rich"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"rfs-1"</span>&gt;</span>rfs-1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                    <h2>Responsive Font Size<br></h2>
+                    <p>Control the font size of an element using the rfs-{size} utilities.<br></p>
+                </div>
+            </div>
+        </div>
+        <div class="row border mb-5">
+            <div class="col-12">
+                <div class="lc-block overflow-scroll" style="height:25vh">
+                    <div editable="rich">
+                        <p class="rfs-1">rfs-1</p>
+                        <p class="rfs-2">rfs-2</p>
+                        <p class="rfs-3">rfs-3</p>
+                        <p class="rfs-4">rfs-4</p>
+                        <p class="rfs-5">rfs-5</p>
+                        <p class="rfs-6">rfs-6</p>
+                        <p class="rfs-7">rfs-7</p>
+                        <p class="rfs-8">rfs-8</p>
+                        <p class="rfs-9">rfs-9</p>
+                        <p class="rfs-10">rfs-10</p>
+                        <p class="rfs-11">rfs-11</p>
+                        <p class="rfs-12">rfs-12</p>
+                        <p class="rfs-13">rfs-13</p>
+                        <p class="rfs-14">rfs-14</p>
+                        <p class="rfs-15">rfs-15</p>
+                        <p class="rfs-16">rfs-16</p>
+                        <p class="rfs-17">rfs-17</p>
+                        <p class="rfs-18">rfs-18</p>
+                        <p class="rfs-19">rfs-19</p>
+                        <p class="rfs-20">rfs-20</p>
+                        <p class="rfs-21">rfs-21</p>
+                        <p class="rfs-22">rfs-22</p>
+                        <p class="rfs-23">rfs-23</p>
+                        <p class="rfs-24">rfs-24</p>
+                        <p class="rfs-25">rfs-25</p>
+                        <p class="rfs-30">rfs-30</p>
+                        <p class="rfs-35">rfs-35</p>
+                        <p class="rfs-40">rfs-40</p>
+                        <p class="rfs-45">rfs-45</p>
+                        <p class="rfs-50">rfs-50</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-3 bg-black">
+                <div class="lc-block">
+                    <pre><code class="language-html" editable="rich"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"rfs-1"</span>&gt;</span>rfs-1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"rfs-2"</span>&gt;</span>rfs-2<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 ...
 </code></pre>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="lc-block">
-				<div editable="rich">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="lc-block">
+                <div editable="rich">
 
-					<h2>Lead<br></h2>
-					<p>Make a paragraph stand out by adding .lead.</p>
-				</div>
-			</div>
-		</div>
-		<div class="row border mb-5">
-			<div class="col-12">
-				<div class="lc-block" style="">
-					<div editable="rich">
-						<p class="lead">
-							This is a lead paragraph. It stands out from regular paragraphs.
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 p-3 bg-black">
-				<div class="lc-block">
-					<pre><code class="language-html" editable="rich">&lt;p class="lead"&gt;
+                    <h2>Lead<br></h2>
+                    <p>Make a paragraph stand out by adding .lead.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row border mb-5">
+            <div class="col-12">
+                <div class="lc-block" style="">
+                    <div editable="rich">
+                        <p class="lead">
+                            This is a lead paragraph. It stands out from regular paragraphs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-3 bg-black">
+                <div class="lc-block">
+                    <pre><code class="language-html" editable="rich">&lt;p class="lead"&gt;
   This is a lead paragraph. It stands out from regular paragraphs.
 &lt;/p&gt;
 </code></pre>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="lc-block">
-				<div editable="rich">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="lc-block">
+                <div editable="rich">
 
-					<h2>Inline text elements</h2>
-					<p>Styling for common inline HTML5 elements.</p>
-				</div>
-			</div>
-		</div>
-		<div class="row border mb-5">
-			<div class="col-12">
-				<div class="lc-block" style="">
-					<div editable="rich">
-						<p>You can use the mark tag to <mark>highlight</mark> text.</p>
-						<p><del>This line of text is meant to be treated as deleted text.</del></p>
-						<p><s>This line of text is meant to be treated as no longer accurate.</s></p>
-						<p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>
-						<p><u>This line of text will render as underlined.</u></p>
-						<p><small>This line of text is meant to be treated as fine print.</small></p>
-						<p><strong>This line rendered as bold text.</strong></p>
-						<p><em>This line rendered as italicized text.</em></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 p-3 bg-black">
-				<div class="lc-block">
-					<pre><code class="language-html" editable="rich"><span class="hljs-tag">&lt;p&gt;You can use the mark tag to &lt;mark&gt;highlight&lt;/mark&gt; text.&lt;/p&gt;
+                    <h2>Inline text elements</h2>
+                    <p>Styling for common inline HTML5 elements.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row border mb-5">
+            <div class="col-12">
+                <div class="lc-block" style="">
+                    <div editable="rich">
+                        <p>You can use the mark tag to <mark>highlight</mark> text.</p>
+                        <p><del>This line of text is meant to be treated as deleted text.</del></p>
+                        <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+                        <p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>
+                        <p><u>This line of text will render as underlined.</u></p>
+                        <p><small>This line of text is meant to be treated as fine print.</small></p>
+                        <p><strong>This line rendered as bold text.</strong></p>
+                        <p><em>This line rendered as italicized text.</em></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-3 bg-black">
+                <div class="lc-block">
+                    <pre><code class="language-html" editable="rich"><span class="hljs-tag">&lt;p&gt;You can use the mark tag to &lt;mark&gt;highlight&lt;/mark&gt; text.&lt;/p&gt;
 &lt;p&gt;&lt;del&gt;This line of text is meant to be treated as deleted text.&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;This line of text is meant to be treated as no longer accurate.&lt;/s&gt;&lt;/p&gt;
 &lt;p&gt;&lt;ins&gt;This line of text is meant to be treated as an addition to the document.&lt;/ins&gt;&lt;/p&gt;
@@ -933,548 +1098,546 @@
 &lt;p&gt;&lt;strong&gt;This line rendered as bold text.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;This line rendered as italicized text.&lt;/em&gt;&lt;/p&gt;
  </span></code></pre>
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </section>
 
-<section class="style_header pt-4 border-top border-3" id="readymades">
-	<div class="container py-4">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="lc-block hstack align-items-baseline gap-2">
-					<svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" fill="currentColor"
-						viewBox="0 0 16 16">
-						<path
-							d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z">
-						</path>
-					</svg>
+<section class="style_header pt-4 border-top border-3" id="sample-sections">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="lc-block hstack align-items-baseline gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.3rem" height="1.3rem" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z">
+                        </path>
+                    </svg>
 
 
-					<div editable="rich">
-						<h2>Readymade Examples</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <div editable="rich">
+                        <h2>Sample Sections</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section>
-	<div class="container py-6">
-		<div class="row justify-content-center">
-			<div class="col-xl-10">
-				<div class="lc-block mb-5 text-center">
-					<div editable="rich">
-						<span class="badge bg-primary-subtle text-primary mb-2">EXAMPLE</span>
-						<h2 class="text-center fw-bolder">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit suspendisse a lacus est. Etiam diam metus, lobortis </h2>
-					</div>
-				</div>
-				<div class="row text-center text-md-start ">
-					<div class=" col-md-6  ">
-						<div class="lc-block">
-							<div editable="rich">
-								<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Suspendisse a lacus est. Etiam diam metus, lobortis non augue at, placerat
-									viverra risus.&nbsp;</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="lc-block">
-							<div editable="rich">
-								<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Suspendisse a lacus est. Etiam diam metus, lobortis non augue at, placerat
-									viverra risus.&nbsp;</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section>
-	<div class="container py-6">
-		<div class="row align-items-center flex-lg-row-reverse">
-			<div class="col-lg-5">
-				<div class="lc-block">
-					<svg xmlns="http://www.w3.org/2000/svg" class="w-100" viewBox="0 0 513 255" fill="none">
-						<g clip-path="url(#clip0_401_580)">
-							<path
-								d="M453.918 253.622L455.666 219.941C455.666 219.941 513 207.627 513 172.135C513 136.642 419.307 132.296 409.868 148.594C409.774 148.757 409.68 148.92 409.587 149.083C397.928 169.452 404.51 195.896 424.35 207.659C431.134 211.681 439.222 215.123 448.674 217.043L448.008 252.824"
-								fill="var(--bs-secondary)"></path>
-							<path
-								d="M400.741 69.7331C418.617 69.7331 433.109 54.7207 433.109 36.202C433.109 17.6833 418.617 2.67091 400.741 2.67091C382.865 2.67091 368.374 17.6833 368.374 36.202C368.374 54.7207 382.865 69.7331 400.741 69.7331Z"
-								fill="var(--bs-danger)"></path>
-							<path
-								d="M352.991 245.638L316.486 243.227L314.517 73.176C314.469 69.0486 316.058 65.0069 318.876 62.0879L357.984 21.5734C363.459 15.9025 372.075 15.4927 378.028 20.6225L420.469 57.1971C423.932 60.1809 425.887 64.5679 425.834 69.2334L424.376 197.12L442.822 223.661L442.861 223.717L445.987 251.779L352.991 245.638Z"
-								fill="var(--bs-light)"></path>
-							<path
-								d="M359.125 61.1682V53.2828C359.125 51.2014 360.76 49.508 362.769 49.508H373.464C375.473 49.508 377.107 51.2014 377.107 53.2828V61.1682C377.107 63.2496 375.473 64.943 373.464 64.943H362.769C360.76 64.943 359.125 63.2496 359.125 61.1682Z"
-								fill="var(--bs-primary)"></path>
-							<path
-								d="M336.52 122.376V93.2008C336.52 91.1194 338.154 89.426 340.163 89.426H355.996C358.005 89.426 359.639 91.1194 359.639 93.2008V122.376C359.639 124.457 358.005 126.151 355.996 126.151H340.163C338.154 126.151 336.52 124.457 336.52 122.376Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M372.308 190.668C370.394 190.598 368.851 188.989 368.794 187.006L367.994 158.807C367.96 157.604 368.463 156.485 369.374 155.737C370.285 154.99 371.452 154.74 372.575 155.049L373.376 155.27C374.968 155.711 376.08 157.21 376.08 158.918V186.896C376.08 187.929 375.685 188.894 374.967 189.611C374.282 190.297 373.389 190.67 372.44 190.67C372.396 190.67 372.352 190.67 372.308 190.668Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M323.761 189.611C323.043 188.894 322.648 187.929 322.648 186.896V158.918C322.648 157.21 323.76 155.711 325.353 155.27L326.154 155.049C327.278 154.74 328.444 154.99 329.355 155.737C330.266 156.485 330.769 157.604 330.735 158.807L329.934 187.006C329.878 188.989 328.335 190.598 326.421 190.668C326.376 190.67 326.332 190.67 326.288 190.67C325.34 190.67 324.447 190.297 323.761 189.611Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M339.088 186.777V157.517C339.088 155.452 340.65 153.794 342.643 153.743L357.033 153.38C359.028 153.351 360.706 154.973 360.765 157.044L361.593 186.667C361.622 187.696 361.257 188.669 360.564 189.407C359.873 190.145 358.944 190.552 357.951 190.552H342.732C340.723 190.552 339.088 188.858 339.088 186.777Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M424.142 206.771L435.421 227.542L436.716 250.902L445.696 251.493L442.614 223.817L424.118 197.205C422.522 200.181 422.531 203.803 424.142 206.771Z"
-								fill="var(--bs-secondary)"></path>
-							<path d="M436.354 244.216L399.749 244.735L399.756 245.267L436.361 244.749L436.354 244.216Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M434.134 239.519L399.426 239.8L399.43 240.332L434.138 240.051L434.134 239.519Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M432.333 234.719L399.133 235.391L399.143 235.923L432.343 235.251L432.333 234.719Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M431.302 229.946L399.42 231.042L399.437 231.574L431.319 230.478L431.302 229.946Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M429.761 225.695L399.128 226.811L399.146 227.343L429.779 226.227L429.761 225.695Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M427.714 221.954H397.879V222.486H427.714V221.954Z" fill="var(--bs-dark)"></path>
-							<path d="M426.17 218.219L397.174 218.571L397.18 219.103L426.176 218.751L426.17 218.219Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M424.622 214.497L396.526 215.463L396.543 215.995L424.639 215.029L424.622 214.497Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M423.6 210.79L395.855 211.296L395.864 211.828L423.609 211.323L423.6 210.79Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M421.54 207.104L394.975 207.964L394.991 208.496L421.556 207.636L421.54 207.104Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M420.519 203.858L394.188 204.124L394.193 204.656L420.524 204.39L420.519 203.858Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M392.264 192.898V156.804C392.264 154.722 393.898 153.029 395.907 153.029H412.767C414.777 153.029 416.411 154.722 416.411 156.804V192.898C416.411 194.979 414.777 196.672 412.767 196.672H395.907C393.898 196.672 392.264 194.979 392.264 192.898Z"
-								fill="var(--bs-primary)"></path>
-							<path
-								d="M352.99 245.638L323.145 243.669L322.905 243.653V219.725C322.905 216.699 325.281 214.236 328.202 214.236H357.681C360.602 214.236 362.979 216.699 362.979 219.725V245.639H362.722L352.99 245.638Z"
-								fill="var(--bs-secondary)"></path>
-							<path
-								d="M394.319 127.432V99.8538C394.319 97.7724 395.953 96.079 397.963 96.079H403.52C405.529 96.079 407.163 97.7724 407.163 99.8538V127.432C407.163 129.513 405.529 131.207 403.52 131.207H397.963C395.953 131.207 394.319 129.513 394.319 127.432Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M399.971 248.3L398.429 224.881L393.805 202.527L392.521 196.406C389.882 194.547 386.327 196.615 386.487 199.918L386.613 202.527L391.236 224.881L392.778 248.3"
-								fill="var(--bs-secondary)"></path>
-							<path
-								d="M225.061 237.122L188.557 234.711L186.588 64.6602C186.54 60.5327 188.129 56.491 190.946 53.572L230.055 13.0576C235.53 7.38592 244.146 6.97712 250.099 12.1067L292.54 48.6813C296.002 51.665 297.958 56.0521 297.905 60.7175L296.447 188.605L314.893 215.145L314.932 215.202L318.057 243.263L225.061 237.122Z"
-								fill="var(--bs-light)"></path>
-							<path
-								d="M231.197 52.6523V44.767C231.197 42.6856 232.831 40.9922 234.841 40.9922H245.535C247.544 40.9922 249.179 42.6856 249.179 44.767V52.6523C249.179 54.7337 247.544 56.4271 245.535 56.4271H234.841C232.831 56.4271 231.197 54.7337 231.197 52.6523Z"
-								fill="var(--bs-primary)"></path>
-							<path
-								d="M208.591 113.86V84.6849C208.591 82.6035 210.225 80.9101 212.235 80.9101H228.067C230.076 80.9101 231.71 82.6035 231.71 84.6849V113.86C231.71 115.941 230.076 117.635 228.067 117.635H212.235C210.225 117.635 208.591 115.941 208.591 113.86Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M241.764 147.639C240.981 148.281 240.549 149.242 240.579 150.276L241.379 178.475C241.428 180.178 242.753 181.56 244.397 181.62C245.261 181.656 246.065 181.329 246.681 180.712C247.298 180.096 247.637 179.268 247.637 178.38V150.402C247.637 148.935 246.682 147.647 245.314 147.269L244.513 147.048C244.242 146.973 243.968 146.936 243.697 146.936C243.002 146.936 242.327 147.177 241.764 147.639Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M195.832 181.095C195.114 180.378 194.719 179.413 194.719 178.38V150.402C194.719 148.694 195.831 147.195 197.424 146.755L198.224 146.533C199.346 146.224 200.514 146.474 201.425 147.221C202.337 147.969 202.84 149.088 202.806 150.292L202.005 178.49C201.949 180.473 200.406 182.082 198.492 182.152C198.448 182.154 198.403 182.154 198.359 182.154C197.411 182.154 196.518 181.781 195.832 181.095Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M211.16 178.261V149.001C211.16 146.936 212.721 145.278 214.715 145.227L229.105 144.864C229.135 144.864 229.165 144.863 229.195 144.863C231.154 144.863 232.779 146.488 232.836 148.529L233.665 178.152C233.693 179.18 233.328 180.153 232.636 180.891C231.944 181.629 231.016 182.036 230.022 182.036H214.804C212.794 182.036 211.16 180.342 211.16 178.261Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M296.213 198.255L307.492 219.026L308.786 242.387L317.767 242.977L314.685 215.301L296.189 188.689C294.592 191.665 294.602 195.287 296.213 198.255Z"
-								fill="var(--bs-secondary)"></path>
-							<path d="M308.426 235.701L271.82 236.219L271.827 236.751L308.433 236.233L308.426 235.701Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M306.205 231.003L271.498 231.284L271.502 231.816L306.209 231.535L306.205 231.003Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M304.404 226.203L271.204 226.875L271.214 227.407L304.414 226.735L304.404 226.203Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M303.374 221.43L271.491 222.526L271.508 223.059L303.391 221.962L303.374 221.43Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M301.832 217.179L271.2 218.295L271.218 218.827L301.85 217.711L301.832 217.179Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M299.785 213.438H269.95V213.97H299.785V213.438Z" fill="var(--bs-dark)"></path>
-							<path d="M298.241 209.703L269.246 210.055L269.252 210.588L298.247 210.236L298.241 209.703Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M296.694 205.981L268.598 206.947L268.615 207.479L296.711 206.513L296.694 205.981Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M295.671 202.275L267.927 202.78L267.936 203.312L295.68 202.807L295.671 202.275Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M293.612 198.588L267.047 199.448L267.063 199.98L293.628 199.12L293.612 198.588Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M292.59 195.342L266.259 195.608L266.264 196.141L292.595 195.874L292.59 195.342Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M264.335 184.382V148.288C264.335 146.206 265.97 144.513 267.979 144.513H284.839C286.848 144.513 288.482 146.206 288.482 148.288V184.382C288.482 186.463 286.848 188.156 284.839 188.156H267.979C265.97 188.156 264.335 186.463 264.335 184.382Z"
-								fill="var(--bs-primary)"></path>
-							<path
-								d="M225.061 237.122L195.216 235.153L194.976 235.137V211.209C194.976 208.183 197.352 205.721 200.273 205.721H229.752C232.674 205.721 235.05 208.183 235.05 211.209V237.123H234.793L225.061 237.122Z"
-								fill="var(--bs-secondary)"></path>
-							<path
-								d="M266.39 118.916V91.3379C266.39 89.2565 268.025 87.5631 270.034 87.5631H275.591C277.6 87.5631 279.234 89.2565 279.234 91.3379V118.916C279.234 120.998 277.6 122.691 275.591 122.691H270.034C268.025 122.691 266.39 120.998 266.39 118.916Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M272.041 239.784L270.5 216.365L265.876 194.011L264.592 187.89C261.952 186.031 258.398 188.099 258.557 191.402L258.683 194.011L263.307 216.365L264.849 239.784"
-								fill="var(--bs-secondary)"></path>
-							<path
-								d="M97.1323 228.606L60.628 226.196L58.6592 56.1444C58.6116 52.0169 60.2001 47.9752 63.0178 45.0562L102.127 4.54177C107.601 -1.12965 116.218 -1.53845 122.17 3.59086L164.611 40.1655C168.074 43.1492 170.029 47.5363 169.976 52.2017L168.518 180.089L186.964 206.63L187.003 206.686L190.129 234.747L97.1323 228.606Z"
-								fill="var(--bs-light)"></path>
-							<path
-								d="M103.268 44.1365V36.2511C103.268 34.1697 104.902 32.4763 106.912 32.4763H117.606C119.615 32.4763 121.25 34.1697 121.25 36.2511V44.1365C121.25 46.2179 119.615 47.9113 117.606 47.9113H106.912C104.902 47.9113 103.268 46.2179 103.268 44.1365Z"
-								fill="var(--bs-primary)"></path>
-							<path
-								d="M80.6616 105.344V76.1691C80.6616 74.0877 82.2963 72.3943 84.3057 72.3943H100.138C102.147 72.3943 103.781 74.0877 103.781 76.1691V105.344C103.781 107.425 102.147 109.119 100.138 109.119H84.3057C82.2963 109.119 80.6616 107.426 80.6616 105.344Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M116.45 173.636C114.536 173.566 112.993 171.957 112.936 169.975L112.136 141.776C112.102 140.572 112.605 139.453 113.516 138.705C114.427 137.958 115.593 137.708 116.717 138.017L117.517 138.239C119.11 138.679 120.222 140.178 120.222 141.886V169.864C120.222 170.897 119.827 171.862 119.109 172.58C118.423 173.266 117.531 173.638 116.583 173.638C116.539 173.638 116.494 173.638 116.45 173.636Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M69.5611 138.496L70.3617 138.275C72.5519 137.67 74.6864 139.421 74.6198 141.768L73.8192 169.967C73.7667 171.816 72.3379 173.305 70.5537 173.37C68.6374 173.441 67.0469 171.85 67.0469 169.864V141.886C67.0469 140.296 68.0785 138.905 69.5611 138.496Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M83.231 169.745V140.486C83.231 138.42 84.7923 136.763 86.7862 136.712L101.176 136.348C103.181 136.315 104.849 137.941 104.907 140.013L105.736 169.636C105.765 170.664 105.399 171.637 104.707 172.375C104.015 173.113 103.087 173.52 102.093 173.52H86.875C84.8656 173.52 83.231 171.826 83.231 169.745Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M168.285 189.739L179.563 210.511L180.858 233.871L189.838 234.461L186.756 206.785L168.26 180.173C166.664 183.15 166.673 186.771 168.285 189.739Z"
-								fill="var(--bs-secondary)"></path>
-							<path d="M180.497 227.185L143.892 227.703L143.899 228.235L180.504 227.717L180.497 227.185Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M178.276 222.488L143.569 222.768L143.573 223.301L178.28 223.02L178.276 222.488Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M176.475 217.687L143.275 218.359L143.285 218.891L176.485 218.22L176.475 217.687Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M175.444 212.914L143.562 214.01L143.579 214.543L175.461 213.446L175.444 212.914Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M173.903 208.663L143.271 209.779L143.289 210.311L173.921 209.195L173.903 208.663Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M171.856 204.922H142.021V205.455H171.856V204.922Z" fill="var(--bs-dark)"></path>
-							<path d="M170.312 201.188L141.316 201.54L141.322 202.072L170.318 201.72L170.312 201.188Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M168.765 197.465L140.669 198.431L140.686 198.964L168.782 197.997L168.765 197.465Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M167.742 193.759L139.998 194.264L140.007 194.796L167.751 194.291L167.742 193.759Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M165.683 190.073L139.118 190.933L139.134 191.465L165.699 190.605L165.683 190.073Z"
-								fill="var(--bs-dark)"></path>
-							<path d="M164.661 186.826L138.33 187.092L138.335 187.625L164.666 187.358L164.661 186.826Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M136.406 175.866V139.772C136.406 137.691 138.041 135.997 140.05 135.997H156.91C158.919 135.997 160.553 137.691 160.553 139.772V175.866C160.553 177.947 158.919 179.641 156.91 179.641H140.05C138.041 179.641 136.406 177.947 136.406 175.866Z"
-								fill="var(--bs-primary)"></path>
-							<path
-								d="M97.1321 228.606L67.2872 226.637L67.0469 226.621V202.693C67.0469 199.667 69.4236 197.205 72.3446 197.205H101.824C104.745 197.205 107.121 199.667 107.121 202.693V228.607H106.864L97.1321 228.606Z"
-								fill="var(--bs-secondary)"></path>
-							<path
-								d="M138.461 110.4V82.8222C138.461 80.7408 140.096 79.0474 142.105 79.0474H147.662C149.671 79.0474 151.305 80.7408 151.305 82.8222V110.4C151.305 112.482 149.671 114.175 147.662 114.175H142.105C140.096 114.175 138.461 112.482 138.461 110.4Z"
-								fill="var(--bs-dark)"></path>
-							<path
-								d="M144.113 231.268L142.571 207.849L137.947 185.495L136.663 179.375C134.024 177.515 130.469 179.583 130.629 182.886L130.755 185.495L135.379 207.849L136.92 231.268"
-								fill="var(--bs-secondary)"></path>
-							<path
-								d="M50.0941 225.413L51.8421 191.732C51.8421 191.732 109.176 179.418 109.176 143.926C109.176 108.434 15.4837 104.088 6.04457 120.385C5.95018 120.548 5.85636 120.711 5.76312 120.874C-5.89568 141.243 0.686738 167.687 20.526 179.45C27.31 183.473 35.3985 186.915 44.8501 188.835L44.1843 224.615"
-								fill="var(--bs-secondary)"></path>
-							<path d="M12.9427 222.56L12.8765 223.622L480.346 254.896L480.412 253.834L12.9427 222.56Z"
-								fill="var(--bs-secondary)"></path>
-						</g>
-						<defs>
-							<clipPath id="clip0_401_580">
-								<rect width="513" height="254.952" fill="white"></rect>
-							</clipPath>
-						</defs>
-					</svg>
-				</div>
-			</div>
-			<div class="col-lg-7">
-				<div class="lc-block mb-4" style="max-width:42rem">
-					<div editable="rich">
-
-						<h2 class="fw-bolder display-4">The quick brown fox jumps over the lazy dog</h2>
-
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lacus est. Etiam diam
-							metus, lobortis non augue at, placerat viverra risus. Cras ornare faucibus laoreet. Aenean
-							vel nisi in ipsum congue fermentum et ut arcu. Proin leo diam,
-							vulputate eu tellus ac, mattis cursus nunc. In aliquet erat ac eros congue maximus. Fusce
-							cursus leo at elit tincidunt, consequat ultrices ante pretium. Vivamus ut dapibus nisl, nec
-							condimentum purus.</p>
-					</div>
-				</div>
-				<div class="lc-block d-grid d-lg-block gap-2"><a class="btn btn-primary" href="#"
-						role="button">Primary</a><a class="btn ms-lg-2 btn-outline-primary" href="#"
-						role="button">Primary Outline</a></div>
-			</div>
-		</div>
-	</div>
+    <div class="container py-6">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="lc-block mb-5 text-center">
+                    <div editable="rich">
+                        <span class="badge bg-primary-subtle text-primary mb-2">EXAMPLE</span>
+                        <h2 class="text-center fw-bolder">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit suspendisse a lacus est. Etiam diam metus, lobortis </h2>
+                    </div>
+                </div>
+                <div class="row text-center text-md-start ">
+                    <div class=" col-md-6  ">
+                        <div class="lc-block">
+                            <div editable="rich">
+                                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Suspendisse a lacus est. Etiam diam metus, lobortis non augue at, placerat
+                                    viverra risus.&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="lc-block">
+                            <div editable="rich">
+                                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Suspendisse a lacus est. Etiam diam metus, lobortis non augue at, placerat
+                                    viverra risus.&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section>
-	<div class="container-fluid  overflow-hidden">
-		<div class="row align-items-center">
-			<div class="col-lg-6 g-0 align-self-lg-stretch bg-primary">
+    <div class="container py-6">
+        <div class="row align-items-center flex-lg-row-reverse">
+            <div class="col-lg-5">
+                <div class="lc-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-100" viewBox="0 0 513 255" fill="none">
+                        <g clip-path="url(#clip0_401_580)">
+                            <path
+                                d="M453.918 253.622L455.666 219.941C455.666 219.941 513 207.627 513 172.135C513 136.642 419.307 132.296 409.868 148.594C409.774 148.757 409.68 148.92 409.587 149.083C397.928 169.452 404.51 195.896 424.35 207.659C431.134 211.681 439.222 215.123 448.674 217.043L448.008 252.824"
+                                fill="var(--bs-secondary)"></path>
+                            <path
+                                d="M400.741 69.7331C418.617 69.7331 433.109 54.7207 433.109 36.202C433.109 17.6833 418.617 2.67091 400.741 2.67091C382.865 2.67091 368.374 17.6833 368.374 36.202C368.374 54.7207 382.865 69.7331 400.741 69.7331Z"
+                                fill="var(--bs-danger)"></path>
+                            <path
+                                d="M352.991 245.638L316.486 243.227L314.517 73.176C314.469 69.0486 316.058 65.0069 318.876 62.0879L357.984 21.5734C363.459 15.9025 372.075 15.4927 378.028 20.6225L420.469 57.1971C423.932 60.1809 425.887 64.5679 425.834 69.2334L424.376 197.12L442.822 223.661L442.861 223.717L445.987 251.779L352.991 245.638Z"
+                                fill="var(--bs-light)"></path>
+                            <path
+                                d="M359.125 61.1682V53.2828C359.125 51.2014 360.76 49.508 362.769 49.508H373.464C375.473 49.508 377.107 51.2014 377.107 53.2828V61.1682C377.107 63.2496 375.473 64.943 373.464 64.943H362.769C360.76 64.943 359.125 63.2496 359.125 61.1682Z"
+                                fill="var(--bs-primary)"></path>
+                            <path
+                                d="M336.52 122.376V93.2008C336.52 91.1194 338.154 89.426 340.163 89.426H355.996C358.005 89.426 359.639 91.1194 359.639 93.2008V122.376C359.639 124.457 358.005 126.151 355.996 126.151H340.163C338.154 126.151 336.52 124.457 336.52 122.376Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M372.308 190.668C370.394 190.598 368.851 188.989 368.794 187.006L367.994 158.807C367.96 157.604 368.463 156.485 369.374 155.737C370.285 154.99 371.452 154.74 372.575 155.049L373.376 155.27C374.968 155.711 376.08 157.21 376.08 158.918V186.896C376.08 187.929 375.685 188.894 374.967 189.611C374.282 190.297 373.389 190.67 372.44 190.67C372.396 190.67 372.352 190.67 372.308 190.668Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M323.761 189.611C323.043 188.894 322.648 187.929 322.648 186.896V158.918C322.648 157.21 323.76 155.711 325.353 155.27L326.154 155.049C327.278 154.74 328.444 154.99 329.355 155.737C330.266 156.485 330.769 157.604 330.735 158.807L329.934 187.006C329.878 188.989 328.335 190.598 326.421 190.668C326.376 190.67 326.332 190.67 326.288 190.67C325.34 190.67 324.447 190.297 323.761 189.611Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M339.088 186.777V157.517C339.088 155.452 340.65 153.794 342.643 153.743L357.033 153.38C359.028 153.351 360.706 154.973 360.765 157.044L361.593 186.667C361.622 187.696 361.257 188.669 360.564 189.407C359.873 190.145 358.944 190.552 357.951 190.552H342.732C340.723 190.552 339.088 188.858 339.088 186.777Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M424.142 206.771L435.421 227.542L436.716 250.902L445.696 251.493L442.614 223.817L424.118 197.205C422.522 200.181 422.531 203.803 424.142 206.771Z"
+                                fill="var(--bs-secondary)"></path>
+                            <path d="M436.354 244.216L399.749 244.735L399.756 245.267L436.361 244.749L436.354 244.216Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M434.134 239.519L399.426 239.8L399.43 240.332L434.138 240.051L434.134 239.519Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M432.333 234.719L399.133 235.391L399.143 235.923L432.343 235.251L432.333 234.719Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M431.302 229.946L399.42 231.042L399.437 231.574L431.319 230.478L431.302 229.946Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M429.761 225.695L399.128 226.811L399.146 227.343L429.779 226.227L429.761 225.695Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M427.714 221.954H397.879V222.486H427.714V221.954Z" fill="var(--bs-dark)"></path>
+                            <path d="M426.17 218.219L397.174 218.571L397.18 219.103L426.176 218.751L426.17 218.219Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M424.622 214.497L396.526 215.463L396.543 215.995L424.639 215.029L424.622 214.497Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M423.6 210.79L395.855 211.296L395.864 211.828L423.609 211.323L423.6 210.79Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M421.54 207.104L394.975 207.964L394.991 208.496L421.556 207.636L421.54 207.104Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M420.519 203.858L394.188 204.124L394.193 204.656L420.524 204.39L420.519 203.858Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M392.264 192.898V156.804C392.264 154.722 393.898 153.029 395.907 153.029H412.767C414.777 153.029 416.411 154.722 416.411 156.804V192.898C416.411 194.979 414.777 196.672 412.767 196.672H395.907C393.898 196.672 392.264 194.979 392.264 192.898Z"
+                                fill="var(--bs-primary)"></path>
+                            <path
+                                d="M352.99 245.638L323.145 243.669L322.905 243.653V219.725C322.905 216.699 325.281 214.236 328.202 214.236H357.681C360.602 214.236 362.979 216.699 362.979 219.725V245.639H362.722L352.99 245.638Z"
+                                fill="var(--bs-secondary)"></path>
+                            <path
+                                d="M394.319 127.432V99.8538C394.319 97.7724 395.953 96.079 397.963 96.079H403.52C405.529 96.079 407.163 97.7724 407.163 99.8538V127.432C407.163 129.513 405.529 131.207 403.52 131.207H397.963C395.953 131.207 394.319 129.513 394.319 127.432Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M399.971 248.3L398.429 224.881L393.805 202.527L392.521 196.406C389.882 194.547 386.327 196.615 386.487 199.918L386.613 202.527L391.236 224.881L392.778 248.3"
+                                fill="var(--bs-secondary)"></path>
+                            <path
+                                d="M225.061 237.122L188.557 234.711L186.588 64.6602C186.54 60.5327 188.129 56.491 190.946 53.572L230.055 13.0576C235.53 7.38592 244.146 6.97712 250.099 12.1067L292.54 48.6813C296.002 51.665 297.958 56.0521 297.905 60.7175L296.447 188.605L314.893 215.145L314.932 215.202L318.057 243.263L225.061 237.122Z"
+                                fill="var(--bs-light)"></path>
+                            <path
+                                d="M231.197 52.6523V44.767C231.197 42.6856 232.831 40.9922 234.841 40.9922H245.535C247.544 40.9922 249.179 42.6856 249.179 44.767V52.6523C249.179 54.7337 247.544 56.4271 245.535 56.4271H234.841C232.831 56.4271 231.197 54.7337 231.197 52.6523Z"
+                                fill="var(--bs-primary)"></path>
+                            <path
+                                d="M208.591 113.86V84.6849C208.591 82.6035 210.225 80.9101 212.235 80.9101H228.067C230.076 80.9101 231.71 82.6035 231.71 84.6849V113.86C231.71 115.941 230.076 117.635 228.067 117.635H212.235C210.225 117.635 208.591 115.941 208.591 113.86Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M241.764 147.639C240.981 148.281 240.549 149.242 240.579 150.276L241.379 178.475C241.428 180.178 242.753 181.56 244.397 181.62C245.261 181.656 246.065 181.329 246.681 180.712C247.298 180.096 247.637 179.268 247.637 178.38V150.402C247.637 148.935 246.682 147.647 245.314 147.269L244.513 147.048C244.242 146.973 243.968 146.936 243.697 146.936C243.002 146.936 242.327 147.177 241.764 147.639Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M195.832 181.095C195.114 180.378 194.719 179.413 194.719 178.38V150.402C194.719 148.694 195.831 147.195 197.424 146.755L198.224 146.533C199.346 146.224 200.514 146.474 201.425 147.221C202.337 147.969 202.84 149.088 202.806 150.292L202.005 178.49C201.949 180.473 200.406 182.082 198.492 182.152C198.448 182.154 198.403 182.154 198.359 182.154C197.411 182.154 196.518 181.781 195.832 181.095Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M211.16 178.261V149.001C211.16 146.936 212.721 145.278 214.715 145.227L229.105 144.864C229.135 144.864 229.165 144.863 229.195 144.863C231.154 144.863 232.779 146.488 232.836 148.529L233.665 178.152C233.693 179.18 233.328 180.153 232.636 180.891C231.944 181.629 231.016 182.036 230.022 182.036H214.804C212.794 182.036 211.16 180.342 211.16 178.261Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M296.213 198.255L307.492 219.026L308.786 242.387L317.767 242.977L314.685 215.301L296.189 188.689C294.592 191.665 294.602 195.287 296.213 198.255Z"
+                                fill="var(--bs-secondary)"></path>
+                            <path d="M308.426 235.701L271.82 236.219L271.827 236.751L308.433 236.233L308.426 235.701Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M306.205 231.003L271.498 231.284L271.502 231.816L306.209 231.535L306.205 231.003Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M304.404 226.203L271.204 226.875L271.214 227.407L304.414 226.735L304.404 226.203Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M303.374 221.43L271.491 222.526L271.508 223.059L303.391 221.962L303.374 221.43Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M301.832 217.179L271.2 218.295L271.218 218.827L301.85 217.711L301.832 217.179Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M299.785 213.438H269.95V213.97H299.785V213.438Z" fill="var(--bs-dark)"></path>
+                            <path d="M298.241 209.703L269.246 210.055L269.252 210.588L298.247 210.236L298.241 209.703Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M296.694 205.981L268.598 206.947L268.615 207.479L296.711 206.513L296.694 205.981Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M295.671 202.275L267.927 202.78L267.936 203.312L295.68 202.807L295.671 202.275Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M293.612 198.588L267.047 199.448L267.063 199.98L293.628 199.12L293.612 198.588Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M292.59 195.342L266.259 195.608L266.264 196.141L292.595 195.874L292.59 195.342Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M264.335 184.382V148.288C264.335 146.206 265.97 144.513 267.979 144.513H284.839C286.848 144.513 288.482 146.206 288.482 148.288V184.382C288.482 186.463 286.848 188.156 284.839 188.156H267.979C265.97 188.156 264.335 186.463 264.335 184.382Z"
+                                fill="var(--bs-primary)"></path>
+                            <path
+                                d="M225.061 237.122L195.216 235.153L194.976 235.137V211.209C194.976 208.183 197.352 205.721 200.273 205.721H229.752C232.674 205.721 235.05 208.183 235.05 211.209V237.123H234.793L225.061 237.122Z"
+                                fill="var(--bs-secondary)"></path>
+                            <path
+                                d="M266.39 118.916V91.3379C266.39 89.2565 268.025 87.5631 270.034 87.5631H275.591C277.6 87.5631 279.234 89.2565 279.234 91.3379V118.916C279.234 120.998 277.6 122.691 275.591 122.691H270.034C268.025 122.691 266.39 120.998 266.39 118.916Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M272.041 239.784L270.5 216.365L265.876 194.011L264.592 187.89C261.952 186.031 258.398 188.099 258.557 191.402L258.683 194.011L263.307 216.365L264.849 239.784"
+                                fill="var(--bs-secondary)"></path>
+                            <path
+                                d="M97.1323 228.606L60.628 226.196L58.6592 56.1444C58.6116 52.0169 60.2001 47.9752 63.0178 45.0562L102.127 4.54177C107.601 -1.12965 116.218 -1.53845 122.17 3.59086L164.611 40.1655C168.074 43.1492 170.029 47.5363 169.976 52.2017L168.518 180.089L186.964 206.63L187.003 206.686L190.129 234.747L97.1323 228.606Z"
+                                fill="var(--bs-light)"></path>
+                            <path
+                                d="M103.268 44.1365V36.2511C103.268 34.1697 104.902 32.4763 106.912 32.4763H117.606C119.615 32.4763 121.25 34.1697 121.25 36.2511V44.1365C121.25 46.2179 119.615 47.9113 117.606 47.9113H106.912C104.902 47.9113 103.268 46.2179 103.268 44.1365Z"
+                                fill="var(--bs-primary)"></path>
+                            <path
+                                d="M80.6616 105.344V76.1691C80.6616 74.0877 82.2963 72.3943 84.3057 72.3943H100.138C102.147 72.3943 103.781 74.0877 103.781 76.1691V105.344C103.781 107.425 102.147 109.119 100.138 109.119H84.3057C82.2963 109.119 80.6616 107.426 80.6616 105.344Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M116.45 173.636C114.536 173.566 112.993 171.957 112.936 169.975L112.136 141.776C112.102 140.572 112.605 139.453 113.516 138.705C114.427 137.958 115.593 137.708 116.717 138.017L117.517 138.239C119.11 138.679 120.222 140.178 120.222 141.886V169.864C120.222 170.897 119.827 171.862 119.109 172.58C118.423 173.266 117.531 173.638 116.583 173.638C116.539 173.638 116.494 173.638 116.45 173.636Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M69.5611 138.496L70.3617 138.275C72.5519 137.67 74.6864 139.421 74.6198 141.768L73.8192 169.967C73.7667 171.816 72.3379 173.305 70.5537 173.37C68.6374 173.441 67.0469 171.85 67.0469 169.864V141.886C67.0469 140.296 68.0785 138.905 69.5611 138.496Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M83.231 169.745V140.486C83.231 138.42 84.7923 136.763 86.7862 136.712L101.176 136.348C103.181 136.315 104.849 137.941 104.907 140.013L105.736 169.636C105.765 170.664 105.399 171.637 104.707 172.375C104.015 173.113 103.087 173.52 102.093 173.52H86.875C84.8656 173.52 83.231 171.826 83.231 169.745Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M168.285 189.739L179.563 210.511L180.858 233.871L189.838 234.461L186.756 206.785L168.26 180.173C166.664 183.15 166.673 186.771 168.285 189.739Z"
+                                fill="var(--bs-secondary)"></path>
+                            <path d="M180.497 227.185L143.892 227.703L143.899 228.235L180.504 227.717L180.497 227.185Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M178.276 222.488L143.569 222.768L143.573 223.301L178.28 223.02L178.276 222.488Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M176.475 217.687L143.275 218.359L143.285 218.891L176.485 218.22L176.475 217.687Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M175.444 212.914L143.562 214.01L143.579 214.543L175.461 213.446L175.444 212.914Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M173.903 208.663L143.271 209.779L143.289 210.311L173.921 209.195L173.903 208.663Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M171.856 204.922H142.021V205.455H171.856V204.922Z" fill="var(--bs-dark)"></path>
+                            <path d="M170.312 201.188L141.316 201.54L141.322 202.072L170.318 201.72L170.312 201.188Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M168.765 197.465L140.669 198.431L140.686 198.964L168.782 197.997L168.765 197.465Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M167.742 193.759L139.998 194.264L140.007 194.796L167.751 194.291L167.742 193.759Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M165.683 190.073L139.118 190.933L139.134 191.465L165.699 190.605L165.683 190.073Z"
+                                fill="var(--bs-dark)"></path>
+                            <path d="M164.661 186.826L138.33 187.092L138.335 187.625L164.666 187.358L164.661 186.826Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M136.406 175.866V139.772C136.406 137.691 138.041 135.997 140.05 135.997H156.91C158.919 135.997 160.553 137.691 160.553 139.772V175.866C160.553 177.947 158.919 179.641 156.91 179.641H140.05C138.041 179.641 136.406 177.947 136.406 175.866Z"
+                                fill="var(--bs-primary)"></path>
+                            <path
+                                d="M97.1321 228.606L67.2872 226.637L67.0469 226.621V202.693C67.0469 199.667 69.4236 197.205 72.3446 197.205H101.824C104.745 197.205 107.121 199.667 107.121 202.693V228.607H106.864L97.1321 228.606Z"
+                                fill="var(--bs-secondary)"></path>
+                            <path
+                                d="M138.461 110.4V82.8222C138.461 80.7408 140.096 79.0474 142.105 79.0474H147.662C149.671 79.0474 151.305 80.7408 151.305 82.8222V110.4C151.305 112.482 149.671 114.175 147.662 114.175H142.105C140.096 114.175 138.461 112.482 138.461 110.4Z"
+                                fill="var(--bs-dark)"></path>
+                            <path
+                                d="M144.113 231.268L142.571 207.849L137.947 185.495L136.663 179.375C134.024 177.515 130.469 179.583 130.629 182.886L130.755 185.495L135.379 207.849L136.92 231.268"
+                                fill="var(--bs-secondary)"></path>
+                            <path
+                                d="M50.0941 225.413L51.8421 191.732C51.8421 191.732 109.176 179.418 109.176 143.926C109.176 108.434 15.4837 104.088 6.04457 120.385C5.95018 120.548 5.85636 120.711 5.76312 120.874C-5.89568 141.243 0.686738 167.687 20.526 179.45C27.31 183.473 35.3985 186.915 44.8501 188.835L44.1843 224.615"
+                                fill="var(--bs-secondary)"></path>
+                            <path d="M12.9427 222.56L12.8765 223.622L480.346 254.896L480.412 253.834L12.9427 222.56Z"
+                                fill="var(--bs-secondary)"></path>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_401_580">
+                                <rect width="513" height="254.952" fill="white"></rect>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="lc-block mb-4" style="max-width:42rem">
+                    <div editable="rich">
 
-				<img width="1080" height="1080"
-					src="https://images.unsplash.com/photo-1524041255072-7da0525d6b34?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=1080"
-					class="w-100" alt="Photo by Pooja Chaudhary" decoding="async" loading="lazy"
-					srcset="https://images.unsplash.com/photo-1524041255072-7da0525d6b34?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=1080 1080w, https://images.unsplash.com/photo-1524041255072-7da0525d6b34??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=150 150w, https://images.unsplash.com/photo-1524041255072-7da0525d6b34??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300 300w, https://images.unsplash.com/photo-1524041255072-7da0525d6b34??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=768 768w, https://images.unsplash.com/photo-1524041255072-7da0525d6b34??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1024 1024w"
-					sizes="(max-width: 1080px) 100vw, 1080px" style="mix-blend-mode:overlay">
+                        <h2 class="fw-bolder display-4">The quick brown fox jumps over the lazy dog</h2>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a lacus est. Etiam diam
+                            metus, lobortis non augue at, placerat viverra risus. Cras ornare faucibus laoreet. Aenean
+                            vel nisi in ipsum congue fermentum et ut arcu. Proin leo diam,
+                            vulputate eu tellus ac, mattis cursus nunc. In aliquet erat ac eros congue maximus. Fusce
+                            cursus leo at elit tincidunt, consequat ultrices ante pretium. Vivamus ut dapibus nisl, nec
+                            condimentum purus.</p>
+                    </div>
+                </div>
+                <div class="lc-block d-grid d-lg-block gap-2"><a class="btn btn-primary" href="#"
+                        role="button">Primary</a><a class="btn ms-lg-2 btn-outline-primary" href="#"
+                        role="button">Primary Outline</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid  overflow-hidden">
+        <div class="row align-items-center">
+            <div class="col-lg-6 g-0 align-self-lg-stretch bg-primary">
+
+                <img width="1080" height="1080"
+                    src="https://images.unsplash.com/photo-1524041255072-7da0525d6b34?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=1080"
+                    class="w-100" alt="Photo by Pooja Chaudhary" decoding="async" loading="lazy"
+                    srcset="https://images.unsplash.com/photo-1524041255072-7da0525d6b34?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=1080 1080w, https://images.unsplash.com/photo-1524041255072-7da0525d6b34??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=150 150w, https://images.unsplash.com/photo-1524041255072-7da0525d6b34??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300 300w, https://images.unsplash.com/photo-1524041255072-7da0525d6b34??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=768 768w, https://images.unsplash.com/photo-1524041255072-7da0525d6b34??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8Mjl8fHRlY25vJTIwZ2lybHxlbnwwfDJ8fHwxNjk1MTE4NzM0fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1024 1024w"
+                    sizes="(max-width: 1080px) 100vw, 1080px" style="mix-blend-mode:overlay">
 
 
-			</div>
-			<div class="col-lg-6 col-xl-5 ps-lg-5 mb-5 py-lg-4"><span
-					class="badge rounded-pill bg-primary-subtle text-primary-emphasis rfs-6 mb-2">Sale!</span>
+            </div>
+            <div class="col-lg-6 col-xl-5 ps-lg-5 mb-5 py-lg-4"><span
+                    class="badge rounded-pill bg-primary-subtle text-primary-emphasis rfs-6 mb-2">Sale!</span>
 
-				<div class="lc-block mb-4">
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb rfs-6">
-							<li class="breadcrumb-item">
-								<a class="text-decoration-none">Home</a>
-							</li>
-							<li class="breadcrumb-item">
-								<a class="text-decoration-none">Glasses</a>
-							</li>
-							<li class="breadcrumb-item active" aria-current="page">Album</li>
-						</ol>
-					</nav>
-				</div>
-
-
-				<div class="lc-block">
-					<h1 class="display-2 fw-bolder">Enigma Gown</h1>
-				</div>
-
-				<div class="lc-block d-block d-sm-flex justify-content-between my-4">
-					<div>
-						<h4><span>$</span>150.00</h4>
-					</div>
-					<div>
-
-					</div>
-				</div>
-
-				<div class="lc-block lead text-secondary-400 mb-4">
-					<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-						Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero
-						sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo...</p>
-				</div>
-
-				<div class="lc-block product">
-					<div class="lc-block">
-						<form>
-							<div class="d-grid d-lg-flex gap-2">
-
-								<input type="number" style="width: 3.631em;" class="form-control-lg form-control"
-									min="1" max="100" step="1" placeholder="1" autocomplete="off">
-
-								<button class="btn btn-primary  btn-lg">Add to cart</button>
-
-							</div>
-
-							<div>
+                <div class="lc-block mb-4">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb rfs-6">
+                            <li class="breadcrumb-item">
+                                <a class="text-decoration-none">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a class="text-decoration-none">Glasses</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Album</li>
+                        </ol>
+                    </nav>
+                </div>
 
 
-							</div>
+                <div class="lc-block">
+                    <h1 class="display-2 fw-bolder">Enigma Gown</h1>
+                </div>
 
-						</form>
+                <div class="lc-block d-block d-sm-flex justify-content-between my-4">
+                    <div>
+                        <h4><span>$</span>150.00</h4>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+
+                <div class="lc-block lead text-secondary-400 mb-4">
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                        Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero
+                        sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo...</p>
+                </div>
+
+                <div class="lc-block product">
+                    <div class="lc-block">
+                        <form>
+                            <div class="d-grid d-lg-flex gap-2">
+
+                                <input type="number" style="width: 3.631em;" class="form-control-lg form-control"
+                                    min="1" max="100" step="1" placeholder="1" autocomplete="off">
+
+                                <button class="btn btn-primary  btn-lg">Add to cart</button>
+
+                            </div>
+
+                            <div>
+
+
+                            </div>
+
+                        </form>
 
 
 
 
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 <section class="position-relative min-vh-100 d-flex align-items-end overflow-hidden">
-	<div class="lc-block bg-primary position-absolute w-100 top-0 start-0 z-n1">
-		<img class="img-fluid w-100"
-			src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=768"
-			srcset="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=768 1080w, https://images.unsplash.com/photo-1559827291-72ee739d0d9a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=150 150w, https://images.unsplash.com/photo-1559827291-72ee739d0d9a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300 300w, https://images.unsplash.com/photo-1559827291-72ee739d0d9a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=768 768w, https://images.unsplash.com/photo-1559827291-72ee739d0d9a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1024 1024w"
-			sizes="(max-width: 1080px) 100vw, 1080px" width="1080" height="768" alt="Photo by Silas Baisch"
-			style="mix-blend-mode:overlay">
-	</div>
-	<div class="container bg-light pt-6 pb-4 px-lg-6">
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<div class="lc-block ">
-					<div editable="rich">
+    <div class="lc-block bg-primary position-absolute w-100 top-0 start-0 z-n1">
+        <img class="img-fluid w-100"
+            src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=768"
+            srcset="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=768 1080w, https://images.unsplash.com/photo-1559827291-72ee739d0d9a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=150 150w, https://images.unsplash.com/photo-1559827291-72ee739d0d9a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300 300w, https://images.unsplash.com/photo-1559827291-72ee739d0d9a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=768 768w, https://images.unsplash.com/photo-1559827291-72ee739d0d9a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfDB8fHwxNjk1MTE3NDA3fDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1024 1024w"
+            sizes="(max-width: 1080px) 100vw, 1080px" width="1080" height="768" alt="Photo by Silas Baisch"
+            style="mix-blend-mode:overlay">
+    </div>
+    <div class="container bg-light pt-6 pb-4 px-lg-6">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="lc-block ">
+                    <div editable="rich">
 
-						<h1 class="display-3 fw-bolder">Corrupti quis atque ex quibusdam omnis ut</h1>
-					</div>
-				</div>
-				<div class="lc-block mb-4">
-					<div editable="rich">
-						<p class="text-secondary"> March 30, 2045 by admin</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-8 col-xxl-7 offset-xxl-1 offset-xl-1">
-				<div class="lc-block">
-					<div editable="rich">
-						<h2 class="fw-bolder">Et nisi laboriosam quia qui tempora odit aspernatur.<br></h2>
-					</div>
-				</div>
-				<div class="lc-block">
-					<div editable="rich">
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et metus id ligula malesuada
-							placerat sit amet quis enim. Aliquam erat volutpat. In pellentesque scelerisque auctor. Ut
-							porta lacus eget nisi fermentum lobortis. Vestibulum facilisis tempor
-							ipsum, ut rhoncus magna ultricies laoreet. Proin vehicula erat eget libero accumsan iaculis.
-						</p>
-					</div>
-				</div>
-				<div class="lc-block bg-primary" style="width:256px;height:256px">
-					<img class="img-fluid"
-						src="https://images.unsplash.com/photo-1565651454302-e263192bad3a?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=1080"
-						srcset="https://images.unsplash.com/photo-1565651454302-e263192bad3a?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=1080 1080w, https://images.unsplash.com/photo-1565651454302-e263192bad3a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=150 150w, https://images.unsplash.com/photo-1565651454302-e263192bad3a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300 300w, https://images.unsplash.com/photo-1565651454302-e263192bad3a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=768 768w, https://images.unsplash.com/photo-1565651454302-e263192bad3a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1024 1024w"
-						sizes="(max-width: 1080px) 100vw, 1080px" width="256" height="256" alt="Photo by Andre Tan"
-						style="mix-blend-mode:overlay">
-				</div>
-			</div>
-		</div>
-	</div>
+                        <h1 class="display-3 fw-bolder">Corrupti quis atque ex quibusdam omnis ut</h1>
+                    </div>
+                </div>
+                <div class="lc-block mb-4">
+                    <div editable="rich">
+                        <p class="text-secondary"> March 30, 2045 by admin</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 col-xxl-7 offset-xxl-1 offset-xl-1">
+                <div class="lc-block">
+                    <div editable="rich">
+                        <h2 class="fw-bolder">Et nisi laboriosam quia qui tempora odit aspernatur.<br></h2>
+                    </div>
+                </div>
+                <div class="lc-block">
+                    <div editable="rich">
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et metus id ligula malesuada
+                            placerat sit amet quis enim. Aliquam erat volutpat. In pellentesque scelerisque auctor. Ut
+                            porta lacus eget nisi fermentum lobortis. Vestibulum facilisis tempor
+                            ipsum, ut rhoncus magna ultricies laoreet. Proin vehicula erat eget libero accumsan iaculis.
+                        </p>
+                    </div>
+                </div>
+                <div class="lc-block bg-primary" style="width:256px;height:256px">
+                    <img class="img-fluid"
+                        src="https://images.unsplash.com/photo-1565651454302-e263192bad3a?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=1080"
+                        srcset="https://images.unsplash.com/photo-1565651454302-e263192bad3a?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080&amp;h=1080 1080w, https://images.unsplash.com/photo-1565651454302-e263192bad3a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=150 150w, https://images.unsplash.com/photo-1565651454302-e263192bad3a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300 300w, https://images.unsplash.com/photo-1565651454302-e263192bad3a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=768 768w, https://images.unsplash.com/photo-1565651454302-e263192bad3a??crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wzNzg0fDB8MXxzZWFyY2h8MTd8fGxhbmRzY2FwZXxlbnwwfDJ8fHwxNjk1MTE3NzUzfDA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1024 1024w"
+                        sizes="(max-width: 1080px) 100vw, 1080px" width="256" height="256" alt="Photo by Andre Tan"
+                        style="mix-blend-mode:overlay">
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section class="carousel slide" id="carouselExample">
-	<div class="carousel-inner">
-		<div class="carousel-item container-fluid bg-dark-900 text-dark-100 active">
-			<div class="container my-5">
-				<div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 shadow-lg">
-					<div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-						<div class="lc-block mb-3">
-							<div editable="rich">
-								<h2 class="fw-bold display-4">The quick brown fox jumps over the lazy dog</h2>
-							</div>
-						</div>
+    <div class="carousel-inner">
+        <div class="carousel-item container-fluid bg-dark-900 text-dark-100 active">
+            <div class="container my-5">
+                <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 shadow-lg">
+                    <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                        <div class="lc-block mb-3">
+                            <div editable="rich">
+                                <h2 class="fw-bold display-4">The quick brown fox jumps over the lazy dog</h2>
+                            </div>
+                        </div>
 
-						<div class="lc-block mb-3">
-							<div editable="rich">
-								<p class="lead">Quickly design and customize responsive mobile-first sites with
-									Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass
-									variables and mixins, responsive grid system, extensive prebuilt components, and
-									powerful JavaScript plugins.
-								</p>
-							</div>
-						</div>
+                        <div class="lc-block mb-3">
+                            <div editable="rich">
+                                <p class="lead">Quickly design and customize responsive mobile-first sites with
+                                    Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass
+                                    variables and mixins, responsive grid system, extensive prebuilt components, and
+                                    powerful JavaScript plugins.
+                                </p>
+                            </div>
+                        </div>
 
-						<div class="lc-block d-grid gap-2 d-lg-block"><a class="btn btn-primary" href="#"
-								role="button">Click me, I'm a button</a>
-							<a class="btn btn-outline-primary ms-lg-2" href="#" role="button">Click me, I'm a button</a>
-						</div>
-					</div>
-					<div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-						<div class="lc-block bg-primary rounded-start" style=""><img class=""
-								src="https://images.unsplash.com/photo-1493612276216-ee3925520721?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8M3x8d2Vic2l0ZXxlbnwwfDF8fHwxNjIxNDQ4NTEw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080"
-								alt="Photo by Diego PH" width="720" style="mix-blend-mode:overlay"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="carousel-item container-fluid bg-primary-100 text-primary-900 ">
-			<div class="container my-5">
-				<div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-					<div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-						<div class="lc-block mb-3">
-							<div editable="rich">
-								<h2 class="fw-bold display-4">The quick brown fox jumps over the lazy dog</h2>
-							</div>
-						</div>
+                        <div class="lc-block d-grid gap-2 d-lg-block"><a class="btn btn-primary" href="#"
+                                role="button">Click me, I'm a button</a>
+                            <a class="btn btn-outline-primary ms-lg-2" href="#" role="button">Click me, I'm a button</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+                        <div class="lc-block bg-primary rounded-start" style=""><img class=""
+                                src="https://images.unsplash.com/photo-1493612276216-ee3925520721?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8M3x8d2Vic2l0ZXxlbnwwfDF8fHwxNjIxNDQ4NTEw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080"
+                                alt="Photo by Diego PH" width="720" style="mix-blend-mode:overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item container-fluid bg-primary-100 text-primary-900 ">
+            <div class="container my-5">
+                <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+                    <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                        <div class="lc-block mb-3">
+                            <div editable="rich">
+                                <h2 class="fw-bold display-4">The quick brown fox jumps over the lazy dog</h2>
+                            </div>
+                        </div>
 
-						<div class="lc-block mb-3">
-							<div editable="rich">
-								<p class="lead">Quickly design and customize responsive mobile-first sites with
-									Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass
-									variables and mixins, responsive grid system, extensive prebuilt components, and
-									powerful JavaScript plugins.
-								</p>
-							</div>
-						</div>
+                        <div class="lc-block mb-3">
+                            <div editable="rich">
+                                <p class="lead">Quickly design and customize responsive mobile-first sites with
+                                    Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass
+                                    variables and mixins, responsive grid system, extensive prebuilt components, and
+                                    powerful JavaScript plugins.
+                                </p>
+                            </div>
+                        </div>
 
-						<div class="lc-block d-grid gap-2 d-lg-block"><a class="btn btn-primary" href="#"
-								role="button">Click me, I'm a button</a>
-							<a class="btn btn-outline-primary ms-lg-2" href="#" role="button">Click me, I'm a button</a>
-						</div>
-					</div>
-					<div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-						<div class="lc-block bg-primary rounded-start"><img class="rounded-start"
-								src="https://images.unsplash.com/photo-1493612276216-ee3925520721?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8M3x8d2Vic2l0ZXxlbnwwfDF8fHwxNjIxNDQ4NTEw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080"
-								alt="Photo by Diego PH" width="720" style="mix-blend-mode:overlay"></div>
-					</div>
-				</div>
-			</div>
-		</div>
+                        <div class="lc-block d-grid gap-2 d-lg-block"><a class="btn btn-primary" href="#"
+                                role="button">Click me, I'm a button</a>
+                            <a class="btn btn-outline-primary ms-lg-2" href="#" role="button">Click me, I'm a button</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+                        <div class="lc-block bg-primary rounded-start"><img class="rounded-start"
+                                src="https://images.unsplash.com/photo-1493612276216-ee3925520721?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8M3x8d2Vic2l0ZXxlbnwwfDF8fHwxNjIxNDQ4NTEw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080"
+                                alt="Photo by Diego PH" width="720" style="mix-blend-mode:overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	</div>
-	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Previous</span>
-	</button>
-	<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Next</span>
-	</button>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </section>
 <section class="random_bg_text">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-12 col-md-6 col-xl-7 mb-lg-0 py-5 py-md-6">
-				<div class="lc-block mb-3 mb-md-5 lh-1">
-					<div editable="rich">
-						<h1 class="fw-bolder display-4">The quick brown fox jumps over the lazy dog</h1>
-					</div>
-				</div>
-				<div class="lc-block"><button class="btn btn-lg btn-primary" id="random_shades_pair">Generate Random
-						Shades Pair</button>
-				</div>
-			</div>
-			<div class="col-12 col-md-6 col-xl-5">
-				<div class="lc-block px-md-4 px-lg-5 lh-lg">
-					<div editable="rich">
-						<p class="rfs-7 random_text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et
-							metus
-							id ligula malesuada placerat sit amet quis enim.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 g-0">
-				<div class="lc-block bg-primary" style="">
-					<img class="img-fluid w-100"
-						src="https://images.unsplash.com/photo-1489058535093-8f530d789c3b?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8Mzl8fGFyY2hpdGVjdHVyZXxlbnwwfDB8fHwxNjM0MzgwMDgz&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1620&amp;h=1152"
-						alt="Photo by Sandro Katalina" style="object-fit:cover;
-max-height:35vh;
-mix-blend-mode:overlay;">
-				</div>
-			</div>
-		</div>
-		<div class="row mt-3">
-			<div class="col-md-12 d-flex justify-content-center align-items-baseline">
-				<div class="lc-block py-4 me-3">
-					<div editable="rich">
-						<h4 class="fw-bolder">2016</h4>
-					</div>
-				</div>
-				<div class="lc-block py-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-6 col-xl-7 mb-lg-0 py-5 py-md-6">
+                <div class="lc-block mb-3 mb-md-5 lh-1">
+                    <div editable="rich">
+                        <h1 class="fw-bolder display-4">The quick brown fox jumps over the lazy dog</h1>
+                    </div>
+                </div>
+                <div class="lc-block"><button class="btn btn-lg btn-primary" id="random_shades_pair">Generate Random
+                        Shades Pair</button>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-5">
+                <div class="lc-block px-md-4 px-lg-5 lh-lg">
+                    <div editable="rich">
+                        <p class="rfs-7 random_text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et
+                            metus
+                            id ligula malesuada placerat sit amet quis enim.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 g-0">
+                <div class="lc-block bg-primary" style="">
+                    <img class="img-fluid w-100"
+                        src="https://images.unsplash.com/photo-1489058535093-8f530d789c3b?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8Mzl8fGFyY2hpdGVjdHVyZXxlbnwwfDB8fHwxNjM0MzgwMDgz&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1620&amp;h=1152"
+                        alt="Photo by Sandro Katalina" style="object-fit:cover;max-height:35vh;mix-blend-mode:overlay;">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12 d-flex justify-content-center align-items-baseline">
+                <div class="lc-block py-4 me-3">
+                    <div editable="rich">
+                        <h4 class="fw-bolder">2016</h4>
+                    </div>
+                </div>
+                <div class="lc-block py-4">
 
-					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-						width="2em" height="2em" viewBox="0 0 24 24" style="" lc-helper="svg-icon" fill="currentColor">
-						<path
-							d="M23,12L19,16V13H6.83C6.42,14.17 5.31,15 4,15A3,3 0 0,1 1,12A3,3 0 0,1 4,9C5.31,9 6.42,9.83 6.83,11H19V8L23,12Z">
-						</path>
-					</svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                        width="2em" height="2em" viewBox="0 0 24 24" style="" lc-helper="svg-icon" fill="currentColor">
+                        <path
+                            d="M23,12L19,16V13H6.83C6.42,14.17 5.31,15 4,15A3,3 0 0,1 1,12A3,3 0 0,1 4,9C5.31,9 6.42,9.83 6.83,11H19V8L23,12Z">
+                        </path>
+                    </svg>
 
-				</div>
-				<div class="lc-block py-4 ms-3">
-					<div editable="rich">
-						<h4 class="fw-bolder"> 2021</h4>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+                <div class="lc-block py-4 ms-3">
+                    <div editable="rich">
+                        <h4 class="fw-bolder"> 2021</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
- 
+
 </section>
