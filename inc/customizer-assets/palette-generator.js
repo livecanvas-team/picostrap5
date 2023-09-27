@@ -41,12 +41,13 @@ const palette_generator_html = `
                 <select style="font-size: 0.875rem; width: 100%;" type="select" id="adjacency_matrix"
                     name="adjacency_matrix" required aria-label="Matrix">
                         <option selected value="
-                        0,	90,	10,	60,	40,	25,
-                        90,	0,	80,	0,	0,	0,
-                        10,	80,	0,	90,	0,	0,
-                        60,	0,	90,	0,	55,	80,
-                        40,	0,	0,	55,	0,	65,
-                        25,	0,	0,	80,	65,	0">Balanced Contrast</option>
+                          0,	90,	10,	60,	40,	25,
+                          90,	0,	80,	0,	0,	0,
+                          10,	80,	0,	90,	0,	0,
+                          60,	0,	90,	0,	55,	80,
+                          40,	0,	0,	55,	0,	65,
+                          25,	0,	0,	80,	65,	0
+                        ">Balanced Contrast</option>
                 </select>
             </div>
 
@@ -78,30 +79,13 @@ const palette_generator_html = `
             <textarea style="display: none; width: 100%; border: 1px solid #dee2e6; border-radius: 0.25rem;"
                 id="result-palette" rows="1" readonly></textarea>
         </div>
-
+      <div class="result-palettes" style="background-color: #fff;">
+      </div>
     </div>
 
-    <div class="result-palettes" style="background-color: #fff;">
-    </div>
-
-    <script>
-
-      const colorSelector = document.getElementById('color_selection');
-      const colorTypeSelector = document.getElementById('color_type_select');
 
 
-      colorTypeSelector.addEventListener('change', function () {
-        console.log(this.value);
-        if (this.value == 'None') {
-          colorSelector.style.display = 'none';
-        } else {
-          colorSelector.style.display = 'block';
-        }
-      })
-
-    </script>
-
-`;
+    `;
 
 (function ($) {
   $(document).ready(function () {
@@ -112,105 +96,107 @@ const palette_generator_html = `
     //DEFINE BEHAVIOURS
     const resultPalette = document.getElementById("result-palette");
 
-    document
-      .querySelector(".toggle-palette-generator")
-      .addEventListener("click", function () {
-        document
-          .querySelector("#color-palette-generator")
-          .toggleAttribute("hidden");
-      });
+    //USER CLICKS TOGGLE: REVEAL / HIDE PALETTE GENERATOR
+    document.querySelector(".toggle-palette-generator").addEventListener("click", function () {
+      document.querySelector("#color-palette-generator").toggleAttribute("hidden");
+    });
 
-    document
-      .getElementById("generate-button")
-      .addEventListener("click", function () {
-        // Get input values
-        const mode = document.getElementById("mode").value;
-        const numColors = document.getElementById("num_colors").value;
-        const temperature = document.getElementById("temperature").value;
-        const adjacency = document.getElementById("adjacency_matrix").value;
+    // USER CHANGES COLOR SELECT: SHOW / HIDE COLOR PICKER
+    document.getElementById('color_type_select').addEventListener('change', function () {
+      const colorSelector = document.getElementById('color_selection');
+      if (this.value == 'None') colorSelector.style.display = 'none'; colorSelector.style.display = 'block';
+    });
 
-        const colorIndex = document.getElementById("color_type_select").value;
-        let palette = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"];
+    //USER CLICKS GENERATE BUTTON: GENERATE PALETTE
+    document.getElementById("generate-button").addEventListener("click", function () {
+      // Get input values
+      const mode = document.getElementById("mode").value;
+      const numColors = document.getElementById("num_colors").value;
+      const temperature = document.getElementById("temperature").value;
+      const adjacency = document.getElementById("adjacency_matrix").value;
 
-        // if the color index chose isn't none, then set the color in the right position
-        if (colorIndex != "None") {
-          palette[colorIndex] = document.getElementById("locked_colors").value;
-        }
+      const colorIndex = document.getElementById("color_type_select").value;
+      let palette = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"];
 
-        // Construct the JSON data object
-        const jsonData = {
-          mode: mode,
-          num_colors: numColors,
-          temperature: temperature,
-          num_results: 10,
-          adjacency: adjacency.split(",").map(function (item, index, arr) {
-            if (index === 0 || index % 11 == 0) {
-              return parseInt(item);
-            } else {
-              return item.toString().trim();
-            }
-          }),
-          palette: palette,
-        };
+      // if the color index chose isn't none, then set the color in the right position
+      if (colorIndex != "None") {
+        palette[colorIndex] = document.getElementById("locked_colors").value;
+      }
 
-        // Empty the results container and give feedback
-        //document.querySelector(".result-palettes").innerHTML = '<div id="pg-feedback" style="position:relative;padding:12px 24px; font-family:monospace;overflow:hidden"> <div style="background: -webkit-gradient(linear, left center, right center, from(#f74843), color-stop(24%, #f74843), color-stop(25%, #ffa067), color-stop(49%, #ffa067), color-stop(50%, #81d565), color-stop(74%, #81d565), color-stop(74%, #3a82e4), color-stop(100%, #3a82e4)); width: 60px; height: 500px; opacity: 1; -webkit-transform: rotate(25deg); position: absolute; z-index: 1;right:0 " id="pg-feedback"></div> Working... </div>';
-        document.querySelector(".result-palettes").innerHTML =
-          '<div id="pg-feedback"><div id="pg-feedback-bars"></div> Working<span class="pg-feedback-dot">.</span><span class="pg-feedback-dot">.</span><span class="pg-feedback-dot">.</span></div>';
+      // Construct the JSON data object
+      const jsonData = {
+        mode: mode,
+        num_colors: numColors,
+        temperature: temperature,
+        num_results: 10,
+        adjacency: adjacency.split(",").map(function (item, index, arr) {
+          if (index === 0 || index % 11 == 0) {
+            return parseInt(item);
+          } else {
+            return item.toString().trim();
+          }
+        }),
+        palette: palette,
+      };
 
-        // Make the AJAX request
-        const xhr = new XMLHttpRequest();
+      // Show loader
+      //document.querySelector(".result-palettes").innerHTML = '<div id="pg-feedback" style="position:relative;padding:12px 24px; font-family:monospace;overflow:hidden"> <div style="background: -webkit-gradient(linear, left center, right center, from(#f74843), color-stop(24%, #f74843), color-stop(25%, #ffa067), color-stop(49%, #ffa067), color-stop(50%, #81d565), color-stop(74%, #81d565), color-stop(74%, #3a82e4), color-stop(100%, #3a82e4)); width: 60px; height: 500px; opacity: 1; -webkit-transform: rotate(25deg); position: absolute; z-index: 1;right:0 " id="pg-feedback"></div> Working... </div>';
+      document.querySelector(".result-palettes").innerHTML =
+        '<div id="pg-feedback"><div id="pg-feedback-bars"></div> Working<span class="pg-feedback-dot">.</span><span class="pg-feedback-dot">.</span><span class="pg-feedback-dot">.</span></div>';
 
-        xhr.open("POST", "https://api.huemint.com/color", true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      // Make the AJAX request
+      const xhr = new XMLHttpRequest();
 
-        // Definisci la funzione di gestione della risposta
-        xhr.onload = function () {
-          document.querySelector(".result-palettes").innerHTML = "";
-          if (xhr.status >= 200 && xhr.status < 300) {
-            const response = JSON.parse(xhr.responseText);
-            console.log(response); // Log the entire API response
+      xhr.open("POST", "https://api.huemint.com/color", true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-            // Check if response.results is defined and is an array
-            if (response && Array.isArray(response.results)) {
-              //write message into results div: Choose Palette
-              document.querySelector(".result-palettes").innerHTML =
-                '<h2 style="font-size: 1.25rem; margin: 0 !important; padding: 12px;">Choose Palette</h2>';
+      // When we get a response
+      xhr.onload = function () {
+        document.querySelector(".result-palettes").innerHTML = "";
+        if (xhr.status >= 200 && xhr.status < 300) {
+          const response = JSON.parse(xhr.responseText);
+          console.log(response); // Log the entire API response
 
-              // Loop through each result and create HTML elements for palettes
-              response.results.forEach((result, index) => {
-                // Create a new div for this palette
-                const paletteDiv = document.createElement("div");
-                paletteDiv.style.backgroundColor = "#f8f9fa";
-                paletteDiv.style.border = "1px solid #dee2e6";
-                paletteDiv.style.padding = "1rem";
-                paletteDiv.style.marginBottom = "1rem";
-                paletteDiv.style.display = "flex"; // Cambiato da "grid" a "flex"
-                paletteDiv.style.flexWrap = "wrap"; // Aggiunto flex-wrap
-                paletteDiv.style.gap = "0.5rem"; // Aggiunto gap
-                paletteDiv.style.justifyContent = "space-between"; // Aggiunto justify-content
+          // Check if response.results is defined and is an array
+          if (response && Array.isArray(response.results)) {
+            //write message into results div: Choose Palette
+            document.querySelector(".result-palettes").innerHTML =
+              '<h2 style="font-size: 1.25rem; margin: 0 !important; padding: 12px;">Choose Palette</h2>';
+
+            // Loop through each result and create HTML elements for palettes
+            response.results.forEach((result, index) => {
+              // Create a new div for this palette
+              const paletteDiv = document.createElement("div");
+              paletteDiv.style.backgroundColor = "#f8f9fa";
+              paletteDiv.style.border = "1px solid #dee2e6";
+              paletteDiv.style.padding = "1rem";
+              paletteDiv.style.marginBottom = "1rem";
+              paletteDiv.style.display = "flex"; // Cambiato da "grid" a "flex"
+              paletteDiv.style.flexWrap = "wrap"; // Aggiunto flex-wrap
+              paletteDiv.style.gap = "0.5rem"; // Aggiunto gap
+              paletteDiv.style.justifyContent = "space-between"; // Aggiunto justify-content
 
 
-                // Loop through the colors in the palette and create color boxes
-                result.palette.forEach((color, colorIndex) => {
-                  // Create a div for the color box
-                  const colorBoxDiv = document.createElement("div");
-                  colorBoxDiv.style.display = "flex";
-                  colorBoxDiv.style.alignItems = "center";
-                  colorBoxDiv.style.gap = "0.2rem";
-                  colorBoxDiv.setAttribute("data-color", color);
-                  colorBoxDiv.setAttribute("data-index", colorIndex);
+              // Loop through the colors in the palette and create color boxes
+              result.palette.forEach((color, colorIndex) => {
+                // Create a div for the color box
+                const colorBoxDiv = document.createElement("div");
+                colorBoxDiv.style.display = "flex";
+                colorBoxDiv.style.alignItems = "center";
+                colorBoxDiv.style.gap = "0.2rem";
+                colorBoxDiv.setAttribute("data-color", color);
+                colorBoxDiv.setAttribute("data-index", colorIndex);
 
-                  // Create a div for displaying the color
-                  const colorDiv = document.createElement("div");
-                  colorDiv.style.width = "24px";
-                  colorDiv.style.height = "12px";
-                  colorDiv.style.backgroundColor = color;
-                  colorDiv.style.border = "1px solid #dee2e6";
-                  colorDiv.style.borderRadius = "0.25rem";
+                // Create a div for displaying the color
+                const colorDiv = document.createElement("div");
+                colorDiv.style.width = "24px";
+                colorDiv.style.height = "12px";
+                colorDiv.style.backgroundColor = color;
+                colorDiv.style.border = "1px solid #dee2e6";
+                colorDiv.style.borderRadius = "0.25rem";
 
-                  // Create a div for displaying the color code
-                  /*
+                // Create a div for displaying the color code
+                /*
                 const colorCodeDiv = document.createElement("div");
                 colorCodeDiv.style.fontSize = "0.875rem";
                 colorCodeDiv.style.paddingLeft = "0.5rem";
@@ -218,77 +204,67 @@ const palette_generator_html = `
                 colorCodeDiv.textContent = color;
                 */
 
-                  // Append color and color code divs to the color box div
-                  colorBoxDiv.appendChild(colorDiv);
-                  //colorBoxDiv.appendChild(colorCodeDiv);
+                // Append color and color code divs to the color box div
+                colorBoxDiv.appendChild(colorDiv);
+                //colorBoxDiv.appendChild(colorCodeDiv);
 
-                  // Append the color box div to the palette div
-                  paletteDiv.appendChild(colorBoxDiv);
-                });
-
-                // Append the palette div to the container
-                document
-                  .querySelector(".result-palettes")
-                  .appendChild(paletteDiv);
-
-                //scroll to it
-                document.querySelector(".result-palettes").scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                  inline: "nearest",
-                });
+                // Append the color box div to the palette div
+                paletteDiv.appendChild(colorBoxDiv);
               });
-            } else {
-              // Handle the case where response.results is undefined or not an array
-              resultPalette.value = "Error: Invalid API response format.";
-            }
+
+              // Append the palette div to the container
+              document.querySelector(".result-palettes").appendChild(paletteDiv);
+
+              //scroll to it
+              document.querySelector(".result-palettes").scrollIntoView({behavior: "smooth", block: "start", inline: "nearest", });
+            });
           } else {
-            // Handle the case where the AJAX request fails
-            resultPalette.value =
-              "Error: AJAX request failed with status " + xhr.status;
+            // Handle the case where response.results is undefined or not an array
+            resultPalette.value = "Error: Invalid API response format.";
           }
-        };
+        } else {
+          // Handle the case where the AJAX request fails
+          resultPalette.value =
+            "Error: AJAX request failed with status " + xhr.status;
+        }
+      };
 
-        // Error Handling
-        xhr.onerror = function () {
-          resultPalette.value = "Error: AJAX request failed.";
-        };
+      // Error Handling
+      xhr.onerror = function () {
+        resultPalette.value = "Error: AJAX request failed.";
+      };
 
-        // Send request with JSON data
-        xhr.send(JSON.stringify(jsonData));
-      });
+      // Send request with JSON data
+      xhr.send(JSON.stringify(jsonData));
+    });
 
-    //ON CLICK OF A PALETTE
+    //ON CLICK OF A PALETTE, APPLY IT
     $("body").on("click", ".result-palettes > DIV", function (e) {
-      e.preventDefault();
-      console.log("chosen palette");
+    e.preventDefault();
+    console.log("chosen palette");
 
-      function setColorWidget(theSuffix = "body-bg", theValue = "#ffcc99") {
-        document.querySelector(
-          `[id^='customize-control-SCSSvar_${theSuffix}'] input`
-        ).value = theValue;
-        document
-          .querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`)
-          .dispatchEvent(new Event("change"));
-      }
+    function setColorWidget(theSuffix = "body-bg", theValue = "#ffcc99") {
+      document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).value = theValue;
+      document.querySelector(`[id^='customize-control-SCSSvar_${theSuffix}'] input`).dispatchEvent(new Event("change"));
+    }
 
-      setColorWidget(
-        "body-bg",
-        $(this).find("> DIV:eq(0)").attr("data-color")
-      );
-      setColorWidget("body-color", $(this).find("> DIV:eq(1)").attr("data-color"));
-      setColorWidget("light", $(this).find("> DIV:eq(2)").attr("data-color"));
-      setColorWidget("dark", $(this).find("> DIV:eq(3)").attr("data-color"));
-      setColorWidget("primary", $(this).find("> DIV:eq(4)").attr("data-color"));
-      setColorWidget(
-        "secondary",
-        $(this).find("> DIV:eq(5)").attr("data-color")
-      );
-      /*setColorWidget("success", $(this).find("> DIV:eq(6)").attr("data-color"));
-      setColorWidget("danger", $(this).find("> DIV:eq(7)").attr("data-color"));
-      setColorWidget("warning", $(this).find("> DIV:eq(8)").attr("data-color"));
-      setColorWidget("info", $(this).find("> DIV:eq(9)").attr("data-color"));
-      */
+    setColorWidget(
+      "body-bg",
+      $(this).find("> DIV:eq(0)").attr("data-color")
+    );
+    setColorWidget("body-color", $(this).find("> DIV:eq(1)").attr("data-color"));
+    setColorWidget("light", $(this).find("> DIV:eq(2)").attr("data-color"));
+    setColorWidget("dark", $(this).find("> DIV:eq(3)").attr("data-color"));
+    setColorWidget("primary", $(this).find("> DIV:eq(4)").attr("data-color"));
+    setColorWidget(
+      "secondary",
+      $(this).find("> DIV:eq(5)").attr("data-color")
+    );
+    /*setColorWidget("success", $(this).find("> DIV:eq(6)").attr("data-color"));
+    setColorWidget("danger", $(this).find("> DIV:eq(7)").attr("data-color"));
+    setColorWidget("warning", $(this).find("> DIV:eq(8)").attr("data-color"));
+    setColorWidget("info", $(this).find("> DIV:eq(9)").attr("data-color"));
+    */
     }); // end onClick
   }); //end doc ready
 })(jQuery);
