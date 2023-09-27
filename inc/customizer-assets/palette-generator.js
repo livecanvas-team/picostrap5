@@ -41,14 +41,38 @@ const palette_generator_html = `
                 <label style="font-size: 0.875rem;display:block;margin-bottom:2px" for="adjacency_matrix">Choose Contrast:</label>
                 <select style="font-size: 0.875rem; width: 100%;" type="select" id="adjacency_matrix"
                     name="adjacency_matrix" required aria-label="Matrix">
-                        <option selected value="
-                          0,	90,	10,	60,	40,	25,
-                          90,	0,	80,	0,	0,	0,
-                          10,	80,	0,	90,	0,	0,
-                          60,	0,	90,	0,	55,	80,
-                          40,	0,	0,	55,	0,	65,
-                          25,	0,	0,	80,	65,	0
+                    <option value="
+                        0, 100, 20, 70, 50, 35,
+                        100, 0, 90, 0, 0, 0,
+                        20, 90, 0, 100, 0, 0,
+                        70, 0, 100, 0, 65, 90,
+                        50, 0, 0, 65, 0, 75,
+                        35, 0, 0, 90, 75, 0
+                    ">High Contrast</option>
+                    <option selected value="
+                        0,	90,	10,	60,	40,	25,
+                        90,	0,	80,	0,	0,	0,
+                        10,	80,	0,	90,	0,	0,
+                        60,	0,	90,	0,	55,	80,
+                        40,	0,	0,	55,	0,	65,
+                        25,	0,	0,	80,	65,	0
                         ">Balanced Contrast</option>
+                      <option value="
+                        0, 50, 0, 20, 20, 5,
+                        50, 0, 40, 0, 0, 0,
+                        0, 40, 0, 50, 0, 0,
+                        20, 0, 50, 0, 15, 40,
+                        20, 0, 0, 15, 0, 25,
+                        5, 0, 0, 40, 25, 0
+                      ">Low Contrast</option>
+                      <option value="
+                        0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0
+                      ">Unconnected Colors</option>
                 </select>
             </div>
 
