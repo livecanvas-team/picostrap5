@@ -1,13 +1,9 @@
-//THIS IS THE MAIN SCSS PIPELINE START
-
-//IMPORT BOOTSTRAP ////// 
-
-//SIMPLE IMPORT
-//@import "theme_variables"; //now in bs loader
-//@import "bootstrap5/bootstrap";
-
-
-//NEW CUSTOM WAY
+///////////////////////////////////////////////////
+// MAIN.SCSS
+// THIS IS THE MAIN SCSS PIPELINE START
+//////////////////////////////////////////////////
+ 
+//IMPORT BOOTSTRAP 
 @import "bootstrap-loader"; 
 
 
@@ -20,6 +16,3 @@
 // CUSTOM CSS : THE CHILD THEME STUFF, IF ITS THERE
 @import "custom";
 
-
-//AS A QUICK EXPERIMENT
-//body {opacity: 0.2;}

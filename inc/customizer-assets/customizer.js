@@ -524,12 +524,12 @@
 			$("#sub-accordion-" + section_name + " li:first ").after("<a class='style-guide-link' href='#" + hash + "'>" + theStyleGuideIcon  + "View Style Guide</a> ");
 		}
 
-		//pico_add_styleguide_link("section-colors", "colors");
+		//pico_add_styleguide_link("section-colors", "colors"); //this is now added by palette-generator js
 		pico_add_styleguide_link("section-typography", "typography");
 		pico_add_styleguide_link("section-components", "sample-sections");
         pico_add_styleguide_link("section-buttons", "buttons");
-		//pico_add_styleguide_link("section-buttons-forms", "https://youtu.be/SwDrR-FmzkE&t=169s");
-		pico_add_styleguide_link("section-nav", "nav");
+		//pico_add_styleguide_link("section-buttons-forms", "");
+		//pico_add_styleguide_link("section-nav", "nav");
 
 		 
 

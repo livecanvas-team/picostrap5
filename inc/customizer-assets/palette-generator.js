@@ -9,6 +9,7 @@ const palette_generator_html = `
             <h2 style="font-size: 1.25rem;margin-bottom: 0;color: #000;display: inline;">Palette Generator <sup style="background: #0071eb;font-size: 0.5rem;padding: 1px 5px;color: #f0f0f1;border-radius: 2px;">AI</sup> 
             <a target="_blank" style="color:#bbc0c4;float:right" class="customize-help-toggle dashicons dashicons-editor-help" href="https://huemint.com/" title="Huemint Color Palette Generator"></a>
             </h2>
+            <p style="font-size: 10px; line-height: 1.5; margin: 0.4em 0;">This tool will generate 6-color palettes, for body background, text body, light, dark, primary, secondary.</p>
         </div>
 
         <form id="color-palette-form" style="padding: 1rem; background-color: #fff;">
