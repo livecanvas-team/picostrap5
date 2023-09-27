@@ -521,7 +521,7 @@
 
 		function pico_add_styleguide_link(section_name, hash) {
 			 
-			$("#sub-accordion-" + section_name + " li:first ").after("<a class='style-guide-link' href='" + hash + "'>" + theStyleGuideIcon  + "View Style Guide</a> ");
+			$("#sub-accordion-" + section_name + " li:first ").after("<a class='style-guide-link' href='#" + hash + "'>" + theStyleGuideIcon  + "View Style Guide</a> ");
 		}
 
 		//pico_add_styleguide_link("section-colors", "colors");
@@ -531,39 +531,7 @@
 		//pico_add_styleguide_link("section-buttons-forms", "https://youtu.be/SwDrR-FmzkE&t=169s");
 		pico_add_styleguide_link("section-nav", "nav");
 
-		$("body").on("click", ".style-guide-link", function (e) {
-			e.preventDefault();
-			const theID = $(this).attr("href");
-			
-			const url= "../wp-content/themes/picostrap5/inc/customizer-assets/style-guide-body.html";
 		 
-			$.get(url, function (response) { 
-
-				//insert response in body
-				document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('body').innerHTML = response;
-				
-				//scroll to anchor
-				document.querySelector('#customize-preview iframe').contentWindow.document.getElementById(theID).scrollIntoView();
-
-			});
-		});	
-
-		//DOUBLE CLICK TO VIEW WEBSITE AGAIN
-		$("body").on("dblclick", ".style-guide-link", function (e) {
-			e.preventDefault();
-			const theID = $(this).attr("href");
-
-
-			const url = (document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('body').innerHTML.includes('Style Guide')) ? "../" : "../wp-content/themes/picostrap5/inc/customizer-assets/style-guide-body.html";
-
-			$.get(url, function (response) { 
-				//insert response in body
-				document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('body').innerHTML = response;
- 
-			});
-		});	
-
-
 
 		//// BOOTSTRAP VARIABLES TOOLBOX ////
 
@@ -723,7 +691,7 @@
  
  
 
-		///COLOR PALETTE GENERATOR /////
+		///COLOR PALETTE GENERATOR UNUSED BUT COULD BE USEFUL /////
 		/*
 		//ADD COLOR PALETTE GENERATOR
 		var html = "<a href='#' class='generate-palette'>Generate palette from this </a>";

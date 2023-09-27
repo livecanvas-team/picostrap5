@@ -1476,39 +1476,5 @@ mix-blend-mode:overlay;">
 		</div>
 	</div>
 
-	<script>
-		let colors = ["light", "dark", "primary", "secondary", "success", "danger", "warning", "info"];
-		let values = [25, 50, 100, 200, 300, 400, 600, 700, 800, 900];
-
-		document.getElementById("random_shades_pair").addEventListener('click', function () {
-			let elements = document.querySelectorAll('.random_bg_text');
-			let randomColor = colors[Math.floor(Math.random() * colors.length)];
-			let randomValueIndex = Math.floor(Math.random() * values.length);
-			let randomValueBg = values[randomValueIndex];
-			let randomValueTextIndex = randomValueIndex + 3; // ensure at least 3 steps difference
-			if (randomValueTextIndex >= values.length) {
-				randomValueTextIndex -= 4;
-			}
-			let randomValueText = values[randomValueTextIndex];
-
-			elements.forEach(function (element) {
-				element.className = "random_bg_text"; // reset classes
-				element.classList.add("bg-" + randomColor + "-" + randomValueBg);
-				element.classList.add("text-" + randomColor + "-" + randomValueText);
-			});
-
-			let textElements = document.querySelectorAll('.random_text');
-			randomColor = colors[Math.floor(Math.random() * colors.length)];
-			let randomValueIndex2 = randomValueTextIndex + 4; // ensure at least 4 steps difference from randomValueText
-			if (randomValueIndex2 >= values.length) {
-				randomValueIndex2 -= 5;
-			}
-			let randomValue2 = values[randomValueIndex2];
-
-			textElements.forEach(function (element) {
-				element.className = "random_text"; // reset classes
-				element.classList.add("text-" + randomColor + "-" + randomValue2);
-			});
-		});
-	</script>
+ 
 </section>

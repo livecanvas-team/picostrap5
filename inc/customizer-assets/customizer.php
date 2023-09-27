@@ -24,6 +24,9 @@ function picostrap_customize_enqueue() {
 	wp_enqueue_script( 'palette-generator', get_template_directory_uri() . '/inc/customizer-assets/palette-generator.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
 	wp_enqueue_style( 'palette-generator', get_template_directory_uri() . '/inc/customizer-assets/palette-generator.css', array(), rand(0,1000)   );
 	
+	//style guide
+	wp_enqueue_script( 'style-guide', get_template_directory_uri() . '/inc/customizer-assets/style-guide.js', array( 'jquery' ), rand(0,1000), true );
+ 
 	//fontpicker
 	wp_enqueue_script( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.js', array( 'jquery', 'customize-controls' ), rand(0,1000), true );
 	wp_enqueue_style( 'fontpicker', get_template_directory_uri() . '/inc/customizer-assets/fontpicker/jquery.fontpicker.min.css', array(), rand(0,1000) );
