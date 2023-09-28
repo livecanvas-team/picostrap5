@@ -65,6 +65,7 @@ const palette_generator_html = `
                         20, 0, 0, 15, 0, 25,
                         5, 0, 0, 40, 25, 0
                       ">Low Contrast</option>
+                      <!-- 
                       <option value="
                         0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0,
@@ -73,11 +74,12 @@ const palette_generator_html = `
                         0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0
                       ">Unconnected Colors</option>
+                      -->
                 </select>
             </div>
 
             <div style="margin-bottom: 1rem; border-bottom: 1px solid #dee2e6; padding-bottom: 1rem;">
-                <label style="font-size: 0.875rem;display:block;margin-bottom:2px" for="color_type_select">Choose a base color:</label>
+                <label style="font-size: 0.875rem;display:block;margin-bottom:2px" for="color_type_select">Lock a Color: <span style="font-size: 9px;font-style: italic;">(optional)</span></label>
                 <select style="font-size: 0.875rem; width: 100%;" type="select" id="color_type_select"
                     name="color_type_select" required aria-label="Default select example">
                       <option value="None">None</option>
@@ -91,7 +93,7 @@ const palette_generator_html = `
             </div>
 
             <div style="margin-bottom: 1rem; display: none" id="color_selection">
-                <label style="font-size: 0.875rem;display:block;margin-bottom:2px" for="locked_colors">color:</label>
+                <label style="font-size: 0.875rem;display:block;margin-bottom:2px" for="locked_colors">Choose Color:</label>
                 <input type="color" style="font-size: 0.875rem; width: 100%;" id="locked_colors" name="locked_colors"
                     value="#563d7c" title="Choose your colors">
             </div>
@@ -136,7 +138,7 @@ function setColorWidget(theSuffix = "body-bg", theValue = "#ffcc99") {
         // USER CHANGES COLOR SELECT: SHOW / HIDE COLOR PICKER
         document.getElementById('color_type_select').addEventListener('change', function () {
             const colorSelector = document.getElementById('color_selection');
-            if (this.value == 'None') colorSelector.style.display = 'none'; colorSelector.style.display = 'block';
+            if (this.value == 'None') colorSelector.style.display = 'none'; else colorSelector.style.display = 'block';
         });
 
         //USER CLICKS GENERATE BUTTON: GENERATE PALETTE
