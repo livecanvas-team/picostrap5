@@ -268,6 +268,13 @@
 			}
 		});
 
+        // If user navigates inside preview, rebuild and apply SCSS
+        wp.customize.previewer.bind('url', function (newUrl) {
+            console.log('Preview URL changed to: ' + newUrl);
+            updateScssPreviewDebounced();
+        });
+
+      
 		//////////// USER ACTIONS / UX HELPERS /////////////////
 		
 		//ON CLICK LINK TO REGENERATE FONT LOADING CODE, DO IT
