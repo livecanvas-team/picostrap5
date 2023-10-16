@@ -162,6 +162,9 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
     //show the first feedback message: Compiling .... 
     document.querySelector("#picosass-output-feedback").innerHTML = `Compiling SCSS... <span></span>`;
     console.log("Compiling SCSS...");
+    
+    //measure time
+    const timeStart = Date.now();
 
     //run the compiler
     runScssCompiler(theCode, sassParams)
@@ -169,6 +172,7 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
         .then((compiled) => {
             //console.log("SCSS compiled successfully.");
             //console.log(compiled);
+            const timeEnd = Date.now();
 
             //if not present, add a new CSS element
             if (!document.querySelector("#picosass-injected-style")) document.head.insertAdjacentHTML("beforeend", `<style id="picosass-injected-style"> </style>`);
@@ -180,15 +184,15 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
             document.querySelector(".picostrap-provisional-css")?.setAttribute("disabled", "true");
 
             //show compiled size
-            const theFeedback = `SCSS compiled successfully. <span>Approx. CSS bundle size:  ${measureStringSizeInKB(compiled.css)} KB (${measureEstimatedGzippedSizeInKB(compiled.css)} KB gzipped) </span>`;
+            const theFeedback = `SCSS compiled successfully. <span>Approx. CSS bundle size:  ${measureStringSizeInKB(compiled.css)} KB (${measureEstimatedGzippedSizeInKB(compiled.css)} KB gzipped) </span><span>Execution time: ${(timeEnd - timeStart)/1000 } secs</span>`;
             document.querySelector("#picosass-output-feedback").innerHTML= theFeedback;
             console.log(theFeedback.replace(/(<([^>]+)>)/ig, ''));
 
             //as there are no errors, clear the output feedback
-            const myTimeout = setTimeout(() => { document.querySelector("#picosass-output-feedback").innerHTML = ''; }, 2500);
+            const myTimeout = setTimeout(() => { document.querySelector("#picosass-output-feedback").innerHTML = ''; }, 4500);
 
             //run callback
-            theCallback(compiled);
+            theCallback(compiled); 
         })
 
         .catch((error) => {
