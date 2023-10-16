@@ -9,8 +9,7 @@ function picostrap_force_css_rebuilding() {
 }
 
 //FOR THE CUSTOMIZER AND FRONTEND SCSS COMPILER: ADD TO HEADER SOME PRELOADING FOR SCSS FILES
-//seems ineffective
-/*
+ 
 add_action( 'wp_head', function  () {
 	if (!current_user_can('administrator') ) return;
 	if (!isset($_GET['customize_theme']) && !isset($_GET['compile_sass'])) return;
@@ -33,10 +32,10 @@ add_action( 'wp_head', function  () {
 		<?php
 	}
 } );
-*/
-
-//PREVENT WP's 404 in /sass/ folder
  
+
+//PREVENT WP's 404 in /sass/ folder: useless, kept only for messing around
+/* 
 add_action('template_redirect', 'custom_scss_handler');
 function custom_scss_handler() {
     $uri = $_SERVER['REQUEST_URI'];
@@ -49,7 +48,7 @@ function custom_scss_handler() {
         }
     }
 }
- 
+*/
 
 //FOR THE CUSTOMIZER AND FRONTEND SCSS COMPILER: ADD TO HEADER 
 add_action( 'wp_head', function  () {
