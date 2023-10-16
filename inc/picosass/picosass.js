@@ -77,7 +77,7 @@ async function load(canonicalUrl) {
     
     //show some feedback about the file that is loaded
     if (document.querySelector("#picosass-output-feedback span")) {
-        document.querySelector("#picosass-output-feedback span").innerHTML = `Importing ${canonicalUrl}`;
+        document.querySelector("#picosass-output-feedback span").innerHTML = `Importing file: <br>${canonicalUrl}`;
     }
 
     //build the request options: if nocache parameter is set, declare it, or just have an empty one. Seems like default browser is no cache anyway.
@@ -132,8 +132,8 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
     if (!document.querySelector("#picosass-output-feedback")) document.querySelector("html").insertAdjacentHTML("afterbegin", `
         <div id='picosass-output-feedback'></div> 
         <style> 
-            #picosass-output-feedback { position: fixed; top:5px; z-index: 9999; width:80%;font-size:30px; background:#212337; color:lime; font-family:courier; border:12px solid red; padding:15px; display:block;    word-wrap: break-word;   }
-            #picosass-output-feedback span{display:block; font-size:16px; z-index:0}
+            #picosass-output-feedback { position: fixed; top:5px; z-index: 9999; width:80%;font-size:36px; background:#212337; color:lime; font-family:courier; border:8px solid red; padding:0 15px 10px 15px; display:block;   word-wrap: break-word;   }
+            #picosass-output-feedback span{display:block; font-size:20px; z-index:0}
             #picosass-output-feedback:empty {display:none}
         </style>
         `);
@@ -176,7 +176,7 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
             //populate the element with the new CSS
             document.querySelector('#picosass-injected-style').innerHTML = compiled.css;
 
-            //remove initial static CSS 
+            //remove initial static CSS, if present (just to prevent FOUC)
             document.querySelector(".picostrap-provisional-css")?.setAttribute("disabled", "true");
 
             //show compiled size
