@@ -87,7 +87,7 @@ async function load(canonicalUrl) {
     let response = await fetch(canonicalUrl, options);
 
     //if file is not found, let's see in the fallback folder
-    if (!response.ok && response.status != 200 && document.querySelector(theScssSelector).hasAttribute("fallback_baseurl")) {
+    if (!response.ok && document.querySelector(theScssSelector).hasAttribute("fallback_baseurl")) {
         const canonicalUrlFallback = canonicalUrl.href.replace(
             (document.querySelector(theScssSelector).getAttribute("baseurl")),
             (document.querySelector(theScssSelector).getAttribute("fallback_baseurl")
