@@ -9,9 +9,22 @@ function picostrap_force_css_rebuilding() {
 }
 
 //FOR THE CUSTOMIZER AND FRONTEND SCSS COMPILER: ADD TO HEADER SOME PRELOADING FOR SCSS FILES
+//seems ineffective
+/*
 add_action( 'wp_head', function  () {
 	if (!current_user_can('administrator') ) return;
 	if (!isset($_GET['customize_theme']) && !isset($_GET['compile_sass'])) return;
+    
+    //preload theme scss
+    $theme_filenames_str = "_bootstrap-loader _custom _picostrap _theme_variables _woocommerce _wp_basic_styles main  ninjabootstrap/_borders ninjabootstrap/_letter-spacing ninjabootstrap/_positioning ninjabootstrap/_sizing ninjabootstrap/_theme_colors_shades ninjabootstrap/_variables";
+	$theme_filenames_arr = explode (' ',$theme_filenames_str);
+	foreach($theme_filenames_arr as $theme_filename) {
+		?> 
+		 
+        <link rel="prefetch" href="<?php echo get_stylesheet_directory_uri()."/sass/".$theme_filename ?>.scss" />
+		<?php
+	}
+    //preload bs subfolder
 	$bs_filenames_str = "bootstrap mixins/_banner _functions _variables _maps _mixins vendor/_rfs mixins/_deprecate mixins/_breakpoints mixins/_color-scheme mixins/_image mixins/_resize mixins/_visually-hidden mixins/_reset-text mixins/_text-truncate mixins/_utilities mixins/_alert mixins/_backdrop mixins/_buttons mixins/_caret mixins/_pagination mixins/_lists mixins/_list-group mixins/_forms mixins/_table-variants mixins/_border-radius mixins/_box-shadow mixins/_gradients mixins/_transition mixins/_clearfix mixins/_container mixins/_grid _tables _forms forms/_labels forms/_form-text forms/_form-control forms/_form-select forms/_form-check forms/_form-range forms/_floating-labels forms/_input-group forms/_validation _buttons _transitions _dropdown _button-group _nav _navbar _card _accordion _breadcrumb _pagination _badge _alert _progress _list-group _close _toasts _modal _tooltip _popover _carousel _spinners _offcanvas _placeholders _helpers helpers/_clearfix helpers/_color-bg helpers/_colored-links helpers/_ratio helpers/_position helpers/_stacks helpers/_visually-hidden helpers/_stretched-link helpers/_text-truncation helpers/_vr utilities/_api";
 	$bs_filenames_arr = explode (' ',$bs_filenames_str);
 	foreach($bs_filenames_arr as $bs_filename) {
@@ -20,7 +33,23 @@ add_action( 'wp_head', function  () {
 		<?php
 	}
 } );
+*/
 
+//PREVENT WP's 404 in /sass/ folder
+ 
+add_action('template_redirect', 'custom_scss_handler');
+function custom_scss_handler() {
+    $uri = $_SERVER['REQUEST_URI'];
+    if (preg_match('/\/sass\/.*\.scss/', $uri)) {
+        if (!file_exists(get_stylesheet_directory() . $uri)) {
+            status_header(404);  // Override the WordPress 404 header
+            // Handle the request; possibly serve an alternative file or message.
+            echo "File not found.";
+            exit();
+        }
+    }
+}
+ 
 
 //FOR THE CUSTOMIZER AND FRONTEND SCSS COMPILER: ADD TO HEADER 
 add_action( 'wp_head', function  () {
