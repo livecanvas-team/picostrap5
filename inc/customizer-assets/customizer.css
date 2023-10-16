@@ -303,3 +303,10 @@ body span.fp-pill.italic { display: none}
 #bs-tools a {
   display:inline-block; margin:0 5px 0 0;
 }
+
+
+/* DISABLED INPUTS */
+
+#_customize-input-picostrap_header_navbar_disabled,
+#_customize-input-picostrap_footer_disabled
+    {display: none;}
