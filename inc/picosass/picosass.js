@@ -83,18 +83,32 @@ async function load(canonicalUrl) {
     //build the request options: if nocache parameter is set, declare it, or just have an empty one. Seems like default browser is no cache anyway.
     const options = (((new URL(document.location)).searchParams).get("sass_nocache")) ? { cache: "no-cache" } : {}
 
-    //fetch the URL
-    let response = await fetch(canonicalUrl, options);
 
-    //if file is not found, let's see in the fallback folder
-    if (!response.ok && document.querySelector(theScssSelector).hasAttribute("fallback_baseurl")) {
-        const canonicalUrlFallback = canonicalUrl.href.replace(
-            (document.querySelector(theScssSelector).getAttribute("baseurl")),
-            (document.querySelector(theScssSelector).getAttribute("fallback_baseurl")
-        ));
-        console.log('Since ' + canonicalUrl.href + ' cannot be found, we look for ' + canonicalUrlFallback);
-        response = await fetch(canonicalUrlFallback, options);
-    }
+    let url = canonicalUrl;
+    const checkResponse = await fetch(canonicalUrl, { method: 'HEAD' })
+    if (checkResponse.status > 399 && document.querySelector(theScssSelector).hasAttribute("fallback_baseurl")) {
+        // Skipping the fetch since the status code is 404
+        url = canonicalUrl.href.replace(
+                (document.querySelector(theScssSelector).getAttribute("baseurl")),
+                (document.querySelector(theScssSelector).getAttribute("fallback_baseurl")
+            ));
+    } 
+    //fetch the URL
+    let response = await fetch(url, options);
+
+
+    //fetch the URL
+    // let response = await fetch(canonicalUrl, options);
+
+    // //if file is not found, let's see in the fallback folder
+    // if (!response.ok && document.querySelector(theScssSelector).hasAttribute("fallback_baseurl")) {
+    //     const canonicalUrlFallback = canonicalUrl.href.replace(
+    //         (document.querySelector(theScssSelector).getAttribute("baseurl")),
+    //         (document.querySelector(theScssSelector).getAttribute("fallback_baseurl")
+    //     ));
+    //     console.log('Since ' + canonicalUrl.href + ' cannot be found, we look for ' + canonicalUrlFallback);
+    //     response = await fetch(canonicalUrlFallback, options);
+    // }
 
     if (!response.ok) {
         document.querySelector("#picosass-output-feedback").innerHTML = `Error reading   SCSS file:  ${canonicalUrl} <span>${response.status} (${response.statusText})</span>`;
