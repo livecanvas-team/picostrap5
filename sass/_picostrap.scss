@@ -61,19 +61,21 @@ body:has(nav.fixed-top) *[id] {
 //HEADER: FIX SVG LOGO 
 .custom-logo-link img[src$='.svg'] {width:100%}
 
-// WHEN THERE IS A FIXED TOP NAVBAR, unless it's transparent, 
+// WHEN NO WP ADMIN BAR IS PRESENT
+// AND THERE IS A FIXED TOP NAVBAR, unless it's transparent, 
 // MOVE BODY CONTENT DOWN A BIT so it's not hidden by the menubar
 // You may want to remove/edit this row depending on your design and navbar height
-body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_color_choice_bg-transparent):not(.lc-custom-header), //this selector is only for FireFox < 121
-body:has(nav.fixed-top) {
+body.picostrap_header_navbar_position_fixed-top:not(.admin-bar):not(.picostrap_header_navbar_color_choice_bg-transparent):not(.lc-custom-header), //this selector is only for FireFox < 121
+body:not(.admin-bar):has(nav.fixed-top) {
     padding-top: var(--header-height);
 }
 
-body:has(nav.fixed-top.bg-transparent) {
+body:not(.admin-bar):has(nav.fixed-top.bg-transparent) {
     padding-top: 0;
 }
 
-// WHEN WP ADMIN BAR IS PRESENT, AND HEADER NAVBAR IS FIXED TOP  
+// WHEN WP ADMIN BAR IS PRESENT, 
+// AND HEADER NAVBAR IS FIXED TOP  
 // MOVE THE MENUBAR DOWN A BIT SO ITS NOT HIDDEN BY WP ADMIN BAR
 body.admin-bar nav.fixed-top {
     top: var(--wp-adminbar-height);
@@ -81,8 +83,11 @@ body.admin-bar nav.fixed-top {
 
 // WHEN WP ADMIN BAR IS PRESENT, AND HEADER NAVBAR IS FIXED TOP
 // MOVE THE SITE DOWN A BIT
-body.admin-bar:not(.picostrap_header_navbar_color_choice_bg-transparent):has(nav.fixed-top) {
+body.admin-bar:has(nav.fixed-top) {
     padding-top:  calc(var(--wp-adminbar-height) + var(--header-height));
+}
+body.admin-bar:has(nav.fixed-top.bg-transparent) {
+    padding-top:  0;
 }
 
 // OPTIONAL: 
