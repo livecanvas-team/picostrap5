@@ -61,11 +61,31 @@ body:has(nav.fixed-top) *[id] {
 // FIX SVG LOGO IN HEADER
 .custom-logo-link img[src$='.svg'] {width:100%}
 
+//ORIG
+
+// WHEN HEADER NAVBAR IS FIXED TOP, unless it's transparent, MOVE CONTENT DOWN so it's not hidden by the menubar
+// You may want to remove/edit this row depending on your design and navbar height
+body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_color_choice_bg-transparent) {padding-top:58px}
+
+// WHEN HEADER NAVBAR IS FIXED TOP, Make WPADMINBAR SEE-THROUGH
+body.picostrap_header_navbar_position_fixed-top #wpadminbar {opacity:0.1}
+body.picostrap_header_navbar_position_fixed-top #wpadminbar:hover {opacity:1}
+
+// OPT-IN: WHEN TOP ADMIN BAR IS PRESENT, MOVE MENU AND SITE DOWN A BIT
+//body.admin-bar #wrapper-navbar nav {top:30px;}
+//body.admin-bar.picostrap_header_navbar_position_fixed-top {padding-top: 88px;}
+ 
+
+
+// TOO NEW.....
+
+/*
 // CASE WP ADMIN BAR IS NOT PRESENT /////////////////////////////////
 
 // ...AND THERE IS A FIXED TOP NAVBAR, unless it's transparent, 
 // MOVE BODY CONTENT DOWN A BIT so it's not hidden by the menubar
 // You may want to remove/edit this row depending on your design and navbar height
+body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_color_choice_bg-transparent)
 body.picostrap_header_navbar_position_fixed-top:not(.admin-bar):not(.picostrap_header_navbar_color_choice_bg-transparent):not(.lc-custom-header), //this selector is only for FireFox < 121
 body:not(.admin-bar):has(nav.fixed-top) {
     padding-top: var(--header-height);
@@ -78,6 +98,7 @@ body.is-using-livecanvas:not(.admin-bar):has(nav.fixed-top.bg-transparent) {
 
 // CASE  WP ADMIN BAR IS PRESENT ///////////////////////////////////////
 
+ 
 // ...AND HEADER NAVBAR IS FIXED TOP  
 // MOVE THE NAV DOWN A BIT SO ITS NOT HIDDEN BY WP ADMIN BAR
 body.admin-bar nav.fixed-top {
@@ -98,6 +119,7 @@ body.admin-bar:has(nav.fixed-top) {
 body.admin-bar.is-using-livecanvas:has(nav.fixed-top.bg-transparent) {
     padding-top:   var(--wp-adminbar-height);
 }
+*/
 
 // OPTIONAL: 
 // WHEN HEADER NAVBAR IS FIXED TOP, Make WPADMINBAR ALMOST TRANSPARENT,
