@@ -1,8 +1,8 @@
 ///// PICOSTRAP.SCSS:  
 /// A bunch of small utilities and CSS tweaks, to make
-///  some WordPress elements behave a bit better with Bootstrap.
+/// some WordPress elements behave a bit better with Bootstrap.
 /// 
-///  You should not need to edit this file. 
+/// You should not need to edit this file. 
 /// 
 /// 
 /// TO ADD YOUR OWN CODE:
@@ -41,7 +41,7 @@ html {
 
 :root {
   --header-height: 56px; // default, customize this value to suit your design
-  --wp-adminbar-height: 30px; // standard, leave untouched
+  --wp-adminbar-height: 32px; // standard, leave untouched
 }
 
 /* ============ SCROLL OFFSET  ============ */
@@ -70,6 +70,7 @@ body:not(.admin-bar):has(nav.fixed-top) {
     padding-top: var(--header-height);
 }
 
+//if header is transparent, don't account for the navbar, so that backgrounds are not messed up in the first home section
 body:not(.admin-bar):has(nav.fixed-top.bg-transparent) {
     padding-top: 0;
 }
@@ -86,8 +87,10 @@ body.admin-bar nav.fixed-top {
 body.admin-bar:has(nav.fixed-top) {
     padding-top:  calc(var(--wp-adminbar-height) + var(--header-height));
 }
+
+//if header is transparent, don't account for the navbar, so that backgrounds are not messed up in the first home section
 body.admin-bar:has(nav.fixed-top.bg-transparent) {
-    padding-top:  0;
+    padding-top:   var(--wp-adminbar-height);
 }
 
 // OPTIONAL: 
