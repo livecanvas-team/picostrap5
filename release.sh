@@ -5,7 +5,8 @@ echo "Release picostrap5:"
 
 
 # Define a subfolder name
-SUBFOLDER="picostrap5"
+SUBFOLDER="../picostrap5-deploy"
+NAMEZIP="picostrap5"
 
 # Create the subfolder if it doesn't exist
 mkdir -p "$SUBFOLDER"
@@ -18,7 +19,7 @@ rm -rf "$SUBFOLDER"/.gitignore
 rm -rf "$SUBFOLDER"/.DS_Store
 
 # Zip the subfolder
-zip -r "${SUBFOLDER}.zip" "$SUBFOLDER/"
+zip -r "${NAMEZIP}.zip" "$SUBFOLDER/"
 
 # Optionally, remove the subfolder after zipping
 rm -rf "$SUBFOLDER"
