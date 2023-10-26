@@ -143,6 +143,9 @@ function setColorWidget(theSuffix = "body-bg", theValue = "#ffcc99") {
 
         //USER CLICKS GENERATE BUTTON: GENERATE PALETTE
         document.getElementById("generate-button").addEventListener("click", function () {
+            //disable the button
+            this.disabled = true;
+
             // Get input values
             const mode = document.getElementById("mode").value;
             const numColors = document.getElementById("num_colors").value;
@@ -251,6 +254,7 @@ function setColorWidget(theSuffix = "body-bg", theValue = "#ffcc99") {
 
                             //scroll to it
                             document.querySelector(".result-palettes").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest", });
+                            document.getElementById("generate-button").disabled = false;
                         });
                     } else {
                         // Handle the case where response.results is undefined or not an array
