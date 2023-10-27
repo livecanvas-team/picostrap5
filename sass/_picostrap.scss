@@ -71,7 +71,7 @@ body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_col
 
 //  WP ADMIN BAR: IF THERE IS A FIXED TOP ELEMENT LIKE A MENUBAR IN THE PAGE, MOVE THE WP ADMIN BAR AT PAGE BOTTOM
 html:has(.fixed-top) {
-    #wpadminbar { top: auto !important; bottom: 0;}
+    #wpadminbar { position: fixed; top: auto !important; bottom: 0;}
     #wpadminbar .quicklinks .menupop .ab-sub-wrapper { bottom: 28px;}
     #wpadminbar .quicklinks .menupop ul { bottom: 0;}
 }
