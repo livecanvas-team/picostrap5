@@ -63,33 +63,25 @@ body:has(nav.fixed-top) *[id] {
 
 // IMPORTANT NOTE: if body has class picostrap_header_navbar_position_xxx or picostrap_header_navbar_color_choice_xxx then we are not using a custom LC-powered header
 
-// WHEN HEADER NAVBAR IS FIXED TOP, unless it's transparent, MOVE CONTENT DOWN so it's not hidden by the menubar
-// You may want to remove/edit this row depending on your design and navbar height
-body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_color_choice_bg-transparent) {padding-top: var(--header-height); }
+// WHEN using built-in header, and HEADER NAVBAR IS set to FIXED TOP, unless it's transparent, 
+// MOVE CONTENT DOWN so it's not hidden by the menubar 
+body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_color_choice_bg-transparent) {
+    padding-top: var(--header-height); 
+}
 
-// OPT-IN: WHEN TOP ADMIN BAR IS PRESENT, MOVE MENU AND SITE DOWN A BIT
-// these rules don't play well with the topbar, and are risky
-//body.admin-bar #wrapper-navbar nav {margin-top: var(--wp-adminbar-height); }
-//body.admin-bar.picostrap_header_navbar_position_fixed-top {padding-top: calc(var(--wp-adminbar-height) + var(--header-height));   }
-//...when fixed header is transparent
-//body.admin-bar.picostrap_header_navbar_position_fixed-top.picostrap_header_navbar_color_choice_bg-transparent  {padding-top: var(--wp-adminbar-height)   }
-//...when fixed header is transparent, Woocommerce templates
-//body.admin-bar.picostrap_header_navbar_position_fixed-top.picostrap_header_navbar_color_choice_bg-transparent.woocommerce  {padding-top: calc(  var(--wp-adminbar-height) + var(--header-height));    }
+//  IF THERE IS A FIXED TOP ELEMENT LIKE A MENUBAR, MOVE THE WP ADMIN BAR AT PAGE BOTTOM
+html:has(.fixed-top){
+    #wpadminbar { top: auto !important; bottom: 0;}
+    #wpadminbar .quicklinks .menupop .ab-sub-wrapper { bottom: 28px;}
+    #wpadminbar .quicklinks .menupop ul { bottom: 0;}
+}
 
-// Make WPADMINBAR ALMOST TRANSPARENT, AND SHOW IT FULLY ON HOVER
-// when using topbar or fixed header
-body.picostrap_header_navbar_position_fixed-top #wpadminbar,
-body.picostrap_topbar_enabled #wpadminbar {opacity:0.1;transition: all .5s ease-out;}
-
-body.picostrap_header_navbar_position_fixed-top #wpadminbar:hover,
-body.picostrap_topbar_enabled #wpadminbar:hover {opacity:1;transition: all .5s ease-out;}
- 
 /* ============ OPTIONAL "SCROLL DETECTION" AND HEADER MODS ============ */
 
 // HOW THIS WORKS:
 // From the Customizer, enable the "Scroll Detection" feature.
-// Depending on if page is scrolled, or at the top, 
-// one of these classes will be added to the bodyelement:
+
+// Depending upon scroll position, one of these classes will be added to the body element:
 // scroll-position-at-top / scroll-position-not-at-top
 
 //PAGE HAS NOT SCROLLED YET: MAKE HEADER BIGGER, BUT LEAVE IT TRANSPARENT
@@ -99,7 +91,7 @@ body.scroll-position-at-top  #wrapper-navbar nav.navbar {
 
 //PAGE HAS SCROLLED: MAKE HEADER NAVBAR COLOR CHANGE COLOR
 body.scroll-position-not-at-top  #wrapper-navbar nav.navbar { 
-	background: white !important;
+	background: var(--bs-body-bg) !important;
 }
 
 //ANIMATION
