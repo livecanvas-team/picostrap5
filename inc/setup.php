@@ -191,4 +191,4 @@ function bootstrap_wrap_oembed( $html ){
 
 //REMOVE ADMIN BAR BUMP HTML via MARGIN TOP CSS: 
 // removes  html {    margin-top: 32px !important;}
-//add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
+add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
