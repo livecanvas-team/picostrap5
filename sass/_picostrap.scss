@@ -108,12 +108,12 @@ html:not(:has(.fixed-top)):has(body.admin-bar) {
 
 //PAGE HAS NOT SCROLLED YET: MAKE HEADER BIGGER, BUT LEAVE IT TRANSPARENT
 body.scroll-position-at-top  #wrapper-navbar nav.navbar { 
-	padding: 2rem 0; 
+	padding: 1.01rem 0; 
 }
 
 //PAGE HAS SCROLLED: MAKE HEADER NAVBAR COLOR CHANGE COLOR
 body.scroll-position-not-at-top  #wrapper-navbar nav.navbar { 
-	background: var(--bs-body-bg) !important;
+	background-color: $body-bg !important;
 }
 
 //ANIMATION
