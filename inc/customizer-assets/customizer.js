@@ -543,7 +543,7 @@
 		//// BOOTSTRAP VARIABLES TOOLBOX ////
 
 		//ADD TOOLS MINIPANEL TO RESET / LOAD / DOWNLOAD BOOTSTRAP / SCSS VARS
-		$("li#accordion-section-themes").after(`
+        $("li#accordion-section-publish_settings").before(`
 		
 			<div id='bs-tools'>
 				<span>Bootstrap Variables:</span>

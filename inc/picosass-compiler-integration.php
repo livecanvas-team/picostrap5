@@ -15,7 +15,7 @@ add_action( 'wp_head', function  () {
 	if (!isset($_GET['customize_theme']) && !isset($_GET['compile_sass'])) return;
     
     //preload theme scss
-    $theme_filenames_str = "_bootstrap-loader _custom _picostrap _theme_variables _woocommerce _wp_basic_styles main  ninjabootstrap/_borders ninjabootstrap/_letter-spacing ninjabootstrap/_positioning ninjabootstrap/_sizing ninjabootstrap/_theme_colors_shades ninjabootstrap/_variables";
+    $theme_filenames_str = "_bootstrap-loader _custom _picostrap _theme_variables _woocommerce _wp_basic_styles main ninjabootstrap/_borders ninjabootstrap/_letter-spacing ninjabootstrap/_positioning ninjabootstrap/_sizing ninjabootstrap/_theme_colors_shades ninjabootstrap/_variables";
 	$theme_filenames_arr = explode (' ',$theme_filenames_str);
 	foreach($theme_filenames_arr as $theme_filename) {
 		?> 
