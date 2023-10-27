@@ -68,7 +68,7 @@ body:has(nav.fixed-top) *[id] {
 body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_color_choice_bg-transparent) {padding-top: var(--header-height); }
 
 // OPT-IN: WHEN TOP ADMIN BAR IS PRESENT, MOVE MENU AND SITE DOWN A BIT
-// these rules don't play well with the topbar
+// these rules don't play well with the topbar, and are risky
 //body.admin-bar #wrapper-navbar nav {margin-top: var(--wp-adminbar-height); }
 //body.admin-bar.picostrap_header_navbar_position_fixed-top {padding-top: calc(var(--wp-adminbar-height) + var(--header-height));   }
 //...when fixed header is transparent
@@ -76,10 +76,13 @@ body.picostrap_header_navbar_position_fixed-top:not(.picostrap_header_navbar_col
 //...when fixed header is transparent, Woocommerce templates
 //body.admin-bar.picostrap_header_navbar_position_fixed-top.picostrap_header_navbar_color_choice_bg-transparent.woocommerce  {padding-top: calc(  var(--wp-adminbar-height) + var(--header-height));    }
 
-// WHEN HEADER NAVBAR IS FIXED TOP, Make WPADMINBAR ALMOST TRANSPARENT,
-// AND SHOW IT FULLY ON HOVER
-#wpadminbar {opacity:0.1;transition: all .5s ease-out;}
-#wpadminbar:hover {opacity:1;transition: all .5s ease-out;}
+// Make WPADMINBAR ALMOST TRANSPARENT, AND SHOW IT FULLY ON HOVER
+// when using topbar or fixed header
+body.picostrap_header_navbar_position_fixed-top #wpadminbar,
+body.picostrap_topbar_enabled #wpadminbar {opacity:0.1;transition: all .5s ease-out;}
+
+body.picostrap_header_navbar_position_fixed-top #wpadminbar:hover,
+body.picostrap_topbar_enabled #wpadminbar:hover {opacity:1;transition: all .5s ease-out;}
  
 /* ============ OPTIONAL "SCROLL DETECTION" AND HEADER MODS ============ */
 

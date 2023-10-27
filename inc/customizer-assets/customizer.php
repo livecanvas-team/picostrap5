@@ -55,6 +55,8 @@ function picostrap_config_body_classes( $classes ) {
 	
 	$classes[]="picostrap_header_navbar_position_".get_theme_mod('picostrap_header_navbar_position');
 	$classes[]="picostrap_header_navbar_color_choice_".get_theme_mod('picostrap_header_navbar_color_choice');
+
+    if (get_theme_mod("enable_topbar")) $classes[]="picostrap_topbar_enabled";
 	
 	return $classes;
 }
