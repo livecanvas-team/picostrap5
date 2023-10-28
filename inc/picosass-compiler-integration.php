@@ -2,11 +2,6 @@
 
 ////   PICOSASS JS INTEGRATION ////
 
-// TODO: FORCE CSS REBUILD UPON ENABLING CHILD THEME //has to be updated to new logic
-add_action( 'after_switch_theme', 'picostrap_force_css_rebuilding', 10, 2 ); 
-function picostrap_force_css_rebuilding() {   
-    //remove_theme_mod("picostrap_scss_last_filesmod_timestamp_v2"); //no, we should force recompiling differently, eg show nag and link recompile
-}
 
 //FOR THE CUSTOMIZER AND FRONTEND SCSS COMPILER: ADD TO HEADER SOME PRELOADING FOR SCSS FILES
  

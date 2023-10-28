@@ -43,7 +43,7 @@ function picostrap_get_css_version(){
 add_action( 'wp_enqueue_scripts',  function  () {
  
     //ENQUEUE THE CSS FILE
-    wp_enqueue_style( 'picostrap-styles', picostrap_get_css_url(), array(), picostrap_get_css_version()); 
+    wp_enqueue_style( 'picostrap-styles', picostrap_get_css_url() . '#handlecsserror', array(), picostrap_get_css_version()); 
     
 });
 
@@ -108,6 +108,18 @@ function picostrap_defer_scripts($url){
 	return str_replace( '#deferload', '', $url )."' defer='defer"; 
     }
 add_filter( 'clean_url', 'picostrap_defer_scripts', 11, 1 );
+
+//CSS error handling ENQUEUE: if CSS bundle file is not found, trigger recompile
+function picostrap_add_css_error_handling($url){
+    if ( strpos( $url, '#handlecsserror') === false )
+        return $url;
+    else if ( !current_user_can('administrator') or isset($_GET['compile_sass']))
+        return str_replace( '#handlecsserror', '', $url );
+    else
+	return str_replace( '#handlecsserror', '', $url )."' onerror='alert(\"CSS bundle not found. Rebuilding.\");location.href=\"?compile_sass=1&sass_nocache=1\""; 
+    }
+add_filter( 'clean_url', 'picostrap_add_css_error_handling', 11, 1 );
+
 
 
 //UNRENDER-BLOCK CSS 
