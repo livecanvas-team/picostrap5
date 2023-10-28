@@ -74,7 +74,7 @@ function canonicalize(url) {
 async function load(canonicalUrl) {
 
     //console.log(`Importing ${canonicalUrl} (async)`);
-    
+
     //show some feedback about the file that is loaded
     if (document.querySelector("#picosass-output-feedback span")) {
         document.querySelector("#picosass-output-feedback span").innerHTML = `Importing file: <br>${canonicalUrl}`;
@@ -83,32 +83,18 @@ async function load(canonicalUrl) {
     //build the request options: if nocache parameter is set, declare it, or just have an empty one. Seems like default browser is no cache anyway.
     const options = (((new URL(document.location)).searchParams).get("sass_nocache")) ? { cache: "no-cache" } : {}
 
+    //fetch the URL
+    let response = await fetch(canonicalUrl, options);
 
-    let url = canonicalUrl;
-    const checkResponse = await fetch(canonicalUrl, { method: 'HEAD' })
-    if (checkResponse.status > 399 && document.querySelector(theScssSelector).hasAttribute("fallback_baseurl")) {
-        // Skipping the fetch since the status code is 404
-        url = canonicalUrl.href.replace(
-                (document.querySelector(theScssSelector).getAttribute("baseurl")),
-                (document.querySelector(theScssSelector).getAttribute("fallback_baseurl")
+    //if file is not found, let's see in the fallback folder
+    if (!response.ok && document.querySelector(theScssSelector).hasAttribute("fallback_baseurl")) {
+        const canonicalUrlFallback = canonicalUrl.href.replace(
+            (document.querySelector(theScssSelector).getAttribute("baseurl")),
+            (document.querySelector(theScssSelector).getAttribute("fallback_baseurl")
             ));
-    } 
-    //fetch the URL
-    let response = await fetch(url, options);
-
-
-    //fetch the URL
-    // let response = await fetch(canonicalUrl, options);
-
-    // //if file is not found, let's see in the fallback folder
-    // if (!response.ok && document.querySelector(theScssSelector).hasAttribute("fallback_baseurl")) {
-    //     const canonicalUrlFallback = canonicalUrl.href.replace(
-    //         (document.querySelector(theScssSelector).getAttribute("baseurl")),
-    //         (document.querySelector(theScssSelector).getAttribute("fallback_baseurl")
-    //     ));
-    //     console.log('Since ' + canonicalUrl.href + ' cannot be found, we look for ' + canonicalUrlFallback);
-    //     response = await fetch(canonicalUrlFallback, options);
-    // }
+        console.log('Since ' + canonicalUrl.href + ' cannot be found, we look for ' + canonicalUrlFallback);
+        response = await fetch(canonicalUrlFallback, options);
+    }
 
     if (!response.ok) {
         document.querySelector("#picosass-output-feedback").innerHTML = `Error reading   SCSS file:  ${canonicalUrl} <span>${response.status} (${response.statusText})</span>`;
@@ -121,7 +107,7 @@ async function load(canonicalUrl) {
     }
 }
 
-async function runScssCompiler(theCode, sassParams ) {
+async function runScssCompiler(theCode, sassParams) {
 
     //SMART DEFAULTS FOR THE COMPILER
 
@@ -137,7 +123,7 @@ async function runScssCompiler(theCode, sassParams ) {
     return await sass.compileStringAsync(theCode, sassParams)
 }
 
-export function Compile(sassParams = {}, theCallback = () => {} ) {
+export function Compile(sassParams = {}, theCallback = () => { }) {
 
     //for debug
     console.log("PicoSASS Compile launched");
@@ -151,15 +137,15 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
             #picosass-output-feedback:empty {display:none}
         </style>
         `);
-    
+
     //is a Compile process already running? if so, abort
     //TODO: make it cleaner, this is just a dirty implementation
-    if(document.querySelector("#picosass-output-feedback").innerHTML.includes('Compiling')) {
-        console.log("PicoSASS task is already running, retrying in a few secs."); 
+    if (document.querySelector("#picosass-output-feedback").innerHTML.includes('Compiling')) {
+        console.log("PicoSASS task is already running, retrying in a few secs.");
         setTimeout(function () {
             Compile(sassParams, theCallback);
-        }, 2000);  
-        
+        }, 2000);
+
         return false;
     }
 
@@ -168,15 +154,15 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
 
     //if SCSS source element is empty, exit
     const theCode = document.querySelector(theScssSelector).innerHTML;
-    if (theCode.trim() == '')  {
+    if (theCode.trim() == '') {
         console.log("Empty SCSS source, aborting");
-        return false; 
+        return false;
     }
 
     //show the first feedback message: Compiling .... 
     document.querySelector("#picosass-output-feedback").innerHTML = `Compiling SCSS... <span></span>`;
     console.log("Compiling SCSS...");
-    
+
     //measure time
     const timeStart = Date.now();
 
@@ -198,15 +184,15 @@ export function Compile(sassParams = {}, theCallback = () => {} ) {
             document.querySelector(".picostrap-provisional-css")?.setAttribute("disabled", "true");
 
             //show compiled size
-            const theFeedback = `SCSS compiled successfully. <span>Approx. CSS bundle size:  ${measureStringSizeInKB(compiled.css)} KB (${measureEstimatedGzippedSizeInKB(compiled.css)} KB gzipped) </span><span>Execution time: ${(timeEnd - timeStart)/1000 } secs</span>`;
-            document.querySelector("#picosass-output-feedback").innerHTML= theFeedback;
+            const theFeedback = `SCSS compiled successfully. <span>Approx. CSS bundle size:  ${measureStringSizeInKB(compiled.css)} KB (${measureEstimatedGzippedSizeInKB(compiled.css)} KB gzipped) </span><span>Execution time: ${(timeEnd - timeStart) / 1000} secs</span>`;
+            document.querySelector("#picosass-output-feedback").innerHTML = theFeedback;
             console.log(theFeedback.replace(/(<([^>]+)>)/ig, ''));
 
             //as there are no errors, clear the output feedback
             const myTimeout = setTimeout(() => { document.querySelector("#picosass-output-feedback").innerHTML = ''; }, 4500);
 
             //run callback
-            theCallback(compiled); 
+            theCallback(compiled);
         })
 
         .catch((error) => {
@@ -231,6 +217,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     //run  the compiler, unless a special class is added to the body
     if (!document.querySelector(theScssSelector).classList.contains("prevent-autocompile")) {
         Compile();
-    } 
+    }
 
 }); //end onDOMContentLoaded
