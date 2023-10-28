@@ -95,7 +95,7 @@ function theme_option_page() {
 								.button-hero { min-width: 58%;text-align: center; }
 							</style>
                             <h3>Get Started</h3>
-                            <a class="button button-hero" target="_blank" href="https://picostrap.com/documentation/">Theme Documentation</a>
+                            <a class="button button-hero" target="_blank" href="https://picostrap.com/docs/">Theme Documentation</a>
 							<br><br>
 							<a class="button button-primary button-hero" href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>">Customize Your Site</a>
                             <p>  to make your own Bootstrap build!		</p>
