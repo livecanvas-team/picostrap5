@@ -21,7 +21,7 @@ $picostrap_includes = array(
 	'/editor.php',                          // Load Editor functions. 
 	'/customizer-assets/customizer.php',	//Defines Customizer options
 	'/picosass-compiler-integration.php',	//To interface the Customizer with the SCSS js compiler
-	'/scssphp-legacy-compiler-integration.php', //To interface the Customizer with the SCSS php compiler
+	//'/scssphp-legacy-compiler-integration.php', //To interface the Customizer with the SCSS php compiler
 	'/options-page.php',                  // Load theme options page. 
 	'/content-filtering.php',				//for LC compatibility when shutting down plugin
 

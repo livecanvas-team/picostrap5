@@ -1,5 +1,5 @@
 # picoSASS
-> Drop-in SASS compiler for HTML pages: compile SCSS in the browser with a simple API. Uses official DART SASS implementation.
+> Drop-in SASS compiler for HTML pages: compile SCSS in the browser with a simple API. Uses official DART SASS implementation. Readme file:TODO.
 > Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
@@ -80,7 +80,7 @@ Give credit here.
 
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+Created by [@LiveCanvas](https://www.livecanvas.com/) - feel free to contact me!
 
 
 <!-- Optional -->
