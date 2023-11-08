@@ -54,10 +54,10 @@ add_action( 'wp_enqueue_scripts', function() {
     //MAIN BOOTSTRAP JS
     //want to override file in child theme? use get_stylesheet_directory_uri in place of get_template_directory_uri 
     //this was done for compatibility reasons towards older child themes
-    wp_enqueue_script( 'bootstrap5', get_template_directory_uri() . "/js/bootstrap.bundle.min.js#deferload", array(), null, true );
+    wp_enqueue_script( 'bootstrap5', get_template_directory_uri() . "/js/bootstrap.bundle.min.js", array(), null, array('strategy' => 'defer', 'in_footer' => true) );
 
     //DARK MODE SWITCH SUPPORT
-    if (get_theme_mod('enable_dark_mode_switch')) wp_enqueue_script( 'dark-mode-switch', get_template_directory_uri() . "/js/dark-mode-switch.js#deferload", array(), null, true );
+    if (get_theme_mod('enable_dark_mode_switch')) wp_enqueue_script( 'dark-mode-switch', get_template_directory_uri() . "/js/dark-mode-switch.js", array(), null,  array('strategy' => 'defer', 'in_footer' => true) );
     
 } ,100);
 
@@ -86,29 +86,6 @@ function picostrap_add_header_chrome_color() {
 	<?php endif;
 }
 
-//Utils for ASYNC / DEFER. Read more at https://pagespeedchecklist.com/async-and-defer
-//JS ASYNC ENQUEUE: add an async load option 
-function picostrap_async_scripts($url){
-    if ( strpos( $url, '#asyncload') === false )
-        return $url;
-    else if ( is_admin() )
-        return str_replace( '#asyncload', '', $url );
-    else
-	return str_replace( '#asyncload', '', $url )."' async='async"; 
-    }
-add_filter( 'clean_url', 'picostrap_async_scripts', 11, 1 );
-
-//JS defer ENQUEUE: add an defer load option 
-function picostrap_defer_scripts($url){
-    if ( strpos( $url, '#deferload') === false )
-        return $url;
-    else if ( is_admin() )
-        return str_replace( '#deferload', '', $url );
-    else
-	return str_replace( '#deferload', '', $url )."' defer='defer"; 
-    }
-add_filter( 'clean_url', 'picostrap_defer_scripts', 11, 1 );
-
 //CSS error handling ENQUEUE: if CSS bundle file is not found, trigger recompile
 function picostrap_add_css_error_handling($url){
     if ( strpos( $url, '#handlecsserror') === false )
@@ -119,8 +96,6 @@ function picostrap_add_css_error_handling($url){
 	return str_replace( '#handlecsserror', '', $url )."' onerror='alert(\"CSS bundle not found. Rebuilding.\");location.href=\"?compile_sass=1&sass_nocache=1\""; 
     }
 add_filter( 'clean_url', 'picostrap_add_css_error_handling', 11, 1 );
-
-
 
 //UNRENDER-BLOCK CSS 
 // as per https://www.phpied.com/faster-wordpress-rendering-with-3-lines-of-configuration/

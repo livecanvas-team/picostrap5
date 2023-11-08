@@ -7,7 +7,7 @@
 
 //enqueue js in footer, async
 add_action( 'wp_enqueue_scripts', function() {
-	wp_enqueue_script( 'glightbox',  "https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js#asyncload", array(), false, true );
+	wp_enqueue_script( 'glightbox',  "https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js", array(), false,  array('strategy' => 'async', 'in_footer' => true)  );
 } ,100);
 
 //add inline js in footer, defer execution
