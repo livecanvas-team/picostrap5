@@ -2,7 +2,7 @@
 /**
  * Bootstrap 5 WordPress navbar walker menu 1.3.4
  * https://github.com/AlexWebLab/bootstrap-5-wordpress-navbar-walker
- * Includes 2 custom patches for submenus on BootStrap 5.1 
+ * Includes 2 custom patches for submenus on Bootstrap 5.1 by the LC Team
  *
  * @package picostrap5
  */
