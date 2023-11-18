@@ -1,6 +1,8 @@
 // From https://getbootstrap.com/docs/5.3/customize/sass/#importing
 // Custom.scss
 // Option B: Include parts of Bootstrap
+// You can exclude parts of Bootstrap commenting these lines, one by one.
+// Caution: you must know what you're doing. Not truly necessary
 
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "bootstrap5/functions";
@@ -70,4 +72,3 @@
 
 @import "bootstrap5/utilities/api";
 
-// 8. Add additional custom code here
