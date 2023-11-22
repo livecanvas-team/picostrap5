@@ -342,15 +342,13 @@
 
 		// FONT COMBINATIONS SELECT ////////////////////////////////////////////
 
-		//ADD THE UI: append link to show FONT COMBINATIONs
-		$("#customize-control-SCSSvar_font-family-base h1").append(" <a href='#' id='cs-show-combi' style='float: right;  font-size: 10px;text-decoration: none;user-select: none;'>Font Combinations...</button>");
-
-		//ADD THE UI: the SELECT
+		//ADD UI: the SELECT for FONT BASE
 		$("li#customize-control-SCSSvar_font-family-base").prepend(ps_font_combinations_select);
 
 		//USER CLICKS SHOW FONT COMBINATIONS: show the select
 		$("body").on("click", "#cs-show-combi", function () {
 			//$(".customize-controls-close").click();
+            $(this).toggleClass("active");
 			$("#cs-font-combi").slideToggle();
 		});
 
@@ -505,7 +503,7 @@
 		/// VIDEO TUTORIAL LINKS ////////////////////////
 
 		function pico_add_video_link (section_name, video_url){
-			$("#sub-accordion-" + section_name + " li:first ").after("<a class='video-tutorial-link' href='" + video_url + "' target='_blank'>" + videoTutIcon + "Watch Video</a> ");
+            $("#sub-accordion-" + section_name + " .customize-section-title .customize-control-notifications-container").after("<a class='video-tutorial-link' href='" + video_url + "' target='_blank'>" + videoTutIcon + "Watch Video</a> ");
 		}
 
 		//pico_add_video_link("section-colors", "https://youtu.be/SwDrR-FmzkE&t=63s");
@@ -524,19 +522,7 @@
 
 
 
-		/// STYLE GUIDE LINKS ////////////////////////
 
-		function pico_add_styleguide_link(section_name, hash) {
-			 
-			$("#sub-accordion-" + section_name + " li:first ").after("<a class='style-guide-link' href='#" + hash + "'>" + theStyleGuideIcon  + "View Style Guide</a> ");
-		}
-
-		//pico_add_styleguide_link("section-colors", "colors"); //this is now added by palette-generator js
-		pico_add_styleguide_link("section-typography", "typography");
-		pico_add_styleguide_link("section-components", "sample-sections");
-        pico_add_styleguide_link("section-buttons", "buttons");
-		//pico_add_styleguide_link("section-buttons-forms", "");
-		//pico_add_styleguide_link("section-nav", "nav");
 
 		 
 

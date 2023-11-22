@@ -24,8 +24,16 @@ function removeAfterLastSlash(url) {
     $("body").on("click", ".style-guide-link", function (e) {
 
         e.preventDefault();
+        $(this).toggleClass("active");
 
         const thePreviewDocument = document.querySelector('#customize-preview iframe').contentWindow.document;
+        
+        //if button is not active anymore, we have to remove the styleguide
+        if (!$(this).hasClass('active')) { 
+            //place again the original document
+            thePreviewDocument.querySelector('body').innerHTML = window.originalPageBody;
+            return false; //early exit
+        }
 
         //first time, store the body in originalPageBody
         if (typeof window.originalPageBody === 'undefined') {
@@ -95,20 +103,7 @@ function removeAfterLastSlash(url) {
         });
     });
 
-    //WHEN USER RIGHT-CLICKS LINK TO OPEN STYLE GUIDE, RE-PUT ORIGINAL BODY
-    $("body").on("contextmenu", ".style-guide-link", function (e) {
-
-        e.preventDefault();
-        console.log('remove style guide');
-
-        const thePreviewDocument = document.querySelector('#customize-preview iframe').contentWindow.document;
  
-        //if the style guide is already there, place the original body again  
-        if (window.originalPageBody && thePreviewDocument.querySelector('body').innerHTML.includes('Style Guide')) {
-            thePreviewDocument.querySelector('body').innerHTML = window.originalPageBody;
-        }
- 
-    });
 
     //add here
 })(jQuery);

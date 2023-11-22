@@ -251,12 +251,12 @@ body span.fp-pill.italic { display: none}
 #customize-control-headings_font_object {display: none;}
 
 /* VIDEO TUTORIAL LINKS  */
-
 .video-tutorial-link {
-  display:block;
-  text-align:right;
-  font-size: 12px;
-  margin:0 10px 10px;
+    display: block;
+    font-size: 11px;
+    position: absolute;
+    top: 9px;
+    right: 11px;
 }
 
 .video-tutorial-link:hover {
@@ -267,26 +267,13 @@ body span.fp-pill.italic { display: none}
   box-shadow: none;
 }
 
-/* STYLE GUIDE LINKS  */
+/* EXTRA CUSTOMIZER ACTIONS   */
 
-.style-guide-link, .toggle-palette-generator {
-  display:block;
-  text-align:right;
-  font-size: 12px;
-  margin:0 10px 10px;
-}
-
-.style-guide-link:hover, .toggle-palette-generator:hover{
-  color:red;
-}
-
- 
-
-.style-guide-link:focus, .toggle-palette-generator:focus {
-  box-shadow: none;
-}
-
- 
+ .pico-extra-customizer-actions-wrap  {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 11px;
+ }
 
 /* TOOLBAR TO RESET, DOWNLOAD, UPLOAD */
 #bs-tools {
