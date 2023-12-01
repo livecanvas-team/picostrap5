@@ -17,7 +17,7 @@ if ( have_posts() ) :
         ?><div class="d-flex container-fluid" style="height:20vh;"></div>
     <?php } ?>
     
-    <div id="container-content-single" class="container p-5 bg-body shadow mt-lg-n7" >
+    <div id="container-content-single" class="container p-5  bg-body-tertiary text-body-emphasis shadow mt-lg-n7" >
         <div class="row text-center mb-2">
             
             <div class="col-md-12">
