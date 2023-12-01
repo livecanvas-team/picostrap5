@@ -32,7 +32,7 @@ if (have_posts()):
         }
         ?>
     
-    <div id="container-content-single" class="container position-relative p-5  bg-body-tertiary text-body-emphasis shadow mt-lg-n7" >
+    <div id="container-content-single" class="container position-relative p-5 bg-body text-body-emphasis shadow mt-lg-n7" >
         <div class="row text-center mb-2">
             
             <div class="col-md-12">
@@ -55,7 +55,7 @@ if (have_posts()):
                 
                 <?php if (!get_theme_mod("singlepost_disable_date") OR !get_theme_mod("singlepost_disable_author")  ): ?>
                     <div class="post-meta" id="single-post-meta">
-                        <p class="lead opacity-50">
+                        <p class="lead opacity-75">
                             
                             <?php if (!get_theme_mod("singlepost_disable_date") ): ?>
                                 <span class="post-date"><?php the_date(); ?> </span>
