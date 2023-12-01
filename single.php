@@ -6,23 +6,35 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 
 
+// Loop through posts if there are any
+if (have_posts()):
+    while (have_posts()): the_post();
 
-
-if ( have_posts() ) : 
-    while ( have_posts() ) : the_post();
-    
-    if (get_the_post_thumbnail_url()) { 
+        // Check if the post has a featured image
+        if (has_post_thumbnail()) {
+            // Get the ID of the featured image
+            $thumbnail_id = get_post_thumbnail_id();
+            // Retrieve the alt attribute for the featured image
+            $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
+            ?>
+            <div class="container-fluid d-flex p-0 bg-body" style="height:50vh;">
+                <?php
+                // Output the featured image with custom classes and styles
+                the_post_thumbnail('full', [
+                    'class' => 'img-fluid w-100 h-100',
+                    'style' => 'object-fit:cover;',
+                    'alt' => esc_attr($alt) // Use the retrieved alt attribute
+                ]);
+                ?>
+            </div>
+        <?php
+        } else {
+            // Default block if no featured image is found
+            ?>
+            <div class="container-fluid d-flex p-0" style="height:20vh;"></div>
+        <?php
+        }
         ?>
-        <div class="container-fluid d-flex p-0" style="height:50vh;">
-            <img class="img-fluid w-100 h-100" style="object-fit:cover;" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title_attribute(); ?>">
-        </div>
-        <?php 
-    } else {
-        ?>
-        <div class="container-fluid d-flex p-0" style="height:20vh;"></div>
-        <?php 
-    } ?>
-
     
     <div id="container-content-single" class="container position-relative p-5  bg-body-tertiary text-body-emphasis shadow mt-lg-n7" >
         <div class="row text-center mb-2">
