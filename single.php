@@ -17,8 +17,8 @@ if ( have_posts() ) :
         ?><div class="d-flex container-fluid" style="height:20vh;"></div>
     <?php } ?>
     
-    <div id="container-content-single" class="container p-5 bg-light" style="margin-top:-100px">
-        <div class="row text-center">
+    <div id="container-content-single" class="container p-5 bg-body shadow mt-lg-n7" >
+        <div class="row text-center mb-2">
             
             <div class="col-md-12">
                 <?php 
@@ -40,14 +40,14 @@ if ( have_posts() ) :
                 
                 <?php if (!get_theme_mod("singlepost_disable_date") OR !get_theme_mod("singlepost_disable_author")  ): ?>
                     <div class="post-meta" id="single-post-meta">
-                        <p class="lead text-secondary">
+                        <p class="lead opacity-50">
                             
                             <?php if (!get_theme_mod("singlepost_disable_date") ): ?>
                                 <span class="post-date"><?php the_date(); ?> </span>
                             <?php endif; ?>
 
                             <?php if (!get_theme_mod("singlepost_disable_author") ): ?>
-                                <span class="text-secondary post-author"> <?php _e( 'by', 'picostrap5' ) ?> <?php the_author(); ?></span>
+                                <span class="post-author"> <?php _e( 'by', 'picostrap5' ) ?> <?php the_author(); ?></span>
                             <?php endif; ?>
                         </p>
                     </div> 
