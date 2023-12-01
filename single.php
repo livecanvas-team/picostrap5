@@ -11,11 +11,7 @@ if (have_posts()):
     while (have_posts()): the_post();
 
         // Check if the post has a featured image
-        if (has_post_thumbnail()) {
-            // Get the ID of the featured image
-            $thumbnail_id = get_post_thumbnail_id();
-            // Retrieve the alt attribute for the featured image
-            $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
+        if (has_post_thumbnail()) {  
             ?>
             <div class="container-fluid d-flex p-0 bg-body" style="height:50vh;">
                 <?php
@@ -23,7 +19,7 @@ if (have_posts()):
                 the_post_thumbnail('full', [
                     'class' => 'img-fluid w-100 h-100',
                     'style' => 'object-fit:cover;',
-                    'alt' => esc_attr($alt) // Use the retrieved alt attribute
+                    'alt' => esc_attr(get_post_meta(get_post_thumbnail_id() , '_wp_attachment_image_alt', true)), 
                 ]);
                 ?>
             </div>
@@ -31,7 +27,7 @@ if (have_posts()):
         } else {
             // Default block if no featured image is found
             ?>
-            <div class="container-fluid d-flex p-0" style="height:20vh;"></div>
+            <div class="container-fluid d-flex py-6"></div>
         <?php
         }
         ?>
