@@ -32,7 +32,7 @@ if (have_posts()):
         }
         ?>
     
-    <div id="container-content-single" class="container position-relative p-5 bg-body text-body-emphasis shadow mt-lg-n7" >
+    <div id="container-content-single" class="container position-relative p-5 bg-body text-body-emphasis shadow mt-lg-n7 rounded" >
         <div class="row text-center mb-2">
             
             <div class="col-md-12">
