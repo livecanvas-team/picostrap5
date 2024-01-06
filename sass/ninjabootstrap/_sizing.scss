@@ -68,6 +68,26 @@ $utilities: map-merge(
         100: 100vh,
       )
     ),
+    "max-width": (
+      responsive: true,
+      property: max-width,
+      class: mw,
+      values: (
+        0: 0rem,
+        none: none,
+        1: 20rem,
+        2: 24rem,
+        3: 28rem,
+        4: 32rem,
+        5: 36rem,
+        6: 42rem,
+        7: 48rem,
+        8: 56rem,
+        9: 64rem,
+        10: 72rem,
+        11: 80rem
+      )
+    ),
     //"another-prop"
   )
 );
