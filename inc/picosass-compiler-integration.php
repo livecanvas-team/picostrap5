@@ -84,7 +84,9 @@ add_action( 'wp_footer', function  () {
 	if (!current_user_can('administrator') ) return;
 	if (isset($_GET['customize_theme']) OR  !isset($_GET['compile_sass'])) return;
     ?>
-		<script>
+		<script type="module">
+
+			import { Picosass } from "<?php echo get_template_directory_uri() ?>/inc/picosass/picosass.js";
 
 			//init var
 			let lastCssBundle='';
@@ -124,7 +126,8 @@ add_action( 'wp_footer', function  () {
 
 				//Recompile in a few seconds
 				setTimeout(function () {
-					window.Picosass.Compile({}, compilingSassFinishedCallback);
+					const compiler = new Picosass();
+					compiler.compile({}, compilingSassFinishedCallback);
 				}, 7000);
 
 				<?php } else { ?>
@@ -147,9 +150,8 @@ add_action( 'wp_footer', function  () {
 
 			/////// ON DOM CONTENT LOADED, RUN COMPILER
 			window.addEventListener("DOMContentLoaded", (event) => {
-
-				window.Picosass.Compile({}, compilingSassFinishedCallback);
-				 
+				const compiler = new Picosass();
+				compiler.compile({}, compilingSassFinishedCallback);
 			}); //end onDOMContentLoaded
 
 		</script>

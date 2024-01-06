@@ -199,7 +199,7 @@
 		document.querySelector('#customize-save-button-wrapper').setAttribute('hidden', '');
 
 		//trigger picosass compiler
-		document.querySelector('#customize-preview iframe').contentWindow.Picosass.Compile({}, compilingFinished); 
+		document.querySelector('#customize-preview iframe').contentWindow.picosassInstance.compile({}, compilingFinished); 
 	
 		//update font loading code as well, if necessary
 		if (window.fontLoadingUrl){
