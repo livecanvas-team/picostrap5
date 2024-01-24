@@ -300,10 +300,49 @@ function ps_add_toolbar_items($admin_bar) {
 				)),
 		));	
 	}
-	
-
- 	 
 } 
+
+// ADD RECOMPILE TRIGGER LINK TO ADMIN BAR IN BACKEND
+add_action('admin_bar_menu', 'ps_add_backend_toolbar_items', 100);
+function ps_add_backend_toolbar_items($admin_bar) {
+
+    // Check if user is an administrator
+    if (!current_user_can("administrator")) return;
+
+    // Allow only in the backend
+    if (!is_admin()) return;
+
+    //if (!is_child_theme()) return; // COMMENT TO TEST ON ORIG THEME FOR CONSISTENCY
+
+    // Base query args for recompiling SASS
+    $base_query_args = [
+        'compile_sass' => '1',
+        'sass_nocache' => '1'
+    ];
+
+    // MAIN MENU ELEMENT - Link to Recompile SASS on the homepage
+    $admin_bar->add_node([
+        'id'    => 'ps-recompile-sass-backend',
+        'title' => '<span id="icon-picostrap-sass"></span>' . __('Recompile SASS', 'your-textdomain'),
+        'href'  => add_query_arg($base_query_args, home_url()),
+    ]);
+
+    // CHILD MENU ITEM - Recompile Once
+    $admin_bar->add_node([
+        'id'     => 'ps-recompile-sass-once-backend',
+        'parent' => 'ps-recompile-sass-backend',
+        'title'  => __('Recompile Once', 'your-textdomain'),
+        'href'   => add_query_arg($base_query_args, home_url()),
+    ]);
+
+    // CHILD MENU ITEM - Recompile Continuously
+    $admin_bar->add_node([
+        'id'     => 'ps-recompile-sass-automatic-backend',
+        'parent' => 'ps-recompile-sass-backend',
+        'title'  => __('Recompile Continuously', 'your-textdomain'),
+        'href'   => add_query_arg(array_merge($base_query_args, ['autorecompile' => '1']), home_url()),
+    ]);
+}
 
 
 /////// ICON IN TOOLBAR STYLING ///////////////////////////////////////////////////
