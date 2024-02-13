@@ -1,27 +1,38 @@
 <?php
  
-////////  TOOLTIPS  ////////////////////////////////////////////////////
+////////  TOOLTIPS & POPOVERS ////////////////////////////////////////////////////
 // this is a purely opt-in feature:
 // this code is executed only if the option is enabled in the  Customizer
  
 
 
-// INITIALIZE BOOTSTRAP TOOLTIPS 
-add_action('wp_footer',function(){
+add_action('wp_footer', function() {
     ?>
     <script>
-        const checkBootstrapAvailable = setInterval(() => {
-            //console.log("Trying");
-            if (typeof bootstrap !== 'undefined') {
-                //console.log("Success");
-                clearInterval(checkBootstrapAvailable);
-                // do it
-                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                    return new bootstrap.Tooltip(tooltipTriggerEl);
-                });
+        document.addEventListener('DOMContentLoaded', function() {
+            var bootstrapScript = document.getElementById('bootstrap5-childtheme-js') || document.getElementById('bootstrap5-js');
+            if (bootstrapScript) {
+                if (document.readyState === 'complete' || typeof bootstrap !== 'undefined') {
+                    
+                    // Bootstrap is loaded and available 
+                    
+                    // Initialize Bootstrap  tooltips
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                    tooltipTriggerList.map(function(tooltipTriggerEl) {
+                        return new bootstrap.Tooltip(tooltipTriggerEl);
+                    });
+
+                    // Initialize Bootstrap popovers  
+                    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+                    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+                    
+                } else {
+                    bootstrapScript.addEventListener('load', initializeBootstrapTooltips);
+                }
+            } else {
+                console.error('Bootstrap script not found');
             }
-        }, 500);
+        });
     </script>
     <?php
 });

@@ -1317,8 +1317,8 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "enable_tooltips",
         array(
-            "label" => __("Enable Tooltips", 'picostrap5'),
-			"description" => __("Adds inline <a target='_blank' href='https://getbootstrap.com/docs/5.2/components/tooltips/#enable-tooltips'>two rows of JavaScript</a> to enable Boostrap 5 tooltips. Publish and exit the Customizer to see the change.", 'picostrap5'),
+            "label" => __("Enable Tooltips & Popovers", 'picostrap5'),
+			"description" => __("Adds inline <a target='_blank' href='https://getbootstrap.com/docs/5.2/components/tooltips/#enable-tooltips'>two rows of JavaScript</a> to enable Boostrap 5 tooltips and popovers. Publish and exit the Customizer to see the change.", 'picostrap5'),
             "section" => "extras", 
             'type'     => 'checkbox',
 			)
