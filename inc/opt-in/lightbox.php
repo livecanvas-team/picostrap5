@@ -19,7 +19,7 @@ add_action( 'wp_footer', function(){
 		window.onload = function() { //after all page els are loaded 
 			
 			//find elements that need to be 'lightboxed'
-			var matches = document.querySelectorAll('#container-content-single a:not(.nolightbox) img, #container-content-page a:not(.nolightbox) img, .autolightbox a:not(.nolightbox) img');
+			var matches = document.querySelectorAll('#container-content-single a:not(.nolightbox) img:not(.nolightbox), #container-content-page a:not(.nolightbox) img:not(.nolightbox), .autolightbox a:not(.nolightbox) img:not(.nolightbox)');
 
 			//iterate and add the class
 			for (i=0; i<matches.length; i++) {
