@@ -11,12 +11,12 @@ get_header();
 <section class="py-6 text-center">
   <div class="container">
     <h1><?php 
-								printf(
-									/* translators: %s: query term */
-									esc_html__( 'Search Results for: %s', 'picostrap5' ),
-									'<span class="text-muted">"' . get_search_query() . '"</span>'
-								);
-								?></h1>
+        printf(
+            /* translators: %s: query term */
+            esc_html__( 'Search Results for: %s', 'picostrap5' ),
+            '<span class="text-light">"' . get_search_query() . '"</span>'
+        );
+        ?></h1>
     <div class="lead text-muted col-md-8 offset-md-2 archive-description">
      
     </div> 
