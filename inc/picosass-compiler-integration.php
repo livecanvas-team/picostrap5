@@ -194,7 +194,10 @@ function ps_get_main_sass(){
 		
 	endforeach;
 	
-	return $sass . " @import 'main'; "; 
+	$sass .= " @import 'main'; "; 
+
+    return apply_filters('ps_main_sass', $sass);
+
 }
 
 //HANDLE AJAX ACTION FOR SAVING CSS BUNDLE
