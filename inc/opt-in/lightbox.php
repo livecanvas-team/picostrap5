@@ -3,28 +3,36 @@
 ////////  GLIGHTBOX ////////////////////////////////////////////////////
 // this is a purely opt-in feature:
 // this code is executed only if the option is enabled in the  Customizer
-// enables lightbox on all <a class="lightbox"  
+// Glightbox basically enables lightbox on all <a class="lightbox"  
 
 //enqueue js in footer, async
 add_action( 'wp_enqueue_scripts', function() {
-	wp_enqueue_script( 'glightbox',  "https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js", array(), false,  array('strategy' => 'async', 'in_footer' => true)  );
+	wp_enqueue_script( 'glightbox',  "https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js", array(), false,  array('strategy' => 'defer', 'in_footer' => true)  );
 } ,100);
 
-//add inline js in footer, defer execution
+//add onload attribute so init function is run upon script loading
+add_filter('script_loader_tag', function  ($tag, $handle, $src) {
+    if ($handle === 'glightbox') {
+        $tag = str_replace('<script', '<script onload="pico_initialize_glightbox()"', $tag); 
+    }
+    return $tag;
+}, 10, 3);
+
 add_action( 'wp_footer', function(){ 
 	if (isset($_GET['lc_page_editing_mode'])) return;
 	?>
 	<script>
 		//picostrap gLightbox integration
-		window.onload = function() { //after all page els are loaded 
+		function pico_initialize_glightbox() {   
 			
 			//find elements that need to be 'lightboxed'
-			var matches = document.querySelectorAll('#container-content-single a:not(.nolightbox) img:not(.nolightbox), #container-content-page a:not(.nolightbox) img:not(.nolightbox), .autolightbox a:not(.nolightbox) img:not(.nolightbox)');
+			let matches = document.querySelectorAll('#container-content-single a:not(.nolightbox) img:not(.nolightbox), #container-content-page a:not(.nolightbox) img:not(.nolightbox), .autolightbox a:not(.nolightbox) img:not(.nolightbox)');
 
 			//iterate and add the class
 			for (i=0; i<matches.length; i++) {
 				matches[i].parentElement.classList.add("glightbox");
 			}
+
 			//run the lightbox
 			const lightbox = GLightbox({});
 		}
