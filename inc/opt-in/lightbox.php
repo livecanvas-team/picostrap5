@@ -12,7 +12,7 @@ add_action( 'wp_enqueue_scripts', function() {
 
 //add onload attribute so init function is run upon script loading
 add_filter('script_loader_tag', function  ($tag, $handle, $src) {
-    if ($handle === 'glightbox') {
+    if ($handle === 'glightbox' && !isset($_GET['lc_page_editing_mode'])) {
         $tag = str_replace('<script', '<script onload="pico_initialize_glightbox()"', $tag); 
     }
     return $tag;
