@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Picker Component</title>
+    <script src="font-picker.js"></script>
+    <style>
+        button.custom-font-button {
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button.custom-font-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <font-picker data-fontlist-url="https://api.fontsource.org/v1/fonts?subsets=latin">
+        <button class="custom-font-button" slot="button">Select a Font</button>
+    </font-picker>
+
+    <script>
+        document.querySelector('font-picker').addEventListener('font-selected', (event) => {
+            console.log('Font selected:', event.detail);
+        });
+    </script>
+</body>
+
+</html>

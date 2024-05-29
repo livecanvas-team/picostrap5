@@ -411,39 +411,37 @@
 
 		//FONT PICKER ///////////////////////////////////////////////////////////////////
 
-		var csFontPickerOptions = ({
-			variants: true,
-			onSelect: fontHasBeenSelected,
-			localFonts: theLocalFonts //defined in customizer-constants.js file
-		});
+        //APPEND FONTPICKERS 
 
-		var csFontPickerButton = " <button class='cs-open-fontpicker button button-secondary' style='float:right;'>Font Picker...</button>";
+        var csFontPickerButtonBase = ` 
+            <font-picker id="fontpickerbasefont" data-fontlist-url="https://api.fontsource.org/v1/fonts?subsets=latin">
+                <button class="custom-font-button" slot="button">Select a Font</button>
+            </font-picker>
+        `;
+        var csFontPickerButtonHeadings = ` 
+            <font-picker id="fontpickerheadingsfont" data-fontlist-url="https://api.fontsource.org/v1/fonts?subsets=latin">
+                <button class="custom-font-button" slot="button">Select a Font</button>
+            </font-picker>
+        `;
 
-		//INITIALIZE FONTPICKERs
+        $("label[for=_customize-input-SCSSvar_font-family-base]").append(csFontPickerButtonBase);
 
-		//append field and initialize Fontpicker for BASE FONT
-		$("label[for=_customize-input-SCSSvar_font-family-base]").append(csFontPickerButton).closest(".customize-control").append("<div hidden><input id='cs-fontpicker-input-base' class='cs-fontpicker-input' type='text' value=''></div>");
-		$("#cs-fontpicker-input-base").fontpicker(csFontPickerOptions);
-		
-		//append field and initialize Fontpicker for HEADINGS FONT
-		$("label[for=_customize-input-SCSSvar_headings-font-family]").append(csFontPickerButton).closest(".customize-control").append("<div hidden><input id='cs-fontpicker-input-headings' class='cs-fontpicker-input' type='text' value=''></div>");
-		$("#cs-fontpicker-input-headings").fontpicker(csFontPickerOptions);
-		
-		//ON CLICK OF FONT PICKER TRIGGER BUTTONS, OPEN THE PICKER
-		$("body").on("click",".cs-open-fontpicker",function(e){
-			e.preventDefault();
-			$(this).closest(".customize-control").find(".cs-fontpicker-input").val("").change().fontpicker('show'); //trick to reset and solve the picker bug returning wromg weight after selecting two times the same font
-		});// end onClick of button
-		
-		//ON SUBMIT / CHANGE OF FONT PICKER FIELD
-		$(".cs-fontpicker-input").on('change', function() {
-			
-			//exit if empty value - eg when changed programmatically two rows above
-			if (this.value=="") { /* console.log("Change ignored"); */ return; }
+        $("label[for=_customize-input-SCSSvar_headings-font-family]").append(csFontPickerButtonHeadings);
 
-			window.lastSelectedFontFieldId = $(this).attr("id"); // so field id is reachable in callback function
+        //ON SUBMIT / CHANGE OF FONT PICKER FIELD
 
-		}); //end on picker change
+        //new
+        document.querySelector('#fontpickerbasefont').addEventListener('font-selected', (event) => {
+            console.log('Font selected:', event.detail);
+            //set font family and font weight fields	
+            $("#_customize-input-SCSSvar_font-family-base").val(event.detail.family).change();
+            $("#_customize-input-SCSSvar_font-weight-base").val('').change();
+            //store font object
+            $("#_customize-input-body_font_object").val(JSON.stringify(event.detail)).change();
+            //anyway, a new font has been selected, so generate the import code
+            const importCode = "<style>" + event.detail.cssImport + "<style>";
+            $("#_customize-input-picostrap_fonts_header_code").val(importCode).change();
+        });
 
 		//CALLBACK: FONT HAS BEEN SELECTED ON PICKER
 		function fontHasBeenSelected(fontObj) {
