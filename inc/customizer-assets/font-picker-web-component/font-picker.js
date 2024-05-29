@@ -93,15 +93,14 @@ class FontPicker extends HTMLElement {
         if (font.variable) {
             const weightRange = font.weights.join(' ');
 
-            return `
-                @font-face {
-                    font-family: '${font.family}';
-                    font-style: normal;
-                    font-display: swap;
-                    font-weight: ${weightRange};
-                    src: url(https://cdn.jsdelivr.net/fontsource/fonts/${font.id}:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
-                    unicode-range: ${unicodeRange};
-                }
+            return ` @font-face {
+    font-family: '${font.family}';
+    font-style: normal;
+    font-display: swap;
+    font-weight: ${weightRange};
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/${font.id}:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
+    unicode-range: ${unicodeRange};
+    }
             `;
         } else {
             return font.weights.map(weight => `
@@ -233,7 +232,7 @@ class FontPicker extends HTMLElement {
                 #modal {
                     display: none;
                     position: fixed;
-                    z-index: 1;
+                    z-index: 999999;
                     left: 0;
                     top: 0;
                     width: 100%;

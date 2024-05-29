@@ -229,13 +229,7 @@
 
       
 		//////////// USER ACTIONS / UX HELPERS /////////////////
-		
-		//ON CLICK LINK TO REGENERATE FONT LOADING CODE, DO IT
-		$("body").on("click", "#regenerate-font-loading-code", function () {
-			ps_update_fonts_import_code_snippet();
-		});	
 
-		
 		//AFTER PUBLISHING CUSTOMIZER CHANGES, SAVE SCSS & CSS
 		wp.customize.bind('saved', function( /* data */ ) {
 			ps_save_css_bundle();
@@ -269,89 +263,18 @@
 			if ($("#_customize-input-topbar_content").val() == "") $("#_customize-input-topbar_content").val(html_default.trim().replace(/(\r\n|\n|\r)/gm, "")).change();
 		}); 
 
-		// FONT COMBINATIONS SELECT ////////////////////////////////////////////
-
-		//ADD UI: the SELECT for FONT BASE
-		$("li#customize-control-SCSSvar_font-family-base").prepend(ps_font_combinations_select);
-
-		//USER CLICKS SHOW FONT COMBINATIONS: show the select
-		$("body").on("click", "#cs-show-combi", function () {
-			//$(".customize-controls-close").click();
-            $(this).toggleClass("active");
-			$("#cs-font-combi").slideToggle();
-		});
-
-		//TBD: WHEN A FONT COMBINATION IS CHOSEN
-		$("body").on("change", "select#_ps_font_combinations", function() {
-			var value = jQuery(this).val(); //Cabin and Old Standard TT
-			var arr = value.split(' and ');
-			var font_headings = arr[0];
-			var font_body = arr[1];
-			if (value === '') {		font_headings = "";	font_body = "";		}
-
-			//SET FONT FAMILY VALUES
-			$("#_customize-input-SCSSvar_font-family-base").val(font_body).change();
-			$("#_customize-input-SCSSvar_headings-font-family").val(font_headings).change();
-
-			//RESET FONT WEIGHT FIELDS
-			$("#_customize-input-SCSSvar_font-weight-base").val("").change();
-			$("#_customize-input-SCSSvar_headings-font-weight").val("").change();	
-
-			//prepare font import snippet
-			ps_update_fonts_import_code_snippet();	
-							
-			//reset combination select
-			//$('select#_ps_font_combinations option:first').attr('selected','selected');
-		});
 		
-		// (OPTIONAL) ON CHANGE OF BASE FONT FAMILY TEXT FIELD 
-		$("body").on("change", "#_customize-input-SCSSvar_font-family-base", function() {
-			//if empty, reset font object field, as a security
-			if ($(this).val()=="") $("#_customize-input-body_font_object").val("").change();
-		});
+		//FONT PICKERS ///////////////////////////////////////////////////////////////////
 
-		// (OPTIONAL) ON CHANGE OF HEADINGS FONT TEXT FIELD 
-		$("body").on("change", "#_customize-input-SCSSvar_headings-font-family", function() { 
-			//if empty, reset font object field, as a security
-			if ($(this).val() == "")  $("#_customize-input-headings_font_object").val("").change();
-		});
-
-		// ON keyup OF FONT FAMILY FIELD: user is editing field with the keyboard
-        // TBD, IN CASE.
-		$("body").on("keyup", "#_customize-input-SCSSvar_font-family-base", function () {
-			console.log("keyup #_customize-input-SCSSvar_font-family-base, so we reset the font weight");
-
-			//reset font weight field, as the weight might not be available on the newly chosen font
-			//$("#_customize-input-SCSSvar_font-weight-base").val(""); 	
-
-			//prepare font import snippet
-			//ps_update_fonts_import_code_snippet();
-		});
-
-		// ON keyup OF FONT HEADING FIELD: user is editing field with the keyboard
-        // TBD, IN CASE.
-		$("body").on("keyup", "#_customize-input-SCSSvar_headings-font-family", function () {
-			console.log("keyup #_customize-input-SCSSvar_headings-font-family, so we reset the font weight");
-
-			//reset font weight field, as the weight might not be available on the newly chosen font
-			//$("#_customize-input-SCSSvar_headings-font-weight").val("");	
-
-			//prepare font import snippet
-			//ps_update_fonts_import_code_snippet();
-		});
-
-		//FONT PICKER ///////////////////////////////////////////////////////////////////
-
-        //APPEND FONTPICKERS 
-
+        // append font pickers
         var csFontPickerButtonBase = ` 
             <font-picker id="fontpickerbasefont" data-fontlist-url="https://api.fontsource.org/v1/fonts?subsets=latin">
-                <button class="custom-font-button" slot="button">Select a Font</button>
+                <button class="custom-font-button" slot="button">Choose Font...</button>
             </font-picker>
         `;
         var csFontPickerButtonHeadings = ` 
             <font-picker id="fontpickerheadingsfont" data-fontlist-url="https://api.fontsource.org/v1/fonts?subsets=latin">
-                <button class="custom-font-button" slot="button">Select a Font</button>
+                <button class="custom-font-button" slot="button">Choose Font...</button>
             </font-picker>
         `;
 
@@ -413,6 +336,99 @@
 
         });
 
+        // FONT CHOICE BEHAVIOUR REFINEMENTS ///////////////
+
+        // ON CHANGE OF BASE FONT FAMILY TEXT FIELD 
+        $("body").on("change", "#_customize-input-SCSSvar_font-family-base", function () {
+            //if empty, reset fields
+            if ($(this).val() == "") {
+                //reset font object field, as a security
+                $("#_customize-input-body_font_object").val("").change();
+
+                //reset import code field
+                $("#_customize-input-picostrap_body_font_loading_snippet").val('').change();
+
+                ps_update_fonts_import_code_snippet();
+            }
+        });
+
+        // ON CHANGE OF HEADINGS FONT TEXT FIELD 
+        $("body").on("change", "#_customize-input-SCSSvar_headings-font-family", function () {
+            //if empty, reset font object field, as a security
+            if ($(this).val() == "") {
+                //reset font object field, as a security
+                $("#_customize-input-headings_font_object").val("").change();
+
+                //reset import code field
+                $("#_customize-input-picostrap_headings_font_loading_snippet").val('').change();
+
+                ps_update_fonts_import_code_snippet();
+            }
+        });
+
+        // ON keyup OF FONT FAMILY FIELD: user is editing field with the keyboard
+        // TBD, IN CASE.
+        $("body").on("keyup", "#_customize-input-SCSSvar_font-family-base", function () {
+            console.log("keyup #_customize-input-SCSSvar_font-family-base, so we reset the font weight");
+
+            //reset font weight field, as the weight might not be available on the newly chosen font
+            //$("#_customize-input-SCSSvar_font-weight-base").val(""); 	
+
+            //prepare font import snippet
+            //ps_update_fonts_import_code_snippet();
+        });
+
+        // ON keyup OF FONT HEADING FIELD: user is editing field with the keyboard
+        // TBD, IN CASE.
+        $("body").on("keyup", "#_customize-input-SCSSvar_headings-font-family", function () {
+            console.log("keyup #_customize-input-SCSSvar_headings-font-family, so we reset the font weight");
+
+            //reset font weight field, as the weight might not be available on the newly chosen font
+            //$("#_customize-input-SCSSvar_headings-font-weight").val("");	
+
+            //prepare font import snippet
+            //ps_update_fonts_import_code_snippet();
+        });
+
+        //ON CLICK LINK TO REGENERATE FONT LOADING CODE, DO IT
+        $("body").on("click", "#regenerate-font-loading-code", function () {
+            ps_update_fonts_import_code_snippet();
+        });	
+
+        // FONT COMBINATIONS SELECT ////////////////////////////////////////////
+
+        //ADD UI: the SELECT for FONT BASE
+        $("li#customize-control-SCSSvar_font-family-base").prepend(ps_font_combinations_select);
+
+        //USER CLICKS SHOW FONT COMBINATIONS: show the select
+        $("body").on("click", "#cs-show-combi", function () {
+            //$(".customize-controls-close").click();
+            $(this).toggleClass("active");
+            $("#cs-font-combi").slideToggle();
+        });
+
+        //TBD: WHEN A FONT COMBINATION IS CHOSEN
+        $("body").on("change", "select#_ps_font_combinations", function () {
+            var value = jQuery(this).val(); //Cabin and Old Standard TT
+            var arr = value.split(' and ');
+            var font_headings = arr[0];
+            var font_body = arr[1];
+            if (value === '') { font_headings = ""; font_body = ""; }
+
+            //SET FONT FAMILY VALUES
+            $("#_customize-input-SCSSvar_font-family-base").val(font_body).change();
+            $("#_customize-input-SCSSvar_headings-font-family").val(font_headings).change();
+
+            //RESET FONT WEIGHT FIELDS
+            $("#_customize-input-SCSSvar_font-weight-base").val("").change();
+            $("#_customize-input-SCSSvar_headings-font-weight").val("").change();
+
+            //prepare font import snippet
+            ps_update_fonts_import_code_snippet();
+
+            //reset combination select
+            //$('select#_ps_font_combinations option:first').attr('selected','selected');
+        });
 
 		
 		/////// CSS EDITOR MAXIMIZE BUTTON ////////////////////////////////////////////////////////

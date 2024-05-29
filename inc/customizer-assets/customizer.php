@@ -1144,12 +1144,12 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			'description' =>__('
 						The code in the field below is generated each time you set a new font family for body or headings, and is served in the site\'s &lt;head&gt;.
 						<br><br>
-						You can customize this code, for example to add multiple font weights, but please mind that if you choose new fonts, your customizations will be lost.
+						You can customize this code, but please mind that if you edit font family seetings your customizations will be lost.
 						<br><br>
 						In case you break things up while editing, you can manually regenerate the code <a href="#" id="regenerate-font-loading-code">clicking here</a>.
 						<br><br>
-						For further information, and to understand how to enable multiple font weights,  please refer to our <a target="_blank" href="https://www.youtube.com/watch?v=dmsUpFJwDW8&t=200s">video documentation</a> and to the <a target="_blank" href="https://fonts.google.com/">Google Fonts website</a>.
-						')
+						Using the JSDelivr CDN is known to be GDPR compliant.
+                        ')
 			)
     ));
 	
@@ -1200,10 +1200,10 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_body_font_loading_snippet",
         array(
-            "label" => __("Body Font Loading Snippet", 'picostrap5'),
+            "label" => __("Body Font Loading CSS Snippet", 'picostrap5'),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>__(' ')
+			'description' =>__('Do not touch - internal use only. We may hide this field.')
 			)
     ));
     //ADD HEADING FONT LOADING CSS SNIPPET 
@@ -1216,10 +1216,10 @@ function picostrap_theme_customize_register_extras($wp_customize) {
         $wp_customize,
         "picostrap_headings_font_loading_snippet",
         array(
-            "label" => __("Headings Font Loading Snippet", 'picostrap5'),
+            "label" => __("Headings Font Loading CSS Snippet", 'picostrap5'),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>__(' ')
+			'description' =>__('Do not touch - internal use only. We may hide this field.')
 			)
     ));
 
