@@ -1153,6 +1153,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 	
+    /*
 	//USE ALTERNATIVE FONT SOURCE FOR GDPR COMPLIANCE
 	$wp_customize->add_setting("picostrap_fonts_use_alternative_font_source", array(
         "default" => "",
@@ -1169,6 +1170,7 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             'type'     => 'checkbox',
 			)
     ));
+    */
 
 	//DISABLE FONTLOADING HEADER CODE  
 	$wp_customize->add_setting("picostrap_fonts_header_code_disable", array(

@@ -75,59 +75,16 @@
 			
 	} //END FUNCTION  
 	
-		
-	function ps_is_a_google_font(fontFamilyName){
-		const google_fonts = JSON.parse(google_fonts_json);
-		var fontData = google_fonts.find(function (element) {
-			return element.family == fontFamilyName;
-		});
-		if (!fontData) return false; else return true;
-		
-	} // end function ps_is_a_google_font
 
 
-	// FUNCTION TO PREPARE THE HTML CODE SNIPPET THAT LOADS THE (GOOGLE) FONTS
+	// (NEW) FUNCTION TO PREPARE THE HTML CODE SNIPPET THAT LOADS THE (GOOGLE) FONTS
 	function ps_update_fonts_import_code_snippet(){
-        return;
-		console.log('Running function ps_update_fonts_import_code_snippet to generate html code for font import:');
+         
+		console.log('Running function ps_update_fonts_import_code_snippet to generate   code for font import:');
 		
-		//BUILD BASE FONT IMPORT HEAD CODE
-		var first_part="";
-		if ($("#_customize-input-SCSSvar_font-family-base").val().trim()!='' && ps_is_a_google_font($("#_customize-input-SCSSvar_font-family-base").val().split(',')[0].trim().replace(/"/g, "")) ) {  
-			first_part += 'family=' + $("#_customize-input-SCSSvar_font-family-base").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
-			if ($("#_customize-input-SCSSvar_font-weight-base").val() != '') first_part +=":wght@"+$("#_customize-input-SCSSvar_font-weight-base").val();
-		}
-		//console.log(first_part); //for debug
-		
-		//BUILD HEADINGS FONT IMPORT HEAD CODE
-		var second_part="";
-		if ($("#_customize-input-SCSSvar_headings-font-family").val().trim()!=''  && ps_is_a_google_font($("#_customize-input-SCSSvar_headings-font-family").val().split(',')[0].trim().replace(/"/g, "")) ) {
-			second_part += 'family=' + $("#_customize-input-SCSSvar_headings-font-family").val().split(',')[0].trim().replace(/"/g, "").replace(/ /g, "+");
-			if ($("#_customize-input-SCSSvar_headings-font-weight").val() != '') second_part +=":wght@"+$("#_customize-input-SCSSvar_headings-font-weight").val();
-		}
-		//console.log(second_part); //for debug
+        let css_snippets = $("#_customize-input-picostrap_body_font_loading_snippet").val() + " " + $("#_customize-input-picostrap_headings_font_loading_snippet").val();
+        let html_code = "<style>" + css_snippets + "</style>";
 
-		var html_code = "";
-
-		if (first_part == "" && second_part == "") {
-			//no import code needed
-		} else {
-			var separator_char = ""; 
-			if (first_part != "" && second_part != "") separator_char = "&"; 
-
-			window.fontLoadingUrl = 'https://fonts.googleapis.com/css2?' + first_part + separator_char + second_part +'&display=swap'
-			html_code += '<link rel="preconnect" href="https://fonts.googleapis.com">\n';
-			html_code += '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n';
-			html_code += '<link href="' + window.fontLoadingUrl + '" rel="stylesheet">\n';
-			
-			//an example: https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&family=Roboto:wght@100;300&display=swap 
-		}
-			
-		//disable alternative font source checkbox
-		$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked",false);
-
-		//console.log(html_code);
-		
 		//populate the textarea with the result
 		$("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
 
@@ -221,11 +178,7 @@
 
 	////////////////////////////////////////// DOCUMENT READY //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$(document).ready(function() {
-		
-		//TESTBED for G fontsx
-		//console.log(ps_is_a_google_font("ABeeZee"));
-		//console.log(ps_is_a_google_font("Nunito"));
-		
+			
 		//hide useless bg color widget
 		$("#customize-control-background_color").hide();
 		
@@ -254,8 +207,7 @@
 
 		//CHECK IF USING VINTAGE GOOGLE FONTS API V1, REBUILD FONT IMPORT CODE
 		if ($("#_customize-input-picostrap_fonts_header_code").val().includes('https://fonts.googleapis.com/css?')){
-			console.log("GOOGLE FONTS API V1 is used, let's rebuild the font import header code to update it to v2 syntax");
-			ps_update_fonts_import_code_snippet();
+			alert("Your font settings are obsolete, please choose again fonts using new tool");
 		}
 		
 		//////////////////// LISTEN TO CUSTOMIZER CHANGES ////////////////////////
@@ -297,15 +249,6 @@
 
 			$("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
 
-		});	
-
-		//ON CHANGE FONT LOADING CODE TEXTAREA, IF INSERTED TEXT CONTAINS GOOGLE FONTS DOMAIN, RESET ALTERNATIVE FONT SOURCE CHECKBOX
-		$("body").on("input", "#_customize-input-picostrap_fonts_header_code", function () {
-			if ($(this).val().includes('fonts.googleapis.com') && $("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked")){
-				console.log("New textarea content contains 'fonts.googleapis.com' so we will uncheck the GDPR compliance checkbox");
-				//disable alternative font source checkbox
-				$("#_customize-input-picostrap_fonts_use_alternative_font_source").prop("checked", false);
-			}
 		});	
 		
 		//AFTER PUBLISHING CUSTOMIZER CHANGES, SAVE SCSS & CSS
@@ -444,52 +387,39 @@
             //Set import code field
             $("#_customize-input-picostrap_body_font_loading_snippet").val(event.detail.cssImport ).change();
 
-            //adjust preview
+            //adjust preview injecting CSS 
             document.querySelector('#customize-preview iframe').contentWindow.document
                 .querySelector('#provisional-body-font-loading-style').innerHTML = event.detail.cssImport; 
+            
+            ps_update_fonts_import_code_snippet();
+
         });
 
-		//CALLBACK: FONT HAS BEEN SELECTED ON PICKER
-		function fontHasBeenSelected(fontObj) {
-			console.log(fontObj);
-			//console.log(window.lastSelectedFontFieldId); //for debug
+        //UPON FONT PICKER FONT SELECTION for HEADINGS FONT 
+        document.querySelector('#fontpickerheadingsfont').addEventListener('font-selected', (event) => {
 
-			//protection for removed google fonts
-			if (fontObj.fontType == 'google' && !ps_is_a_google_font(fontObj.fontFamily)){
-				alert("Apologies. The " + fontObj.fontFamily +" font has been recently removed from the Google Font directory. Please choose another one.");
-				return false;
-			}
+            console.log('Headings Font selected:', event.detail);
 
-			//is it a body font that's been chosen?
-			if (window.lastSelectedFontFieldId == 'cs-fontpicker-input-base') {
+            //set font family and font weight fields	
+            $("#_customize-input-SCSSvar_headings-font-family").val(event.detail.family).change();
+            $("#_customize-input-SCSSvar_headings-font-weight").val('').change();
 
-				//store font object
-				$("#_customize-input-body_font_object").val(JSON.stringify(fontObj)).change();
+            //store font object
+            $("#_customize-input-headings_font_object").val(JSON.stringify(event.detail)).change();
 
-				//maybe in the future, for google fonts, suggest opening modal for multiple weights
+            //Set import code field
+            $("#_customize-input-picostrap_headings_font_loading_snippet").val(event.detail.cssImport).change();
 
-				//set font family and font weight fields	
-				$("#_customize-input-SCSSvar_font-weight-base").val(fontObj.fontWeight).change();
-				$("#_customize-input-SCSSvar_font-family-base").val(fontObj.fontFamily).change();
-			}
+            //adjust preview injecting CSS 
+            document.querySelector('#customize-preview iframe').contentWindow.document
+                .querySelector('#provisional-headings-font-loading-style').innerHTML = event.detail.cssImport;
 
-			//is it a headings font that's been chosen?
-			if (window.lastSelectedFontFieldId == 'cs-fontpicker-input-headings') {
+            ps_update_fonts_import_code_snippet();
 
-				//store font object
-				$("#_customize-input-headings_font_object").val(JSON.stringify(fontObj)).change();
+        });
 
-				//maybe in the future, for google fonts, suggest opening modal for multiple weights
 
-				//set font family and font weight fields
-				$("#_customize-input-SCSSvar_headings-font-weight").val(fontObj.fontWeight).change();
-				$("#_customize-input-SCSSvar_headings-font-family").val(fontObj.fontFamily).change();
-			}
-			
-			//anyway, a new font has been selected, so generate the import code
-			ps_update_fonts_import_code_snippet();
 
-		} //end callback function
 		
 		
 		/////// CSS EDITOR MAXIMIZE BUTTON ////////////////////////////////////////////////////////
