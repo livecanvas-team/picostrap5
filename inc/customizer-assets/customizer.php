@@ -1186,6 +1186,41 @@ function picostrap_theme_customize_register_extras($wp_customize) {
             'type'     => 'checkbox',
 			)
     ));
+
+    //NEW
+    //ADD BODY FONT LOADING CSS SNIPPET 
+	$wp_customize->add_setting("picostrap_body_font_loading_snippet", array(
+        "default" => "",
+		//"transport" => "refresh",
+        "transport" => "postMessage", // and no custom js is added: so no live page update is done, how it should be - but causes unstable behaviour
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "picostrap_body_font_loading_snippet",
+        array(
+            "label" => __("Body Font Loading Snippet", 'picostrap5'),
+            "section" => "addcode",
+            'type'     => 'textarea',
+			'description' =>__(' ')
+			)
+    ));
+    //ADD HEADING FONT LOADING CSS SNIPPET 
+	$wp_customize->add_setting("picostrap_headings_font_loading_snippet", array(
+        "default" => "",
+		//"transport" => "refresh",
+        "transport" => "postMessage", // and no custom js is added: so no live page update is done, how it should be - but causes unstable behaviour
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "picostrap_headings_font_loading_snippet",
+        array(
+            "label" => __("Headings Font Loading Snippet", 'picostrap5'),
+            "section" => "addcode",
+            'type'     => 'textarea',
+			'description' =>__(' ')
+			)
+    ));
+
 	
 
 	// ADD A SECTION FOR EXTRAS /////////////////////////////////////////////////////////////////////////////

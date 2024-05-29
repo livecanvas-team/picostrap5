@@ -88,6 +88,7 @@
 
 	// FUNCTION TO PREPARE THE HTML CODE SNIPPET THAT LOADS THE (GOOGLE) FONTS
 	function ps_update_fonts_import_code_snippet(){
+        return;
 		console.log('Running function ps_update_fonts_import_code_snippet to generate html code for font import:');
 		
 		//BUILD BASE FONT IMPORT HEAD CODE
@@ -428,19 +429,24 @@
 
         $("label[for=_customize-input-SCSSvar_headings-font-family]").append(csFontPickerButtonHeadings);
 
-        //ON SUBMIT / CHANGE OF FONT PICKER FIELD
-
-        //new
+        //UPON FONT PICKER FONT SELECTION for BODY FONT 
         document.querySelector('#fontpickerbasefont').addEventListener('font-selected', (event) => {
-            console.log('Font selected:', event.detail);
+            
+            console.log('Body Font selected:', event.detail);
+            
             //set font family and font weight fields	
             $("#_customize-input-SCSSvar_font-family-base").val(event.detail.family).change();
             $("#_customize-input-SCSSvar_font-weight-base").val('').change();
+            
             //store font object
             $("#_customize-input-body_font_object").val(JSON.stringify(event.detail)).change();
-            //anyway, a new font has been selected, so generate the import code
-            const importCode = " <style> " +  (event.detail.cssImport) + " </style> ";
-            $("#_customize-input-picostrap_fonts_header_code").val(importCode.trim()).change();
+            
+            //Set import code field
+            $("#_customize-input-picostrap_body_font_loading_snippet").val(event.detail.cssImport ).change();
+
+            //adjust preview
+            document.querySelector('#customize-preview iframe').contentWindow.document
+                .querySelector('#provisional-body-font-loading-style').innerHTML = event.detail.cssImport; 
         });
 
 		//CALLBACK: FONT HAS BEEN SELECTED ON PICKER
