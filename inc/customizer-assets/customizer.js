@@ -74,16 +74,14 @@
 			}); 
 			
 	} //END FUNCTION  
-	
-
 
 	// (NEW) FUNCTION TO PREPARE THE HTML CODE SNIPPET THAT LOADS THE (GOOGLE) FONTS
 	function ps_update_fonts_import_code_snippet(){
          
 		console.log('Running function ps_update_fonts_import_code_snippet to generate   code for font import:');
 		
-        let css_snippets = $("#_customize-input-picostrap_body_font_loading_snippet").val() + " " + $("#_customize-input-picostrap_headings_font_loading_snippet").val();
-        let html_code = "<style>" + css_snippets + "</style>";
+        let css_snippets = $("#_customize-input-picostrap_body_font_loading_snippet").val() + " \n " + $("#_customize-input-picostrap_headings_font_loading_snippet").val();
+        let html_code = ( "<style> \n " + css_snippets + "\n </style>");
 
 		//populate the textarea with the result
 		$("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
@@ -91,7 +89,7 @@
 	} // end function 
 		
 
-	// FUNCTION TO PREPARE THE SCSS CODE assigning all the variables according to  THE WIDGETS VALUES
+	// FUNCTION TO PREPARE THE SCSS CODE assigning all the variables according to THE WIDGETS VALUES
 	function getMainSass() {
 
 		var sass = '';
@@ -190,8 +188,10 @@
 		//ADD COLORS HEADING 
 		$("#customize-control-enable_back_to_top").prepend(" <h1>Opt-in extra features</h1><hr> ");
 		
-		//add codemirror to header field - does not work
-		//wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
+		//ADD CODEMIRROR TO TEXTAREAS header and footer code. 
+        // Dont use CodeMirror on  "service" ones (breaks direct i/o)
+        wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
+        wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_footer_code'));
 
 		//NOW UNUSED -- ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)
 		/*
@@ -235,21 +235,6 @@
 			ps_update_fonts_import_code_snippet();
 		});	
 
-		//ON CHANGE CHECKBOX FOR  USE ALTERNATIVE FONT SOURCE FOR GDPR
-		$("body").on("change", "#_customize-input-picostrap_fonts_use_alternative_font_source", function() {
-			var html_code = $("#_customize-input-picostrap_fonts_header_code").val();
-
-			if ($(this).prop("checked")) {
-				html_code = html_code.replaceAll('fonts.googleapis.com', 'api.fonts.coollabs.io');
-				html_code = html_code.replaceAll('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>', '<!-- -->');
-			} else {
-				html_code = html_code.replaceAll('api.fonts.coollabs.io', 'fonts.googleapis.com');
-				html_code = html_code.replaceAll('<!-- -->', '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
-			}
-
-			$("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
-
-		});	
 		
 		//AFTER PUBLISHING CUSTOMIZER CHANGES, SAVE SCSS & CSS
 		wp.customize.bind('saved', function( /* data */ ) {
@@ -296,7 +281,7 @@
 			$("#cs-font-combi").slideToggle();
 		});
 
-		//WHEN A FONT COMBINATION IS CHOSEN
+		//TBD: WHEN A FONT COMBINATION IS CHOSEN
 		$("body").on("change", "select#_ps_font_combinations", function() {
 			var value = jQuery(this).val(); //Cabin and Old Standard TT
 			var arr = value.split(' and ');
@@ -319,38 +304,40 @@
 			//$('select#_ps_font_combinations option:first').attr('selected','selected');
 		});
 		
-		// ON CHANGE OF NEW FONT FAMILY FIELD 
+		// (OPTIONAL) ON CHANGE OF BASE FONT FAMILY TEXT FIELD 
 		$("body").on("change", "#_customize-input-SCSSvar_font-family-base", function() {
 			//if empty, reset font object field, as a security
 			if ($(this).val()=="") $("#_customize-input-body_font_object").val("").change();
 		});
 
-		// ON CHANGE OF NEW FONT HEADING FIELD 
+		// (OPTIONAL) ON CHANGE OF HEADINGS FONT TEXT FIELD 
 		$("body").on("change", "#_customize-input-SCSSvar_headings-font-family", function() { 
 			//if empty, reset font object field, as a security
 			if ($(this).val() == "")  $("#_customize-input-headings_font_object").val("").change();
 		});
 
 		// ON keyup OF FONT FAMILY FIELD: user is editing field with the keyboard
+        // TBD, IN CASE.
 		$("body").on("keyup", "#_customize-input-SCSSvar_font-family-base", function () {
 			console.log("keyup #_customize-input-SCSSvar_font-family-base, so we reset the font weight");
 
 			//reset font weight field, as the weight might not be available on the newly chosen font
-			$("#_customize-input-SCSSvar_font-weight-base").val(""); 	
+			//$("#_customize-input-SCSSvar_font-weight-base").val(""); 	
 
 			//prepare font import snippet
-			ps_update_fonts_import_code_snippet();
+			//ps_update_fonts_import_code_snippet();
 		});
 
 		// ON keyup OF FONT HEADING FIELD: user is editing field with the keyboard
+        // TBD, IN CASE.
 		$("body").on("keyup", "#_customize-input-SCSSvar_headings-font-family", function () {
 			console.log("keyup #_customize-input-SCSSvar_headings-font-family, so we reset the font weight");
 
 			//reset font weight field, as the weight might not be available on the newly chosen font
-			$("#_customize-input-SCSSvar_headings-font-weight").val("");	
+			//$("#_customize-input-SCSSvar_headings-font-weight").val("");	
 
 			//prepare font import snippet
-			ps_update_fonts_import_code_snippet();
+			//ps_update_fonts_import_code_snippet();
 		});
 
 		//FONT PICKER ///////////////////////////////////////////////////////////////////
@@ -383,13 +370,17 @@
             
             //store font object
             $("#_customize-input-body_font_object").val(JSON.stringify(event.detail)).change();
+
+            //format the import css
+            let theCss =  event.detail.cssImport;
+            console.log(theCss);
             
             //Set import code field
-            $("#_customize-input-picostrap_body_font_loading_snippet").val(event.detail.cssImport ).change();
+            $("#_customize-input-picostrap_body_font_loading_snippet").val(theCss).change();
 
             //adjust preview injecting CSS 
             document.querySelector('#customize-preview iframe').contentWindow.document
-                .querySelector('#provisional-body-font-loading-style').innerHTML = event.detail.cssImport; 
+                .querySelector('#provisional-body-font-loading-style').innerHTML = theCss; 
             
             ps_update_fonts_import_code_snippet();
 
@@ -407,20 +398,22 @@
             //store font object
             $("#_customize-input-headings_font_object").val(JSON.stringify(event.detail)).change();
 
+            //format the import css
+            let theCss = event.detail.cssImport;
+            console.log(theCss);
+
             //Set import code field
-            $("#_customize-input-picostrap_headings_font_loading_snippet").val(event.detail.cssImport).change();
+            $("#_customize-input-picostrap_headings_font_loading_snippet").val(theCss).change();
 
             //adjust preview injecting CSS 
             document.querySelector('#customize-preview iframe').contentWindow.document
-                .querySelector('#provisional-headings-font-loading-style').innerHTML = event.detail.cssImport;
+                .querySelector('#provisional-headings-font-loading-style').innerHTML = theCss;
 
             ps_update_fonts_import_code_snippet();
 
         });
 
 
-
-		
 		
 		/////// CSS EDITOR MAXIMIZE BUTTON ////////////////////////////////////////////////////////
 		
@@ -455,12 +448,8 @@
 		pico_add_video_link("section-extras", "https://www.youtube.com/watch?v=dmsUpFJwDW8&t=411s");
 
 
+        //// BOOTSTRAP VARIABLES TOOLBOX ////////////////////////////////////////////////////////////
 
-
-
-		 
-
-		//// BOOTSTRAP VARIABLES TOOLBOX ////
 
 		//ADD TOOLS MINIPANEL TO RESET / LOAD / DOWNLOAD BOOTSTRAP / SCSS VARS
         $("li#accordion-section-publish_settings").before(`
