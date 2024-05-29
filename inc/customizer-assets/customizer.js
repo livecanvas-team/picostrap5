@@ -439,8 +439,8 @@
             //store font object
             $("#_customize-input-body_font_object").val(JSON.stringify(event.detail)).change();
             //anyway, a new font has been selected, so generate the import code
-            const importCode = "<style>" + event.detail.cssImport + "<style>";
-            $("#_customize-input-picostrap_fonts_header_code").val(importCode).change();
+            const importCode = " <style> " +  (event.detail.cssImport) + " </style> ";
+            $("#_customize-input-picostrap_fonts_header_code").val(importCode.trim()).change();
         });
 
 		//CALLBACK: FONT HAS BEEN SELECTED ON PICKER
