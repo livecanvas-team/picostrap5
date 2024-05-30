@@ -218,16 +218,29 @@ class FontPicker extends HTMLElement {
                     font-family: Arial, sans-serif;
                 }
                 ::slotted(button) {
-                    padding: 10px 20px;
-                    font-size: 16px;
+                    float:right;  /* ONLY FOR THE CUSTOMIZE */
+                    padding: 0px 10px;
+                    font-size: 11px !important;
+                    min-height: 30px;
+                    font-weight: 400 !important;
+                    color: #2271b1;
+                    border-color: #2271b1;
+                    background: #f6f7f7;
+                    vertical-align: top;
                     cursor: pointer;
-                    background-color: #007bff;
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-radius: 3px;
+                    -webkit-appearance: none;
+                    white-space: nowrap;
+                    box-sizing: border-box;
+
+
                 }
                 ::slotted(button:hover) {
-                    background-color: #0056b3;
+                    background: #f0f0f1;
+                    border-color: #0a4b78;
+                    color: #0a4b78;
                 }
                 #modal {
                     display: none;
@@ -252,14 +265,14 @@ class FontPicker extends HTMLElement {
                     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
                 }
                 .modal-header {
-                    padding: 15px;
-                    background-color: #007bff;
-                    color: white;
+                    padding: 12px 20px;
+                    background-color: #f9fafb;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     border-top-left-radius: 10px;
                     border-top-right-radius: 10px;
+                    border-bottom: 1px solid #ced6de;
                 }
                 .modal-body {
                     flex: 1;
@@ -267,7 +280,7 @@ class FontPicker extends HTMLElement {
                     padding: 20px;
                 }
                 .close {
-                    color: white;
+                    color: #535ac1;;
                     font-size: 28px;
                     font-weight: bold;
                     cursor: pointer;
@@ -301,10 +314,10 @@ class FontPicker extends HTMLElement {
                     margin-top: 5px;
                 }
                 #filterContainer {
-                    background-color: #f8f9fa;
+                    background-color: #f9fafb;
                     z-index: 1;
                     padding: 15px;
-                    border-bottom: 1px solid #ccc;
+                    border-bottom: 1px solid #ced6de;
                     display: flex;
                     gap: 15px;
                     position: sticky;
@@ -313,7 +326,7 @@ class FontPicker extends HTMLElement {
                 }
                 #filterContainer input, #filterContainer select {
                     padding: 10px;
-                    border: 1px solid #ccc;
+                    border: 1px solid #ced6de;
                     border-radius: 4px;
                     flex: 1;
                 }
