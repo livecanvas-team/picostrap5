@@ -75,13 +75,31 @@
 			
 	} //END FUNCTION  
 
-	// (NEW) FUNCTION TO PREPARE THE HTML CODE SNIPPET THAT LOADS THE (GOOGLE) FONTS
+	// FUNCTION TO PREPARE THE HTML CODE SNIPPET THAT LOADS THE (GOOGLE) FONTS
 	function ps_update_fonts_import_code_snippet(){
          
 		console.log('Running function ps_update_fonts_import_code_snippet to generate   code for font import:');
 		
-        let css_snippets = $("#_customize-input-picostrap_body_font_loading_snippet").val() + " \n " + $("#_customize-input-picostrap_headings_font_loading_snippet").val();
-        let html_code = ( "<style> \n " + css_snippets + "\n </style>");
+        // BODY: Get the value from the input field
+        let bodyFontObjectFieldValue = $("#_customize-input-body_font_object").val();
+
+        // Parse the JSON string to an object
+        let bodyFontObjectData = JSON.parse(bodyFontObjectFieldValue ? bodyFontObjectFieldValue : "{}");
+
+        // Extract the cssImport field, defaulting to an empty string if it doesn't exist
+        let css_snippet_body_font = bodyFontObjectData.cssImport ?? ""; 
+
+        // HEADINGS: Get the value from the input field
+        let headingsFontObjectFieldValue = $("#_customize-input-headings_font_object").val();
+
+        // Parse the JSON string to an object
+        let headingsFontObjectData = JSON.parse(headingsFontObjectFieldValue ? headingsFontObjectFieldValue : "{}");
+
+        // Extract the cssImport field, defaulting to an empty string if it doesn't exist
+        let css_snippet_headings_font = headingsFontObjectData.cssImport ?? ""; 
+
+        //build the full HTML import code
+        let html_code = ("<style> \n " + css_snippet_body_font + ' \n ' + css_snippet_headings_font + "\n </style>");
 
 		//populate the textarea with the result
 		$("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
@@ -297,9 +315,6 @@
             //format the import css
             let theCss =  event.detail.cssImport;
             console.log(theCss);
-            
-            //Set import code field
-            $("#_customize-input-picostrap_body_font_loading_snippet").val(theCss).change();
 
             //adjust preview injecting CSS 
             document.querySelector('#customize-preview iframe').contentWindow.document
@@ -324,9 +339,6 @@
             //format the import css
             let theCss = event.detail.cssImport;
             console.log(theCss);
-
-            //Set import code field
-            $("#_customize-input-picostrap_headings_font_loading_snippet").val(theCss).change();
 
             //adjust preview injecting CSS 
             document.querySelector('#customize-preview iframe').contentWindow.document
@@ -357,10 +369,7 @@
             //if empty, reset font object field, as a security
             if ($(this).val() == "") {
                 //reset font object field, as a security
-                $("#_customize-input-headings_font_object").val("").change();
-
-                //reset import code field
-                $("#_customize-input-picostrap_headings_font_loading_snippet").val('').change();
+                $("#_customize-input-headings_font_object").val("").change(); 
 
                 ps_update_fonts_import_code_snippet();
             }
@@ -514,7 +523,14 @@
 				els[i].dispatchEvent(new Event('change'));
 			}	
 
+            //update SCSS in preview
 			updateScssPreviewDebounced();
+            
+            //reset font object fields
+            $("#_customize-input-body_font_object").val("").change();
+            $("#_customize-input-headings_font_object").val("").change();
+
+            //rebuild font import code snippet
 			ps_update_fonts_import_code_snippet();
 	 
 		});// end onClick  

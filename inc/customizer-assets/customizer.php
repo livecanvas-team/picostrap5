@@ -1096,38 +1096,6 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 
-	//ADD BODY FONT OBJECT - hidden by CSS
-	$wp_customize->add_setting("body_font_object", array(
-        "default" => "",
-		"transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "body_font_object",
-        array(
-            "label" => __("body_font_object", 'picostrap5'),
-            "section" => "addcode",
-            'type'     => 'textarea',
-			'description' =>'<b>Not editable</b> - Internal purpose only.'
-			)
-    ));
-
-	//ADD HEADINGS FONT OBJECT - hidden by CSS
-	$wp_customize->add_setting("headings_font_object", array(
-        "default" => "",
-		"transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "headings_font_object",
-        array(
-            "label" => __("headings_font_object", 'picostrap5'),
-            "section" => "addcode",
-            'type'     => 'textarea',
-			'description' =>'<b>Not editable</b> - Internal purpose only.'
-			)
-    ));
-
 	//ADD FONT LOADING HEADER CODE  
 	$wp_customize->add_setting("picostrap_fonts_header_code", array(
         "default" => "",
@@ -1189,42 +1157,38 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 			)
     ));
 
-    //NEW
-    //ADD BODY FONT LOADING CSS SNIPPET 
-	$wp_customize->add_setting("picostrap_body_font_loading_snippet", array(
+    //ADD BODY FONT OBJECT - hidden by CSS
+	$wp_customize->add_setting("body_font_object", array(
         "default" => "",
-		//"transport" => "refresh",
-        "transport" => "postMessage", // and no custom js is added: so no live page update is done, how it should be - but causes unstable behaviour
+		"transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
-        "picostrap_body_font_loading_snippet",
+        "body_font_object",
         array(
-            "label" => __("Body Font Loading CSS Snippet", 'picostrap5'),
+            "label" => __("body_font_object", 'picostrap5'),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>__('Do not touch - internal use only. We may hide this field.')
+			'description' =>'<b>Not editable</b> - Internal purpose only.'
 			)
     ));
-    //ADD HEADING FONT LOADING CSS SNIPPET 
-	$wp_customize->add_setting("picostrap_headings_font_loading_snippet", array(
+
+	//ADD HEADINGS FONT OBJECT - hidden by CSS
+	$wp_customize->add_setting("headings_font_object", array(
         "default" => "",
-		//"transport" => "refresh",
-        "transport" => "postMessage", // and no custom js is added: so no live page update is done, how it should be - but causes unstable behaviour
+		"transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
-        "picostrap_headings_font_loading_snippet",
+        "headings_font_object",
         array(
-            "label" => __("Headings Font Loading CSS Snippet", 'picostrap5'),
+            "label" => __("headings_font_object", 'picostrap5'),
             "section" => "addcode",
             'type'     => 'textarea',
-			'description' =>__('Do not touch - internal use only. We may hide this field.')
+			'description' =>'<b>Not editable</b> - Internal purpose only.'
 			)
     ));
-
-	
-
+    
 	// ADD A SECTION FOR EXTRAS /////////////////////////////////////////////////////////////////////////////
 	$wp_customize->add_section("extras", array(
         "title" => __("Global Utilities", 'picostrap5'),
