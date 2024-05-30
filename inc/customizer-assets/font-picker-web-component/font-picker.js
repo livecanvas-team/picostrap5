@@ -60,8 +60,10 @@ class FontPicker extends HTMLElement {
             fontElement.setAttribute('data-font-category', font.category);
             fontElement.setAttribute('data-font-type', font.type);
             fontElement.innerHTML = `
-                <div class="font-name" style="font-family: '${font.family}', sans-serif;">${font.family}</div>
-                <div class="font-preview" style="font-family: '${font.family}', sans-serif;">The quick brown fox jumps over the lazy dog's back.</div>
+                <div>
+                    <div class="font-name" style="font-family: '${font.family}', sans-serif;">${font.family}</div>
+                    <div class="font-preview" style="font-family: '${font.family}', sans-serif;">The quick brown fox jumps over the lazy dog's back.</div>
+                </div>
                 <div class="font-details">
                     Subsets: ${font.subsets.join(', ')}, Weights: ${font.weights.join(', ')}, Styles: ${font.styles.join(', ')}, Default Subset: ${font.defSubset}, Variable: ${font.variable}, Category: ${font.category}, Type: ${font.type}
                 </div>
@@ -290,15 +292,40 @@ class FontPicker extends HTMLElement {
                     color: #ccc;
                     text-decoration: none;
                 }
+                
+                #fontList {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 12px;
+                }
+
+                /* Grid for medium screen >= 768px */
+                @media (min-width: 768px) {
+                    #fontList {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                }
+
+                /* Grid for big screen >= 1200px */
+                @media (min-width: 1200px) {
+                    #fontList {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+                }
+
                 .font-row {
-                    padding: 10px;
-                    border-bottom: 1px solid #ccc;
+                    padding: 12px;
+                    border: 1px solid #eaedf1;
                     cursor: pointer;
                     display: flex;
                     flex-direction: column;
+                    border-radius:4px;
+                    min-height: 12rem;
+                    justify-content: space-between;
+                    gap:12px;
                 }
                 .font-row:hover {
-                    background-color: #f1f1f1;
+                    background-color: #f9fafb;
                 }
                 .font-name {
                     font-size: 2em;
@@ -306,12 +333,13 @@ class FontPicker extends HTMLElement {
                 }
                 .font-preview {
                     font-size: 1.5em;
-                    margin-top: 5px;
+                    font-weight:400;
+                    line-height: 1.5;
                 }
                 .font-details {
-                    font-size: 1em;
+                    font-size: 0.8em;
                     color: #666;
-                    margin-top: 5px;
+                    font-weight:400;
                 }
                 #filterContainer {
                     background-color: #f9fafb;
