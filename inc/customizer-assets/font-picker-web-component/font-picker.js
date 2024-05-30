@@ -310,8 +310,18 @@ class FontPicker extends HTMLElement {
                 @media (min-width: 1200px) {
                     #fontList {
                         grid-template-columns: repeat(3, 1fr);
+                        gap:18px
                     }
                 }
+
+                /* Grid for big screen >= 1400px */
+                @media (min-width: 1400px) {
+                    #fontList {
+                        grid-template-columns: repeat(4, 1fr);
+                        gap:18px
+                    }
+                }
+
 
                 .font-row {
                     padding: 12px;
@@ -322,7 +332,7 @@ class FontPicker extends HTMLElement {
                     border-radius:4px;
                     min-height: 12rem;
                     justify-content: space-between;
-                    gap:12px;
+                    gap: 12px;
                 }
                 .font-row:hover {
                     background-color: #f9fafb;
