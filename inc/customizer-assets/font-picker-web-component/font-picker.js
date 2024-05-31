@@ -64,8 +64,16 @@ class FontPicker extends HTMLElement {
                     <div class="font-name" style="font-family: '${font.family}', sans-serif;">${font.family}</div>
                     <div class="font-preview" style="font-family: '${font.family}', sans-serif;">The quick brown fox jumps over the lazy dog's back.</div>
                 </div>
-                <div class="font-details">
-                    Subsets: ${font.subsets.join(', ')}, Weights: ${font.weights.join(', ')}, Styles: ${font.styles.join(', ')}, Default Subset: ${font.defSubset}, Variable: ${font.variable}, Category: ${font.category}, Type: ${font.type}
+                 <div class="font-details">
+                    <div class="weights"><b>Weights:</b> ${font.weights.join(', ')}</div>
+                    <div class="styles"><b>Styles:</b> ${font.styles.join(', ')} </div>  
+                    <!-- <div class="subsets"><b>Subsets:</b> ${font.subsets.join(', ')}</div>  -->
+                    <!-- <div class="subset"><b>Default Subset:</b> ${font.defSubset} </div>  -->
+                    <div class="tags">
+                        <div class="tag category-tag"> ${font.category}</div>
+                        ${font.variable ? `<div class="tag variable-tag"><span >Variable</span></div>` : ''}
+                        <!-- <div class="tag type-tag"> ${font.type}</div> -->
+                    </div>
                 </div>
                 <div class="css-import" style="display: none;"></div>
             `;
@@ -350,6 +358,22 @@ class FontPicker extends HTMLElement {
                     font-size: 0.8em;
                     color: #666;
                     font-weight:400;
+                }
+                .tags {
+                    margin-top:8px;
+                    text-align:right;
+                }
+                .tag {
+                    background-color: #ebedf1;
+                    border-radius: 4px;
+                    padding: 2px 8px;
+                    margin-right: 5px;
+                    font-size: 0.9em;
+                    display: inline-block;
+                }
+                .category-tag {
+                    background: transparent;
+                    border: 1px solid #eee;
                 }
                 #filterContainer {
                     background-color: #f9fafb;
