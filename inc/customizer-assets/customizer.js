@@ -77,6 +77,7 @@
 
     //FUNCTION TO GET FONT DETAILS FROM FONTSOURCE
     function getFontData(fontName) {
+        console.log("getFontData for " + fontName);
         const apiUrl = 'https://api.fontsource.org/v1/fonts/';
         const formattedFontName = fontName.toLowerCase().replace(/\s+/g, '-');
         const url = `${apiUrl}${formattedFontName}`;
@@ -108,7 +109,9 @@
             return {};
         }
     }
-
+    // Example usage
+    //const fontData = getFontData('Montserrat');
+    //console.log(fontData);
 
     function generateCssSnippet(font) {
         const unicodeRange = font.unicodeRange ? font.unicodeRange.latin : '';
@@ -140,11 +143,7 @@
         }
     }
 
-    // Example usage
-    //const fontData = getFontData('Montserrat');
-    //console.log(fontData);
-
-    //CHECK IF FONTS HAVE CHANGED, IF SO GRAB FONT INFO AND REBUILD IMPORT CODE SNIPPET 
+    //CHECK IF FONTS HAVE CHANGED, IF SO GRAB FONT INFO REMOTELY AND REBUILD IMPORT CODE SNIPPET 
     function ps_update_font_objects_and_import_code(){
 
         //get old font values from object fields
@@ -175,56 +174,53 @@
         console.log("New fonts: " + new_body_font_family + " & " + new_headings_font_family);
 
         //if fonts differ, update obect and preview data, and rebuild code snippet
-
+        
+        // BODY FONT
         if (old_body_font_family != new_body_font_family) {
-            console.log("Body font has changed, the import code will be reissued ");
-            handleBodyFontChange();
+            console.log("Body font has changed");
+            
+            //get remote font data
+            const fontData = getFontData(new_body_font_family);
+            console.log(fontData);
+
+            //save font object data into field
+            $("#_customize-input-body_font_object").val(JSON.stringify(fontData)).change();
+
+            //update preview
+            if (fontData.cssImport) {
+                document.querySelector('#customize-preview iframe').contentWindow.document
+                    .querySelector('#provisional-body-font-loading-style').innerHTML = fontData.cssImport;
+            }
+
+            //update font import code
             ps_update_fonts_import_code_snippet_from_object_fields();
         }
+
+        //HEADINGS FONT
         if (old_headings_font_family != new_headings_font_family) {
-            console.log("Headings font has changed, the import code will be reissued ");
-            handleHeadingsFontChange();
+            console.log("Headings font has changed");
+            
+            //get remote font data      
+            const fontData = getFontData(new_headings_font_family);
+            console.log(fontData);
+
+            //save font object data into field
+            $("#_customize-input-headings_font_object").val(JSON.stringify(fontData)).change();
+
+            //update preview
+            if (fontData.cssImport) {
+                document.querySelector('#customize-preview iframe').contentWindow.document
+                    .querySelector('#provisional-headings-font-loading-style').innerHTML = fontData.cssImport;
+            }
+
+            //update font import code
             ps_update_fonts_import_code_snippet_from_object_fields();
         }
         
     }
 
 
-    //FUNCTION TO HANDLE BODY FONT CHANGE
-    function handleBodyFontChange() {
-
-        //get remote font data     
-        let fontName = $("#_customize-input-SCSSvar_font-family-base").val();
-        console.log("handleBodyFontChange to " + fontName);
-        const fontData = getFontData(fontName);
-        console.log(fontData);
-
-        $("#_customize-input-body_font_object").val(JSON.stringify(fontData)).change();
-
-        if (fontData.cssImport) {
-            document.querySelector('#customize-preview iframe').contentWindow.document
-                .querySelector('#provisional-body-font-loading-style').innerHTML = fontData.cssImport;
-        }
-
-    };
-
-    //FUNCTION TO HANDLE HEADINGS FONT CHANGE
-    function handleHeadingsFontChange() {
-
-        //get remote font data     
-        let fontName = $("#_customize-input-SCSSvar_headings-font-family").val();
-        console.log("handleHeadingsFontChange to " + fontName);
-        const fontData = getFontData(fontName);
-        console.log(fontData);
-
-        $("#_customize-input-headings_font_object").val(JSON.stringify(fontData)).change();
-
-        if (fontData.cssImport) {
-            document.querySelector('#customize-preview iframe').contentWindow.document
-                .querySelector('#provisional-headings-font-loading-style').innerHTML = fontData.cssImport;
-        }
-
-    };
+  
 
     // FUNCTION TO PREPARE THE HTML CODE SNIPPET FROM OBJECT FIELDS
     function ps_update_fonts_import_code_snippet_from_object_fields() {
