@@ -1,6 +1,22 @@
 <?php
 defined('ABSPATH') || exit;
 
+// ADD BODY CLASSES: FOR PUBLIC SITE TO SUPPORT CUSTOMIZER MENUBAR OPTIONS
+add_filter('body_class', 'picostrap_config_body_classes');
+function picostrap_config_body_classes($classes) {
+    if (function_exists('lc_custom_header')) return $classes;
+    $classes[] = "picostrap_header_navbar_position_" . get_theme_mod('picostrap_header_navbar_position');
+    $classes[] = "picostrap_header_navbar_color_choice_" . get_theme_mod('picostrap_header_navbar_color_choice');
+    if (get_theme_mod("enable_topbar")) $classes[] = "picostrap_topbar_enabled";
+    return $classes;
+}
+
+// REMOVE BODY MARGIN-TOP GIVEN BY WORDPRESS ADMIN BAR
+add_action('get_header', 'picostrap_filter_head');
+function picostrap_filter_head() {
+    if (get_theme_mod('picostrap_header_navbar_position') == "fixed-top") remove_action('wp_head', '_admin_bar_bump_cb');
+}
+
 // ADD CUSTOM JS & CSS TO CUSTOMIZER
 add_action('customize_controls_enqueue_scripts', 'picostrap_customize_enqueue');
 function picostrap_customize_enqueue() {
@@ -16,22 +32,6 @@ function picostrap_customize_enqueue() {
     wp_enqueue_style('palette-generator', get_template_directory_uri() . '/inc/customizer-assets/palette-generator.css', [], $rand);
     wp_enqueue_script('style-guide', get_template_directory_uri() . '/inc/customizer-assets/style-guide.js', ['jquery'], $rand, true);
     wp_enqueue_script('fontpicker', get_template_directory_uri() . '/inc/customizer-assets/font-picker-web-component/font-picker.js', ['customize-controls'], $rand, true);
-}
-
-// ADD BODY CLASSES
-add_filter('body_class', 'picostrap_config_body_classes');
-function picostrap_config_body_classes($classes) {
-    if (function_exists('lc_custom_header')) return $classes;
-    $classes[] = "picostrap_header_navbar_position_" . get_theme_mod('picostrap_header_navbar_position');
-    $classes[] = "picostrap_header_navbar_color_choice_" . get_theme_mod('picostrap_header_navbar_color_choice');
-    if (get_theme_mod("enable_topbar")) $classes[] = "picostrap_topbar_enabled";
-    return $classes;
-}
-
-// REMOVE BODY MARGIN-TOP GIVEN BY WORDPRESS ADMIN BAR
-add_action('get_header', 'picostrap_filter_head');
-function picostrap_filter_head() {
-    if (get_theme_mod('picostrap_header_navbar_position') == "fixed-top") remove_action('wp_head', '_admin_bar_bump_cb');
 }
 
 // ADD CUSTOMIZER SETTINGS AND CONTROLS
