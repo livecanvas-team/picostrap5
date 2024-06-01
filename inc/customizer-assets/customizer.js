@@ -174,7 +174,7 @@
         console.log("New fonts: " + new_body_font_family + " & " + new_headings_font_family);
 
         //if fonts differ, update obect and preview data, and rebuild code snippet
-        
+
         // BODY FONT
         if (old_body_font_family != new_body_font_family) {
             console.log("Body font has changed");
@@ -225,7 +225,7 @@
     // FUNCTION TO PREPARE THE HTML CODE SNIPPET FROM OBJECT FIELDS
     function ps_update_fonts_import_code_snippet_from_object_fields() {
 
-        console.log('Running function ps_update_fonts_import_code_snippet_from_object_fields to generate   code for font import:');
+        console.log('Running function ps_update_fonts_import_code_snippet_from_object_fields to generate the code snippet for fonts import');
 
         // BODY: Get the value from the input field
         let bodyFontObjectFieldValue = $("#_customize-input-body_font_object").val();
