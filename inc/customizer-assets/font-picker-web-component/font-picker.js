@@ -70,8 +70,12 @@ class FontPicker extends HTMLElement {
                     <!-- <div class="subsets"><b>Subsets:</b> ${font.subsets.join(', ')}</div>  -->
                     <!-- <div class="subset"><b>Default Subset:</b> ${font.defSubset} </div>  -->
                     <div class="tags">
-                        <div class="tag category-tag"> ${font.category}</div>
-                        ${font.variable ? `<div class="tag variable-tag"><span >Variable</span></div>` : ''}
+                        <div class="tag category-tag ${font.category} "> ${font.category}</div>
+                        ${font.variable ? `<div class="tag variable-tag">
+                       
+                        <svg xmlns="http://www.w3.org/2000/svg" width="54" height="12" fill="currentColor" class="ng-star-inserted"><path _ngcontent-ng-c3107572908="" d="M1 1h2.7l1.7 6.5a11.8 11.8 0 0 1 .4 2l.1-.6.1-.5L8.1 1h.7l-3 10h-2L1 1ZM9.5 9c0-.8.4-1.4 1.3-1.8.8-.4 2-.6 3.5-.6h3.2v-.4c0-.5-.3-.8-.7-1-.5-.2-1.2-.3-2.2-.3a7 7 0 0 0-2.2.2c-.5.2-.7.4-.7.8H10c0-.7.4-1.3 1.2-1.6.8-.4 2-.6 3.4-.6s2.4.2 3.2.6c.8.5 1.1 1 1.1 1.9v3.3c0 .3 0 .5.2.8 0 .3.1.5.3.7v.1h-1.6a1.8 1.8 0 0 1-.4-1 3 3 0 0 1-1.5.8c-.7.2-1.6.3-2.7.3-1.2 0-2.1-.2-2.8-.5-.7-.4-1-1-1-1.7Zm1.6-.1c0 .4.2.7.6.9.5.2 1.2.3 2.2.3 1 0 1.8-.2 2.5-.5s1-.7 1-1v-1h-2.8c-1.1 0-2 .1-2.6.4-.6.2-1 .5-1 .9Zm9.7 2.2V3.8h2.4v.8c.2-.3.5-.5 1-.7a3 3 0 0 1 2-.2v1.8a3.7 3.7 0 0 0-.8-.1 2.4 2.4 0 0 0-2 1.2V11h-2.6Zm6.4 0V3.8h2V11h-2Zm-.1-9.2c0-.3 0-.6.2-.8.2-.2.5-.3.9-.3.3 0 .6.1.8.3.2.2.3.5.3.8 0 .3 0 .5-.3.7-.2.2-.5.3-.8.3-.4 0-.7 0-.9-.3a1 1 0 0 1-.2-.7Zm3.5 6.9c0-.8.2-1.5.7-1.9a3 3 0 0 1 2-.6h1.2v-1c0-.3 0-.6-.2-.8-.1-.2-.4-.3-.7-.3-.3 0-.5.1-.7.3l-.2.9H31c0-.7.3-1.3.8-1.8s1.1-.7 2-.7a3 3 0 0 1 2 .6c.4.4.6 1 .6 2v4l.1.8.2.7v.1h-1.8l-.1-.4-.1-.6c-.1.3-.4.6-.7.8a2 2 0 0 1-1.2.3c-.6 0-1.1-.2-1.5-.6-.4-.3-.6-1-.6-1.8Zm1.8-.1c0 .4 0 .7.2 1 .2.2.4.3.7.3.3 0 .6-.2.8-.5.3-.2.4-.6.4-1V7.2h-1c-.3 0-.6.1-.8.4-.2.2-.3.5-.3 1Zm5.7 2.4V.5h1.5v4c.1-.2.4-.5.7-.6.2-.2.6-.2 1-.2.7 0 1.4.3 1.8 1 .5.7.7 1.5.7 2.6v.2c0 1-.2 2-.7 2.6-.4.7-1 1-1.8 1-.4 0-.8 0-1-.2-.4-.2-.6-.4-.8-.7v.8H38Zm1.5-2c0 .2.2.5.5.7.2.2.5.3.8.3.5 0 .9-.2 1.1-.6.2-.4.4-1 .4-1.7v-.6c0-.7-.2-1.3-.4-1.7-.2-.4-.6-.6-1-.6s-.7.1-1 .3c-.2.3-.4.5-.4.8v3Zm5.8 2V.5h1V11h-1Zm2.7-3.5v-.2c0-1.2.2-2 .7-2.7.5-.7 1.2-1 2-1s1.4.3 1.9.9c.4.5.6 1.4.6 2.7v.3h-5v-.6h4.4c0-.9-.2-1.6-.5-2-.2-.4-.7-.7-1.5-.7-.6 0-1.1.3-1.5.8-.3.5-.5 1.2-.5 2v.7c0 1 .2 1.6.6 2.1.4.5 1 .8 1.7.8.4 0 .8-.1 1-.3.4-.1.6-.4.9-.7l.5.4c-.3.4-.6.7-1 .9a3 3 0 0 1-1.4.3c-1 0-1.6-.3-2.2-1-.5-.6-.7-1.5-.7-2.7Z"></path></svg>
+                      
+                        </div>` : ''}
                         <!-- <div class="tag type-tag"> ${font.type}</div> -->
                     </div>
                 </div>
@@ -360,21 +364,34 @@ class FontPicker extends HTMLElement {
                     font-weight:400;
                 }
                 .tags {
-                    margin-top:8px;
-                    text-align:right;
+                    margin-top: 8px;
+                    display: flex;
+                    justify-content: end;
+                    gap: 3px;
+                    align-items: stretch;
+
+                    .serif {font-family:serif;}
+                    .sans-serif {font-family:sans-serif;}
+                    .display {font-family:Impact;}
+                    .handwriting {font-family:Comic Sans MS;font-style:italic;letter-spacing:1px}
                 }
                 .tag {
-                    background-color: #ebedf1;
                     border-radius: 4px;
                     padding: 2px 8px;
-                    margin-right: 5px;
                     font-size: 0.9em;
                     display: inline-block;
                 }
+
+                .variable-tag svg {
+                    vertical-align: middle;
+                    height: 14px;   
+                }
+
                 .category-tag {
                     background: transparent;
                     border: 1px solid #eee;
                 }
+
                 #filterContainer {
                     background-color: #f9fafb;
                     z-index: 1;
