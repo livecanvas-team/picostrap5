@@ -59,8 +59,7 @@ add_action( 'wp_head', function  () {
 			<?php echo ps_get_main_sass() ?>
 		</template>
 
-        <style id="provisional-body-font-loading-style"> </style>
-        <style id="provisional-headings-font-loading-style"> </style>
+        <div id="font-loading-snippet-wrapper-for-preview"> </div> 
 	<?php
 } );
 

@@ -186,12 +186,6 @@
             //save font object data into field
             $("#_customize-input-body_font_object").val(JSON.stringify(fontData)).change();
 
-            //update preview
-            if (fontData.cssImport) {
-                document.querySelector('#customize-preview iframe').contentWindow.document
-                    .querySelector('#provisional-body-font-loading-style').innerHTML = fontData.cssImport;
-            }
-
             //update font import code
             ps_update_fonts_import_code_snippet_from_object_fields();
         }
@@ -207,12 +201,6 @@
             //save font object data into field
             $("#_customize-input-headings_font_object").val(JSON.stringify(fontData)).change();
 
-            //update preview
-            if (fontData.cssImport) {
-                document.querySelector('#customize-preview iframe').contentWindow.document
-                    .querySelector('#provisional-headings-font-loading-style').innerHTML = fontData.cssImport;
-            }
-
             //update font import code
             ps_update_fonts_import_code_snippet_from_object_fields();
         }
@@ -220,9 +208,7 @@
     }
 
 
-  
-
-    // FUNCTION TO PREPARE THE HTML CODE SNIPPET FROM OBJECT FIELDS
+    // FUNCTION TO PREPARE THE HTML CODE FONT IMPORT SNIPPET FROM THE FONT OBJECT FIELDS, and put it into Customizer field & preview
     function ps_update_fonts_import_code_snippet_from_object_fields() {
 
         console.log('Running function ps_update_fonts_import_code_snippet_from_object_fields to generate the code snippet for fonts import');
@@ -251,7 +237,12 @@
         //populate the textarea with the result
         $("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
 
+        //update preview
+        document.querySelector('#customize-preview iframe').contentWindow.document
+            .querySelector('#font-loading-snippet-wrapper-for-preview').innerHTML = html_code;
+
     } // end function 
+
 
 	// FUNCTION TO PREPARE THE SCSS CODE assigning all the variables according to THE WIDGETS VALUES
 	function getMainSass() {
@@ -275,7 +266,6 @@
 				sass += `$${name}: ${els[i].value}; `;
 				
 			} //end if value 
-
 		}
 
 		// loop all checkbox text widgets that have values matched to SCSS vars
@@ -298,9 +288,7 @@
 
 	// FUNCTION TO REUPDATE THE SCSS FIELD AND RETRIGGER COMPILER
 	function updateScssPreview() {
-
-        ps_update_font_objects_and_import_code();
-        
+       
 		var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
 
 		//build the full SCSS with variables and main import
@@ -315,6 +303,7 @@
 			// show publishing action buttons
 			document.querySelector('#customize-save-button-wrapper').removeAttribute('hidden');
 			ps_get_page_colors(); 
+            ps_update_font_objects_and_import_code();
 		}
 
 		//hide publishing action buttons
@@ -322,18 +311,6 @@
 
 		//trigger picosass compiler
 		document.querySelector('#customize-preview iframe').contentWindow.Picosass.Compile({}, compilingFinished); 
-	
-		//update font loading code as well, if necessary
-        /*
-		if (window.fontLoadingUrl){
-			console.log("Update font loading code to add " + window.fontLoadingUrl);
-			var style = document.createElement('link');
-			style.href = window.fontLoadingUrl;
-			style.type = 'text/css';
-			style.rel = 'stylesheet';
-			iframeDoc.head.append(style);
-		}
-        */
 
 	}
 
@@ -525,7 +502,7 @@
 		}
 
 		//pico_add_video_link("section-colors", "https://youtu.be/SwDrR-FmzkE&t=63s");
-		pico_add_video_link("section-typography", "https://youtu.be/SwDrR-FmzkE&t=86s");
+		//pico_add_video_link("section-typography", "https://youtu.be/SwDrR-FmzkE&t=86s");
 		pico_add_video_link("section-components", "https://youtu.be/SwDrR-FmzkE&t=149s");
 		pico_add_video_link("section-buttons", "https://youtu.be/SwDrR-FmzkE&t=169s");
 		pico_add_video_link("section-nav", "https://youtu.be/aY7JmxBe76Y&t=26s");
