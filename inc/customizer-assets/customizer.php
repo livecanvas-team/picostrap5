@@ -1,7 +1,7 @@
 <?php
 defined('ABSPATH') || exit;
 
-// ADD BODY CLASSES: FOR PUBLIC SITE TO SUPPORT CUSTOMIZER MENUBAR OPTIONS
+// FOR SITE FRONTEND: : ADD BODY CLASSES:  TO SUPPORT CUSTOMIZER MENUBAR OPTIONS
 add_filter('body_class', 'picostrap_config_body_classes');
 function picostrap_config_body_classes($classes) {
     if (function_exists('lc_custom_header')) return $classes;
@@ -11,11 +11,12 @@ function picostrap_config_body_classes($classes) {
     return $classes;
 }
 
-// REMOVE BODY MARGIN-TOP GIVEN BY WORDPRESS ADMIN BAR
+// FOR SITE FRONTEND: REMOVE BODY MARGIN-TOP GIVEN BY WORDPRESS ADMIN BAR
 add_action('get_header', 'picostrap_filter_head');
 function picostrap_filter_head() {
     if (get_theme_mod('picostrap_header_navbar_position') == "fixed-top") remove_action('wp_head', '_admin_bar_bump_cb');
 }
+// START CUSTOMIZER ////////////////////////////////////////
 
 // ADD CUSTOM JS & CSS TO CUSTOMIZER
 add_action('customize_controls_enqueue_scripts', 'picostrap_customize_enqueue');
@@ -34,26 +35,168 @@ function picostrap_customize_enqueue() {
     wp_enqueue_script('fontpicker', get_template_directory_uri() . '/inc/customizer-assets/font-picker-web-component/font-picker.js', ['customize-controls'], $rand, true);
 }
 
+// DEFINE SCSS VARIABLES ARRAY
+function picostrap_get_scss_variables_array() {
+    return [
+        "colors" => [
+            '$body-bg' => ['type' => 'color', 'newgroup' => 'Base Colors'],
+            '$body-color' => ['type' => 'color'],
+            '$link-color' => ['type' => 'color'],
+            '$link-hover-color' => ['type' => 'color'],
+            '$primary' => ['type' => 'color', 'newgroup' => 'Bootstrap Colors'],
+            '$secondary' => ['type' => 'color'],
+            '$success' => ['type' => 'color'],
+            '$info' => ['type' => 'color'],
+            '$warning' => ['type' => 'color'],
+            '$danger' => ['type' => 'color'],
+            '$light' => ['type' => 'color'],
+            '$dark' => ['type' => 'color'],
+            '$enable-text-shades' => ['type' => 'boolean', 'default' => 'true', 'newgroup' => 'Color Shades', 'comment' => 'Generates text shade classes'],
+            '$enable-bg-shades' => ['type' => 'boolean', 'default' => 'true', 'comment' => 'Generates background shade classes'],
+            '$enable-text-bg-shades' => ['type' => 'boolean', 'comment' => 'Generates text & background combination shade classes'],
+        ],
+        "global-options" => [
+            '$enable-rounded' => ['type' => 'boolean', 'default' => 'true'],
+            '$enable-shadows' => ['type' => 'boolean'],
+            '$enable-gradients' => ['type' => 'boolean'],
+            '$spacer' => ['type' => 'text', 'placeholder' => '1rem'],
+            '$border-width' => ['newgroup' => 'Global Borders', 'type' => 'text', 'placeholder' => '1px'],
+            '$border-style' => ['type' => 'text', 'placeholder' => 'solid'],
+            '$border-color' => ['type' => 'color'],
+            '$border-radius' => ['type' => 'text', 'placeholder' => '.375rem'],
+            '$border-radius-sm' => ['newgroup' => 'Rounded Helper Classes', 'type' => 'text', 'placeholder' => '.25rem'],
+            '$border-radius-lg' => ['type' => 'text', 'placeholder' => '.5rem'],
+            '$border-radius-xl' => ['type' => 'text', 'placeholder' => '1rem'],
+            '$border-radius-2xl' => ['type' => 'text', 'placeholder' => '2rem'],
+            '$border-radius-pill' => ['type' => 'text', 'placeholder' => '50rem'],
+        ],
+        "typography" => [
+            '$font-family-base' => ['type' => 'text', 'placeholder' => '$font-family-sans-serif', 'newgroup' => 'Font Families'],
+            '$font-family-sans-serif' => ['type' => 'text'],
+            '$font-family-monospace' => ['type' => 'text'],
+            '$font-size-base' => ['newgroup' => 'Font Sizes', 'type' => 'text', 'placeholder' => '1rem'],
+            '$font-size-sm' => ['type' => 'text', 'placeholder' => '.875rem'],
+            '$font-size-lg' => ['type' => 'text', 'placeholder' => '1.25rem'],
+            '$enable-rfs' => ['type' => 'boolean', 'default' => 'true'],
+            '$font-weight-base' => ['newgroup' => 'Font Weights', 'type' => 'text', 'placeholder' => '400'],
+            '$line-height-base' => ['type' => 'text', 'placeholder' => '1.5'],
+            '$font-weight-lighter' => ['type' => 'text', 'placeholder' => 'lighter'],
+            '$font-weight-light' => ['type' => 'text', 'placeholder' => '300'],
+            '$font-weight-normal' => ['type' => 'text', 'placeholder' => '400'],
+            '$font-weight-semibold' => ['type' => 'text', 'placeholder' => '600'],
+            '$font-weight-bold' => ['type' => 'text', 'placeholder' => '700'],
+            '$font-weight-bolder' => ['type' => 'text', 'placeholder' => 'bolder'],
+            '$headings-font-family' => ['type' => 'text', 'placeholder' => 'null', 'newgroup' => 'Headings'],
+            '$headings-font-weight' => ['type' => 'text', 'placeholder' => '500'],
+            '$headings-line-height' => ['type' => 'text', 'placeholder' => '1.2'],
+            '$headings-color' => ['type' => 'color'],
+            '$headings-margin-bottom' => ['type' => 'text', 'placeholder' => '$spacer / 2'],
+            '$h1-font-size' => ['type' => 'text', 'placeholder' => '2.5rem'],
+            '$h2-font-size' => ['type' => 'text', 'placeholder' => '2rem'],
+            '$h3-font-size' => ['type' => 'text', 'placeholder' => '1.75rem'],
+            '$h4-font-size' => ['type' => 'text', 'placeholder' => '1.5rem'],
+            '$h5-font-size' => ['type' => 'text', 'placeholder' => '1.25rem'],
+            '$h6-font-size' => ['type' => 'text', 'placeholder' => '1rem'],
+            '$lead-font-size' => ['newgroup' => 'Lead, Small and Muted', 'type' => 'text', 'placeholder' => '1.25rem'],
+            '$lead-font-weight' => ['type' => 'text', 'placeholder' => '300'],
+            '$small-font-size' => ['type' => 'text', 'placeholder' => '80%'],
+            '$text-muted' => ['type' => 'color'],
+            '$blockquote-margin-y' => ['newgroup' => 'Blockquotes', 'type' => 'text', 'placeholder' => '$spacer'],
+            '$blockquote-font-size' => ['type' => 'text', 'placeholder' => '1.25rem'],
+            '$blockquote-footer-color' => ['type' => 'color'],
+            '$blockquote-footer-font-size' => ['type' => 'text', 'placeholder' => '$small-font-size'],
+            '$hr-height' => ['newgroup' => 'HRs', 'type' => 'text', 'placeholder' => '$border-width'],
+            '$hr-color' => ['type' => 'color'],
+            '$mark-padding' => ['newgroup' => 'Miscellanea', 'type' => 'text', 'placeholder' => '.2em'],
+            '$dt-font-weight' => ['type' => 'text', 'placeholder' => '700'],
+            '$nested-kbd-font-weight' => ['type' => 'text', 'placeholder' => '700'],
+            '$list-inline-padding' => ['type' => 'text', 'placeholder' => '.5rem'],
+            '$mark-bg' => ['type' => 'color', 'placeholder' => '#fcf8e3'],
+            '$hr-margin-y' => ['type' => 'text', 'placeholder' => '$spacer'],
+            '$paragraph-margin-bottom' => ['type' => 'text', 'placeholder' => '1rem'],
+        ],
+        "forms-and-buttons" => [
+            '$input-btn-padding-y' => ['type' => 'text', 'placeholder' => '.375rem'],
+            '$input-btn-padding-x' => ['type' => 'text', 'placeholder' => '.75rem'],
+            '$input-btn-font-family' => ['type' => 'text', 'placeholder' => 'null'],
+            '$input-btn-font-size' => ['type' => 'text', 'placeholder' => '$font-size-base'],
+            '$input-btn-line-height' => ['type' => 'text', 'placeholder' => '$line-height-base'],
+            '$input-btn-focus-width' => ['type' => 'text', 'placeholder' => '.2rem'],
+            '$input-btn-focus-color-opacity' => ['type' => 'text', 'placeholder' => '.25'],
+            '$input-btn-focus-color' => ['type' => 'color', 'placeholder' => 'rgba($component-active-bg, .25)'],
+            '$input-btn-focus-blur' => ['type' => 'text', 'placeholder' => '0'],
+            '$input-btn-focus-box-shadow' => ['type' => 'text', 'placeholder' => '0 0 0 $input-btn-focus-width $input-btn-focus-color'],
+            '$input-btn-padding-y-sm' => ['type' => 'text', 'placeholder' => '.25rem'],
+            '$input-btn-padding-x-sm' => ['type' => 'text', 'placeholder' => '.5rem'],
+            '$input-btn-font-size-sm' => ['type' => 'text', 'placeholder' => '$font-size-sm'],
+            '$input-btn-padding-y-lg' => ['type' => 'text', 'placeholder' => '.5rem'],
+            '$input-btn-padding-x-lg' => ['type' => 'text', 'placeholder' => '1rem'],
+            '$input-btn-font-size-lg' => ['type' => 'text', 'placeholder' => '$font-size-lg'],
+            '$input-btn-border-width' => ['type' => 'text', 'placeholder' => '$border-width'],
+        ],
+        "buttons" => [
+            '$btn-padding-y' => ['type' => 'text', 'placeholder' => '.375rem'],
+            '$btn-padding-x' => ['type' => 'text', 'placeholder' => '.75rem'],
+            '$btn-font-family' => ['type' => 'text', 'placeholder' => 'null'],
+            '$btn-font-size' => ['type' => 'text', 'placeholder' => '$font-size-base'],
+            '$btn-line-height' => ['type' => 'text', 'placeholder' => '$line-height-base'],
+            '$btn-white-space' => ['type' => 'text', 'placeholder' => 'null (Set to `nowrap` to prevent text wrapping)'],
+            '$btn-padding-y-sm' => ['type' => 'text', 'placeholder' => '.25rem'],
+            '$btn-padding-x-sm' => ['type' => 'text', 'placeholder' => '.5rem'],
+            '$btn-font-size-sm' => ['type' => 'text', 'placeholder' => '$font-size-sm'],
+            '$btn-padding-y-lg' => ['type' => 'text', 'placeholder' => '.5rem'],
+            '$btn-padding-x-lg' => ['type' => 'text', 'placeholder' => '1rem'],
+            '$btn-font-size-lg' => ['type' => 'text', 'placeholder' => '$font-size-lg'],
+            '$btn-border-width' => ['type' => 'text', 'placeholder' => '$border-width'],
+            '$btn-font-weight' => ['type' => 'text', 'placeholder' => '$font-weight-normal !default'],
+            '$btn-box-shadow' => ['type' => 'text', 'placeholder' => 'inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default'],
+            '$btn-focus-width' => ['type' => 'text', 'placeholder' => '$input-btn-focus-width !default'],
+            '$btn-focus-box-shadow' => ['type' => 'text', 'placeholder' => '$input-btn-focus-box-shadow !default'],
+            '$btn-disabled-opacity' => ['type' => 'text', 'placeholder' => '.65 !default'],
+            '$btn-active-box-shadow' => ['type' => 'text', 'placeholder' => 'inset 0 3px 5px rgba($black, .125) !default'],
+            '$btn-link-color' => ['type' => 'text', 'placeholder' => '$link-color !default', 'newgroup' => 'Button Colors'],
+            '$btn-link-hover-color' => ['type' => 'text', 'placeholder' => '$link-hover-color !default'],
+            '$btn-link-disabled-color' => ['type' => 'text', 'placeholder' => '$gray-600 !default'],
+            '$btn-border-radius' => ['type' => 'text', 'placeholder' => '$border-radius !default', 'newgroup' => 'Buttons Border Radius'],
+            '$btn-border-radius-sm' => ['type' => 'text', 'placeholder' => '$border-radius-sm !default'],
+            '$btn-border-radius-lg' => ['type' => 'text', 'placeholder' => '$border-radius-lg !default'],
+            '$btn-transition' => ['newgroup' => 'Buttons Extras', 'type' => 'text', 'placeholder' => 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default'],
+            '$btn-hover-bg-shade-amount' => ['type' => 'text', 'placeholder' => '15% !default'],
+            '$btn-hover-bg-tint-amount' => ['type' => 'text', 'placeholder' => '15% !default'],
+            '$btn-hover-border-shade-amount' => ['type' => 'text', 'placeholder' => '20% !default'],
+            '$btn-hover-border-tint-amount' => ['type' => 'text', 'placeholder' => '10% !default'],
+            '$btn-active-bg-shade-amount' => ['type' => 'text', 'placeholder' => '20% !default'],
+            '$btn-active-bg-tint-amount' => ['type' => 'text', 'placeholder' => '20% !default'],
+            '$btn-active-border-shade-amount' => ['type' => 'text', 'placeholder' => '25% !default'],
+            '$btn-active-border-tint-amount' => ['type' => 'text', 'placeholder' => '10% !default'],
+        ],
+        "navbars" => [
+            '$navbar-brand-font-size' => ['type' => 'text', 'placeholder' => '1.25rem', 'newgroup' => 'Brand'],
+            '$navbar-light-brand-color' => ['type' => 'color'],
+            '$navbar-dark-brand-color' => ['type' => 'color'],
+            '$nav-link-font-size' => ['type' => 'text', 'placeholder' => '1rem', 'newgroup' => 'Nav Links'],
+            '$navbar-light-color' => ['type' => 'color'],
+            '$navbar-light-hover-color' => ['type' => 'color'],
+            '$navbar-dark-color' => ['type' => 'color'],
+            '$navbar-dark-hover-color' => ['type' => 'color'],
+            '$navbar-toggler-font-size' => ['type' => 'text', 'placeholder' => '1rem', 'newgroup' => 'Toggler']
+        ],
+    ];
+}
+
 // ADD CUSTOMIZER SETTINGS AND CONTROLS
 add_action('customize_register', 'picostrap_customize_register');
 function picostrap_customize_register($wp_customize) {
     add_theme_support('customize-selective-refresh-widgets');
 
-    // Sections
-    $sections = [
-        "typography" => __("Typography", 'picostrap5'),
-        "components" => __("Global Options", 'picostrap5'),
-        "buttons-forms" => __("Forms", 'picostrap5'),
-        "buttons" => __("Buttons", 'picostrap5'),
-        "navbars" => __("Navbars", 'picostrap5')
-    ];
-
-    foreach ($sections as $slug => $title) {
-        $wp_customize->add_section($slug, ["title" => $title, "priority" => 50]);
-    }
-
     // Add SCSS variables controls
     foreach (picostrap_get_scss_variables_array() as $section_slug => $section_data) {
+        // Add section if not exists
+        $wp_customize->add_section($section_slug, [
+            "title" => ucwords(str_replace("-", ' ', $section_slug)),
+            "priority" => 50
+        ]);
+
         foreach ($section_data as $variable_name => $variable_props) {
             $variable_slug = str_replace("$", "SCSSvar_", $variable_name);
             $variable_pretty_name = ucwords(str_replace("-", ' ', str_replace("$", "", $variable_name)));
@@ -84,7 +227,7 @@ function picostrap_customize_register($wp_customize) {
                     $placeholder = isset($variable_props['placeholder']) ? $variable_props['placeholder'] : '';
                     $wp_customize->add_control($variable_slug, [
                         'label' => __($variable_pretty_name, 'picostrap5'),
-                        'description' => $optional_grouptitle . " <!-- (" . $variable_name . ") -->" . $placeholder . " " . $optional_comment,
+                        'description' => $optional_grouptitle . " <!-- (" . $variable_name . ") -->" . $placeholder_html . " " . $optional_comment,
                         'section' => $section_slug,
                         'type' => 'text',
                         'input_attrs' => ['title' => esc_attr($variable_name)]
@@ -94,24 +237,21 @@ function picostrap_customize_register($wp_customize) {
         }
     }
 
-    // Additional settings and controls
+    // Additional sections below Bootstrap options
     $wp_customize->add_section("nav", ["title" => __("Main Navigation Bar", 'picostrap5'), "priority" => 60]);
     $wp_customize->add_section("topbar", ["title" => __("Optional Topbar", 'picostrap5'), "priority" => 60]);
     $wp_customize->add_section("footer", ["title" => __("Footer", 'picostrap5'), "priority" => 100]);
     $wp_customize->add_section("singleposts", ["title" => __("Single Post & Archives", 'picostrap5'), "priority" => 160]);
     $wp_customize->add_section("addcode", ["title" => __("Header / Footer Code", 'picostrap5'), "priority" => 180]);
     $wp_customize->add_section("extras", ["title" => __("Global Utilities", 'picostrap5'), "priority" => 190]);
+    
+    // ADD SETTINGS AND CONTROLS /////////////////////////////////////
 
-    // Sample setting and control
-    $wp_customize->add_setting("sample_setting", ["default" => "", "transport" => "postMessage"]);
-    $wp_customize->add_control("sample_setting", ["label" => __("Sample Setting", 'picostrap5'), "section" => "extras", "type" => "text"]);
-
-    // ADD SETTINGS AND CONTROLS FOR OTHER SECTIONS
-    // TAGLINE: SHOW / HIDE SWITCH
+    // SITE IDENTITY: HIDE TAGLINE OPTION
     $wp_customize->add_setting('header_disable_tagline', ['default' => '', 'transport' => 'postMessage']);
     $wp_customize->add_control('header_disable_tagline', ['label' => __('Hide Tagline', 'picostrap5'), 'section' => 'title_tagline', 'type' => 'checkbox']);
 
-    // NAVBAR SECTION
+    // MAIN NAVIGATION BAR  
     if (function_exists('lc_custom_header')) {
         $wp_customize->add_section("nav", ["title" => __("Main Navigation Bar [Disabled]", 'picostrap5'), "priority" => 60]);
         $wp_customize->add_setting("picostrap_header_navbar_disabled", ["default" => "", "transport" => "refresh"]);
@@ -194,7 +334,7 @@ function picostrap_customize_register($wp_customize) {
         $wp_customize->add_control("enable_dark_mode_switch", ["label" => __("Enable Dark Mode Switch", 'picostrap5'), "section" => "nav", 'type' => 'checkbox']);
     }
 
-    // TOPBAR SECTION
+    // OPTIONAL TOPBAR  
     $wp_customize->add_section("topbar", ["title" => __("Optional Topbar", 'picostrap5'), "priority" => 60]);
     $wp_customize->add_setting("enable_topbar", ["default" => "", "transport" => "refresh"]);
     $wp_customize->add_control("enable_topbar", ["label" => __("Enable Topbar", 'picostrap5'), "description" => __("Requires Navbar position set to 'Standard static top'", 'picostrap5'), "section" => "topbar", 'type' => 'checkbox']);
@@ -224,7 +364,7 @@ function picostrap_customize_register($wp_customize) {
         'text-dark' => 'Dark',
     ]]);
 
-    // FOOTER SECTION
+    // FOOTER  
     if (function_exists('lc_custom_footer')) {
         $wp_customize->add_section("footer", ["title" => __("Footer [Disabled]", 'picostrap5'), "priority" => 100]);
         $wp_customize->add_setting("picostrap_footer_disabled", ["default" => "", "transport" => "refresh"]);
@@ -235,7 +375,7 @@ function picostrap_customize_register($wp_customize) {
         $wp_customize->add_control("picostrap_footer_text", ["label" => __("Footer Text", 'picostrap5'), "description" => "THIS SIMPLE FIELD can contain HTML and is displayed into the 'colophon', the very bottom of the site. <br><br>TO BUILD A MORE COMPLEX FOOTER, USE THE WIDGETED AREA. <br>To enable it, populate it from the backend's <a target='_blank' href='" . admin_url('widgets.php') . "'>Widgets page</a>", "section" => "footer", 'type' => 'textarea']);
     }
 
-    // SINGLE POST & ARCHIVES SECTION
+    // SINGLE POST & ARCHIVES  
     $wp_customize->add_section("singleposts", ["title" => __("Single Post & Archives", 'picostrap5'), "priority" => 160]);
     $wp_customize->add_setting("singlepost_disable_entry_cats", ["default" => "", "transport" => "refresh"]);
     $wp_customize->add_control("singlepost_disable_entry_cats", ["label" => __("Hide Categories", 'picostrap5'), "section" => "singleposts", 'type' => 'checkbox']);
@@ -246,7 +386,7 @@ function picostrap_customize_register($wp_customize) {
     $wp_customize->add_setting("enable_sharing_buttons", ["default" => "", "transport" => "refresh"]);
     $wp_customize->add_control("enable_sharing_buttons", ["label" => __("Enable Sharing Buttons after the Content", 'picostrap5'), "description" => __("Pure HTML only, SVG inline icons, zero bloat", 'picostrap5'), "section" => "singleposts", 'type' => 'checkbox']);
 
-    // HEADER & FOOTER CODE SECTION
+    // HEADER & FOOTER CODE  
     $wp_customize->add_section("addcode", ["title" => __("Header / Footer Code", 'picostrap5'), "priority" => 180]);
     $wp_customize->add_setting("picostrap_header_code", ["default" => "", "transport" => "refresh"]);
     $wp_customize->add_control("picostrap_header_code", ["label" => __("Add code to Header", 'picostrap5'), "section" => "addcode", 'type' => 'textarea', 'description' => 'Will be added to the &lt;HEAD&gt; of all site pages']);
@@ -261,7 +401,7 @@ function picostrap_customize_register($wp_customize) {
     $wp_customize->add_setting("headings_font_object", ["default" => "", "transport" => "postMessage"]);
     $wp_customize->add_control("headings_font_object", ["label" => __("headings_font_object", 'picostrap5'), "section" => "addcode", 'type' => 'textarea', 'description' => '<b>Not editable</b> - Internal purpose only.']);
 
-    // GLOBAL UTILITIES SECTION
+    // GLOBAL UTILITIES  
     $wp_customize->add_section("extras", ["title" => __("Global Utilities", 'picostrap5'), "priority" => 190]);
     $wp_customize->add_setting("disable_gutenberg", ["default" => "", "transport" => "refresh"]);
     $wp_customize->add_control("disable_gutenberg", ["label" => __("Disable the Gutenberg Content Editor", 'picostrap5'), "description" => __("Disables the Gutenberg content editor on all post types. De-enqueues its CSS styles as well.", 'picostrap5'), "section" => "extras", 'type' => 'checkbox']);
@@ -279,154 +419,6 @@ function picostrap_customize_register($wp_customize) {
     $wp_customize->add_control("enable_tooltips", ["label" => __("Enable Tooltips & Popovers", 'picostrap5'), "description" => __("Adds inline <a target='_blank' href='https://getbootstrap.com/docs/5.2/components/tooltips/#enable-tooltips'>two rows of JavaScript</a> to enable Boostrap 5 tooltips and popovers. Publish and exit the Customizer to see the change.", 'picostrap5'), "section" => "extras", 'type' => 'checkbox']);
 }
 
-// GET SCSS VARIABLES ARRAY
-function picostrap_get_scss_variables_array() {
-    return [
-        "colors" => [
-            '$body-bg' => ['type' => 'color', 'newgroup' => 'Base Colors'],
-            '$body-color' => ['type' => 'color'],
-            '$link-color' => ['type' => 'color'],
-            '$link-hover-color' => ['type' => 'color'],
-            '$primary' => ['type' => 'color', 'newgroup' => 'Bootstrap Colors'],
-            '$secondary' => ['type' => 'color'],
-            '$success' => ['type' => 'color'],
-            '$info' => ['type' => 'color'],
-            '$warning' => ['type' => 'color'],
-            '$danger' => ['type' => 'color'],
-            '$light' => ['type' => 'color'],
-            '$dark' => ['type' => 'color'],
-            '$enable-text-shades' => ['type' => 'boolean', 'default' => 'true', 'newgroup' => 'Color Shades', 'comment' => 'Generates text shade classes'],
-            '$enable-bg-shades' => ['type' => 'boolean', 'default' => 'true', 'comment' => 'Generates background shade classes'],
-            '$enable-text-bg-shades' => ['type' => 'boolean', 'comment' => 'Generates text & background combination shade classes'],
-        ],
-        "components" => [
-            '$enable-rounded' => ['type' => 'boolean', 'default' => 'true'],
-            '$enable-shadows' => ['type' => 'boolean'],
-            '$enable-gradients' => ['type' => 'boolean'],
-            '$spacer' => ['type' => 'text', 'placeholder' => '1rem'],
-            '$border-width' => ['newgroup' => 'Global Borders', 'type' => 'text', 'placeholder' => '1px'],
-            '$border-style' => ['type' => 'text', 'placeholder' => 'solid'],
-            '$border-color' => ['type' => 'color'],
-            '$border-radius' => ['type' => 'text', 'placeholder' => '.375rem'],
-            '$border-radius-sm' => ['newgroup' => 'Rounded Helper Classes', 'type' => 'text', 'placeholder' => '.25rem'],
-            '$border-radius-lg' => ['type' => 'text', 'placeholder' => '.5rem'],
-            '$border-radius-xl' => ['type' => 'text', 'placeholder' => '1rem'],
-            '$border-radius-2xl' => ['type' => 'text', 'placeholder' => '2rem'],
-            '$border-radius-pill' => ['type' => 'text', 'placeholder' => '50rem'],
-        ],
-        "typography" => [
-            '$font-family-base' => ['type' => 'text', 'placeholder' => '$font-family-sans-serif', 'newgroup' => 'Font Families'],
-            '$font-family-sans-serif' => ['type' => 'text'],
-            '$font-family-monospace' => ['type' => 'text'],
-            '$font-size-base' => ['newgroup' => 'Font Sizes', 'type' => 'text', 'placeholder' => '1rem'],
-            '$font-size-sm' => ['type' => 'text', 'placeholder' => '.875rem'],
-            '$font-size-lg' => ['type' => 'text', 'placeholder' => '1.25rem'],
-            '$enable-rfs' => ['type' => 'boolean', 'default' => 'true'],
-            '$font-weight-base' => ['newgroup' => 'Font Weights', 'type' => 'text', 'placeholder' => '400'],
-            '$line-height-base' => ['type' => 'text', 'placeholder' => '1.5'],
-            '$font-weight-lighter' => ['type' => 'text', 'placeholder' => 'lighter'],
-            '$font-weight-light' => ['type' => 'text', 'placeholder' => '300'],
-            '$font-weight-normal' => ['type' => 'text', 'placeholder' => '400'],
-            '$font-weight-semibold' => ['type' => 'text', 'placeholder' => '600'],
-            '$font-weight-bold' => ['type' => 'text', 'placeholder' => '700'],
-            '$font-weight-bolder' => ['type' => 'text', 'placeholder' => 'bolder'],
-            '$headings-font-family' => ['type' => 'text', 'placeholder' => 'null', 'newgroup' => 'Headings'],
-            '$headings-font-weight' => ['type' => 'text', 'placeholder' => '500'],
-            '$headings-line-height' => ['type' => 'text', 'placeholder' => '1.2'],
-            '$headings-color' => ['type' => 'color'],
-            '$headings-margin-bottom' => ['type' => 'text', 'placeholder' => '$spacer / 2'],
-            '$h1-font-size' => ['type' => 'text', 'placeholder' => '2.5rem'],
-            '$h2-font-size' => ['type' => 'text', 'placeholder' => '2rem'],
-            '$h3-font-size' => ['type' => 'text', 'placeholder' => '1.75rem'],
-            '$h4-font-size' => ['type' => 'text', 'placeholder' => '1.5rem'],
-            '$h5-font-size' => ['type' => 'text', 'placeholder' => '1.25rem'],
-            '$h6-font-size' => ['type' => 'text', 'placeholder' => '1rem'],
-            '$lead-font-size' => ['newgroup' => 'Lead, Small and Muted', 'type' => 'text', 'placeholder' => '1.25rem'],
-            '$lead-font-weight' => ['type' => 'text', 'placeholder' => '300'],
-            '$small-font-size' => ['type' => 'text', 'placeholder' => '80%'],
-            '$text-muted' => ['type' => 'color'],
-            '$blockquote-margin-y' => ['newgroup' => 'Blockquotes', 'type' => 'text', 'placeholder' => '$spacer'],
-            '$blockquote-font-size' => ['type' => 'text', 'placeholder' => '1.25rem'],
-            '$blockquote-footer-color' => ['type' => 'color'],
-            '$blockquote-footer-font-size' => ['type' => 'text', 'placeholder' => '$small-font-size'],
-            '$hr-height' => ['newgroup' => 'HRs', 'type' => 'text', 'placeholder' => '$border-width'],
-            '$hr-color' => ['type' => 'color'],
-            '$mark-padding' => ['newgroup' => 'Miscellanea', 'type' => 'text', 'placeholder' => '.2em'],
-            '$dt-font-weight' => ['type' => 'text', 'placeholder' => '700'],
-            '$nested-kbd-font-weight' => ['type' => 'text', 'placeholder' => '700'],
-            '$list-inline-padding' => ['type' => 'text', 'placeholder' => '.5rem'],
-            '$mark-bg' => ['type' => 'color', 'placeholder' => '#fcf8e3'],
-            '$hr-margin-y' => ['type' => 'text', 'placeholder' => '$spacer'],
-            '$paragraph-margin-bottom' => ['type' => 'text', 'placeholder' => '1rem'],
-        ],
-        "buttons-forms" => [
-            '$input-btn-padding-y' => ['type' => 'text', 'placeholder' => '.375rem'],
-            '$input-btn-padding-x' => ['type' => 'text', 'placeholder' => '.75rem'],
-            '$input-btn-font-family' => ['type' => 'text', 'placeholder' => 'null'],
-            '$input-btn-font-size' => ['type' => 'text', 'placeholder' => '$font-size-base'],
-            '$input-btn-line-height' => ['type' => 'text', 'placeholder' => '$line-height-base'],
-            '$input-btn-focus-width' => ['type' => 'text', 'placeholder' => '.2rem'],
-            '$input-btn-focus-color-opacity' => ['type' => 'text', 'placeholder' => '.25'],
-            '$input-btn-focus-color' => ['type' => 'color', 'placeholder' => 'rgba($component-active-bg, .25)'],
-            '$input-btn-focus-blur' => ['type' => 'text', 'placeholder' => '0'],
-            '$input-btn-focus-box-shadow' => ['type' => 'text', 'placeholder' => '0 0 0 $input-btn-focus-width $input-btn-focus-color'],
-            '$input-btn-padding-y-sm' => ['type' => 'text', 'placeholder' => '.25rem'],
-            '$input-btn-padding-x-sm' => ['type' => 'text', 'placeholder' => '.5rem'],
-            '$input-btn-font-size-sm' => ['type' => 'text', 'placeholder' => '$font-size-sm'],
-            '$input-btn-padding-y-lg' => ['type' => 'text', 'placeholder' => '.5rem'],
-            '$input-btn-padding-x-lg' => ['type' => 'text', 'placeholder' => '1rem'],
-            '$input-btn-font-size-lg' => ['type' => 'text', 'placeholder' => '$font-size-lg'],
-            '$input-btn-border-width' => ['type' => 'text', 'placeholder' => '$border-width'],
-        ],
-        "buttons" => [
-            '$btn-padding-y' => ['type' => 'text', 'placeholder' => '.375rem'],
-            '$btn-padding-x' => ['type' => 'text', 'placeholder' => '.75rem'],
-            '$btn-font-family' => ['type' => 'text', 'placeholder' => 'null'],
-            '$btn-font-size' => ['type' => 'text', 'placeholder' => '$font-size-base'],
-            '$btn-line-height' => ['type' => 'text', 'placeholder' => '$line-height-base'],
-            '$btn-white-space' => ['type' => 'text', 'placeholder' => 'null (Set to `nowrap` to prevent text wrapping)'],
-            '$btn-padding-y-sm' => ['type' => 'text', 'placeholder' => '.25rem'],
-            '$btn-padding-x-sm' => ['type' => 'text', 'placeholder' => '.5rem'],
-            '$btn-font-size-sm' => ['type' => 'text', 'placeholder' => '$font-size-sm'],
-            '$btn-padding-y-lg' => ['type' => 'text', 'placeholder' => '.5rem'],
-            '$btn-padding-x-lg' => ['type' => 'text', 'placeholder' => '1rem'],
-            '$btn-font-size-lg' => ['type' => 'text', 'placeholder' => '$font-size-lg'],
-            '$btn-border-width' => ['type' => 'text', 'placeholder' => '$border-width'],
-            '$btn-font-weight' => ['type' => 'text', 'placeholder' => '$font-weight-normal !default'],
-            '$btn-box-shadow' => ['type' => 'text', 'placeholder' => 'inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default'],
-            '$btn-focus-width' => ['type' => 'text', 'placeholder' => '$input-btn-focus-width !default'],
-            '$btn-focus-box-shadow' => ['type' => 'text', 'placeholder' => '$input-btn-focus-box-shadow !default'],
-            '$btn-disabled-opacity' => ['type' => 'text', 'placeholder' => '.65 !default'],
-            '$btn-active-box-shadow' => ['type' => 'text', 'placeholder' => 'inset 0 3px 5px rgba($black, .125) !default'],
-            '$btn-link-color' => ['type' => 'text', 'placeholder' => '$link-color !default', 'newgroup' => 'Button Colors'],
-            '$btn-link-hover-color' => ['type' => 'text', 'placeholder' => '$link-hover-color !default'],
-            '$btn-link-disabled-color' => ['type' => 'text', 'placeholder' => '$gray-600 !default'],
-            '$btn-border-radius' => ['type' => 'text', 'placeholder' => '$border-radius !default', 'newgroup' => 'Buttons Border Radius'],
-            '$btn-border-radius-sm' => ['type' => 'text', 'placeholder' => '$border-radius-sm !default'],
-            '$btn-border-radius-lg' => ['type' => 'text', 'placeholder' => '$border-radius-lg !default'],
-            '$btn-transition' => ['newgroup' => 'Buttons Extras', 'type' => 'text', 'placeholder' => 'color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default'],
-            '$btn-hover-bg-shade-amount' => ['type' => 'text', 'placeholder' => '15% !default'],
-            '$btn-hover-bg-tint-amount' => ['type' => 'text', 'placeholder' => '15% !default'],
-            '$btn-hover-border-shade-amount' => ['type' => 'text', 'placeholder' => '20% !default'],
-            '$btn-hover-border-tint-amount' => ['type' => 'text', 'placeholder' => '10% !default'],
-            '$btn-active-bg-shade-amount' => ['type' => 'text', 'placeholder' => '20% !default'],
-            '$btn-active-bg-tint-amount' => ['type' => 'text', 'placeholder' => '20% !default'],
-            '$btn-active-border-shade-amount' => ['type' => 'text', 'placeholder' => '25% !default'],
-            '$btn-active-border-tint-amount' => ['type' => 'text', 'placeholder' => '10% !default'],
-        ],
-        "navbars" => [
-            '$navbar-brand-font-size' => ['type' => 'text', 'placeholder' => '1.25rem', 'newgroup' => 'Brand'],
-            '$navbar-light-brand-color' => ['type' => 'color'],
-            '$navbar-dark-brand-color' => ['type' => 'color'],
-            '$nav-link-font-size' => ['type' => 'text', 'placeholder' => '1rem', 'newgroup' => 'Nav Links'],
-            '$navbar-light-color' => ['type' => 'color'],
-            '$navbar-light-hover-color' => ['type' => 'color'],
-            '$navbar-dark-color' => ['type' => 'color'],
-            '$navbar-dark-hover-color' => ['type' => 'color'],
-            '$navbar-toggler-font-size' => ['type' => 'text', 'placeholder' => '1rem', 'newgroup' => 'Toggler']
-        ],
-    ];
-}
 
 function picostrap_sanitize_checkbox($input) {
     return ((isset($input) && true == $input) ? true : false);
@@ -484,18 +476,9 @@ function custom_background_size_css() {
 
 add_action('customize_register', 'picostrap_theme_customize_register_extras');
 function picostrap_theme_customize_register_extras($wp_customize) {
-    $sections = [
-        "typography" => __("Typography", 'picostrap5'),
-        "components" => __("Global Options", 'picostrap5'),
-        "buttons-forms" => __("Forms", 'picostrap5'),
-        "buttons" => __("Buttons", 'picostrap5')
-    ];
-
-    foreach ($sections as $slug => $title) {
-        $wp_customize->add_section($slug, ["title" => $title, "priority" => 50]);
-    }
-
     foreach (picostrap_get_scss_variables_array() as $section_slug => $section_data) {
+        $wp_customize->add_section($section_slug, ["title" => ucwords(str_replace("-", ' ', $section_slug)), "priority" => 50]);
+
         foreach ($section_data as $variable_name => $variable_props) {
             $variable_slug = str_replace("$", "SCSSvar_", $variable_name);
             $variable_pretty_format_name = ucwords(str_replace("-", ' ', str_replace("$", "", $variable_name)));
@@ -547,4 +530,3 @@ function picostrap_theme_customize_register_extras($wp_customize) {
     $wp_customize->add_setting('header_disable_tagline', ['default' => '', 'transport' => 'postMessage']);
     $wp_customize->add_control('header_disable_tagline', ['label' => __('Hide Tagline', 'picostrap5'), 'section' => 'title_tagline', 'type' => 'checkbox']);
 }
-
