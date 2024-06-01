@@ -57,254 +57,18 @@ function picostrap_customize_enqueue() {
  
 
 
-///MAIN SETTING: DECLARE ALL SCSS VARIABLES TO HANDLE IN THE CUSTOMIZER
-function picostrap_get_scss_variables_array(){
-    
-
-
-    return array(
-        "colors" => array( //  $variable_name => $variable_props
-            '$body-bg' => array('type' => 'color', 'newgroup' => 'Base Colors'),
-            '$body-color' => array('type' => 'color'),
-            '$link-color' => array('type' => 'color'),
-            //'$link-decoration' => array('type' => 'text'),
-            '$link-hover-color' => array('type' => 'color' ),
-            // STATUS COLORS
-            '$primary'=> array('type' => 'color','newgroup' => 'Bootstrap Colors'),
-            '$secondary' => array('type' => 'color'),
-            '$success' => array('type' => 'color'),
-            '$info' => array('type' => 'color'),
-            '$warning' => array('type' => 'color'),
-            '$danger' => array('type' => 'color'),
-            '$light' => array('type' => 'color'),
-            '$dark' => array('type' => 'color'),
-            
-            //ADDITIONAL COLOR CLASSES
-            '$enable-text-shades'=> array('type' => 'boolean', 'default' => 'true', 'newgroup' => 'Color Shades', 'comment' => 'Generates text shade classes: from <b>.text-primary-100</b> to <b>.text-primary-900</b>'),
-            '$enable-bg-shades' => array('type' => 'boolean', 'default' => 'true', 'comment' => 'Generates background shade classes: from <b>.bg-primary-100</b> to <b>.bg-primary-900</b>'),
-            '$enable-text-bg-shades' => array('type' => 'boolean', 'comment' => 'Generates text & background combination shade classes: from <b>.text-bg-primary-100</b> to <b>.text-bg-primary-900</b>'),
-            ),	
-        //add another section
-        "components" => array( // $variable_name => $variable_props
-                            
-            '$enable-rounded' => array('type' => 'boolean', 'default' => 'true'),
-            '$enable-shadows' => array('type' => 'boolean'),
-            '$enable-gradients'=> array('type' => 'boolean'),
-            
-            '$spacer' => array('type' => 'text','placeholder' => '1rem'),
-            
-            '$border-width' => array( 'newgroup' => 'Global Borders','type' => 'text','placeholder' => '1px', ),
-            '$border-style' => array('type' => 'text','placeholder' => 'solid', ),
-            '$border-color' => array('type' => 'color',  ),
-            '$border-radius' => array('type' => 'text','placeholder' => '.375rem'),
-            
-            '$border-radius-sm' => array('newgroup' => 'Rounded Helper Classes', 'type' => 'text','placeholder' => '.25rem', ),
-            '$border-radius-lg' => array('type' => 'text','placeholder' => '.5rem', ),
-            '$border-radius-xl' => array('type' => 'text','placeholder' => '1rem', ),
-            '$border-radius-2xl' => array('type' => 'text','placeholder' => '2rem', ),
-            '$border-radius-pill' => array('type' => 'text','placeholder' => '50rem', ),
-            
-
-            ),
-        
-        
-        
-        //add another section
-        "typography" => array( // $variable_name => $variable_props
-            
-            
-                        
-            '$font-family-base' => array('type' => 'text', 'placeholder' => '$font-family-sans-serif ', 'newgroup' => 'Font Families',  ), 
-            '$font-family-sans-serif' => array('type' => 'text', ),
-            '$font-family-monospace' => array('type' => 'text' ),
-            
-            '$font-size-base' => array('newgroup' => 'Font Sizes', 'type' => 'text', 'placeholder' => '1rem'),
-            
-            '$font-size-sm' => array('type' => 'text', 'placeholder' => '.875rem '),
-            '$font-size-lg' => array('type' => 'text', 'placeholder' => '1.25rem'),
-
-            '$enable-rfs' => array('type' => 'boolean','default' => 'true'),
-            
-            '$font-weight-base' => array('newgroup' => 'Font Weights', 'type' => 'text', 'placeholder' => '400', ),
-            '$line-height-base' => array('type' => 'text', 'placeholder' => '1.5', ),
-
-            
-            
-            '$font-weight-lighter' => array('type' => 'text', 'placeholder' => 'lighter '),
-            '$font-weight-light' => array('type' => 'text', 'placeholder' => '300'),
-            '$font-weight-normal' => array('type' => 'text', 'placeholder' => '400'),
-            '$font-weight-semibold' => array('type' => 'text', 'placeholder' => '600'),
-            '$font-weight-bold' => array('type' => 'text', 'placeholder' => '700'),
-            '$font-weight-bolder' => array('type' => 'text', 'placeholder' => 'bolder'),
-            
-            
-        
-            '$headings-font-family' => array('type' => 'text', 'placeholder' => 'null','newgroup' => 'Headings',  ),
-            '$headings-font-weight' => array('type' => 'text', 'placeholder' => '500 '),
-            '$headings-line-height' => array('type' => 'text', 'placeholder' => '1.2'),
-            '$headings-color' => array('type' => 'color'),
-            
-            '$headings-margin-bottom' => array('type' => 'text', 'placeholder' => '$spacer / 2 '),
-            '$h1-font-size' => array('type' => 'text', 'placeholder' => '2.5rem'),
-            '$h2-font-size' => array('type' => 'text', 'placeholder' => '2rem'),
-            '$h3-font-size' => array('type' => 'text', 'placeholder' => '1.75rem'),
-            '$h4-font-size' => array('type' => 'text', 'placeholder' => '1.5rem'),
-            '$h5-font-size' => array('type' => 'text', 'placeholder' => '1.25rem'),
-            '$h6-font-size' => array('type' => 'text', 'placeholder' => '1rem'),
-            
-            
-            //'$display1-size' => array('newgroup' => 'Display Classes', 'type' => 'text', 'placeholder' => '6rem'),
-            //'$display2-size' => array('type' => 'text', 'placeholder' => '5.5rem'),
-            //'$display3-size' => array('type' => 'text', 'placeholder' => '4.5rem'),
-            //'$display4-size' => array('type' => 'text', 'placeholder' => '3.5rem'),
-            //'$display-font-weight' => array('type' => 'text', 'placeholder' => '300'),
-            //'$display-line-height' => array('type' => 'text', 'placeholder' => ' $headings-line-height '),
-            
-            '$lead-font-size' => array('newgroup' => 'Lead, Small and Muted', 'type' => 'text', 'placeholder' => '1.25rem'),
-            '$lead-font-weight' => array('type' => 'text', 'placeholder' => '300'),
-            
-            '$small-font-size' => array('type' => 'text', 'placeholder' => '80%'),
-            
-            '$text-muted' => array('type' => 'color',  ),
-            
-            
-            '$blockquote-margin-y' => array('newgroup' => 'Blockquotes', 'type' => 'text', 'placeholder' => '$spacer'),
-            '$blockquote-font-size' => array('type' => 'text', 'placeholder' => '1.25rem '),
-            '$blockquote-footer-color' => array('type' => 'color' ),
-            '$blockquote-footer-font-size' => array('type' => 'text', 'placeholder' => '$small-font-size'),
-
-            
-            
-            '$hr-height' => array('newgroup' => 'HRs', 'type' => 'text', 'placeholder' => '$border-width'),
-            '$hr-color' => array( 'type' => 'color'),
-            
-            '$mark-padding' => array('newgroup' => 'Miscellanea',  'type' => 'text', 'placeholder' => '.2em'),
-            
-            '$dt-font-weight' => array('type' => 'text', 'placeholder' => '700'),
-            
-            //'$kbd-box-shadow' => array('type' => 'text', 'placeholder' => 'inset 0 -.1rem 0 rgba($black, .25) '),
-            '$nested-kbd-font-weight' => array('type' => 'text', 'placeholder' => '700'),
-            
-            '$list-inline-padding' => array('type' => 'text', 'placeholder' => '.5rem'),
-            
-            '$mark-bg' => array('type' => 'color', 'placeholder' => '#fcf8e3'),
-            
-            '$hr-margin-y' => array('type' => 'text', 'placeholder' => '$spacer'),
-            
-            
-            '$paragraph-margin-bottom' => array('type' => 'text', 'placeholder' => '1rem'),
-            
-            ),
-        
-        
-        
-        
-        //add another section for FORMS
-        "buttons-forms" => array( // $variable_name => $variable_props
-            
-                        
-            '$input-btn-padding-y' => array('type' => 'text','placeholder' => '.375rem'),
-            '$input-btn-padding-x' => array('type' => 'text','placeholder' => '.75rem'),
-            '$input-btn-font-family' => array('type' => 'text','placeholder' => 'null'),
-            '$input-btn-font-size' => array('type' => 'text','placeholder' => '$font-size-base'),
-            '$input-btn-line-height' => array('type' => 'text','placeholder' => '$line-height-base'),
-            
-            '$input-btn-focus-width' => array('type' => 'text','placeholder' => '.2rem'),
-            '$input-btn-focus-color-opacity' => array('type' => 'text','placeholder' => '.25'),
-            '$input-btn-focus-color' => array('type' => 'color','placeholder' => 'rgba($component-active-bg, .25)'),
-            '$input-btn-focus-blur' => array('type' => 'text','placeholder' => '0'),
-            '$input-btn-focus-box-shadow' => array('type' => 'text','placeholder' => '0 0 0 $input-btn-focus-width $input-btn-focus-color'),
-            
-            '$input-btn-padding-y-sm' => array('type' => 'text','placeholder' => '.25rem'),
-            '$input-btn-padding-x-sm' => array('type' => 'text','placeholder' => '.5rem'),
-            '$input-btn-font-size-sm' => array('type' => 'text','placeholder' => '$font-size-sm'),
-                
-            '$input-btn-padding-y-lg' => array('type' => 'text','placeholder' => '.5rem'),
-            '$input-btn-padding-x-lg' => array('type' => 'text','placeholder' => '1rem'),
-            '$input-btn-font-size-lg' => array('type' => 'text','placeholder' => '$font-size-lg'),
-
-            '$input-btn-border-width' => array('type' => 'text','placeholder' => '$border-width'),
-            
-
-            ),
-        
-        
-        //add another section for BUTTONS
-        "buttons" => array( // $variable_name => $variable_props
-            
-                        
-            '$btn-padding-y' => array('type' => 'text','placeholder' => '.375rem'),
-            '$btn-padding-x' => array('type' => 'text','placeholder' => '.75rem'),
-            '$btn-font-family' => array('type' => 'text','placeholder' => 'null'),
-            '$btn-font-size' => array('type' => 'text','placeholder' => '$font-size-base'),
-            '$btn-line-height' => array('type' => 'text','placeholder' => '$line-height-base'),
-            '$btn-white-space' => array('type' => 'text','placeholder' => 'null (Set to `nowrap` to prevent text wrapping)'),
-
-
-            '$btn-padding-y-sm' => array('type' => 'text','placeholder' => '.25rem'),
-            '$btn-padding-x-sm' => array('type' => 'text','placeholder' => '.5rem'),
-            '$btn-font-size-sm' => array('type' => 'text','placeholder' => '$font-size-sm'),
-
-            '$btn-padding-y-lg' => array('type' => 'text','placeholder' => '.5rem'),
-            '$btn-padding-x-lg' => array('type' => 'text','placeholder' => '1rem'),
-            '$btn-font-size-lg' => array('type' => 'text','placeholder' => '$font-size-lg'),
-
-            '$btn-border-width' => array('type' => 'text','placeholder' => '$border-width'),
-            
-
-
-            '$btn-font-weight' => array('type' => 'text','placeholder' => '             $font-weight-normal !default'),
-            '$btn-box-shadow' => array('type' => 'text','placeholder' => '              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default'),
-            '$btn-focus-width' => array('type' => 'text','placeholder' => '             $input-btn-focus-width !default'),
-            '$btn-focus-box-shadow' => array('type' => 'text','placeholder' => '        $input-btn-focus-box-shadow !default'),
-            '$btn-disabled-opacity' => array('type' => 'text','placeholder' => '        .65 !default'),
-            '$btn-active-box-shadow' => array('type' => 'text','placeholder' => '       inset 0 3px 5px rgba($black, .125) !default'),
-
-            '$btn-link-color' => array('type' => 'text','placeholder' => '              $link-color !default','newgroup' => 'Button Colors',),
-            '$btn-link-hover-color' => array('type' => 'text','placeholder' => '        $link-hover-color !default'),
-            '$btn-link-disabled-color' => array('type' => 'text','placeholder' => '     $gray-600 !default'),
-            
-            // Allows for customizing button radius independently from global border radius
-            '$btn-border-radius' => array('type' => 'text','placeholder' => '           $border-radius !default','newgroup' => 'Buttons Border Radius',),
-            '$btn-border-radius-sm' => array('type' => 'text','placeholder' => '        $border-radius-sm !default'),
-            '$btn-border-radius-lg' => array('type' => 'text','placeholder' => '        $border-radius-lg !default'),
-            
-            '$btn-transition' => array( 'newgroup' => 'Buttons Extras', 'type' => 'text','placeholder' => '              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default'),
-            
-            '$btn-hover-bg-shade-amount' => array('type' => 'text','placeholder' => '       15% !default'),
-            '$btn-hover-bg-tint-amount' => array('type' => 'text','placeholder' => '        15% !default'),
-            '$btn-hover-border-shade-amount' => array('type' => 'text','placeholder' => '   20% !default'),
-            '$btn-hover-border-tint-amount' => array('type' => 'text','placeholder' => '    10% !default'),
-            '$btn-active-bg-shade-amount' => array('type' => 'text','placeholder' => '      20% !default'),
-            '$btn-active-bg-tint-amount' => array('type' => 'text','placeholder' => '       20% !default'),
-            '$btn-active-border-shade-amount' => array('type' => 'text','placeholder' => '  25% !default'),
-            '$btn-active-border-tint-amount' => array('type' => 'text','placeholder' => '   10% !default'),
-
-
-
-
-            ),
-        
-        
-        //add another section
-        
-        
-        
-        
-    );	 
-} //end function
 
  
 	
-////////DECLARE ALL THE WIDGETS WE NEED	FOR THE SCSS OPTIONS////////////////////////////////////////////////
+////////DECLARE CUSTOMIZER SECTIONS ////////////////////////////////////////////////
 
-add_action("customize_register","picostrap_theme_customize_register_extras");
+add_action("customize_register","picostrap_theme_customize_register");
 	
-function picostrap_theme_customize_register_extras($wp_customize) {
-	
-	///ADDITIONAL SECTIONS:
-	//COLORS section is already built, so lets define the other ones
-		 
+function picostrap_theme_customize_register($wp_customize) {
+
+	//COLORS section is already built,
+    // so we dont need to define it
+
 	$wp_customize->add_section("typography", array(
         "title" => __("Typography", 'picostrap5'),
         "priority" => 50,
@@ -322,6 +86,11 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 
 	$wp_customize->add_section("buttons", array(
         "title" => __("Buttons", 'picostrap5'),
+        "priority" => 50,
+    ));
+
+    $wp_customize->add_section("navbars", array(
+        "title" => __("Navbars", 'picostrap5'),
         "priority" => 50,
     ));
 	
@@ -1140,6 +909,242 @@ function picostrap_theme_customize_register_extras($wp_customize) {
 } //end function
  
 
+/// DECLARE SCSS VARIABLES 
+function picostrap_get_scss_variables_array(){
+    return array(
+        "colors" => array( //  $variable_name => $variable_props
+            '$body-bg' => array('type' => 'color', 'newgroup' => 'Base Colors'),
+            '$body-color' => array('type' => 'color'),
+            '$link-color' => array('type' => 'color'),
+            //'$link-decoration' => array('type' => 'text'),
+            '$link-hover-color' => array('type' => 'color' ),
+            // STATUS COLORS
+            '$primary'=> array('type' => 'color','newgroup' => 'Bootstrap Colors'),
+            '$secondary' => array('type' => 'color'),
+            '$success' => array('type' => 'color'),
+            '$info' => array('type' => 'color'),
+            '$warning' => array('type' => 'color'),
+            '$danger' => array('type' => 'color'),
+            '$light' => array('type' => 'color'),
+            '$dark' => array('type' => 'color'),
+            
+            //ADDITIONAL COLOR CLASSES
+            '$enable-text-shades'=> array('type' => 'boolean', 'default' => 'true', 'newgroup' => 'Color Shades', 'comment' => 'Generates text shade classes: from <b>.text-primary-100</b> to <b>.text-primary-900</b>'),
+            '$enable-bg-shades' => array('type' => 'boolean', 'default' => 'true', 'comment' => 'Generates background shade classes: from <b>.bg-primary-100</b> to <b>.bg-primary-900</b>'),
+            '$enable-text-bg-shades' => array('type' => 'boolean', 'comment' => 'Generates text & background combination shade classes: from <b>.text-bg-primary-100</b> to <b>.text-bg-primary-900</b>'),
+            ),	
+        
+        //TYPOGRAPHY
+        "typography" => array( // $variable_name => $variable_props
+            
+            
+                        
+            '$font-family-base' => array('type' => 'text', 'placeholder' => '$font-family-sans-serif ', 'newgroup' => 'Font Families',  ), 
+            '$font-family-sans-serif' => array('type' => 'text', ),
+            '$font-family-monospace' => array('type' => 'text' ),
+            
+            '$font-size-base' => array('newgroup' => 'Font Sizes', 'type' => 'text', 'placeholder' => '1rem'),
+            
+            '$font-size-sm' => array('type' => 'text', 'placeholder' => '.875rem '),
+            '$font-size-lg' => array('type' => 'text', 'placeholder' => '1.25rem'),
+
+            '$enable-rfs' => array('type' => 'boolean','default' => 'true'),
+            
+            '$font-weight-base' => array('newgroup' => 'Font Weights', 'type' => 'text', 'placeholder' => '400', ),
+            '$line-height-base' => array('type' => 'text', 'placeholder' => '1.5', ),
+
+            
+            
+            '$font-weight-lighter' => array('type' => 'text', 'placeholder' => 'lighter '),
+            '$font-weight-light' => array('type' => 'text', 'placeholder' => '300'),
+            '$font-weight-normal' => array('type' => 'text', 'placeholder' => '400'),
+            '$font-weight-semibold' => array('type' => 'text', 'placeholder' => '600'),
+            '$font-weight-bold' => array('type' => 'text', 'placeholder' => '700'),
+            '$font-weight-bolder' => array('type' => 'text', 'placeholder' => 'bolder'),
+            
+            
+        
+            '$headings-font-family' => array('type' => 'text', 'placeholder' => 'null','newgroup' => 'Headings',  ),
+            '$headings-font-weight' => array('type' => 'text', 'placeholder' => '500 '),
+            '$headings-line-height' => array('type' => 'text', 'placeholder' => '1.2'),
+            '$headings-color' => array('type' => 'color'),
+            
+            '$headings-margin-bottom' => array('type' => 'text', 'placeholder' => '$spacer / 2 '),
+            '$h1-font-size' => array('type' => 'text', 'placeholder' => '2.5rem'),
+            '$h2-font-size' => array('type' => 'text', 'placeholder' => '2rem'),
+            '$h3-font-size' => array('type' => 'text', 'placeholder' => '1.75rem'),
+            '$h4-font-size' => array('type' => 'text', 'placeholder' => '1.5rem'),
+            '$h5-font-size' => array('type' => 'text', 'placeholder' => '1.25rem'),
+            '$h6-font-size' => array('type' => 'text', 'placeholder' => '1rem'),
+            
+            
+            //'$display1-size' => array('newgroup' => 'Display Classes', 'type' => 'text', 'placeholder' => '6rem'),
+            //'$display2-size' => array('type' => 'text', 'placeholder' => '5.5rem'),
+            //'$display3-size' => array('type' => 'text', 'placeholder' => '4.5rem'),
+            //'$display4-size' => array('type' => 'text', 'placeholder' => '3.5rem'),
+            //'$display-font-weight' => array('type' => 'text', 'placeholder' => '300'),
+            //'$display-line-height' => array('type' => 'text', 'placeholder' => ' $headings-line-height '),
+            
+            '$lead-font-size' => array('newgroup' => 'Lead, Small and Muted', 'type' => 'text', 'placeholder' => '1.25rem'),
+            '$lead-font-weight' => array('type' => 'text', 'placeholder' => '300'),
+            
+            '$small-font-size' => array('type' => 'text', 'placeholder' => '80%'),
+            
+            '$text-muted' => array('type' => 'color',  ),
+            
+            
+            '$blockquote-margin-y' => array('newgroup' => 'Blockquotes', 'type' => 'text', 'placeholder' => '$spacer'),
+            '$blockquote-font-size' => array('type' => 'text', 'placeholder' => '1.25rem '),
+            '$blockquote-footer-color' => array('type' => 'color' ),
+            '$blockquote-footer-font-size' => array('type' => 'text', 'placeholder' => '$small-font-size'),
+
+            
+            
+            '$hr-height' => array('newgroup' => 'HRs', 'type' => 'text', 'placeholder' => '$border-width'),
+            '$hr-color' => array( 'type' => 'color'),
+            
+            '$mark-padding' => array('newgroup' => 'Miscellanea',  'type' => 'text', 'placeholder' => '.2em'),
+            
+            '$dt-font-weight' => array('type' => 'text', 'placeholder' => '700'),
+            
+            //'$kbd-box-shadow' => array('type' => 'text', 'placeholder' => 'inset 0 -.1rem 0 rgba($black, .25) '),
+            '$nested-kbd-font-weight' => array('type' => 'text', 'placeholder' => '700'),
+            
+            '$list-inline-padding' => array('type' => 'text', 'placeholder' => '.5rem'),
+            
+            '$mark-bg' => array('type' => 'color', 'placeholder' => '#fcf8e3'),
+            
+            '$hr-margin-y' => array('type' => 'text', 'placeholder' => '$spacer'),
+            
+            
+            '$paragraph-margin-bottom' => array('type' => 'text', 'placeholder' => '1rem'),
+            
+            ),
+        
+        //GLOBAL OPTIONS
+        "components" => array( // $variable_name => $variable_props
+                            
+            '$enable-rounded' => array('type' => 'boolean', 'default' => 'true'),
+            '$enable-shadows' => array('type' => 'boolean'),
+            '$enable-gradients'=> array('type' => 'boolean'),
+            
+            '$spacer' => array('type' => 'text','placeholder' => '1rem'),
+            
+            '$border-width' => array( 'newgroup' => 'Global Borders','type' => 'text','placeholder' => '1px', ),
+            '$border-style' => array('type' => 'text','placeholder' => 'solid', ),
+            '$border-color' => array('type' => 'color',  ),
+            '$border-radius' => array('type' => 'text','placeholder' => '.375rem'),
+            
+            '$border-radius-sm' => array('newgroup' => 'Rounded Helper Classes', 'type' => 'text','placeholder' => '.25rem', ),
+            '$border-radius-lg' => array('type' => 'text','placeholder' => '.5rem', ),
+            '$border-radius-xl' => array('type' => 'text','placeholder' => '1rem', ),
+            '$border-radius-2xl' => array('type' => 'text','placeholder' => '2rem', ),
+            '$border-radius-pill' => array('type' => 'text','placeholder' => '50rem', ),
+            
+
+            ),
+        
+        
+        // FORMS
+        "buttons-forms" => array( // $variable_name => $variable_props
+            
+                        
+            '$input-btn-padding-y' => array('type' => 'text','placeholder' => '.375rem'),
+            '$input-btn-padding-x' => array('type' => 'text','placeholder' => '.75rem'),
+            '$input-btn-font-family' => array('type' => 'text','placeholder' => 'null'),
+            '$input-btn-font-size' => array('type' => 'text','placeholder' => '$font-size-base'),
+            '$input-btn-line-height' => array('type' => 'text','placeholder' => '$line-height-base'),
+            
+            '$input-btn-focus-width' => array('type' => 'text','placeholder' => '.2rem'),
+            '$input-btn-focus-color-opacity' => array('type' => 'text','placeholder' => '.25'),
+            '$input-btn-focus-color' => array('type' => 'color','placeholder' => 'rgba($component-active-bg, .25)'),
+            '$input-btn-focus-blur' => array('type' => 'text','placeholder' => '0'),
+            '$input-btn-focus-box-shadow' => array('type' => 'text','placeholder' => '0 0 0 $input-btn-focus-width $input-btn-focus-color'),
+            
+            '$input-btn-padding-y-sm' => array('type' => 'text','placeholder' => '.25rem'),
+            '$input-btn-padding-x-sm' => array('type' => 'text','placeholder' => '.5rem'),
+            '$input-btn-font-size-sm' => array('type' => 'text','placeholder' => '$font-size-sm'),
+                
+            '$input-btn-padding-y-lg' => array('type' => 'text','placeholder' => '.5rem'),
+            '$input-btn-padding-x-lg' => array('type' => 'text','placeholder' => '1rem'),
+            '$input-btn-font-size-lg' => array('type' => 'text','placeholder' => '$font-size-lg'),
+
+            '$input-btn-border-width' => array('type' => 'text','placeholder' => '$border-width'),
+            
+
+            ),
+        
+        
+        // BUTTONS
+        "buttons" => array( // $variable_name => $variable_props
+            
+                        
+            '$btn-padding-y' => array('type' => 'text','placeholder' => '.375rem'),
+            '$btn-padding-x' => array('type' => 'text','placeholder' => '.75rem'),
+            '$btn-font-family' => array('type' => 'text','placeholder' => 'null'),
+            '$btn-font-size' => array('type' => 'text','placeholder' => '$font-size-base'),
+            '$btn-line-height' => array('type' => 'text','placeholder' => '$line-height-base'),
+            '$btn-white-space' => array('type' => 'text','placeholder' => 'null (Set to `nowrap` to prevent text wrapping)'),
+
+
+            '$btn-padding-y-sm' => array('type' => 'text','placeholder' => '.25rem'),
+            '$btn-padding-x-sm' => array('type' => 'text','placeholder' => '.5rem'),
+            '$btn-font-size-sm' => array('type' => 'text','placeholder' => '$font-size-sm'),
+
+            '$btn-padding-y-lg' => array('type' => 'text','placeholder' => '.5rem'),
+            '$btn-padding-x-lg' => array('type' => 'text','placeholder' => '1rem'),
+            '$btn-font-size-lg' => array('type' => 'text','placeholder' => '$font-size-lg'),
+
+            '$btn-border-width' => array('type' => 'text','placeholder' => '$border-width'),
+            
+
+
+            '$btn-font-weight' => array('type' => 'text','placeholder' => '             $font-weight-normal !default'),
+            '$btn-box-shadow' => array('type' => 'text','placeholder' => '              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default'),
+            '$btn-focus-width' => array('type' => 'text','placeholder' => '             $input-btn-focus-width !default'),
+            '$btn-focus-box-shadow' => array('type' => 'text','placeholder' => '        $input-btn-focus-box-shadow !default'),
+            '$btn-disabled-opacity' => array('type' => 'text','placeholder' => '        .65 !default'),
+            '$btn-active-box-shadow' => array('type' => 'text','placeholder' => '       inset 0 3px 5px rgba($black, .125) !default'),
+
+            '$btn-link-color' => array('type' => 'text','placeholder' => '              $link-color !default','newgroup' => 'Button Colors',),
+            '$btn-link-hover-color' => array('type' => 'text','placeholder' => '        $link-hover-color !default'),
+            '$btn-link-disabled-color' => array('type' => 'text','placeholder' => '     $gray-600 !default'),
+            
+            // Allows for customizing button radius independently from global border radius
+            '$btn-border-radius' => array('type' => 'text','placeholder' => '           $border-radius !default','newgroup' => 'Buttons Border Radius',),
+            '$btn-border-radius-sm' => array('type' => 'text','placeholder' => '        $border-radius-sm !default'),
+            '$btn-border-radius-lg' => array('type' => 'text','placeholder' => '        $border-radius-lg !default'),
+            
+            '$btn-transition' => array( 'newgroup' => 'Buttons Extras', 'type' => 'text','placeholder' => '              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default'),
+            
+            '$btn-hover-bg-shade-amount' => array('type' => 'text','placeholder' => '       15% !default'),
+            '$btn-hover-bg-tint-amount' => array('type' => 'text','placeholder' => '        15% !default'),
+            '$btn-hover-border-shade-amount' => array('type' => 'text','placeholder' => '   20% !default'),
+            '$btn-hover-border-tint-amount' => array('type' => 'text','placeholder' => '    10% !default'),
+            '$btn-active-bg-shade-amount' => array('type' => 'text','placeholder' => '      20% !default'),
+            '$btn-active-bg-tint-amount' => array('type' => 'text','placeholder' => '       20% !default'),
+            '$btn-active-border-shade-amount' => array('type' => 'text','placeholder' => '  25% !default'),
+            '$btn-active-border-tint-amount' => array('type' => 'text','placeholder' => '   10% !default'),
+            ),
+        
+        
+        // NAVBARS
+        "navbars" => array(
+            '$navbar-brand-font-size' => ['type' => 'text', 'placeholder' => '1.25rem', 'newgroup' => 'Brand'],
+            '$navbar-light-brand-color' => ['type' => 'color'],
+            '$navbar-dark-brand-color' => ['type' => 'color'],
+            '$nav-link-font-size' => ['type' => 'text', 'placeholder' => '1rem', 'newgroup' => 'Nav Links'],
+            '$navbar-light-color' => ['type' => 'color'],
+            '$navbar-light-hover-color' => ['type' => 'color'],
+            '$navbar-dark-color' => ['type' => 'color'],
+            '$navbar-dark-hover-color' => ['type' => 'color'],
+            '$navbar-toggler-font-size' => ['type' => 'text', 'placeholder' => '1rem', 'newgroup' => 'Toggler']
+            ),
+        
+        //add...
+        
+    );	 
+} //end function
 
 
 
