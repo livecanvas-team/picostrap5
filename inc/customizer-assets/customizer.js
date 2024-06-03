@@ -373,30 +373,30 @@
         });
 
         //UPON SELECTIVE REFRESH, the scss is lost, so reapply it
-        jQuery(document).ready(function ($) {
-            var targetNode = $('#customize-preview')[0];
-            var iframeCount = 0;
+         
+        var targetNode = $('#customize-preview')[0];
+        var iframeCount = 0;
 
-            var observer = new MutationObserver(function (mutationsList) {
-                mutationsList.forEach(function (mutation) {
-                    if (mutation.type === 'childList') {
-                        mutation.addedNodes.forEach(function (node) {
-                            if (node.tagName === 'IFRAME') {
-                                iframeCount++;
-                                if (iframeCount > 1) {
-                                    setTimeout(function () {
-                                        console.log('The preview iframe has been reloaded.');
-                                        updateScssPreviewDebounced();
-                                    }, 2000);
-                                }
+        var observer = new MutationObserver(function (mutationsList) {
+            mutationsList.forEach(function (mutation) {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(function (node) {
+                        if (node.tagName === 'IFRAME') {
+                            iframeCount++;
+                            if (iframeCount > 1) {
+                                setTimeout(function () {
+                                    console.log('The preview iframe has been reloaded.');
+                                    updateScssPreviewDebounced();
+                                }, 2000);
                             }
-                        });
-                    }
-                });
+                        }
+                    });
+                }
             });
-
-            observer.observe(targetNode, { childList: true });
         });
+
+        observer.observe(targetNode, { childList: true });
+         
 
 
 		//////////// USER ACTIONS / UX HELPERS /////////////////
