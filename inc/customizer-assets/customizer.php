@@ -691,7 +691,7 @@ function picostrap_theme_customize_register($wp_customize) {
 			'description' =>__('
 						The code in the field below is generated each time you set a new font family for body or headings, and is served in the site\'s &lt;head&gt;.
 						<br><br>
-						You can customize this code, but please mind that if you edit font family seetings your customizations will be lost.
+						You can customize this code, but please mind that if you edit font family settings your customizations will be overwritten.
 						<br><br>
 						In case you break things up while editing, you can manually regenerate the code <a href="#" id="regenerate-font-loading-code">clicking here</a>.
 						<br><br>

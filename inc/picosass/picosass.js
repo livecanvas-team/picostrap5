@@ -132,7 +132,7 @@ export function Compile(sassParams = {}, theCallback = () => { }) {
     if (!document.querySelector("#picosass-output-feedback")) document.querySelector("html").insertAdjacentHTML("afterbegin", `
         <div id='picosass-output-feedback'></div> 
         <style> 
-            #picosass-output-feedback { position: fixed; top:5px; z-index: 9999; width:80%;font-size:36px; background:#212337; color:lime; font-family:courier; border:8px solid red; padding:0 15px 10px 15px; display:block;   word-wrap: break-word;   }
+            #picosass-output-feedback { position: fixed; bottom:5px; z-index: 9999; width:80%;font-size:36px; background:#212337; color:lime; font-family:courier; border:8px solid red; padding:0 15px 10px 15px; display:block;   word-wrap: break-word;   }
             #picosass-output-feedback span{display:block; font-size:20px; z-index:0}
             #picosass-output-feedback:empty {display:none}
         </style>
