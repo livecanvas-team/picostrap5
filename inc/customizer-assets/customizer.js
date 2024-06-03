@@ -350,10 +350,17 @@
 		});			
 		*/
 
-		//CHECK IF USING VINTAGE GOOGLE FONTS API V1, REBUILD FONT IMPORT CODE
-		if ($("#_customize-input-picostrap_fonts_header_code").val().includes('https://fonts.googleapis.com/css?')){
-			alert("Your font settings are obsolete, please delete font family seetings and set them again. Then publish.");
-		}
+        // CHECK IF USING VINTAGE FONTS API, REBUILD FONT IMPORT CODE
+        if ( ($("#_customize-input-body_font_object").val().length > 10) && !$("#_customize-input-body_font_object").val().includes('cssImport')) {
+            // Display a confirmation dialog
+            if (confirm("Your font import settings seem obsolete. Do you want to try to auto-update them? ")) {
+                // User confirmed
+                $("#_customize-input-headings_font_object").val("");
+                $("#_customize-input-body_font_object").val("");
+                $("#_customize-input-picostrap_fonts_header_code").val("");
+                ps_update_font_objects_and_import_code(); 
+            } 
+        }
 		
 		//////////////////// LISTEN TO CUSTOMIZER CHANGES ////////////////////////
 
@@ -363,7 +370,13 @@
 
 			if (setting.id.includes("SCSSvar")) {
 				updateScssPreviewDebounced();
-			}
+            } else {
+                // FOR handling SelectiveRefresh options
+                //wait three seconds and run updateScssPreviewDebounced();
+                setTimeout(function () {
+                    updateScssPreviewDebounced();
+                }, 3000);
+            }
 		});
         
         // If user navigates inside preview, rebuild and apply SCSS
@@ -372,33 +385,7 @@
             updateScssPreviewDebounced();
         });
 
-        //UPON SELECTIVE REFRESH, the scss is lost, so reapply it
-         
-        var targetNode = $('#customize-preview')[0];
-        var iframeCount = 0;
-
-        var observer = new MutationObserver(function (mutationsList) {
-            mutationsList.forEach(function (mutation) {
-                if (mutation.type === 'childList') {
-                    mutation.addedNodes.forEach(function (node) {
-                        if (node.tagName === 'IFRAME') {
-                            iframeCount++;
-                            if (iframeCount > 1) {
-                                setTimeout(function () {
-                                    console.log('The preview iframe has been reloaded.');
-                                    updateScssPreviewDebounced();
-                                }, 2000);
-                            }
-                        }
-                    });
-                }
-            });
-        });
-
-        observer.observe(targetNode, { childList: true });
-         
-
-
+        
 		//////////// USER ACTIONS / UX HELPERS /////////////////
 
 		//AFTER PUBLISHING CUSTOMIZER CHANGES, SAVE SCSS & CSS
