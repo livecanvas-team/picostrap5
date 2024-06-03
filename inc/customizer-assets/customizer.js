@@ -231,15 +231,23 @@
         // Extract the cssImport field, defaulting to an empty string if it doesn't exist
         let css_snippet_headings_font = headingsFontObjectData.cssImport ?? "";
 
-        //build the full HTML import code
-        let html_code = ("<style> \n " + css_snippet_body_font + ' \n ' + css_snippet_headings_font + "\n </style>");
+        //build the full import code
+        let css_code =  css_snippet_body_font + ' \n ' + css_snippet_headings_font; //for preview
+        let html_code = ("<style> \n " + css_code + "\n </style>"); //for site frontend
 
         //populate the textarea with the result
         $("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
 
-        //update preview
-        document.querySelector('#customize-preview iframe').contentWindow.document
-            .querySelector('#font-loading-snippet-wrapper-for-preview').innerHTML = html_code;
+        //update CSS font loading snippet in preview
+        var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
+        var fontLoadingStyle = iframeDoc.querySelector('#font-loading-style-for-preview');
+
+        if (fontLoadingStyle) {
+            fontLoadingStyle.innerHTML = css_code;
+        } else {
+            alert('Element #font-loading-style-for-preview does not exist.');
+        }
+
 
     } // end function 
 
@@ -369,8 +377,12 @@
 		wp.customize.bind('change', function (setting) {
 
 			if (setting.id.includes("SCSSvar")) {
+                //a scss option changed, rebuild bundle
 				updateScssPreviewDebounced();
             } else {
+                //an option that is not SCSS just changed
+                if ( setting.id.includes("font")) return; //ignore font options change
+                console.log("CHANGED: " + setting.id);
                 // FOR handling SelectiveRefresh options
                 //wait three seconds and run updateScssPreviewDebounced();
                 setTimeout(function () {
