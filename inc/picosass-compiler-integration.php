@@ -157,6 +157,7 @@ add_action( 'wp_footer', function  () {
 		<style>
 			#picosass-output-feedback {
     			top: 32px !important;
+                bottom: unset;
 			}
 		</style>
 	<?php
