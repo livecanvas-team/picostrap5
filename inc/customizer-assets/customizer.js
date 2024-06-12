@@ -376,10 +376,15 @@
 		//these options use postMessage and all is handled by us in JS
 		wp.customize.bind('change', function (setting) {
 
+            //console.dir(setting); //very useful to inspect 
+
 			if (setting.id.includes("SCSSvar")) {
                 //a scss option changed, rebuild bundle
 				updateScssPreviewDebounced();
-            } else {
+                return;
+            } 
+            
+            if ( setting.transport == 'refresh') {
                 //an option that is not SCSS just changed
                 if ( setting.id.includes("font")) return; //ignore font options change
                 console.log("CHANGED: " + setting.id);
