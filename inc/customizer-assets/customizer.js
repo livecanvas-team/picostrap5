@@ -383,7 +383,9 @@
 				updateScssPreviewDebounced();
                 return;
             } 
-            
+
+            //no more useful, as is done below better
+            /*
             if ( setting.transport == 'refresh') {
                 //an option that is not SCSS just changed
                 if ( setting.id.includes("font")) return; //ignore font options change
@@ -394,14 +396,20 @@
                     updateScssPreviewDebounced();
                 }, 3000);
             }
+            */
 		});
-        
+
+        //When preview is refreshed, rebuild and apply SCSS
+        wp.customize.previewer.bind('ready', function () {
+            console.log('Preview has been refreshed');
+            updateScssPreviewDebounced();
+        });
+
         // If user navigates inside preview, rebuild and apply SCSS
         wp.customize.previewer.bind('url', function (newUrl) {
             console.log('Preview URL changed to: ' + newUrl);
             updateScssPreviewDebounced();
         });
-
         
 		//////////// USER ACTIONS / UX HELPERS /////////////////
 
