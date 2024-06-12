@@ -55,10 +55,11 @@ add_action( 'wp_head', function  () {
 
 		<!-- add the SCSS source code --> 
 		<template id="the-scss" class="prevent-autocompile" baseurl="<?php echo get_stylesheet_directory_uri() ?>/sass/"
-		<?php if (is_child_theme()): ?> fallback_baseurl="<?php echo get_template_directory_uri() ?>/sass/" <?php endif ?>
-		>
+		<?php if (is_child_theme()): ?> fallback_baseurl="<?php echo get_template_directory_uri() ?>/sass/" <?php endif ?> >
 			<?php echo ps_get_main_sass() ?>
 		</template>
+
+        <style id="font-loading-style-for-preview"> </style> 
 	<?php
 } );
 

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FontSource Fonts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        th.sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: #f2f2f2;
+            z-index: 2;
+        }
+
+        .font-family {
+            font-size: 1.2em;
+        }
+
+        #filterContainer {
+            margin-bottom: 20px;
+        }
+
+        #filterContainer input,
+        #filterContainer select {
+            padding: 5px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>FontSource Fonts</h1>
+    <div id="filterContainer">
+        <label for="filterName">Filter by Name:</label>
+        <input type="text" id="filterName" oninput="filterTable()">
+        <label for="filterCategory">Filter by Category:</label>
+        <select id="filterCategory" onchange="filterTable()">
+            <option value="">All</option>
+            <option value="serif">Serif</option>
+            <option value="sans-serif">Sans Serif</option>
+            <option value="display">Display</option>
+            <option value="handwriting">Handwriting</option>
+            <option value="monospace">Monospace</option>
+        </select>
+        <label for="filterVariable">Filter by Variable:</label>
+        <select id="filterVariable" onchange="filterTable()">
+            <option value="">All</option>
+            <option value="true">Variable only</option>
+            <option value="false">Non-variable only</option>
+        </select>
+    </div>
+    <table id="fontsTable">
+        <thead>
+            <tr>
+                <th>Family</th>
+                <th>Subsets</th>
+                <th>Weights</th>
+                <th>Styles</th>
+                <th>Default Subset</th>
+                <th>Variable</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>CSS Import</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Font data will be appended here -->
+        </tbody>
+    </table>
+
+    <script>
+        async function getFontSourceFonts(url = 'https://api.fontsource.org/v1/fonts?subsets=latin') {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const fonts = await response.json();
+                displayFonts(fonts);
+            } catch (error) {
+                console.error('Failed to fetch fonts:', error);
+            }
+        }
+
+        function displayFonts(fonts) {
+            const tableBody = document.getElementById('fontsTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Clear existing rows
+            fonts.forEach(font => {
+                const row = `
+                    <tr class="font-row" data-font-id="${font.id}" data-font-family="${font.family}" data-font-subsets="${font.subsets.join(', ')}" data-font-weights="${font.weights.join(', ')}" data-font-styles="${font.styles.join(', ')}" data-font-defSubset="${font.defSubset}" data-font-variable="${font.variable}" data-font-category="${font.category}" data-font-type="${font.type}">
+                        <td class="font-family">${font.family}</td>
+                        <td>${font.subsets.join(', ')}</td>
+                        <td>${font.weights.join(', ')}</td>
+                        <td>${font.styles.join(', ')}</td>
+                        <td>${font.defSubset}</td>
+                        <td>${font.variable}</td>
+                        <td>${font.category}</td>
+                        <td>${font.type}</td>
+                        <td class="css-import"></td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+
+            observeFonts();
+        }
+
+        async function fetchFontDetails(fontId) {
+            const url = `https://api.fontsource.org/v1/fonts/${fontId}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Failed to fetch font details:', error);
+            }
+        }
+
+        function generateCssSnippet(font) {
+            const defaultUnicodeRange = 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD';
+            const unicodeRange = font.unicodeRange || defaultUnicodeRange;
+
+            if (font.variable) {
+                const weightRange = font.weights.join(' ');
+
+                return `
+                    @font-face {
+                        font-family: '${font.family} Variable';
+                        font-style: normal;
+                        font-display: swap;
+                        font-weight: ${weightRange};
+                        src: url(https://cdn.jsdelivr.net/fontsource/fonts/${font.id}:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
+                        unicode-range: ${unicodeRange};
+                    }
+                `;
+            } else {
+                return font.weights.map(weight => `
+                    @font-face {
+                        font-family: '${font.family}';
+                        font-style: normal;
+                        font-display: swap;
+                        font-weight: ${weight};
+                        src: url(https://cdn.jsdelivr.net/fontsource/fonts/${font.id}@latest/latin-${weight}-normal.woff2) format('woff2');
+                        unicode-range: ${unicodeRange};
+                    }
+                `).join('\n');
+            }
+        }
+
+        async function loadCssSnippet(entry) {
+            const fontId = entry.target.getAttribute('data-font-id');
+            const fontDetails = await fetchFontDetails(fontId);
+            const cssSnippet = generateCssSnippet(fontDetails);
+            const style = document.createElement('style');
+            style.textContent = cssSnippet;
+            document.head.appendChild(style);
+            entry.target.querySelector('.css-import').textContent = cssSnippet;
+            entry.target.querySelector('.font-family').style.fontFamily = fontDetails.variable ? `'${fontDetails.family} Variable', sans-serif` : `'${fontDetails.family}', sans-serif`;
+        }
+
+        function observeFonts() {
+            const options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadCssSnippet(entry);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            document.querySelectorAll('.font-row').forEach(row => {
+                observer.observe(row);
+            });
+        }
+
+        function filterTable() {
+            const filterName = document.getElementById('filterName').value.toLowerCase();
+            const filterCategory = document.getElementById('filterCategory').value;
+            const filterVariable = document.getElementById('filterVariable').value;
+            const rows = document.querySelectorAll('.font-row');
+
+            rows.forEach(row => {
+                const family = row.getAttribute('data-font-family').toLowerCase();
+                const category = row.getAttribute('data-font-category');
+                const variable = row.getAttribute('data-font-variable');
+                const matchesName = family.includes(filterName);
+                const matchesCategory = !filterCategory || category === filterCategory;
+                const matchesVariable = !filterVariable || variable === filterVariable;
+
+                if (matchesName && matchesCategory && matchesVariable) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        getFontSourceFonts();
+    </script>
+</body>
+
+</html>

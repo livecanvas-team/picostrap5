@@ -69,7 +69,7 @@
 
                 <?php if (get_theme_mod('enable_search_form')): ?>
                     <form action="<?php echo bloginfo('url') ?>" method="get" id="header-search-form" class="me-4">
-                        <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="s"
+                        <input class="form-control" type="text" placeholder="<?php _e("Search", 'picostrap5') ?>" aria-label="<?php _e("Search", 'picostrap5') ?>" name="s"
                             value="<?php the_search_query(); ?>">
                     </form>
                 <?php endif ?>
@@ -83,7 +83,7 @@
                         </svg>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" id="theme-toggle">
-                            <label class="form-check-label visually-hidden" for="theme-toggle"> Toggle Dark / Light mode
+                            <label class="form-check-label visually-hidden" for="theme-toggle"> <?php _e("Toggle Dark / Light mode", 'picostrap5') ?>
                             </label>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
