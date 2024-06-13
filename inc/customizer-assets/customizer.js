@@ -233,7 +233,7 @@
 
         //build the full import code
         let css_code =  css_snippet_body_font + ' \n ' + css_snippet_headings_font; //for preview
-        let html_code = ("<style> \n " + css_code + "\n </style>"); //for site frontend
+        let html_code = ("<link rel='dns-prefetch' href='//cdn.jsdelivr.net' /> <style> \n " + css_code + "\n </style>"); //for site frontend
 
         //populate the textarea with the result
         $("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
