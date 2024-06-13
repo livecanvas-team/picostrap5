@@ -343,8 +343,10 @@
 		
 		//ADD CODEMIRROR TO TEXTAREAS header and footer code. 
         // Dont use CodeMirror on  "service" ones (breaks direct i/o)
-        wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
-        wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_footer_code'));
+        
+        //if you readd it, fix editing (now breaks saving)
+        //wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
+        //wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_footer_code'));
 
 		//NOW UNUSED -- ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)
 		/*
