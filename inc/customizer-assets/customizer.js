@@ -342,11 +342,30 @@
 		$("#customize-control-enable_back_to_top").prepend(" <h1>Opt-in extra features</h1><hr> ");
 		
 		//ADD CODEMIRROR TO TEXTAREAS header and footer code. 
-        // Dont use CodeMirror on  "service" ones (breaks direct i/o)
-        
-        //if you readd it, fix editing (now breaks saving)
-        //wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_header_code'));
-        //wp.codeEditor.initialize(jQuery('#_customize-input-picostrap_footer_code'));
+        // Initialize CodeMirror for the fields
+        var headerEditor = wp.codeEditor.initialize($('#_customize-input-picostrap_header_code')).codemirror;
+        var footerEditor = wp.codeEditor.initialize($('#_customize-input-picostrap_footer_code')).codemirror;
+
+        // Function to update the Customizer settings
+        function updateCustomizerOriginalFields() {
+            var headerContent = headerEditor.getValue();
+            var footerContent = footerEditor.getValue();
+
+            // Update the respective Customizer settings
+            wp.customize('picostrap_header_code').set(headerContent);
+            wp.customize('picostrap_footer_code').set(footerContent);
+        }
+         
+        // bind the update function to the change event
+        headerEditor.on('change', function () {
+            updateCustomizerOriginalFields();
+        });
+
+        footerEditor.on('change', function () {
+            updateCustomizerOriginalFields();
+        });
+
+      
 
 		//NOW UNUSED -- ON MOUSEDOWN ON PUBLISH / SAVE BUTTON, (before saving)
 		/*
@@ -378,7 +397,7 @@
 		//these options use postMessage and all is handled by us in JS
 		wp.customize.bind('change', function (setting) {
 
-            //console.dir(setting); //very useful to inspect 
+            console.dir("Changed setting: " + setting.id); //very useful to inspect 
 
 			if (setting.id.includes("SCSSvar")) {
                 //a scss option changed, rebuild bundle

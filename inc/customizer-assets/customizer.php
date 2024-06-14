@@ -646,7 +646,7 @@ function picostrap_theme_customize_register($wp_customize) {
 	//ADD HEADER CODE  
 	$wp_customize->add_setting("picostrap_header_code", array(
         "default" => "",
-        "transport" => "refresh",
+        "transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -662,7 +662,7 @@ function picostrap_theme_customize_register($wp_customize) {
 	//ADD FOOTER CODE 
 	$wp_customize->add_setting("picostrap_footer_code", array(
         "default" => "",
-        "transport" => "refresh",
+        "transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
