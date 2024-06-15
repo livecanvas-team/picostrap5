@@ -233,9 +233,12 @@
 
         //build the full import code
         let css_code =  css_snippet_body_font + ' \n ' + css_snippet_headings_font; //for preview
-        let html_code = ("<link rel='dns-prefetch' href='//cdn.jsdelivr.net' /> <style> \n " + css_code + "\n </style>"); //for site frontend
+        let html_code = ("\n<link rel='dns-prefetch' href='//cdn.jsdelivr.net' /> \n<style>\n " + css_code + "\n </style>\n"); //for site frontend
 
-        //populate the textarea with the result
+        //handle empty case
+        if (css_snippet_body_font == "" && css_snippet_headings_font=="") html_code="";
+
+        //populate the textarea with the full import code
         $("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
 
         //update CSS font loading snippet in preview
@@ -295,6 +298,15 @@
 	}
 
 	// FUNCTION TO REUPDATE THE SCSS FIELD AND RETRIGGER COMPILER
+    var last_generated_css_bundle="";
+
+    function placeLastScss(){
+        const iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
+        
+        if (!iframeDoc.querySelector("#picosass-injected-style")) iframeDoc.head.insertAdjacentHTML("beforeend", `<style id="picosass-injected-style"> </style>`);
+
+        iframeDoc.querySelector('#picosass-injected-style').innerHTML = last_generated_css_bundle
+    }
 	function updateScssPreview() {
        
 		var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
@@ -311,7 +323,8 @@
 			// show publishing action buttons
 			document.querySelector('#customize-save-button-wrapper').removeAttribute('hidden');
 			ps_get_page_colors(); 
-            ps_update_font_objects_and_import_code();
+            ps_update_font_objects_and_import_code(); 
+            last_generated_css_bundle = document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('#picosass-injected-style').innerHTML;
 		}
 
 		//hide publishing action buttons
@@ -324,7 +337,7 @@
 
 	//DEBOUNCED VERSION OF THE ABOVE
 	var updateScssPreviewDebounced = debounce(function () {
-		updateScssPreview();
+        if ($("body").hasClass("next-change-needs-scss-rebuild")) updateScssPreview(); else placeLastScss();
 	}, 1250);
 
 	////////////////////////////////////////// DOCUMENT READY //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -401,9 +414,13 @@
 
 			if (setting.id.includes("SCSSvar")) {
                 //a scss option changed, rebuild bundle
-				updateScssPreviewDebounced();
+				
+                $("body").addClass("next-change-needs-scss-rebuild");
+                updateScssPreviewDebounced();
                 return;
-            } 
+            } else {
+                $("body").removeClass("next-change-needs-scss-rebuild");
+            }
 
             //no more useful, as is done below better
             /*
