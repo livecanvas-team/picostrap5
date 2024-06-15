@@ -298,15 +298,6 @@
 	}
 
 	// FUNCTION TO REUPDATE THE SCSS FIELD AND RETRIGGER COMPILER
-    var last_generated_css_bundle="";
-
-    function placeLastScss(){
-        const iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
-        
-        if (!iframeDoc.querySelector("#picosass-injected-style")) iframeDoc.head.insertAdjacentHTML("beforeend", `<style id="picosass-injected-style"> </style>`);
-
-        iframeDoc.querySelector('#picosass-injected-style').innerHTML = last_generated_css_bundle
-    }
 	function updateScssPreview() {
        
 		var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
@@ -323,8 +314,7 @@
 			// show publishing action buttons
 			document.querySelector('#customize-save-button-wrapper').removeAttribute('hidden');
 			ps_get_page_colors(); 
-            ps_update_font_objects_and_import_code(); 
-            last_generated_css_bundle = document.querySelector('#customize-preview iframe').contentWindow.document.querySelector('#picosass-injected-style').innerHTML;
+            ps_update_font_objects_and_import_code();
 		}
 
 		//hide publishing action buttons
@@ -337,7 +327,7 @@
 
 	//DEBOUNCED VERSION OF THE ABOVE
 	var updateScssPreviewDebounced = debounce(function () {
-        if ($("body").hasClass("next-change-needs-scss-rebuild")) updateScssPreview(); else placeLastScss();
+		updateScssPreview();
 	}, 1250);
 
 	////////////////////////////////////////// DOCUMENT READY //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -414,13 +404,9 @@
 
 			if (setting.id.includes("SCSSvar")) {
                 //a scss option changed, rebuild bundle
-				
-                $("body").addClass("next-change-needs-scss-rebuild");
-                updateScssPreviewDebounced();
+				updateScssPreviewDebounced();
                 return;
-            } else {
-                $("body").removeClass("next-change-needs-scss-rebuild");
-            }
+            } 
 
             //no more useful, as is done below better
             /*
