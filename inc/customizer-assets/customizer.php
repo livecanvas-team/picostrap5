@@ -217,7 +217,7 @@ function picostrap_theme_customize_register($wp_customize) {
         // Just a message
         $wp_customize->add_setting("picostrap_header_navbar_disabled", array(
             "default" => "",
-            "transport" => "refresh",
+            "transport" => "postMessage",
         ));
         $wp_customize->add_control(new WP_Customize_Control(
             $wp_customize,
@@ -237,7 +237,7 @@ function picostrap_theme_customize_register($wp_customize) {
         // HEADER NAVBAR EXPAND ON BREAKPOINT
         $wp_customize->add_setting("picostrap_header_navbar_expand", array(
             "default" => "navbar-expand-md",
-            "transport" => "refresh",
+            "transport" => "postMessage",
         ));
         $wp_customize->add_control(new WP_Customize_Control(
             $wp_customize,
@@ -261,7 +261,7 @@ function picostrap_theme_customize_register($wp_customize) {
         // HEADER NAVBAR POSITION
         $wp_customize->add_setting("picostrap_header_navbar_position", array(
             "default" => "",
-            "transport" => "refresh",
+            "transport" => "postMessage",
         ));
         $wp_customize->add_control(new WP_Customize_Control(
             $wp_customize,
@@ -282,7 +282,7 @@ function picostrap_theme_customize_register($wp_customize) {
         //DETECT PAGE SCROLL
         $wp_customize->add_setting("enable_detect_page_scroll", array(
             "default" => "",
-            "transport" => "refresh",
+            "transport" => "postMessage",
         ));
         $wp_customize->add_control(new WP_Customize_Control(
             $wp_customize,
@@ -299,7 +299,7 @@ function picostrap_theme_customize_register($wp_customize) {
         //HEADERNAVBAR COLOR CHOICE
         $wp_customize->add_setting("picostrap_header_navbar_color_choice", array(
             'default' => 'bg-dark',
-            "transport" => "refresh",
+            "transport" => "postMessage",
         ));
         $wp_customize->add_control(new WP_Customize_Control(
             $wp_customize,
@@ -333,7 +333,7 @@ function picostrap_theme_customize_register($wp_customize) {
         //HEADERNAVBAR COLOR SCHEME
         $wp_customize->add_setting("picostrap_header_navbar_color_scheme_attr", array(
             'default' => 'dark',
-            "transport" => "refresh",
+            "transport" => "postMessage",
         ));
         $wp_customize->add_control(new WP_Customize_Control(
             $wp_customize,
@@ -353,7 +353,7 @@ function picostrap_theme_customize_register($wp_customize) {
         //SEARCH FORM
         $wp_customize->add_setting("enable_search_form", array(
             "default" => "",
-            "transport" => "refresh",
+            "transport" => "postMessage",
         ));
         $wp_customize->add_control(new WP_Customize_Control(
             $wp_customize,
@@ -368,7 +368,7 @@ function picostrap_theme_customize_register($wp_customize) {
         //DARK MODE SWITCH
         $wp_customize->add_setting("enable_dark_mode_switch", array(
             "default" => "",
-            "transport" => "refresh",
+            "transport" => "postMessage",
         ));
         $wp_customize->add_control(new WP_Customize_Control(
             $wp_customize,
@@ -777,7 +777,7 @@ function picostrap_theme_customize_register($wp_customize) {
 	//DISABLE GUTENBERG
 	$wp_customize->add_setting("disable_gutenberg", array(
         "default" => "",
-        "transport" => "refresh",
+        "transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -793,7 +793,7 @@ function picostrap_theme_customize_register($wp_customize) {
 	//DISABLE WIDGETS BLOCK EDITOR
 	$wp_customize->add_setting("disable_widgets_block_editor", array(
         "default" => "",
-        "transport" => "refresh",
+        "transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -809,7 +809,7 @@ function picostrap_theme_customize_register($wp_customize) {
 	//DISABLE COMMENTS
 	$wp_customize->add_setting("singlepost_disable_comments", array(
         "default" => "",
-        "transport" => "refresh",
+        "transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -825,7 +825,7 @@ function picostrap_theme_customize_register($wp_customize) {
 	//DISABLE XML-RPC
 	$wp_customize->add_setting("disable_xml_rpc", array(
         "default" => "",
-        "transport" => "refresh",
+        "transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -859,7 +859,7 @@ function picostrap_theme_customize_register($wp_customize) {
 	//BACK TO TOP
 	$wp_customize->add_setting("enable_back_to_top", array(
         "default" => "",
-        "transport" => "refresh",
+        "transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -875,7 +875,7 @@ function picostrap_theme_customize_register($wp_customize) {
 	//LIGHTBOX
 	$wp_customize->add_setting("enable_lightbox", array(
         "default" => "",
-        "transport" => "refresh",
+        "transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -891,7 +891,7 @@ function picostrap_theme_customize_register($wp_customize) {
 	//TOOLTIPS
 	$wp_customize->add_setting("enable_tooltips", array(
         "default" => "",
-        "transport" => "refresh",
+        "transport" => "postMessage",
     ));
 	$wp_customize->add_control(new WP_Customize_Control(
         $wp_customize,
@@ -1190,11 +1190,74 @@ function picostrap_register_main_partials( WP_Customize_Manager $wp_customize ) 
     ));
 	
 	//MENUS
-	$wp_customize->selective_refresh->add_partial( 'header_menu_left', array(
-        'selector' => '#navbar .menuwrap-left',
-        'settings' => array( 'nav_menu_locations[navbar-left]' ),
+    //picostrap_header_navbar_expand
+	$wp_customize->selective_refresh->add_partial( 'picostrap_header_navbar_expand', array(
+        'selector' => '#wrapper-navbar',
+        'settings' => array( 'picostrap_header_navbar_expand' ),
+        'render_callback' => function() {
+             return get_template_part( 'partials/header', 'navbar' ); 
+        },
     ) );
 	
+    //picostrap_header_navbar_expand
+	$wp_customize->selective_refresh->add_partial( 'picostrap_header_navbar_position', array(
+        'selector' => '#wrapper-navbar',
+        'settings' => array( 'picostrap_header_navbar_position' ),
+        'render_callback' => function() {
+             return get_template_part( 'partials/header', 'navbar' ); 
+        },
+    ) );
+
+    //enable_detect_page_scroll
+	$wp_customize->selective_refresh->add_partial( 'enable_detect_page_scroll', array(
+        'selector' => '#wrapper-navbar',
+        'settings' => array( 'enable_detect_page_scroll' ),
+        'render_callback' => function() {
+             return get_template_part( 'partials/header', 'navbar' ); 
+        },
+    ) );
+
+    //picostrap_header_navbar_color_choice
+	$wp_customize->selective_refresh->add_partial( 'picostrap_header_navbar_color_choice', array(
+        'selector' => '#wrapper-navbar',
+        'settings' => array( 'picostrap_header_navbar_color_choice' ),
+        'render_callback' => function() {
+             return get_template_part( 'partials/header', 'navbar' ); 
+        },
+    ) );
+
+    //picostrap_header_navbar_color_scheme_attr
+	$wp_customize->selective_refresh->add_partial( 'picostrap_header_navbar_color_scheme_attr', array(
+        'selector' => '#wrapper-navbar',
+        'settings' => array( 'picostrap_header_navbar_color_scheme_attr' ),
+        'render_callback' => function() {
+             return get_template_part( 'partials/header', 'navbar' ); 
+        },
+    ) );
+
+         //enable_search_form
+	$wp_customize->selective_refresh->add_partial( 'enable_search_form', array(
+        'selector' => '#wrapper-navbar',
+        'settings' => array( 'enable_search_form' ),
+        'render_callback' => function() {
+             return get_template_part( 'partials/header', 'navbar' ); 
+        },
+    ) );
+
+         //enable_dark_mode_switch
+	$wp_customize->selective_refresh->add_partial( 'enable_dark_mode_switch', array(
+        'selector' => '#wrapper-navbar',
+        'settings' => array( 'enable_dark_mode_switch' ),
+        'render_callback' => function() {
+             return get_template_part( 'partials/header', 'navbar' ); 
+        },
+    ) );
+
+
+
+
+
+
 	/*
 	$wp_customize->selective_refresh->add_partial( 'header_menu_right', array(
         'selector' => '#navbar .menuwrap-right',
