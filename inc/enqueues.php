@@ -128,6 +128,20 @@ add_action ("template_redirect",function(){
     die;
 });
 
+//DE - ENQUEUE BOOTSTRAP, IF DESIRED 
+add_action('wp_enqueue_scripts',  'pico_dequeue_bootstrap', 300);
 
- 
+function  pico_dequeue_bootstrap() {
+    if (get_theme_mod("disable_bootstrap") ):
+        // Dequeue styles
+        wp_dequeue_style('picostrap-styles');
+        
+        // Dequeue scripts
+        wp_dequeue_script('bootstrap5');
+        wp_dequeue_script('bootstrap5-childtheme');
+        wp_dequeue_script('dark-mode-switch');
+    endif;
+}
+
+
 

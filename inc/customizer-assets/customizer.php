@@ -905,6 +905,22 @@ function picostrap_theme_customize_register($wp_customize) {
 	));
 
 
+    //DISABLE BOOTSTRAP
+	$wp_customize->add_setting("disable_bootstrap", array(
+        "default" => "",
+        "transport" => "refresh",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "disable_bootstrap",
+        array(
+            "label" => __("Disable Bootstrap", 'picostrap5'),
+			"description" => __("Completely disables the Bootstrap CSS and JS. You'll be responsible for adding your own CSS.", 'picostrap5'),
+            "section" => "extras", 
+            'type'     => 'checkbox',
+			)
+	));
+
 
 } //end function
  

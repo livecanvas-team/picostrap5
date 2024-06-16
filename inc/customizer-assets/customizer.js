@@ -299,7 +299,12 @@
 
 	// FUNCTION TO REUPDATE THE SCSS FIELD AND RETRIGGER COMPILER
 	function updateScssPreview() {
-       
+        if ($('#_customize-input-disable_bootstrap').is(':checked')){
+            console.log("Exiting updateScssPreview as BS is disabled.");
+            return false;
+        }
+
+        
 		var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
 
 		//build the full SCSS with variables and main import
