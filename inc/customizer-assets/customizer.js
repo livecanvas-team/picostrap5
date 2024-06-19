@@ -180,7 +180,7 @@
             console.log("Body font has changed");
             
             //get remote font data
-            const fontData = getFontData(new_body_font_family);
+            const fontData = getFontData(new_body_font_family.replaceAll('"', '').split(',')[0]);
             console.log(fontData);
 
             //save font object data into field
@@ -195,7 +195,7 @@
             console.log("Headings font has changed");
             
             //get remote font data      
-            const fontData = getFontData(new_headings_font_family);
+            const fontData = getFontData(new_headings_font_family.replaceAll('"', '').split(',')[0]);
             console.log(fontData);
 
             //save font object data into field
@@ -272,15 +272,9 @@
 
 				let name = els[i].closest("li").getAttribute("id").replace("customize-control-SCSSvar_", "");
 
-                let value = els[i].value;
-
 				//console.log(name + " " + els[i].value);
-
-                if (name.includes("font-family")) {
-                    value = "'" + value + "'";
-                }
 				
-                sass += `$${name}: ${value}; `;
+				sass += `$${name}: ${els[i].value}; `;
 				
 			} //end if value 
 		}
@@ -504,7 +498,7 @@
         document.querySelector('#fontpickerbasefont').addEventListener('font-selected', (event) => {
             
             //set font family and font weight fields	
-            $("#_customize-input-SCSSvar_font-family-base").val(event.detail.family).change();
+            $("#_customize-input-SCSSvar_font-family-base").val('"'+event.detail.family+'"').change();
             $("#_customize-input-SCSSvar_font-weight-base").val('').change(); 
 
         });
@@ -513,7 +507,7 @@
         document.querySelector('#fontpickerheadingsfont').addEventListener('font-selected', (event) => {
 
             //set font family and font weight fields	
-            $("#_customize-input-SCSSvar_headings-font-family").val(event.detail.family).change();
+            $("#_customize-input-SCSSvar_headings-font-family").val('"'+event.detail.family+'"').change();
             $("#_customize-input-SCSSvar_headings-font-weight").val('').change();
 
         });
