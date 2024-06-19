@@ -272,9 +272,15 @@
 
 				let name = els[i].closest("li").getAttribute("id").replace("customize-control-SCSSvar_", "");
 
+                let value = els[i].value;
+
 				//console.log(name + " " + els[i].value);
+
+                if (name.includes("font-family")) {
+                    value = "'" + value + "'";
+                }
 				
-				sass += `$${name}: ${els[i].value}; `;
+                sass += `$${name}: ${value}; `;
 				
 			} //end if value 
 		}

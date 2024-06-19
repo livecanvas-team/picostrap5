@@ -190,7 +190,9 @@ function ps_get_main_sass(){
 		
 		//get the real sass variable name from theme_mod_name, getting rid of our custom prefix
 		$variable_name = str_replace("SCSSvar_", "$", $theme_mod_name);
-		
+        
+        if( strpos($theme_mod_name, 'font-family') !== false  ) $theme_mod_value = "'" . $theme_mod_value . "'";
+
 		//add to output array. In JS that is sass += `$${name}: ${els[i].value}; `;
 		$sass .= $variable_name . ': '.$theme_mod_value . '; ';
 		
