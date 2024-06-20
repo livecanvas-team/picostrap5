@@ -538,8 +538,8 @@
             if (value === '') { font_headings = ""; font_body = ""; }
 
             //SET FONT FAMILY VALUES
-            $("#_customize-input-SCSSvar_font-family-base").val(font_body).change();
-            $("#_customize-input-SCSSvar_headings-font-family").val(font_headings).change();
+            $("#_customize-input-SCSSvar_font-family-base").val('"' + font_body + '"').change();
+            $("#_customize-input-SCSSvar_headings-font-family").val('"' + font_headings + '"').change();
 
             //RESET FONT WEIGHT FIELDS
             $("#_customize-input-SCSSvar_font-weight-base").val("").change();
