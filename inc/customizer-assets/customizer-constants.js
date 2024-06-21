@@ -12,7 +12,91 @@ const videoTutIcon = `
 ////////DEFINE FONT COMBINTIONS //////////
 
 
-const ps_font_combinations_select = '<div id="cs-font-combi"><h2>Font Combinations</h2><span id="_customize-description-picostrap_font_combinations" class="description customize-control-description">Check out  <a target="_blank" href="http://fontpair.co/all">FontPair</a> or <a target="_blank" href="https://femmebot.github.io/google-type/">Google Type</a>   for more   inspiration.</span><select id="_ps_font_combinations" aria-describedby="_customize-description-picostrap_font_combinations" data-customize-setting-link="picostrap_font_combinations"><option value="" selected="selected">Choose...</option><option value="Abel and Ubuntu">Abel and Ubuntu</option><option value="Alegreya and Alegreya">Alegreya and Alegreya</option><option value="Alegreya and Open Sans">Alegreya and Open Sans</option><option value="Barlow Condensed and Montserrat">Barlow Condensed and Montserrat</option><option value="Cabin and Old Standard TT">Cabin and Old Standard TT</option><option value="Cantata One and Imprima">Cantata One and Imprima</option><option value="Clicker Script and EB Garamond">Clicker Script and EB Garamond</option><option value="Cormorant Garamond and Proza Libre">Cormorant Garamond and Proza Libre</option><option value="Crete Round and ABeeZee">Crete Round and ABeeZee</option><option value="Dancing Script and Ledger">Dancing Script and Ledger</option><option value="Didact Gothic and Arimo">Didact Gothic and Arimo</option><option value="DM Serif Display and DM Sans">DM Serif Display and DM Sans</option><option value="Fjalla One and Average">Fjalla One and Average</option><option value="Fjalla One and Cantarell">Fjalla One and Cantarell</option><option value="Francois One and Lato">Francois One and Lato</option><option value="IBM Plex Sans Condensed and IBM Plex Sans">IBM Plex Sans Condensed and IBM Plex Sans</option><option value="Inter and Inter">Inter and Inter</option><option value="Istok Web and Lora">Istok Web and Lora</option><option value="Josefin Sans and Playfair Display">Josefin Sans and Playfair Display</option><option value="Karla and Inconsolata">Karla and Inconsolata</option><option value="Karla and Merriweather">Karla and Merriweather</option><option value="Lato and Merriweather">Lato and Merriweather</option><option value="Libre Baskerville and Libre Baskerville">Libre Baskerville and Libre Baskerville</option><option value="Libre Baskerville and Montserrat">Libre Baskerville and Montserrat</option><option value="Montserrat and Cardo">Montserrat and Cardo</option><option value="Montserrat and Crimson Text">Montserrat and Crimson Text</option><option value="Montserrat and Domine">Montserrat and Domine</option><option value="Montserrat and Hind">Montserrat and Hind</option><option value="Montserrat and Montserrat">Montserrat and Montserrat</option><option value="Montserrat and Neuton">Montserrat and Neuton</option><option value="Montserrat and Playfair Display">Montserrat and Playfair Display</option><option value="Nixie One and Ledger">Nixie One and Ledger</option><option value="Nunito and Lora">Nunito and Lora</option><option value="Nunito and PT Sans">Nunito and PT Sans</option><option value="Nunito Sans and Nunito Sans">Nunito Sans and Nunito Sans</option><option value="Oswald and Merriweather">Oswald and Merriweather</option><option value="Oswald and Quattrocento">Oswald and Quattrocento</option><option value="Patua One and Lora">Patua One and Lora</option><option value="Playfair Display and Lato">Playfair Display and Lato</option><option value="Playfair Display and Open Sans">Playfair Display and Open Sans</option><option value="PT Sans and PT Serif">PT Sans and PT Serif</option><option value="Quattrocento and Lora">Quattrocento and Lora</option><option value="Quattrocento and Quattrocento Sans">Quattrocento and Quattrocento Sans</option><option value="Quicksand and EB Garamond">Quicksand and EB Garamond</option><option value="Quicksand and Quicksand">Quicksand and Quicksand</option><option value="Raleway and Merriweather">Raleway and Merriweather</option><option value="Roboto Condensed and Roboto">Roboto Condensed and Roboto</option><option value="Sacramento and Alice">Sacramento and Alice</option><option value="Stint Ultra Expanded and Pontano Sans">Stint Ultra Expanded and Pontano Sans</option><option value="Ultra and PT Serif">Ultra and PT Serif</option><option value="Ubuntu and Lora">Ubuntu and Lora</option><option value="Work Sans and Merriweather">Work Sans and Merriweather</option><option value="Yeseva One and Josefin Sans">Yeseva One and Josefin Sans</option></select><br> <br></div>';
+const ps_font_combinations_select = `
+
+<div id="cs-font-combi">
+  <h2>Font Combinations</h2>
+  <span id="_customize-description-picostrap_font_combinations" class="description customize-control-description">Check out <a target="_blank" href="http://fontpair.co/all">FontPair</a> or <a target="_blank" href="https://femmebot.github.io/google-type/">Google Type</a> for more inspiration. </span>
+  <select id="_ps_font_combinations" aria-describedby="_customize-description-picostrap_font_combinations" data-customize-setting-link="picostrap_font_combinations">
+    <option value="" selected="selected">Choose...</option>
+    <optgroup label="Variable Fonts">
+        <option value="Alegreya and Noto Sans SC">Alegreya and Noto Sans SC</option>
+        <option value="Arimo and Syne">Arimo and Syne</option>
+        <option value="Archivo and Source Sans 3">Archivo and Source Sans 3</option>
+        <option value="Cabin and Space Grotesk">Cabin and Space Grotesk</option>
+        <option value="Cinzel and Chivo">Cinzel and Chivo</option>
+        <option value="Comfortaa and Figtree">Comfortaa and Figtree</option>
+        <option value="Dancing Script and Anybody">Dancing Script and Anybody</option>
+        <option value="DM Sans and Fira Code">DM Sans and Fira Code</option>
+        <option value="Dosis and Lora">Dosis and Lora</option>
+        <option value="Exo 2 and Nunito">Exo 2 and Nunito</option>
+        <option value="Exo 2 and Overpass">Exo 2 and Overpass</option>
+        <option value="Fira Code and JetBrains Mono">Fira Code and JetBrains Mono</option>
+        <option value="Heebo and Merriweather">Heebo and Merriweather</option>
+        <option value="Inter and Open Sans">Inter and Open Sans</option>
+        <option value="Inter and Roboto Mono">Inter and Roboto Mono</option>
+        <option value="Inter and Source Sans 3">Inter and Source Sans 3</option>
+        <option value="Josefin Sans and Cabin">Josefin Sans and Cabin</option>
+        <option value="Jost and Noto Sans JP">Jost and Noto Sans JP</option>
+        <option value="Jost and Source Sans 3">Jost and Source Sans 3</option>
+        <option value="Karla and Source Sans 3">Karla and Source Sans 3</option>
+        <option value="Karla and Space Grotesk">Karla and Space Grotesk</option>
+        <option value="League Spartan and EB Garamond">League Spartan and EB Garamond</option>
+        <option value="Lexend and Work Sans">Lexend and Work Sans</option>
+        <option value="Lora and Roboto Flex">Lora and Roboto Flex</option>
+        <option value="Manrope and Fira Code">Manrope and Fira Code</option>
+        <option value="Manrope and Inter">Manrope and Inter</option>
+        <option value="Manrope and Overpass">Manrope and Overpass</option>
+        <option value="Manrope and Public Sans">Manrope and Public Sans</option>
+        <option value="Merriweather Sans and Lexend">Merriweather Sans and Lexend</option>
+        <option value="Merriweather Sans and Quicksand">Merriweather Sans and Quicksand</option>
+        <option value="Montserrat and Nunito">Montserrat and Nunito</option>
+        <option value="Montserrat and Roboto Mono">Montserrat and Roboto Mono</option>
+        <option value="Montserrat and Source Sans 3">Montserrat and Source Sans 3</option>
+        <option value="Mulish and DM Sans">Mulish and DM Sans</option>
+        <option value="Mulish and Inconsolata">Mulish and Inconsolata</option>
+        <option value="Mulish and Roboto Mono">Mulish and Roboto Mono</option>
+        <option value="Nunito and DM Sans">Nunito and DM Sans</option>
+        <option value="Nunito and Inter">Nunito and Inter</option>
+        <option value="Nunito and Montserrat">Nunito and Montserrat</option>
+        <option value="Nunito Sans and Roboto Flex">Nunito Sans and Roboto Flex</option>
+        <option value="Nunito Sans and Roboto Slab">Nunito Sans and Roboto Slab</option>
+        <option value="Nunito Sans and Work Sans">Nunito Sans and Work Sans</option>
+        <option value="Noto Sans and DM Sans">Noto Sans and DM Sans</option>
+        <option value="Noto Sans and Roboto Flex">Noto Sans and Roboto Flex</option>
+        <option value="Noto Sans Lao and Nunito Sans">Noto Sans Lao and Nunito Sans</option>
+        <option value="Noto Sans TC and Noto Serif">Noto Sans TC and Noto Serif</option>
+        <option value="Noto Sans Thai and Crimson Pro">Noto Sans Thai and Crimson Pro</option>
+        <option value="Oswald and Quicksand">Oswald and Quicksand</option>
+        <option value="Outfit and Sora">Outfit and Sora</option>
+        <option value="Playfair Display and Comfortaa">Playfair Display and Comfortaa</option>
+        <option value="Playfair Display and Source Sans 3">Playfair Display and Source Sans 3</option>
+        <option value="Piazzolla and Recursive">Piazzolla and Recursive</option>
+        <option value="Poppins and Fira Code">Poppins and Fira Code</option>
+        <option value="Poppins and Source Code Pro">Poppins and Source Code Pro</option>
+        <option value="Plus Jakarta Sans and Raleway">Plus Jakarta Sans and Raleway</option>
+        <option value="Quicksand and Roboto Mono">Quicksand and Roboto Mono</option>
+        <option value="Raleway and Public Sans">Raleway and Public Sans</option>
+        <option value="Raleway and Roboto Mono">Raleway and Roboto Mono</option>
+        <option value="Raleway and Rubik">Raleway and Rubik</option>
+        <option value="Roboto Slab and Figtree">Roboto Slab and Figtree</option>
+        <option value="Rubik and Inter">Rubik and Inter</option>
+        <option value="Rubik and Mulish">Rubik and Mulish</option>
+        <option value="Rubik and Noto Sans">Rubik and Noto Sans</option>
+        <option value="Rubik and Nunito">Rubik and Nunito</option>
+        <option value="Space Grotesk and Inconsolata">Space Grotesk and Inconsolata</option>
+        <option value="Space Grotesk and Roboto Mono">Space Grotesk and Roboto Mono</option>
+        <option value="Source Code Pro and Noto Sans JP">Source Code Pro and Noto Sans JP</option>
+        <option value="Work Sans and Inconsolata">Work Sans and Inconsolata</option>
+        <option value="Yanone Kaffeesatz and Grandstander">Yanone Kaffeesatz and Grandstander</option>
+  
+    </optgroup>
+    
+  </select>
+  <br>
+  <br>
+</div>
+`;
 
 
 
