@@ -180,7 +180,7 @@
             console.log("Body font has changed");
             
             //get remote font data
-            const fontData = getFontData(new_body_font_family.replaceAll('"', '').split(',')[0]);
+            const fontData = getFontData(new_body_font_family.replaceAll("'", '').replaceAll('"', '').split(',')[0]);
             console.log(fontData);
 
             //save font object data into field
@@ -195,7 +195,7 @@
             console.log("Headings font has changed");
             
             //get remote font data      
-            const fontData = getFontData(new_headings_font_family.replaceAll('"', '').split(',')[0]);
+            const fontData = getFontData(new_headings_font_family.replaceAll("'", '').replaceAll('"', '').split(',')[0]);
             console.log(fontData);
 
             //save font object data into field
