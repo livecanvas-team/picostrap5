@@ -23,21 +23,18 @@ if (!function_exists('pico_back_to_top')):
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                const backToTopButton = document.getElementById('backToTop');
-                let scrollTimeout;
-
-                function pico_handleScroll() {
-                    if (window.pageYOffset >= 1000) {
-                        backToTopButton.style.visibility = 'visible';
-                    } else {
-                        backToTopButton.style.visibility = 'hidden';
-                    }
-                }
+                 
+                let pico_scrollTimeout;
 
                 function pico_scrollEnd() {
-                    clearTimeout(scrollTimeout);
-                    scrollTimeout = setTimeout(() => {
-                        pico_handleScroll();
+                    clearTimeout(pico_scrollTimeout);
+                    pico_scrollTimeout = setTimeout(() => {
+                        ///let's handle the scroll
+                        if (window.pageYOffset >= 1000) {
+                            document.getElementById('backToTop').style.visibility = 'visible';
+                        } else {
+                            document.getElementById('backToTop').style.visibility = 'hidden';
+                        }
                     }, 100);
                 }
 
