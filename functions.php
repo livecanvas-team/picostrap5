@@ -39,6 +39,9 @@ if (get_theme_mod("singlepost_disable_comments") ) require_once locate_template(
 //OPTIONAL: BACK TO TOP
 if (get_theme_mod("enable_back_to_top") ) require_once locate_template('/inc/opt-in/back-to-top.php');
 
+//OPTIONAL: OPEN MENU ON HOVER  
+if (get_theme_mod("enable_open_menu_on_hover") ) require_once locate_template('/inc/opt-in/open-menu-on-hover.php');
+
 //OPTIONAL: LIGHTBOX  
 if (get_theme_mod("enable_lightbox") ) require_once locate_template('/inc/opt-in/lightbox.php');
 	

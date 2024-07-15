@@ -871,6 +871,23 @@ function picostrap_theme_customize_register($wp_customize) {
             'type'     => 'checkbox',
 			)
     ));
+
+    //OPEN MENU ON HOVER
+	$wp_customize->add_setting("enable_open_menu_on_hover", array(
+        "default" => "",
+        "transport" => "postMessage",
+    ));
+	$wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        "enable_open_menu_on_hover",
+        array(
+            "label" => __("Open the main menu on hover", 'picostrap5'),
+			"description" => __("Very light implementation. To see the change, you will also need to Publish, exit the Customizer, and scroll down a long page", 'picostrap5'),
+            "section" => "extras", 
+            'type'     => 'checkbox',
+			)
+    ));
+
 	
 	//LIGHTBOX
 	$wp_customize->add_setting("enable_lightbox", array(
