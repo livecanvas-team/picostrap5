@@ -8,12 +8,12 @@
 defined('ABSPATH') || exit;
 
 // Add some JS to the footer 
-add_action('wp_footer', 'picostrap_back_to_top');
+add_action('wp_footer', 'pico_back_to_top');
 
-if (!function_exists('picostrap_back_to_top')):
+// Make function pluggable so it can be redefined in your functions.php child theme file
+if (!function_exists('pico_back_to_top')):
 
-    function picostrap_back_to_top()
-    { 
+    function pico_back_to_top() { 
         ?>
         <a href="#" title="Scroll to page top" id="backToTop" onclick="window.scroll({ top: 0, left: 0, behavior: 'smooth'});" class="bg-light text-dark rounded" style="visibility: hidden;"> 		
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">  
@@ -26,7 +26,7 @@ if (!function_exists('picostrap_back_to_top')):
                 const backToTopButton = document.getElementById('backToTop');
                 let scrollTimeout;
 
-                function handleScroll() {
+                function pico_handleScroll() {
                     if (window.pageYOffset >= 1000) {
                         backToTopButton.style.visibility = 'visible';
                     } else {
@@ -34,19 +34,19 @@ if (!function_exists('picostrap_back_to_top')):
                     }
                 }
 
-                function scrollEnd() {
+                function pico_scrollEnd() {
                     clearTimeout(scrollTimeout);
                     scrollTimeout = setTimeout(() => {
-                        handleScroll();
+                        pico_handleScroll();
                     }, 100);
                 }
 
-                window.addEventListener('scroll', scrollEnd, { capture: false, passive: true });
-                window.addEventListener('touchend', scrollEnd, { capture: false, passive: true });
+                window.addEventListener('scroll', pico_scrollEnd, { capture: false, passive: true });
+                window.addEventListener('touchend', pico_scrollEnd, { capture: false, passive: true });
             });
         </script>
 
         <?php
-    }
+    } //end function
 
 endif;
