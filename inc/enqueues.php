@@ -116,8 +116,10 @@ if(!function_exists('picostrap_hints')):
     }
 endif;
 
-add_action('send_headers', 'picostrap_hints'); 
- 
+if  (!get_theme_mod("disable_bootstrap")) {
+    add_action('send_headers', 'picostrap_hints'); 
+}
+
 //for testing
 add_action ("template_redirect",function(){
     if(!current_user_can("administrator") or !isset($_GET['debug_headers'])) return;
