@@ -24,7 +24,7 @@ $picostrap_includes = array(
 	//'/scssphp-legacy-compiler-integration.php', //To interface the Customizer with the SCSS php compiler
 	'/options-page.php',                  // Load theme options page. 
 	'/content-filtering.php',				//for LC compatibility when shutting down plugin
-
+    '/windpress-support.php'                    //for deep integration with the WindPress plugin, for optional use of TailWind
 );
 
 foreach ( $picostrap_includes as $file ) {
