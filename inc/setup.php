@@ -142,7 +142,7 @@ if ( ! function_exists( 'picostrap_custom_excerpt_more' ) ) {
 		return $more;
 	}
 }
-//da controllare
+
 add_filter( 'wp_trim_excerpt', 'picostrap_all_excerpts_get_more_link' );
 
 if ( ! function_exists( 'picostrap_all_excerpts_get_more_link' ) ) {
@@ -156,6 +156,7 @@ if ( ! function_exists( 'picostrap_all_excerpts_get_more_link' ) ) {
 	function picostrap_all_excerpts_get_more_link( $post_excerpt ) {
         global  $lc_rendered_dynamic_template_id;
         
+        //exclude LC dynamic templates
         if (isset($lc_rendered_dynamic_template_id)) return $post_excerpt;
 
 		if ( ! is_admin() OR ( isset($_POST['action']) && $_POST['action'] == 'lc_process_dynamic_templating_shortcode') ) {
