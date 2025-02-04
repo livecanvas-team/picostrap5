@@ -1003,22 +1003,24 @@ function picostrap_get_scss_variables_array(){
             '$headings-color' => array('type' => 'color'),
             
             '$headings-margin-bottom' => array('type' => 'text', 'placeholder' => '$spacer / 2 '),
-            '$h1-font-size' => array('type' => 'text', 'placeholder' => '2.5rem'),
+
+            '$h1-font-size' => array('newgroup' => 'Headings & FS Classes: <br>  Font Size', 'type' => 'text', 'placeholder' => '2.5rem'),
             '$h2-font-size' => array('type' => 'text', 'placeholder' => '2rem'),
             '$h3-font-size' => array('type' => 'text', 'placeholder' => '1.75rem'),
             '$h4-font-size' => array('type' => 'text', 'placeholder' => '1.5rem'),
             '$h5-font-size' => array('type' => 'text', 'placeholder' => '1.25rem'),
             '$h6-font-size' => array('type' => 'text', 'placeholder' => '1rem'),
 
-            '$display1-font-size' => array('newgroup' => 'Display Classes', 'type' => 'text', 'placeholder' => '5rem'),
+            '$display1-font-size' => array('newgroup' => 'Display Headings: <br>  Font Size', 'type' => 'text', 'placeholder' => '5rem'),
             '$display2-font-size' => array('type' => 'text', 'placeholder' => '4.5rem'),
             '$display3-font-size' => array('type' => 'text', 'placeholder' => '4rem'),
             '$display4-font-size' => array('type' => 'text', 'placeholder' => '3.5rem'),
             '$display5-font-size' => array('type' => 'text', 'placeholder' => '3rem'),
             '$display6-font-size' => array('type' => 'text', 'placeholder' => '2.5rem'),
             
-            '$display-font-family' => array('type' => 'text', 'placeholder' => 'NULL'),
-            '$display-font-style' => array('type' => 'text', 'placeholder' => 'NULL'),
+            //'$display-font-family' => array('type' => 'text', 'placeholder' => 'NULL'),
+            
+            '$display-font-style' => array('newgroup' => 'Display Headings: <br>  Font Details','type' => 'text', 'placeholder' => 'NULL'),
             '$display-font-weight' => array('type' => 'text', 'placeholder' => '300'),
             '$display-line-height' => array('type' => 'text', 'placeholder' => ' $headings-line-height '),
             

@@ -343,7 +343,7 @@
 		
 		//ADD HEADINGS LOOP
 		$(".cs-option-group-title").each(function(index, el) { //foreach group title	
-			$(el).closest("li.customize-control").prepend(" <h1>"+$(el).text()+"</h1><hr> ");
+			$(el).closest("li.customize-control").prepend(" <h1>"+$(el).html()+"</h1><hr> ");
 		}); //end each
 		
 		//ADD COLORS HEADING 
