@@ -1009,14 +1009,18 @@ function picostrap_get_scss_variables_array(){
             '$h4-font-size' => array('type' => 'text', 'placeholder' => '1.5rem'),
             '$h5-font-size' => array('type' => 'text', 'placeholder' => '1.25rem'),
             '$h6-font-size' => array('type' => 'text', 'placeholder' => '1rem'),
+
+            '$display1-font-size' => array('newgroup' => 'Display Classes', 'type' => 'text', 'placeholder' => '5rem'),
+            '$display2-font-size' => array('type' => 'text', 'placeholder' => '4.5rem'),
+            '$display3-font-size' => array('type' => 'text', 'placeholder' => '4rem'),
+            '$display4-font-size' => array('type' => 'text', 'placeholder' => '3.5rem'),
+            '$display5-font-size' => array('type' => 'text', 'placeholder' => '3rem'),
+            '$display6-font-size' => array('type' => 'text', 'placeholder' => '2.5rem'),
             
-            
-            //'$display1-size' => array('newgroup' => 'Display Classes', 'type' => 'text', 'placeholder' => '6rem'),
-            //'$display2-size' => array('type' => 'text', 'placeholder' => '5.5rem'),
-            //'$display3-size' => array('type' => 'text', 'placeholder' => '4.5rem'),
-            //'$display4-size' => array('type' => 'text', 'placeholder' => '3.5rem'),
-            //'$display-font-weight' => array('type' => 'text', 'placeholder' => '300'),
-            //'$display-line-height' => array('type' => 'text', 'placeholder' => ' $headings-line-height '),
+            '$display-font-family' => array('type' => 'text', 'placeholder' => 'NULL'),
+            '$display-font-style' => array('type' => 'text', 'placeholder' => 'NULL'),
+            '$display-font-weight' => array('type' => 'text', 'placeholder' => '300'),
+            '$display-line-height' => array('type' => 'text', 'placeholder' => ' $headings-line-height '),
             
             '$lead-font-size' => array('newgroup' => 'Lead, Small and Muted', 'type' => 'text', 'placeholder' => '1.25rem'),
             '$lead-font-weight' => array('type' => 'text', 'placeholder' => '300'),

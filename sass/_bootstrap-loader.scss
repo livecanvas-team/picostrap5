@@ -17,6 +17,23 @@
 
 // 4. Include any default map overrides here
 
+// Extract display font sizes from Bootstrap's default map
+$display1-font-size: map-get($display-font-sizes, 1) !default;
+$display2-font-size: map-get($display-font-sizes, 2) !default;
+$display3-font-size: map-get($display-font-sizes, 3) !default;
+$display4-font-size: map-get($display-font-sizes, 4) !default;
+$display5-font-size: map-get($display-font-sizes, 5) !default;
+$display6-font-size: map-get($display-font-sizes, 6) !default;
+
+$display-font-sizes: (
+  1: $display1-font-size,
+  2: $display2-font-size,
+  3: $display3-font-size,
+  4: $display4-font-size,
+  5: $display5-font-size,
+  6: $display6-font-size
+);
+
 //eg optional remove theme colors:
 //$theme-colors: map-remove($theme-colors, "info", "warning", "danger");
 
