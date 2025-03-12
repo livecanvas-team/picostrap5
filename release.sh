@@ -7,6 +7,12 @@ echo "Releasing picostrap5"
 SUBFOLDER="picostrap5"
 ZIP_NAME="picostrap5.zip"
 
+# remove ds store files 
+rm -rf .DS_Store
+
+# remove old zip archive
+rm -rf "$ZIP_NAME"
+
 # Create the subfolder if it doesn't exist
 mkdir -p "$SUBFOLDER"
 
