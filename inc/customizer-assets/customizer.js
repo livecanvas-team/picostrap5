@@ -339,7 +339,7 @@
 	$(document).ready(function() {
 		
         //ADD Bootstrap logo before accordion buttons in Customizer
-        const iconHTML = `
+        const bootstrapIconCode = `
             <span style="
             display: inline;
             width: 1.3em;
@@ -364,7 +364,7 @@
         accordionTargets.forEach(id => {
             const accordionButton = document.querySelector(`#${id} h3.accordion-section-title button`);
             if (accordionButton) {
-                accordionButton.insertAdjacentHTML('afterbegin', iconHTML);
+                accordionButton.insertAdjacentHTML('afterbegin', bootstrapIconCode);
             }
         });
 
