@@ -8,6 +8,46 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+//FOR EXPORTING JSON FILE FROM BACKEND
+
+add_action('admin_init', 'pico_handle_theme_options_download');
+
+function pico_handle_theme_options_download() {
+	if (!isset($_GET['pico_download_theme_options'])) return;
+
+	if (!current_user_can('manage_options')) {
+		wp_die('Unauthorized');
+	}
+
+	$mods = get_theme_mods();
+	if (!is_array($mods)) {
+		wp_die('No theme mods found');
+	}
+
+	if (isset($mods[0])) {
+		unset($mods[0]);
+	}
+
+	// ✅ Filter out empty values (but keep false, 0, '0')
+	$filtered_mods = array_filter($mods, function($val) {
+		if (is_array($val)) {
+			return !empty($val); // keep non-empty arrays
+		}
+		return !($val === '' || $val === null); // skip empty strings and nulls
+	});
+
+	$json = json_encode($filtered_mods, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+	header('Content-Description: File Transfer');
+	header('Content-Type: application/json');
+	header('Content-Disposition: attachment; filename="theme-options.json"');
+	header('Content-Length: ' . strlen($json));
+	echo $json;
+	exit;
+}
+
+
+
 //GET PARENT THEME VERSION
 function pico_get_parent_theme_version(){
 		
@@ -100,36 +140,18 @@ function theme_option_page() {
 							<a class="button button-primary button-hero" href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>">Customize Your Site</a>
                             <p>  to make your own Bootstrap build!		</p>
 							
-							
                     </div>
 
-                    <div class="pico-column"  hidden>
+                    <div hidden class="lc-experimental-feature pico-column"   >
 
                         <h3>Secondary Utilities</h3>
 
                         <ul id="pico-utils">
-                                    <li>
-										<a onclick="ps_recompile_sass_in_admin()" href="#" class="">
-											<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" style="" lc-helper="svg-icon">
-												<path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"></path>
-												<path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"></path>
-											</svg>
-											<span>Force CSS Bundle Rebuild</a> </span>
-										<small>(No fear)</small> 
+                                    <li >
+										<a class="button button-secondary button-hero" href="<?php echo esc_url( admin_url( '?pico_download_theme_options=1' ) ); ?>">Export All Customizer Options</a>
+						 
 									</li>
-                                    
-									
-									<li>
-										<a onclick="ps_reset_theme_settings()"   href="#" >
-											<svg viewBox="0 0 24 24">
-    										<path fill="currentColor" d="M16.24,3.56L21.19,8.5C21.97,9.29 21.97,10.55 21.19,11.34L12,20.53C10.44,22.09 7.91,22.09 6.34,20.53L2.81,17C2.03,16.21 2.03,14.95 2.81,14.16L13.41,3.56C14.2,2.78 15.46,2.78 16.24,3.56M4.22,15.58L7.76,19.11C8.54,19.9 9.8,19.9 10.59,19.11L14.12,15.58L9.17,10.63L4.22,15.58Z" />
-											</svg>
-											<span>Reset Theme Options</span>
-										</a> 
-										<small style="color:red">(Destructive!)</small>
-										
-									</li>
-                                       
+                                   
                                     
 									
 									<li>
@@ -149,11 +171,6 @@ function theme_option_page() {
         	</div>
     	</div>                        
     </div> <!-- close wrap -->
-
-
-
-
-
 
     <div class="wrap">
 		
@@ -184,8 +201,21 @@ function theme_option_page() {
 	</div><!--end .wrap-->
 
 
+    <script>
+	
+    document.body.addEventListener('keydown', function (e) {
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        const modifierKey = isMac ? e.metaKey : e.ctrlKey;
 
- 
+        if ((e.key === 'e' || e.key === 'E') && modifierKey) {
+            document.querySelectorAll('.lc-experimental-feature[hidden]').forEach(el => {
+                el.removeAttribute('hidden');
+            });
+        }
+    });
+
+    </script>
+
 
     <?php
 }
