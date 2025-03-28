@@ -9,7 +9,6 @@
 defined( 'ABSPATH' ) || exit;
 
 //FOR EXPORTING JSON FILE FROM BACKEND
-
 add_action('admin_init', 'pico_handle_theme_options_download');
 
 function pico_handle_theme_options_download() {
@@ -46,7 +45,50 @@ function pico_handle_theme_options_download() {
 	exit;
 }
 
+//TO EXPORT MENUS 
+add_action('admin_init', function () {
+    if (!is_admin() || !current_user_can('manage_options')) return;
 
+    if (!isset($_GET['pico_download_menus'])) return;
+
+    $menus = wp_get_nav_menus();
+    $all_data = [];
+
+    foreach ($menus as $menu) {
+        $menu_items = wp_get_nav_menu_items($menu->term_id, ['orderby' => 'menu_order']);
+        $export_items = [];
+
+        foreach ($menu_items as $item) {
+            $export_items[] = [
+                'title'      => $item->title,
+                'url'        => $item->url,
+                'menu_order' => $item->menu_order,
+                'parent'     => $item->menu_item_parent,
+                'type'       => $item->type,
+                'object'     => $item->object,
+                'object_id'  => $item->object_id,
+                'classes'    => $item->classes,
+                'attr_title' => $item->attr_title,
+                'target'     => $item->target,
+                'description'=> $item->description,
+            ];
+        }
+
+        $all_data[] = [
+            'menu_name'  => $menu->name,
+            'menu_slug'  => $menu->slug,
+            'items'      => $export_items,
+        ];
+    }
+
+    $json = json_encode($all_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+    header('Content-Type: application/json');
+    header('Content-Disposition: attachment; filename=menus.json');
+    header('Content-Length: ' . strlen($json));
+    echo $json;
+    exit;
+});
 
 //GET PARENT THEME VERSION
 function pico_get_parent_theme_version(){
@@ -153,7 +195,11 @@ function theme_option_page() {
 									</li>
                                    
                                     
-									
+									 <li >
+										<a class="button button-secondary button-hero" href="<?php echo esc_url( admin_url( '?pico_download_menus=1' ) ); ?>">Export All Menus</a>
+						 
+									</li>
+
 									<li>
 										<a target="_blank" href="https://picostrap.com/" class="">
 											<svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" viewBox="0 0 16 16" style="" lc-helper="svg-icon">
