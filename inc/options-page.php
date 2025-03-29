@@ -134,7 +134,7 @@ function theme_option_page() {
 		/* PICO UTILS */
 
 		ul#pico-utils li {
-		margin-bottom: 10px;
+		    margin-bottom: 10px;
 		}
 		ul#pico-utils li a svg {
 			color:#007cba;
@@ -144,9 +144,11 @@ function theme_option_page() {
 		}
 		
 		ul#pico-utils li a span {
-			font-weight: 700;
-			text-decoration: underline;
+			font-weight: 700; 
+            opacity:0.4
 		}
+ 
+                      
 
 	</style>
     
@@ -181,28 +183,29 @@ function theme_option_page() {
 							<br><br>
 							<a class="button button-primary button-hero" href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>">Customize Your Site</a>
                             <p>  to make your own Bootstrap build!		</p>
-                            <p><a href="#" id="show-pico-utilities" style="opacity:0.7">Show Utilities </a></p>
+                            <p><a href="#" id="show-pico-utilities" style="opacity:0.7">Show Extra Utilities </a></p>
 							
                     </div>
 
                     <div hidden class="pico-utilities pico-column"   >
 
-                        <h3>Utilities</h3>
+                        <h3>Utilities</h3> 
 
                         <ul id="pico-utils">
-                                    <li >
-										<a class="button button-secondary button-hero" href="<?php echo esc_url( admin_url( '?pico_download_theme_options=1' ) ); ?>">Export All Customizer Options</a>
+                                    <li>
+										<a class="button button-secondary button-hero" href="<?php echo esc_url( admin_url( '?pico_download_theme_options=1' ) ); ?>">Export All Customizer Options <span>(theme.json file)</span></a>
 						 
 									</li>
                                    
                                     
-									 <li >
-										<a class="button button-secondary button-hero" href="<?php echo esc_url( admin_url( '?pico_download_menus=1' ) ); ?>">Export All Menus</a>
+									 <li>
+										<a class="button button-secondary button-hero" href="<?php echo esc_url( admin_url( '?pico_download_menus=1' ) ); ?>">Export All Menus <span>(menus.json file)</span></a>
 						 
 									</li>
 
 									<li>
-										<a target="_blank" href="https://picostrap.com/" class="">
+										<br>
+                                        <a target="_blank" href="https://picostrap.com/" class="">
 											<svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" viewBox="0 0 16 16" style="" lc-helper="svg-icon">
 												<path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"></path>
 											</svg>
