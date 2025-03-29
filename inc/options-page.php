@@ -181,12 +181,13 @@ function theme_option_page() {
 							<br><br>
 							<a class="button button-primary button-hero" href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>">Customize Your Site</a>
                             <p>  to make your own Bootstrap build!		</p>
+                            <p><a href="#" id="show-pico-utilities" style="opacity:0.7">Show Utilities </a></p>
 							
                     </div>
 
-                    <div hidden class="lc-experimental-feature pico-column"   >
+                    <div hidden class="pico-utilities pico-column"   >
 
-                        <h3>Secondary Utilities</h3>
+                        <h3>Utilities</h3>
 
                         <ul id="pico-utils">
                                     <li >
@@ -248,17 +249,19 @@ function theme_option_page() {
 
 
     <script>
-	
-    document.body.addEventListener('keydown', function (e) {
-        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-        const modifierKey = isMac ? e.metaKey : e.ctrlKey;
 
-        if ((e.key === 'e' || e.key === 'E') && modifierKey) {
-            document.querySelectorAll('.lc-experimental-feature[hidden]').forEach(el => {
-                el.removeAttribute('hidden');
-            });
-        }
-    });
+        document.addEventListener('DOMContentLoaded', function () {
+            const trigger = document.querySelector('#show-pico-utilities');
+
+            if (trigger) {
+                trigger.addEventListener('click', function (e) {
+                    e.preventDefault(); // optional: prevents default button behavior
+                    document.querySelectorAll('.pico-utilities[hidden]').forEach(el => {
+                        el.removeAttribute('hidden');
+                    });
+                });
+            }
+        });
 
     </script>
 
