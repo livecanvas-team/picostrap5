@@ -2,6 +2,12 @@
 
 [![License: GPL v2 or later](https://img.shields.io/badge/License-GPL%20v2%20or%20later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
+
+
+<p align="center">
+  <img src="https://picostrap.com/wp-content/uploads/2025/03/picostrap5-logo.svg" alt="Picostrap 5 Logo" width="300">
+</p>
+
 **The fastest Bootstrap 5 WordPress starter theme. Experience the power of SASS merged with the WordPress Customizer.**
 
 Picostrap 5 leverages the flexibility of Bootstrap 5 (currently v5.3+) and integrates it deeply with the WordPress Customizer. Customize Bootstrap's look and feel directly from your WordPress backend, and Picostrap will recompile the necessary CSS on the fly using a built-in SASS compiler that runs right in your browser.
