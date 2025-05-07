@@ -1,8 +1,6 @@
 # Picostrap 5 - Bootstrap 5 WordPress Starter Theme
 
 [![License: GPL v2 or later](https://img.shields.io/badge/License-GPL%20v2%20or%20later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![WordPress Theme Version](https://img.shields.io/wordpress/theme/v/picostrap5.svg)](https://wordpress.org/themes/picostrap5/)
-[![WordPress Theme Rating](https://img.shields.io/wordpress/theme/r/picostrap5.svg)](https://wordpress.org/support/theme/picostrap5/reviews/)
 
 **The fastest Bootstrap 5 WordPress starter theme. Experience the power of SASS merged with the WordPress Customizer.**
 
