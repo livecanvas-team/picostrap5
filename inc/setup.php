@@ -199,7 +199,7 @@ function bootstrap_wrap_oembed( $html ){
 add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
 
 
-//UPON THEME SWITCH: IMPORT /livecanvas/theme-options.json
+//UPON THEME SWITCH: IMPORT /starter-data/theme-options.json
 add_action('after_switch_theme', 'picostrap_import_theme_mods_from_json');
 
 function picostrap_import_theme_mods_from_json() {
