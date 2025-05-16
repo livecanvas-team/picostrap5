@@ -203,7 +203,7 @@ add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
 add_action('after_switch_theme', 'picostrap_import_theme_mods_from_json');
 
 function picostrap_import_theme_mods_from_json() {
-	$file = get_stylesheet_directory() . '/livecanvas/theme-options.json';
+	$file = get_stylesheet_directory() . '/starter-data/theme-options.json';
 
 	if (!file_exists($file)) return;
 
