@@ -197,22 +197,3 @@ function bootstrap_wrap_oembed( $html ){
 //REMOVE ADMIN BAR BUMP HTML via MARGIN TOP CSS: 
 // removes  html {    margin-top: 32px !important;}
 add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
-
-
-//UPON THEME SWITCH: IMPORT /starter-data/theme-options.json
-add_action('after_switch_theme', 'picostrap_import_theme_mods_from_json');
-
-function picostrap_import_theme_mods_from_json() {
-	$file = get_stylesheet_directory() . '/starter-data/theme-options.json';
-
-	if (!file_exists($file)) return;
-
-	$json = file_get_contents($file);
-	$data = json_decode($json, true);
-
-	if (!is_array($data)) return;
-
-	foreach ($data as $key => $value) {
-		set_theme_mod($key, $value);
-	}
-}
