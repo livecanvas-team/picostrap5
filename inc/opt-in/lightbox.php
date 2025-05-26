@@ -21,22 +21,30 @@ add_filter('script_loader_tag', function  ($tag, $handle, $src) {
 add_action( 'wp_footer', function(){ 
 	if (isset($_GET['lc_page_editing_mode'])) return;
 	?>
-	<script>
-		//picostrap gLightbox integration
-		function pico_initialize_glightbox() {   
-			
-			//find elements that need to be 'lightboxed'
-			let matches = document.querySelectorAll('#container-content-single a:not(.nolightbox) img:not(.nolightbox), #container-content-page a:not(.nolightbox) img:not(.nolightbox), .autolightbox a:not(.nolightbox) img:not(.nolightbox)');
+	<script> 
+		function pico_initialize_glightbox() {
+			// Enable lightbox for standalone images outside galleries
+			document.querySelectorAll('#container-content-single a:not(.nolightbox) img:not(.nolightbox), #container-content-page a:not(.nolightbox) img:not(.nolightbox), .autolightbox a:not(.nolightbox) img:not(.nolightbox)').forEach(img => {
+				img.parentElement.classList.add("glightbox");
+			});
 
-			//iterate and add the class
-			for (i=0; i<matches.length; i++) {
-				matches[i].parentElement.classList.add("glightbox");
-			}
+			// Find all gallery blocks with IDs like #gallery-1, #gallery-2, etc.
+			document.querySelectorAll('div[id^="gallery-"]').forEach(galleryBlock => {
+				const galleryId = galleryBlock.id; // e.g. "gallery-7"
 
-			//run the lightbox
-			const lightbox = GLightbox({});
+				// Assign that ID as the data-gallery attribute to all links inside this gallery
+				const anchors = galleryBlock.querySelectorAll('a.glightbox');
+				anchors.forEach(a => a.setAttribute('data-gallery', galleryId));
+
+				// Initialize a separate GLightbox instance for each gallery
+				GLightbox({
+					selector: `a.glightbox[data-gallery="${galleryId}"]`
+				});
+			});
 		}
 	</script>
+
+ 
 
 	<!-- lazily load the gLightbox CSS file -->
 	<link rel="preload" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
