@@ -61,6 +61,32 @@ add_action( 'wp_enqueue_scripts', function() {
     
 } ,100);
 
+// PREVENT FOUC IN DARK MODE PAGE RELOAD
+add_action('wp_head', function () {
+    if (!get_theme_mod('enable_dark_mode_switch')) return;
+    ?>
+    <script>
+        (function setThemeFromPreference() {
+            const docEl = document.documentElement;
+            const defaultTheme = 'light';
+
+            try {
+                let theme = localStorage.getItem('theme');
+
+                if (!theme) {
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    theme = prefersDark ? 'dark' : defaultTheme;
+                }
+
+                docEl.setAttribute('data-bs-theme', theme);
+            } catch (error) {
+                docEl.setAttribute('data-bs-theme', defaultTheme);
+                    console.error('Theme detection failed:', error);
+                }
+        })();
+    </script>
+    <?php
+}, 1);  
 
 //ADD THE CUSTOM HEADER CODE (SET IN CUSTOMIZER)
 add_action( 'wp_head', 'picostrap_add_header_code' );
