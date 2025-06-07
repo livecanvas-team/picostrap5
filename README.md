@@ -18,7 +18,7 @@ Picostrap 5 leverages the flexibility of Bootstrap 5 (currently v5.3+) and integ
 ## Key Features
 
 *   **Bootstrap 5.3+ Integration:** Built on the latest stable version of the world's most popular front-end framework.
-*   **Turbocharged by NinjaBootstrap: Bootstrap Configuration & Additional Utility Classes ** This helps you make the most out of Bootstrap, enabling responsive variations of utility classes you DO need, eg position-lg-absolute - check out https://bootstrap.ninja/ninjabootstrap/
+*   **Turbocharged by NinjaBootstrap: Bootstrap Configuration & Additional Utility Classes ** This helps you make the most out of Bootstrap, enabling responsive variations of utility classes you DO need, eg position-lg-absolute - check out https://bootstrap.ninja/ninjabootstrap/ **
 *   **Live SASS Compilation:** Modify Bootstrap SCSS variables (colors, fonts, spacing, components, etc.) directly through the WordPress Customizer. Picostrap uses **PicoSASS** (an implementation of Dart SASS running in the browser via JSPM) to recompile your CSS instantly upon hitting "Publish" or via a manual trigger in the admin bar.
 *   **Single CSS Bundle:** Generates a single, minified `css-output/bundle.css` file for optimal performance.
 *   **Extensive Customizer Options:**
