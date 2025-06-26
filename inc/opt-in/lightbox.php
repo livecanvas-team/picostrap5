@@ -23,10 +23,6 @@ add_action( 'wp_footer', function(){
 	?>
 	<script> 
 		function pico_initialize_glightbox() {
-			// Enable lightbox for standalone images outside galleries
-			document.querySelectorAll('#container-content-single a:not(.nolightbox) img:not(.nolightbox), #container-content-page a:not(.nolightbox) img:not(.nolightbox), .autolightbox a:not(.nolightbox) img:not(.nolightbox)').forEach(img => {
-				img.parentElement.classList.add("glightbox");
-			});
 
 			// Find all gallery blocks with IDs like #gallery-1, #gallery-2, etc.
 			document.querySelectorAll('div[id^="gallery-"]').forEach(galleryBlock => {
@@ -41,6 +37,18 @@ add_action( 'wp_footer', function(){
 					selector: `a.glightbox[data-gallery="${galleryId}"]`
 				});
 			});
+
+			// Enable lightbox for standalone images outside galleries
+			document.querySelectorAll('#container-content-single a:not(.nolightbox) img:not(.nolightbox), #container-content-page a:not(.nolightbox) img:not(.nolightbox), .autolightbox a:not(.nolightbox) img:not(.nolightbox)').forEach(img => {
+				img.parentElement.classList.add("glightbox");
+			});
+
+			// Initialize GLightbox on images that are not in a gallery
+			GLightbox({
+				selector: `a.glightbox:not([data-gallery])`
+			});
+
+
 		}
 	</script>
 
