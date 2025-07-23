@@ -47,7 +47,7 @@ Picostrap 5 leverages the flexibility of Bootstrap 5 (currently v5.3+) and integ
 
 ## Getting Started
 
-1.  **Installation:** Install like any other WordPress theme. Download the `.zip` file and upload it via the WordPress admin panel (`Appearance > Themes > Add New`) or upload the extracted folder via FTP to `/wp-content/themes/`.
+1.  **Installation:** Install like any other WordPress theme. Download the `.zip` file, **RENAME** it to "**picostrap5.zip**" and upload it via the WordPress admin panel (`Appearance > Themes > Add New`) or upload the extracted folder via FTP to `/wp-content/themes/`.
 2.  **Child Theme (Recommended):** For customization beyond the Customizer, it's highly recommended to use a child theme. You can download a starter child theme from the [Picostrap website](https://picostrap.com/#downloads).
 3.  **Customize:** Navigate to `Appearance > Customize` in your WordPress admin panel. Explore the various sections (Colors, Typography, Global Options, Buttons, Forms, Navbars, etc.) to tailor the theme to your needs.
 4.  **Compile SASS:**
