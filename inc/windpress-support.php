@@ -4,6 +4,14 @@
 // https://wind.press/
 // A great solution to add TailWind CSS
 
+// Disable Bootstrap CSS if WindPress is active
+if (is_plugin_active('windpress/windpress.php')) {
+    add_filter('theme_mod_disable_bootstrap', static function () {
+        return true;
+    });
+}
+
+// Scanner callback function
 function pico_scanner_picostrap_provider(): array
 {
     // Any files with this extension will be scanned
@@ -34,7 +42,13 @@ function pico_scanner_picostrap_provider(): array
 
     $themeDir = $wpTheme->get_stylesheet_directory();
 
-    $finder = new \WindPressDeps\Symfony\Component\Finder\Finder();
+    if (class_exists('\WindPressDeps\Symfony\Component\Finder\Finder')) {
+        $finder = new \WindPressDeps\Symfony\Component\Finder\Finder();
+    } elseif (class_exists('\Symfony\Component\Finder\Finder')) {
+        $finder = new \Symfony\Component\Finder\Finder();
+    } else {
+        return $contents; // Finder class not found, early return
+    }
 
     // Check if the current theme is a child theme and get the parent theme directory
     $has_parent = $wpTheme->parent() ? true : false;
@@ -76,10 +90,14 @@ function pico_register_picostrap_provider(array $providers): array
             'integration.%s.enabled',
             'picostrap' // The id of this custom provider
         ), true),
+        'type' => 'theme',
+        'homepage' => 'https://picostrap.com/?ref=windpress',
+        'is_installed_active' => static function () {
+            return 1;
+        },
     ];
 
     return $providers;
 }
 
 add_filter('f!windpress/core/cache:compile.providers', 'pico_register_picostrap_provider');
-
