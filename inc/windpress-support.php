@@ -25,10 +25,9 @@ function pico_scanner_picostrap_provider(): array
     $contents = [];
 
     // The current active theme
-    $wpTheme = wp_get_theme();
 
-    // if the theme is not Picostrap and its' child, early return
-    if (!$wpTheme->get('Name') !== 'picostrap5' && !$wpTheme->get('Name') !== 'picostrap5 Child Base') {
+    // if the theme is not Picostrap or its' child, early return
+    if (get_template() != 'picostrap5') {
         return $contents;
     }
 
@@ -82,4 +81,3 @@ function pico_register_picostrap_provider(array $providers): array
 }
 
 add_filter('f!windpress/core/cache:compile.providers', 'pico_register_picostrap_provider');
-
