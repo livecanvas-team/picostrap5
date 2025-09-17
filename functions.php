@@ -7,14 +7,14 @@ $picostrap_includes = array(
 	'/theme-settings.php',                  // Initialize theme default settings.
 	'/setup.php',                           // Theme setup and custom theme supports.
 	'/widgets.php',                         // Register widget area.
-	'/clean-head.php',							// Eliminates useless meta tags, emojis, etc            
-	'/enqueues.php', 							// Enqueue scripts and styles.     
+	'/clean-head.php',						// Eliminates useless meta tags, emojis, etc            
+	'/enqueues.php', 						// Enqueue scripts and styles.     
 	'/template-tags.php',                   // Custom template tags for this theme.
 	'/pagination.php',                      // Custom pagination for this theme.
-	//'/hooks.php',                           // Custom hooks.
-	//'/extras.php',                          // Custom functions that act independently of the theme templates.
+	//'/hooks.php',                         // Custom hooks.
+	//'/extras.php',                        // Custom functions that act independently of the theme templates.
 	'/custom-comments.php',                 // Custom Comments file.
-	//'/jetpack.php',                         // Load Jetpack compatibility file.
+	//'/jetpack.php',                       // Load Jetpack compatibility file.
 	'/bootstrap-navwalker.php',    			// Load custom WordPress nav walker. 
 	'/woocommerce.php',                     // Load WooCommerce functions.
 	'/editor.php',                          // Load Editor functions. 
@@ -23,7 +23,8 @@ $picostrap_includes = array(
 	//'/scssphp-legacy-compiler-integration.php', //To interface the Customizer with the SCSS php compiler
 	'/options-page.php',                  // Load theme options page. 
 	'/content-filtering.php',				//for LC compatibility when shutting down plugin
-    '/windpress-support.php'                    //for deep integration with the WindPress plugin, for optional use of TailWind
+    '/windpress-support.php',               //for deep integration with the WindPress plugin, for optional use of TailWind
+	'/livecanvas-config.php'				//setup LC config	
 );
 
 foreach ( $picostrap_includes as $file ) {
