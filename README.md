@@ -65,6 +65,37 @@ Picostrap 5 leverages the flexibility of Bootstrap 5 (currently v5.3+) and integ
 
 *Note: SASS compilation requires administrator privileges and happens in the administrator's browser.*
 
+## Theme Structure
+
+### Core Directories
+*   **`/sass/`** - SCSS source files and Bootstrap 5 sources
+*   **`/css-output/`** - Compiled CSS bundle (`bundle.css`)
+*   **`/inc/`** - PHP functionality and customizer assets
+*   **`/page-templates/`** - Specialized page templates
+*   **`/loops/`** - Content display loop templates
+*   **`/partials/`** - Reusable template parts
+*   **`/languages/`** - Translation files (8 languages included)
+*   **`/woocommerce/`** - WooCommerce template overrides
+
+### Available Page Templates
+*   **Blank Templates:** `blank.php`, `blank-nofooter.php`, `empty.php`
+*   **Sidebar Layouts:** `page-sidebar-left.php`, `page-sidebar-right.php`
+*   **Special Pages:** `bootstrap-demo.php`, `default-no-jumbotron.php`
+
+### Loop Templates
+*   **Cards Layout:** `loops/cards.php` - Bootstrap card-based post display
+*   **Accordion Layout:** `loops/accordion.php` - Collapsible content display
+*   **Standard Loop:** `loops/index.php` - Default post loop
+
+### Widget Areas
+*   **Main Sidebar** - Primary sidebar area
+*   **Footer Full** - Full-width footer with dynamic grid
+*   **WooCommerce Sidebar** - Shop sidebar (when WooCommerce is active)
+
+### Menu Locations
+*   **Primary Menu** - Main navigation
+*   **Secondary Menu** - Secondary navigation area
+
 ## Customization
 
 *   **WordPress Customizer:** The primary way to customize colors, typography, and theme options.
@@ -84,11 +115,86 @@ Many features can be toggled on or off under `Customize > Global Utilities`. Thi
 *   Enable Page Scroll Detection script
 *   Open Main Menu on Hover script
 
+## Performance & Security Features
+
+### Performance Optimizations
+*   **Single CSS Bundle:** All styles compile to one minified file
+*   **Head Cleanup:** Removes unnecessary WordPress meta tags and scripts
+*   **Emoji Removal:** Completely disables WordPress emoji scripts and CSS
+*   **REST API Optimization:** Removes REST API links for non-logged-in users
+*   **Selective Loading:** Opt-in features prevent loading unused code
+
+### Security Enhancements
+*   **Login Security:** Obscures login error messages
+*   **Self-Pingback Prevention:** Disables self-referential pingbacks
+*   **XML-RPC Control:** Option to disable XML-RPC entirely
+*   **oEmbed Management:** Smart embed handling while preserving video functionality
+
+## Developer Features
+
+### Custom Functions
+*   **`picostrap_site_info()`** - Customizable footer text
+*   **`picostrap_the_sharing_buttons()`** - Social sharing functionality
+*   **Modified excerpt length** - 22 words with custom "Read More" styling
+
+### WordPress Features Support
+*   **Post Thumbnails:** Full featured image support
+*   **Post Formats:** Aside, image, video, quote, link
+*   **Custom Logo:** WordPress custom logo feature
+*   **HTML5 Markup:** Modern markup for forms, galleries, captions
+*   **Responsive Embeds:** Automatic responsive video embedding
+*   **Selective Refresh:** Customizer widget live preview
+
+### Bootstrap Integration
+*   **Bootstrap 5 Navwalker:** v1.3.4 with custom patches for dropdown support
+*   **NinjaBootstrap:** Additional utility classes and responsive variations
+*   **Dark Mode:** Bootstrap 5-compatible dark mode toggle
+
+## Translation Support
+
+Included translations for 8 languages:
+*   German (de_DE), Spanish (es_ES), Estonian (et), French (fr_FR)
+*   Italian (it_IT), Dutch (nl_NL), Portuguese (pt_PT), Romanian (ro_RO)
+*   Base POT file included for creating new translations
+
 ## Compatibility
 
 *   **WooCommerce:** Theme support and basic template adjustments included.
 *   **LiveCanvas:** Tested and marked as friendly (`lc_theme_is_livecanvas_friendly`). Respects LC's header/footer handling options.
 *   **WindPress:** Includes specific support for integrating with the WindPress plugin for Tailwind CSS scanning (`inc/windpress-support.php`).
+*   **Multisite:** Full WordPress multisite compatibility with separate CSS bundles per site.
+
+## Troubleshooting
+
+### Common Issues
+*   **SASS Not Compiling:** Ensure you have administrator privileges and JavaScript is enabled
+*   **Changes Not Showing:** Clear browser cache and check if CSS bundle version incremented
+*   **Performance Issues:** Use opt-in features to disable unused functionality
+*   **Child Theme SASS:** Remember to recompile using admin bar after editing child theme SASS files
+
+### Debug Mode
+*   Enable WordPress debug mode to see compilation errors
+*   Check browser console for JavaScript errors during SASS compilation
+*   Verify file permissions for `/css-output/` directory write access
+
+## Advanced Configuration
+
+### Custom SCSS Variables
+Child themes can override Bootstrap variables in `sass/_custom.scss`:
+```scss
+$primary: #your-color;
+$font-family-base: 'Your Font', sans-serif;
+```
+
+### Customizer Export/Import
+*   Theme includes JSON export functionality for theme customizations
+*   Useful for transferring settings between sites
+
+### Hooks and Filters
+The theme provides various WordPress hooks for developers:
+*   Custom template tags in `/inc/template-tags.php`
+*   Filter hooks for content modification
+*   Action hooks for theme setup and enhancements
 
 ## License
 
