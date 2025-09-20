@@ -24,7 +24,7 @@ $picostrap_includes = array(
 	'/options-page.php',                  // Load theme options page. 
 	'/content-filtering.php',				//for LC compatibility when shutting down plugin
     '/windpress-support.php',               //for deep integration with the WindPress plugin, for optional use of TailWind
-	'/livecanvas-config.php'				//setup LC config	
+	'/livecanvas-config.php'				//for deep integration with the LiveCanvas plugi, setup LC configuration	
 );
 
 foreach ( $picostrap_includes as $file ) {
