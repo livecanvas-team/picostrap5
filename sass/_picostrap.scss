@@ -152,10 +152,10 @@ body.scroll-position-not-at-top  #wrapper-navbar nav.navbar {
 }
 
 /* ============ DARK MODE UTILITY  ============ */
-//class "invert-on-dark-mode" - useful for images
+//class "invert-in-dark-mode" - useful for images
 // inverts colors when dark mode is on
 
-[data-bs-theme="dark"] .invert-on-dark-mode {
+[data-bs-theme="dark"] .invert-in-dark-mode {
   filter: invert(1);
 }
 
