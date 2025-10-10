@@ -102,6 +102,7 @@ add_action( 'wp_footer', function  () {
 					formdata.append("nonce", "<?php echo wp_create_nonce("picostrap_save_css_bundle") ?>");
 					formdata.append("action", "picostrap_save_css_bundle");
 					formdata.append("css", compiled.css);
+					formdata.append("sourceMap", compiled.sourceMap ? JSON.stringify(compiled.sourceMap) : "" );
 					fetch("<?php echo admin_url( 'admin-ajax.php' ) ?>", {
 						method: "POST",
 						credentials: "same-origin",
@@ -214,6 +215,14 @@ add_action("wp_ajax_picostrap_save_css_bundle", function (){
 	//ADD SOME COMMENT
 	$compiled_css = stripslashes($_POST['css']);
 
+	// sourcemap
+	if (isset($_POST['sourceMap']) AND $_POST['sourceMap']!="") {
+		// Enable source map reference in the CSS file
+		if (apply_filters('picostrap_enable_sourcemap_in_css', false)) {
+			$compiled_css .= "\n/*# sourceMappingURL=bundle.css.map */";
+		}
+	}
+
 	//INIT WP FILESYSTEM 
 	global $wp_filesystem;
 	if (empty($wp_filesystem)) {
@@ -225,6 +234,11 @@ add_action("wp_ajax_picostrap_save_css_bundle", function (){
 	$saving_operation = $wp_filesystem->put_contents( get_stylesheet_directory() . '/' . picostrap_get_css_optional_subfolder_name() . picostrap_get_complete_css_filename(), $compiled_css, FS_CHMOD_FILE ); // , 0644 ?
 	
 	if ($saving_operation) { // IF UPLOAD WAS SUCCESSFUL 
+		// also save source map if present on the payload
+		if (isset($_POST['sourceMap']) AND $_POST['sourceMap']!="") {
+			$source_map = stripslashes($_POST['sourceMap']);
+			$saving_operation_map = $wp_filesystem->put_contents( get_stylesheet_directory() . '/' . picostrap_get_css_optional_subfolder_name() . picostrap_get_complete_css_filename() . '.map', $source_map, FS_CHMOD_FILE );
+		}
 
 		//STORE CSS BUNDLE VERSION NUMBER
 		$current_version_number = get_theme_mod ('css_bundle_version_number');
