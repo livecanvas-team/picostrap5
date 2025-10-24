@@ -193,6 +193,33 @@ function bootstrap_wrap_oembed( $html ){
   }
   add_filter( 'embed_oembed_html','bootstrap_wrap_oembed',10,1);
 
+// Make the core [video] shortcode responsive with Bootstrap 5.3 ratio
+add_filter( 'wp_video_shortcode', 'picostrap_bs_ratio_for_wp_video', 10, 5 );
+function picostrap_bs_ratio_for_wp_video( $output, $atts, $video, $post_id, $library ) {
+
+    // 1) Read width/height from shortcode attributes (fallback to 16:9)
+    $w = isset( $atts['width'] )  ? (int) $atts['width']  : 16;
+    $h = isset( $atts['height'] ) ? (int) $atts['height'] : 9;
+
+    // 2) Compute Bootstrap ratio custom property value (percentage of height over width)
+    //    Example: 16:9 => 9/16*100 = 56.25%
+    $ratio_percent = ($w > 0 && $h > 0) ? round( ($h / $w) * 100, 4 ) : 56.25;
+
+    // 3) Extract the <video> element from WP's generated markup, if present
+    if ( preg_match( '/<video[^>]*>.*<\/video>/is', $output, $m ) ) {
+        $video_html = $m[0];
+    } else {
+        // Fallback: use full output if pattern not matched
+        $video_html = $output;
+    }
+
+    // 4) Remove any fixed width/height attributes from the <video> tag
+    $video_html = preg_replace( '/\s(width|height)="\d*"/i', '', $video_html );
+
+    // 5) Wrap the video in a Bootstrap ratio container (BS ≥ 5.2 supports --bs-aspect-ratio)
+    return '<div class="ratio" style="--bs-aspect-ratio:' . esc_attr( $ratio_percent ) . '%;">' . $video_html . '</div>';
+}
+
 
 //REMOVE ADMIN BAR BUMP HTML via MARGIN TOP CSS: 
 // removes  html {    margin-top: 32px !important;}
