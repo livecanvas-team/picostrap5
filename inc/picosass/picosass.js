@@ -85,6 +85,7 @@ async function load(canonicalUrl) {
 
     //fetch the URL
     let response = await fetch(canonicalUrl, options);
+    let actualUrl = canonicalUrl;
 
     //if file is not found, let's see in the fallback folder
     if (!response.ok && document.querySelector(theScssSelector).hasAttribute("fallback_baseurl")) {
@@ -94,6 +95,9 @@ async function load(canonicalUrl) {
             ));
         console.log('Since ' + canonicalUrl.href + ' cannot be found, we look for ' + canonicalUrlFallback);
         response = await fetch(canonicalUrlFallback, options);
+        if (response.ok) {
+            actualUrl = new URL(canonicalUrlFallback);
+        }
     }
 
     if (!response.ok) {
@@ -101,9 +105,12 @@ async function load(canonicalUrl) {
         throw new Error(`Failed to fetch ${canonicalUrl}: ${response.status} (${response.statusText})`);
     }
     const contents = await response.text()
+
+    //return full URL for source map (required by SASS compiler to be absolute)
     return {
         contents,
-        syntax: canonicalUrl.pathname.endsWith('.sass') ? 'indented' : 'scss'
+        syntax: canonicalUrl.pathname.endsWith('.sass') ? 'indented' : 'scss',
+        sourceMapUrl: actualUrl
     }
 }
 
@@ -119,6 +126,17 @@ async function runScssCompiler(theCode, sassParams) {
 
     //set default charset
     if (!sassParams.charset) sassParams.charset = false;
+
+    //set default source map to include actual file URLs
+    if (sassParams.sourceMap === undefined) sassParams.sourceMap = true;
+    if (sassParams.sourceMapIncludeSources === undefined) sassParams.sourceMapIncludeSources = false;
+
+    //set default URL for the source file to enable proper source map generation
+    //use stdin.scss as a virtual entry point to avoid circular import issues
+    if (!sassParams.url) {
+        const base = document.querySelector(theScssSelector)?.getAttribute("baseurl") ?? window.location.toString();
+        sassParams.url = new URL('stdin.scss', base);
+    }
 
     return await sass.compileStringAsync(theCode, sassParams)
 }
@@ -174,11 +192,37 @@ export function Compile(sassParams = {}, theCallback = () => { }) {
             //console.log(compiled);
             const timeEnd = Date.now();
 
+            //convert absolute URLs to relative paths in the source map
+            let modifiedSourceMap = null;
+            if (compiled.sourceMap) {
+                modifiedSourceMap = {
+                    ...compiled.sourceMap,
+                    sources: compiled.sourceMap.sources.map(source => {
+                        try {
+                            const sourceUrl = new URL(source);
+                            //return path relative to base URL (remove origin)
+                            return sourceUrl.pathname;
+                        } catch (e) {
+                            //if source is not a valid URL, return as-is
+                            return source;
+                        }
+                    })
+                };
+            }
+
             //if not present, add a new CSS element
             if (!document.querySelector("#picosass-injected-style")) document.head.insertAdjacentHTML("beforeend", `<style id="picosass-injected-style"> </style>`);
 
+            //prepare CSS with source map comment if source map exists
+            let cssWithSourceMap = compiled.css;
+            if (modifiedSourceMap) {
+                const sourceMapJson = JSON.stringify(modifiedSourceMap);
+                const sourceMapBase64 = btoa(unescape(encodeURIComponent(sourceMapJson)));
+                cssWithSourceMap += `\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,${sourceMapBase64} */`;
+            }
+
             //populate the element with the new CSS
-            document.querySelector('#picosass-injected-style').innerHTML = compiled.css;
+            document.querySelector('#picosass-injected-style').innerHTML = cssWithSourceMap;
 
             //remove initial static CSS, if present (just to prevent FOUC)
             document.querySelector(".picostrap-provisional-css")?.setAttribute("disabled", "true");
@@ -191,8 +235,11 @@ export function Compile(sassParams = {}, theCallback = () => { }) {
             //as there are no errors, clear the output feedback
             const myTimeout = setTimeout(() => { document.querySelector("#picosass-output-feedback").innerHTML = ''; }, 4500);
 
-            //run callback
-            theCallback(compiled);
+            //run callback with modified source map
+            theCallback({
+                ...compiled,
+                sourceMap: modifiedSourceMap || compiled.sourceMap
+            });
         })
 
         .catch((error) => {
