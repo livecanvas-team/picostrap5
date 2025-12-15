@@ -224,3 +224,7 @@ function picostrap_bs_ratio_for_wp_video( $output, $atts, $video, $post_id, $lib
 //REMOVE ADMIN BAR BUMP HTML via MARGIN TOP CSS: 
 // removes  html {    margin-top: 32px !important;}
 add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
+
+
+//ENABLE SOURCEMAP
+add_filter('picostrap_enable_sourcemap_in_css', '__return_true');
