@@ -70,10 +70,10 @@ function add_link_admin_bar($adminBar) {
 
 
 
-//Add Twitter handle/username to User Contact Information
+//Add X handle/username to User Contact Information
  
 function user_contact_add_twitter( $user_contact ) {
-	$user_contact['twitter'] = __( 'Twitter Username' );
+	$user_contact['twitter'] = __( 'X Username' );
 
 	return $user_contact;
 }
