@@ -130,17 +130,19 @@ add_filter( 'clean_url', 'picostrap_add_css_error_handling', 11, 1 );
 
 function picostrap_get_headers(){
     //add link to preload CSS bundle
-    $headers = "link: <".picostrap_get_css_url()."?ver=".picostrap_get_css_version().">; rel=preload; as=style";
-    //if relevant, add the CSS for Gutenberg blocks
-    if (!get_theme_mod("disable_gutenberg") OR
-        ( function_exists('lc_plugin_option_is_set') && lc_plugin_option_is_set('gtblocks') )
-        ) $headers.=", <".includes_url()."css/dist/block-library/style.min.css?ver=".get_bloginfo( 'version' ).">; rel=preload; as=style";
+    $headers = 'link: <' . add_query_arg( 'ver', picostrap_get_css_version(), picostrap_get_css_url() ) . '>; rel=preload; as=style';
+    // Let WordPress load block CSS as needed: modern versions use individual,
+    // often inline styles, so preloading the full block library wastes a request.
     return $headers;
 }
 
 if(!function_exists('picostrap_hints')):
     function picostrap_hints() {  
-        header(picostrap_get_headers());
+        // Feeds, XML sitemaps, robots and trackbacks do not render the bundle.
+        if ( headers_sent() || is_feed() || is_robots() || is_trackback() || get_query_var( 'sitemap' ) || get_query_var( 'sitemap-stylesheet' ) || is_embed() ) return;
+
+        // Append, preserving Link headers set by plugins and other core features.
+        header( picostrap_get_headers(), false );
     }
 endif;
 

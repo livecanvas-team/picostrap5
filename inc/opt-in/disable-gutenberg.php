@@ -21,13 +21,31 @@ function pico_disable_gutenberg($current_status, $post_type){
 
 /// REMOVE GUTENBERG BLOCKS CSS
 add_action( 'wp_print_styles', 'picostrap_deregister_gstyles', 100 );
+// Block styles can be enqueued during the_content, after wp_head has run.
+add_action( 'wp_footer', 'picostrap_deregister_gstyles', 19 );
 function picostrap_deregister_gstyles() {
 
     //if user wants to use Gutenberg along with LC editor, exit
-    if (function_exists('lc_plugin_option_is_set') && lc_plugin_option_is_set('gtblocks')) return;
+    if ( ! picostrap_should_remove_block_styles() ) return;
     
 	//De - enqueue GT styles
     wp_dequeue_style( 'wp-block-library' );
     wp_dequeue_style( 'wp-block-library-theme' ); 
     wp_dequeue_style( 'classic-theme-styles' );
+    wp_dequeue_style( 'global-styles' );
+    wp_dequeue_style( 'wp-global-styles-placeholder' );
+    wp_dequeue_style( 'wp-block-styles-placeholder' );
+    wp_dequeue_style( 'core-block-supports' );
+    wp_dequeue_style( 'core-block-supports-duotone' );
+    wp_dequeue_style( 'block-style-variation-styles' );
+
+    // Since WP 6.9, classic themes load individual core block styles on demand.
+    // Keep third-party block assets registered and available.
+    foreach ( WP_Block_Type_Registry::get_instance()->get_all_registered() as $block_type ) {
+        if ( strpos( $block_type->name, 'core/' ) !== 0 ) continue;
+
+        foreach ( array_merge( $block_type->style_handles ?? array(), $block_type->view_style_handles ?? array() ) as $handle ) {
+            wp_dequeue_style( $handle );
+        }
+    }
 }
