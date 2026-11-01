@@ -36,7 +36,9 @@ endif;
 
 //HELPER FUNCTION TO GET CSS BUNDLE VERSION
 function picostrap_get_css_version(){ 
-    return(get_theme_mod ('css_bundle_version_number'));
+    $version = get_theme_mod('css_bundle_version_number');
+    // Match WordPress' default version in both the stylesheet and preload URLs.
+    return $version ? $version : get_bloginfo('version');
 }
 
 //ADD THE MAIN CSS FILE
