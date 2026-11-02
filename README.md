@@ -49,10 +49,25 @@ Picostrap 5 leverages the flexibility of Bootstrap 5 (currently v5.3+) and integ
 
 1.  **Installation:** Install like any other WordPress theme. Download the `.zip` file, **RENAME** it to "**picostrap5.zip**" and upload it via the WordPress admin panel (`Appearance > Themes > Add New`) or upload the extracted folder via FTP to `/wp-content/themes/`.
 2.  **Child Theme (Recommended):** For customization beyond the Customizer, it's highly recommended to use a child theme. You can download a starter child theme from the [Picostrap website](https://picostrap.com/#downloads).
+
 3.  **Customize:** Navigate to `Appearance > Customize` in your WordPress admin panel. Explore the various sections (Colors, Typography, Global Options, Buttons, Forms, Navbars, etc.) to tailor the theme to your needs.
 4.  **Compile SASS:**
     *   **Via Customizer:** Make your changes and click "Publish". The SCSS will automatically recompile in your browser, and the new CSS bundle will be saved via AJAX.
     *   **Via Admin Bar:** While viewing the frontend (as an administrator), click the "SASS" icon in the admin bar and choose "Recompile Once" or "Recompile Continuously".
+
+### Updates from GitHub
+
+With WordPress 6.1 or later and Picostrap (or a Picostrap child theme) active, stable GitHub Releases appear in **Dashboard > Updates**. Use **Check again** to refresh the GitHub check immediately. The updater prefers a release asset named `picostrap5.zip`, falling back to the source ZIP of that release's tag. Drafts, prereleases and branch snapshots are excluded.
+
+## Theme options workspace
+
+Open **Appearance > Picostrap Options** for the theme overview, grouped optimization switches, Sass tools, exports and update controls. Settings are shared with the Customizer and require saving. The dark interface is scoped to this admin screen, with no extra frontend assets.
+
+The **CSS lab** previews a conservative reduction of the saved bundle against public homepage HTML without changing settings. Its uncompressed byte calculation includes the inline markup and runtime fallback helper. It is a page-specific preview, not a speed benchmark or a guarantee of transfer savings. The core-script reference sizes separately describe local WordPress files excluded from automatic loading.
+
+The payload inspector also shows **gzip level-6 estimates** for saved CSS and Bootstrap JS. A separate browser-side delivery check reads `Content-Encoding` from public HTML, CSS and JS responses and recognizes gzip, Brotli and Zstandard. Estimates are not actual transferred bytes or evidence that server compression is enabled. Failed, redirected and cross-origin responses are reported as unverified. Configure compression with your host/CDN; the theme does not change server settings.
+
+Contextual help explains measurements, the CSS runtime fallback, deferred Bootstrap JS, and each optimization. Bootstrap uses WordPress's `defer` strategy in the footer, subject to dependency resolution; it is not interaction-triggered lazy loading. A native **Picostrap theme options** dashboard widget introduces the panel and experimental CSS feature to users with theme-editing permissions.
 
 ## How SASS Compilation Works
 
@@ -163,17 +178,15 @@ Included translations for 8 languages:
 
 Picostrap has been tested on **real PHP runtimes**, using isolated WordPress **7.1.4** installations on 2 November 2026:
 
-| PHP runtime | Validation | Details |
-| --- | --- | --- |
-| **8.4.14** | Cleanup, PHP performance audit and WindPress scanner regression checks | [PHP audit](docs/php-performance-audit.md) |
-| **8.6.0 RC4** | 157 assertions passed; WindPress scanner fix validated separately | [PHP 8.6 report](docs/php86-compatibility.md) |
-| **8.7.0-dev**, commit [`f4d80ce83e01`](https://github.com/php/php-src/commit/f4d80ce83e0193a674ce42c4512666cb235128cf) | **195 assertions passed; all 60 PHP files passed native lint** | [PHP 8.7 snapshot report](docs/php87-compatibility.md) |
+| PHP runtime | Validation |
+| --- | --- |
+| **8.4.14** | Cleanup, PHP performance audit and WindPress scanner regression checks |
+| **8.6.0 RC4** | 157 assertions passed; WindPress scanner fix validated separately |
+| **8.7.0-dev**, commit [`f4d80ce83e01`](https://github.com/php/php-src/commit/f4d80ce83e0193a674ce42c4512666cb235128cf) | **195 assertions passed; all 60 PHP files passed native lint** |
 
 The PHP 8.7 snapshot passed the tested frontend, editor, Customizer, REST, theme options, CSS/source-map AJAX save and WindPress provider paths, with **no PHP warnings or deprecations captured from the web requests**. WindPress scanning was verified with both the parent theme and a child theme, including its actual PHP transport. No extra theme changes were needed specifically for that snapshot.
 
 **PHP 8.6 RC4 and PHP 8.7-dev are pre-release test targets.** These results apply to the exact runtimes above, rather than guaranteeing compatibility with future releases or every plugin combination. WP-CLI 2.12.0 emitted a separate deprecation in its bundled color library; it did not originate in the theme. The tests used SQLite, simulated the LiveCanvas `gtblocks` option, and covered the PHP side of compilation; full WooCommerce/LiveCanvas workflows and browser-side Sass/Tailwind compilation were outside their scope.
-
-Repeatable regression tests are included in [`tests/integration/`](tests/integration/). See also the [cleanup audit](docs/performance-audit.md) and [WindPress scanner fix](docs/windpress-scanner-fix.md).
 
 ### WordPress integrations
 

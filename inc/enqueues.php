@@ -139,7 +139,7 @@ function picostrap_get_headers(){
 if(!function_exists('picostrap_hints')):
     function picostrap_hints() {  
         // Feeds, XML sitemaps, robots and trackbacks do not render the bundle.
-        if ( headers_sent() || is_feed() || is_robots() || is_trackback() || get_query_var( 'sitemap' ) || get_query_var( 'sitemap-stylesheet' ) || is_embed() ) return;
+        if ( picostrap_used_css_enabled() || headers_sent() || is_feed() || is_robots() || is_trackback() || get_query_var( 'sitemap' ) || get_query_var( 'sitemap-stylesheet' ) || is_embed() ) return;
 
         // Append, preserving Link headers set by plugins and other core features.
         header( picostrap_get_headers(), false );

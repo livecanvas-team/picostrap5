@@ -774,169 +774,20 @@ function picostrap_theme_customize_register($wp_customize) {
         "priority" => 190,
     ));
 	
-	//DISABLE GUTENBERG
-	$wp_customize->add_setting("disable_gutenberg", array(
-        "default" => "",
-        "transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "disable_gutenberg",
-        array(
-            "label" => __("Disable the Gutenberg Content Editor", 'picostrap5'),
-			"description" => __("Disables the Gutenberg content editor on all post types. De-enqueues its CSS styles as well.", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-    ));
-
-	//DISABLE WIDGETS BLOCK EDITOR
-	$wp_customize->add_setting("disable_widgets_block_editor", array(
-        "default" => "",
-        "transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "disable_widgets_block_editor",
-        array(
-            "label" => __("Disable the Block-based Widgets Editor", 'picostrap5'),
-			"description" => __("Disables the Block-based Widgets Editor and restores the classic widgets editor.", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-    ));
-
-	//DISABLE COMMENTS
-	$wp_customize->add_setting("singlepost_disable_comments", array(
-        "default" => "",
-        "transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "singlepost_disable_comments",
-        array(
-            "label" => __("Disable WordPress Comments", 'picostrap5'),
-			"description" => __("Will completely disable the entire WP comments feature.", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-    ));
-
-	//DISABLE XML-RPC
-	$wp_customize->add_setting("disable_xml_rpc", array(
-        "default" => "",
-        "transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "disable_xml_rpc",
-        array(
-            "label" => __("Disable XML - RPC", 'picostrap5'),
-			"description" => __("Disabling XML-RPC will close one more door that a potential hacker may try to exploit to hack your website.", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-    ));
-
-	//DISABLE LIVERELOAD (no more necessary)
-	/*
-	$wp_customize->add_setting("picostrap_disable_livereload", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "picostrap_disable_livereload",
-        array(
-            "label" => __("Disable  SCSS Autocompile / LiveReload ", 'picostrap5'),
-			"description" => __("If you're not editing the SCSS files, you can check this option. Makes a difference for site admins only.", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-	));
-	*/
-
-	//BACK TO TOP
-	$wp_customize->add_setting("enable_back_to_top", array(
-        "default" => "",
-        "transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "enable_back_to_top",
-        array(
-            "label" => __("Add a 'Back to Top' button to site", 'picostrap5'),
-			"description" => __("Very light implementation. To see the button, you will also need to Publish, exit the Customizer, and scroll down a long page", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-    ));
-
-    //OPEN MENU ON HOVER
-	$wp_customize->add_setting("enable_open_menu_on_hover", array(
-        "default" => "",
-        "transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "enable_open_menu_on_hover",
-        array(
-            "label" => __("Open the main menu on hover", 'picostrap5'),
-			"description" => __("Very light implementation. To see the change, you will also need to Publish, exit the Customizer, and scroll down a long page", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-    ));
-
-	
-	//LIGHTBOX
-	$wp_customize->add_setting("enable_lightbox", array(
-        "default" => "",
-        "transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "enable_lightbox",
-        array(
-            "label" => __("Enable Lightbox", 'picostrap5'),
-			"description" => __("Will lazily add one JS and one CSS file from cdn.jsdelivr.net before closing the BODY of the page, to let you use  <a target='_blank' href='https://github.com/biati-digital/glightbox'>gLightBox</a>: a very lightweight lightbox implementation. <br><br>The lightbox will be triggered on single posts and pages, automatically adding the <b>glightbox</b> class to each IMG in an A element.<br><br>To add the lightbox to other elements arbitrarily, add the <b>glightbox</b> class.<br><br> To prevent the lightbox on a linked image, add the <b>nolightbox</b> class.<br><br>To lightbox all images inside a DIV, add the <b>autolightbox</b> class.", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-	));
-	
-	//TOOLTIPS
-	$wp_customize->add_setting("enable_tooltips", array(
-        "default" => "",
-        "transport" => "postMessage",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "enable_tooltips",
-        array(
-            "label" => __("Enable Tooltips & Popovers", 'picostrap5'),
-			"description" => __("Adds inline <a target='_blank' href='https://getbootstrap.com/docs/5.2/components/tooltips/#enable-tooltips'>two rows of JavaScript</a> to enable Boostrap 5 tooltips and popovers. Publish and exit the Customizer to see the change.", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-	));
-
-
-    //DISABLE BOOTSTRAP
-	$wp_customize->add_setting("disable_bootstrap", array(
-        "default" => "",
-        "transport" => "refresh",
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
-        $wp_customize,
-        "disable_bootstrap",
-        array(
-            "label" => __("Disable Bootstrap", 'picostrap5'),
-			"description" => __("Completely disables the Bootstrap CSS and JS. You'll be responsible for adding your own CSS.", 'picostrap5'),
-            "section" => "extras", 
-            'type'     => 'checkbox',
-			)
-	));
+    // Use one definition and one saved value for both settings screens.
+    foreach ( picostrap_get_extra_settings() as $key => $definition ) {
+        $wp_customize->add_setting( $key, array(
+            'default' => false,
+            'transport' => 'refresh',
+            'sanitize_callback' => 'wp_validate_boolean',
+        ) );
+        $wp_customize->add_control( $key, array(
+            'label' => $definition['label'],
+            'description' => $definition['description'],
+            'section' => 'extras',
+            'type' => 'checkbox',
+        ) );
+    }
 
 
 } //end function

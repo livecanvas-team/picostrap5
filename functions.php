@@ -4,6 +4,9 @@
 defined( 'ABSPATH' ) || exit;
 
 $picostrap_includes = array(
+	'/theme-updates.php',                   // Stable GitHub releases via WordPress updates.
+	'/extra-settings.php',                  // Shared Customizer and backend Extras.
+	'/used-css.php',                        // Experimental page-specific CSS.
 	'/theme-settings.php',                  // Initialize theme default settings.
 	'/setup.php',                           // Theme setup and custom theme supports.
 	'/widgets.php',                         // Register widget area.
@@ -21,7 +24,7 @@ $picostrap_includes = array(
 	'/customizer-assets/customizer.php',	//Defines Customizer options
 	'/picosass-compiler-integration.php',	//To interface the Customizer with the SCSS js compiler
 	//'/scssphp-legacy-compiler-integration.php', //To interface the Customizer with the SCSS php compiler
-	'/options-page.php',                  // Load theme options page. 
+	'/options-page/options-page.php',     // Load theme options page.
 	'/content-filtering.php',				//for LC compatibility when shutting down plugin
     '/windpress-support.php',               //for deep integration with the WindPress plugin, for optional use of TailWind
 	'/livecanvas-config.php'				//for deep integration with the LiveCanvas plugi, setup LC configuration	
@@ -59,4 +62,3 @@ if (get_theme_mod("disable_widgets_block_editor") ) require_once locate_template
 	
 //OPTIONAL: DISABLE XML/RPC
 if (get_theme_mod("disable_xml_rpc") ) require_once locate_template('/inc/opt-in/disable-xml-rpc.php');
-	
