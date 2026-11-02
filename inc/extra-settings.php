@@ -38,7 +38,7 @@ function picostrap_get_extra_settings() {
         ),
         'disable_bootstrap' => array(
             'label' => __( "Disable Bootstrap", 'picostrap5' ),
-            'description' => __( "Completely disables the Bootstrap CSS and JS. You'll be responsible for adding your own CSS.", 'picostrap5' ),
+            'description' => __( "Advanced option: enable only if you know what you are doing. Removes the entire theme CSS bundle, including Bootstrap, NinjaBootstrap and custom Sass styles, as well as Bootstrap JavaScript. You must add your own CSS to style the site and provide replacement JavaScript for any Bootstrap interactions you still need.", 'picostrap5' ),
         ),
         'picostrap_inline_css' => array(
             'label' => __( 'Page-specific CSS — remove the bundle CSS request and serve page-specific styles directly inline.', 'picostrap5' ),

@@ -54,7 +54,7 @@ Consult the [NinjaBootstrap utility reference](https://bootstrap.ninja/ninjaboot
 ## Getting started
 
 1. **Install Picostrap.** In **Appearance > Themes > Add New > Upload Theme**, upload the theme ZIP. The theme directory should be named `picostrap5`; when using a GitHub source archive, rename its extracted top-level directory before uploading it by FTP or creating an installation ZIP.
-2. **Activate a child theme for project code.** Download a starter from the [Picostrap downloads page](https://picostrap.com/#downloads). Keep PHP, template and Sass changes in the child theme so parent-theme updates do not overwrite them.
+2. **Activate a child theme for project code.** Use **Design & Sass > Install starter child theme** to install the latest stable tagged release of [Picostrap Child Base](https://github.com/livecanvas-team/picostrap5-child-base/releases) through WordPress. Activation is a separate step. An existing starter installation is preserved and can be reviewed in Themes. Keep PHP, template and Sass changes in the child theme so parent-theme updates do not overwrite them.
 3. **Open Appearance > Picostrap Options.** Review the theme overview, saved asset sizes and available settings.
 4. **Customize the design.** Open **Appearance > Customize** to change colors, typography, Bootstrap variables and layout options. Publish your changes to save the settings and compiled CSS.
 5. **Recompile after editing Sass files.** Use **Design & Sass > Recompile CSS** in Picostrap Options, or the frontend compiler controls in the admin toolbar.
@@ -64,7 +64,7 @@ Compilation needs an administrator session, JavaScript, network access to the br
 
 ## The theme options workspace
 
-The panel lives at **Appearance > Picostrap Options**. Its styles and scripts load only on that admin screen.
+Find **Picostrap Options** as the first item in **Appearance**. Its styles and scripts load only on that admin screen.
 
 | Section | What you can do |
 | --- | --- |
@@ -159,7 +159,7 @@ The shared **Optimizations / Global Utilities** controls include:
 - Disable the block-based widgets editor.
 - Disable WordPress comments.
 - Disable XML-RPC.
-- Disable Bootstrap, removing the theme CSS bundle and Bootstrap JS. Supply your own styles and interactions if you use this option.
+- Disable Bootstrap. **Enable only if you know what you are doing:** this removes the entire theme CSS bundle (including Bootstrap, NinjaBootstrap and custom Sass styles) and Bootstrap JavaScript. You must add your own CSS and replace any Bootstrap interactions your site needs.
 - Enable the back-to-top button, desktop hover menus, lightbox, and Bootstrap tooltips/popovers.
 - Enable experimental page-specific CSS.
 

@@ -13,6 +13,8 @@
     --pico-on-accent: #fff;
     --pico-code-bg: #e9ecef;
     --pico-warning: #855500;
+    --pico-warning-bg: #fcf4df;
+    --pico-error: #b32d2e;
     --pico-success-bg: #edfaef;
     --pico-success-line: #85b995;
     --pico-switch-bg: #8c8f94;
@@ -49,7 +51,7 @@
 .pico-options .pico-help { font-size: 12px; line-height: 1.65; }
 .pico-brandbar { background: var(--pico-surface); border-top: 1px solid var(--pico-line); display: flex; align-items: center; gap: 18px; padding: 22px 28px; border-bottom: 1px solid var(--pico-line); }
 .pico-brandbar img { width: 145px; height: auto; flex-shrink: 0; }
-.pico-options .pico-brandbar h1 { font-size: 14px; font-weight: 450; letter-spacing: 0; color: var(--pico-muted); padding: 0 0 0 18px; border-left: 1px solid var(--pico-line); }
+.pico-options .pico-brandbar h1 { font-size: 18px; font-weight: 600; letter-spacing: 0; color: var(--pico-text); padding: 0 0 0 18px; border-left: 1px solid var(--pico-line); }
 .pico-version { color: var(--pico-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
 .pico-site-link { margin-left: auto; text-decoration: none; font-size: 13px; white-space: nowrap; }
 .pico-site-link span { margin-left: 6px; }
@@ -60,7 +62,7 @@
 .pico-tabs a[aria-selected=true]::after { background: var(--pico-accent); }
 .pico-tabs a:focus-visible { outline-offset: -5px; }
 .pico-tabs a > span { padding: 1px 7px; background: var(--pico-raised); border-radius: 4px; font-size: 11px; font-variant-numeric: tabular-nums; }
-.pico-tabpanel { padding: 30px 0; scroll-margin-top: 60px; }
+.pico-tabpanel { padding: 30px 24px; scroll-margin-top: 60px; }
 .pico-overview-hero { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(280px,.85fr); gap: 40px; align-items: center; padding: 0 0 30px; }
 .pico-overview-hero h2 { max-width: 24ch; font-size: 30px; line-height: 1.25; margin-bottom: 18px; }
 .pico-overview-hero > div > p { max-width: 53ch; }
@@ -89,8 +91,8 @@
 .pico-panel { min-width: 0; padding: 24px; border: 1px solid var(--pico-line); border-radius: 4px; background: var(--pico-surface); }
 .pico-section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
 .pico-section-heading h3 { max-width: 24ch; }
-.pico-badge { display: inline-block; padding: 3px 8px; border: 1px solid var(--pico-line); color: var(--pico-muted); border-radius: 5px; font-size: 10px; font-weight: 600; white-space: nowrap; line-height: 1.5; vertical-align: middle; }
-.pico-experimental { border-color: var(--pico-line); color: var(--pico-secondary); }
+.pico-badge { display: inline-block; padding: 3px 8px; border: 1px solid var(--pico-line); color: var(--pico-muted); border-radius: 3px; font-size: 12px; font-weight: 600; white-space: nowrap; line-height: 1.5; vertical-align: middle; }
+.pico-experimental { padding: 2px 9px; border: 0; border-radius: 999px; background: var(--pico-warning-bg); color: var(--pico-warning); font-size: 11px; font-weight: 500; cursor: default; }
 .pico-panel > p { font-size: 13px; margin-bottom: 22px; }
 .pico-feature { border-top: 1px solid var(--pico-line); }
 .pico-options summary { cursor: pointer; list-style: none; }
@@ -109,10 +111,10 @@
 .pico-lab { background: var(--pico-surface); }
 .pico-lab .pico-button { width: 100%; margin: 0 0 12px; }
 .pico-lab .pico-lab-status { margin-bottom: 0; min-height: 2em; }
-.pico-lab-status[data-error=true] { color: var(--pico-secondary); }
+.pico-options .pico-lab-status[data-error=true] { color: var(--pico-error); }
 .pico-lab-result { margin: 20px 0; }
 .pico-result-value { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 15px; }
-.pico-result-value strong { font-size: 32px; letter-spacing: -.025em; color: var(--pico-accent); font-variant-numeric: tabular-nums; }
+.pico-result-value strong { font-size: 32px; letter-spacing: -.025em; color: var(--pico-text); font-variant-numeric: tabular-nums; }
 .pico-result-value span { color: var(--pico-muted); font-size: 12px; }
 .pico-comparison { height: 7px; background: var(--pico-line); margin-top: 16px; border-radius: 3px; overflow: hidden; }
 .pico-comparison span { display: block; height: 100%; background: var(--pico-accent); transition: width 250ms ease-out; }
@@ -131,7 +133,7 @@
 .pico-setting:last-child { border-radius: 0 0 4px 4px; border-bottom: 0; }
 .pico-setting-copy { max-width: 800px; min-width: 0; }
 .pico-setting label { display: inline-block; font-size: 14px; font-weight: 600; color: var(--pico-text); cursor: pointer; }
-.pico-setting label .pico-badge { margin-left: 8px; }
+.pico-setting-copy > .pico-badge { margin-left: 8px; }
 .pico-setting-copy > p { margin-top: 6px; font-size: 13px; max-width: 70ch; }
 .pico-setting-details { margin-top: 10px; }
 .pico-setting-details summary { display: inline-block; font-size: 12px; color: var(--pico-muted); text-decoration: underline; text-underline-offset: 3px; }
@@ -152,14 +154,28 @@
 .pico-feedback { padding: 15px 18px; margin-bottom: 24px !important; border: 1px solid var(--pico-success-line); background: var(--pico-success-bg); border-radius: 7px; color: var(--pico-green) !important; }
 .pico-build-info { background: var(--pico-surface); padding: 20px 24px; border-radius: 4px; margin-bottom: 32px; }
 .pico-build-info .pico-help { margin-top: 12px; }
-.pico-sass-section { padding: 28px 0; border-top: 1px solid var(--pico-line); }
+.pico-sass-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; margin: 0 0 32px; }
+.pico-sass-section { min-width: 0; padding: 26px; border: 1px solid var(--pico-line); border-radius: 8px; background: var(--pico-surface); }
+.pico-sass-art { display: grid; place-items: center; margin: -2px 0 24px; padding: 8px; border-radius: 5px; background: var(--pico-raised); }
+.pico-sass-art svg { display: block; width: 100%; max-width: 360px; height: auto; }
+.pico-sass-art .pico-art-surface { fill: var(--pico-surface); stroke: var(--pico-line); stroke-width: 1.5; }
+.pico-sass-art .pico-art-line { stroke: var(--pico-line); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pico-sass-art .pico-art-accent, .pico-sass-art .pico-art-secondary { stroke: var(--pico-accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pico-sass-art .pico-art-secondary { stroke: var(--pico-secondary); }
+.pico-sass-art .pico-art-dot { fill: var(--pico-line); }
+.pico-sass-art .pico-art-knob { fill: var(--pico-surface); stroke: var(--pico-accent); stroke-width: 2; }
+.pico-sass-art .pico-art-label { fill: var(--pico-muted); font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.pico-sass-art .pico-art-output { fill: var(--pico-accent); font: 600 14px ui-monospace, monospace; }
+.pico-sass-section .pico-details pre { max-height: 280px; margin-bottom: 16px; padding: 16px; border-radius: 4px; }
+@media (max-width: 1100px) { .pico-sass-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 720px) { .pico-sass-section { padding: 20px; } .pico-sass-art { margin-bottom: 20px; } }
 .pico-sass-section h2 { font-size: 21px; margin-bottom: 12px; }
 .pico-file-guide { margin: 20px 0; }
 .pico-file-guide > div + div { margin-top: 18px; }
 .pico-file-guide dd { color: var(--pico-muted); margin-top: 8px; font-size: 13px; max-width: 70ch; }
 .pico-pipeline { margin: 24px 0 24px 24px !important; }
 .pico-pipeline li { padding-left: 8px; margin-bottom: 18px; }
-.pico-pipeline li::marker { color: var(--pico-accent); }
+.pico-pipeline li::marker { color: var(--pico-muted); }
 .pico-pipeline p { margin-top: 4px; font-size: 13px; }
 .pico-details { border-top: 1px solid var(--pico-line); }
 .pico-details summary { padding: 18px 0; font-weight: 550; font-size: 13px; }
@@ -179,7 +195,7 @@
 .pico-footer a { text-decoration: none; }
 /* Notices generated by plugins remain recognizable inside this screen. */
 .pico-options .notice { color-scheme: light; }
-@media (min-width: 1600px) { .pico-tabpanel { padding: 36px 0; } .pico-brandbar, .pico-footer { padding-left: 44px; padding-right: 44px; } .pico-tabs { padding: 0 44px; } }
+@media (min-width: 1600px) { .pico-tabpanel { padding: 36px 28px; } .pico-brandbar, .pico-footer { padding-left: 44px; padding-right: 44px; } .pico-tabs { padding: 0 44px; } }
 @media (max-width: 1120px) {
     .pico-overview-hero { gap: 28px; grid-template-columns: minmax(0,1fr) minmax(240px,.8fr); }
     .pico-overview-hero h2 { font-size: 28px; }
@@ -196,7 +212,7 @@
     .pico-brandbar, .pico-footer { padding-left: 16px; padding-right: 16px; }
     .pico-tabs { padding: 0 20px; gap: 22px; }
     .pico-tabs a { min-height: 54px; font-size: 13px; }
-    .pico-tabpanel { padding-top: 28px; }
+    .pico-tabpanel { padding: 28px 16px; }
     .pico-overview-hero { grid-template-columns: minmax(0,1fr); gap: 26px; padding-bottom: 26px; }
     .pico-overview-hero h2 { font-size: 26px; max-width: 24ch; }
     .pico-payload { padding: 22px 0 0; border-left: 0; border-top: 1px solid var(--pico-line); }
@@ -224,12 +240,12 @@
 .pico-payload-table { width: 100%; margin: 18px 0; border-collapse: collapse; font-size: 12px; }
 .pico-payload-table th, .pico-payload-table td { padding: 12px 0; border-bottom: 1px solid var(--pico-line); vertical-align: top; text-align: right; }
 .pico-payload-table th:first-child { text-align: left; }
-.pico-payload-table thead th { color: var(--pico-muted); font-size: 11px; font-weight: 450; }
+.pico-payload-table thead th { color: var(--pico-muted); font-size: 12px; font-weight: 500; }
 .pico-payload-table tbody th { font-weight: 500; padding-right: 12px; }
 .pico-payload-table td { font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; }
-.pico-asset-strategy { display: block; margin: 5px 0 0 15px; color: var(--pico-muted); font-size: 11px; }
+.pico-asset-strategy { display: block; margin: 5px 0 0 15px; color: var(--pico-muted); font-size: 12px; }
 .pico-help-control { display: inline; vertical-align: middle; }
-.pico-options .pico-help-button { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; margin: -3px 0 -3px 4px; padding: 4px; border: 0; border-radius: 50%; background: transparent; color: var(--pico-muted); cursor: pointer; vertical-align: middle; }
+.pico-options .pico-help-button { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin: -6px 0 -6px 4px; padding: 4px; border: 0; border-radius: 50%; background: transparent; color: var(--pico-muted); cursor: pointer; vertical-align: middle; }
 .pico-options .pico-help-button:hover { background: var(--pico-raised); color: var(--pico-accent); }
 .pico-options .pico-tooltip { width: min(340px, calc(100vw - 24px)); max-height: calc(100vh - 24px); padding: 18px; border: 1px solid var(--pico-line); border-radius: 4px; background: var(--pico-surface); color: var(--pico-text); font-size: 13px; font-weight: 400; line-height: 1.7; text-align: left; white-space: normal; overflow: auto; box-sizing: border-box; }
 .pico-options .pico-tooltip[popover] { position: fixed; inset: auto; margin: 0; }
@@ -284,7 +300,7 @@
 .pico-resource-group { margin: 32px 0; }
 .pico-resource-group > h3 { padding-bottom: 18px; }
 .pico-resource-row { display: grid; grid-template-columns: minmax(160px,.75fr) minmax(240px,2fr) auto; gap: 28px; padding: 26px 0; border-top: 1px solid var(--pico-line); align-items: start; }
-.pico-resource-purpose { display: block; margin-top: 7px; color: var(--pico-accent); font-size: 12px; }
+.pico-resource-purpose { display: block; margin-top: 7px; color: var(--pico-muted); font-size: 12px; line-height: 1.5; }
 .pico-resource-row p { font-size: 13px; max-width: 75ch; }
 .pico-resource-row .pico-resource-opinion { margin-top: 9px; color: var(--pico-text); }
 .pico-resource-row .pico-button { max-width: 240px; text-align: center; }
@@ -295,7 +311,7 @@
 .pico-companion-hero p + p { margin-top: 16px; }
 .pico-companion-hero .pico-companion-license { font-size: 12px; margin-top: 22px; }
 .pico-companion-code { min-width: 0; padding: 28px; background: var(--pico-surface); border: 1px solid var(--pico-line); border-radius: 4px; }
-.pico-companion-code > p:first-child { color: var(--pico-accent); font-weight: 600; }
+.pico-companion-code > p:first-child { color: var(--pico-text); font-weight: 600; }
 .pico-companion-code pre { overflow: auto; padding: 24px 0; margin: 0; font-size: 12px; line-height: 1.9; color: var(--pico-text); }
 .pico-companion-code pre code { padding: 0; background: transparent; color: inherit; font-size: inherit; }
 .pico-companion-benefits { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 32px; margin: 16px 0 38px; }
@@ -320,6 +336,8 @@ html[data-pico-options-theme="dark"] .pico-options {
     --pico-on-accent: #1d2327;
     --pico-code-bg: #343e46;
     --pico-warning: #f0c777;
+    --pico-warning-bg: #3d3424;
+    --pico-error: #ffb4ab;
     --pico-success-bg: #253b30;
     --pico-success-line: #557d62;
     --pico-switch-bg: #667782;
@@ -372,3 +390,46 @@ html[data-pico-options-theme="dark"] .pico-options {
     .pico-design-actions { grid-template-columns: minmax(0, 1fr); gap: 24px; }
     .pico-options .pico-design-button { min-height: 72px; padding: 18px 16px; font-size: 16px; }
 }
+
+/* Make descriptive content distinct from navigation and actions. */
+.pico-options a:not(.pico-button):not([role="tab"]):hover { text-decoration: underline; }
+.pico-options .pico-button:active { border-color: var(--pico-accent); transform: translateY(1px); }
+.pico-options .pico-button[aria-disabled=true]:hover { background: var(--pico-surface); border-color: var(--pico-line); color: var(--pico-text); transform: none; }
+.pico-options summary { min-height: 44px; }
+.pico-theme-toggle { min-height: 44px; }
+.pico-options .pico-resource-purpose { cursor: default; }
+.pico-tabs { position: relative; }
+@media (pointer: coarse) {
+    .pico-options .pico-button { min-height: 44px; }
+    .pico-options .pico-design-button { min-height: 72px; }
+    .pico-options .pico-help-button { width: 44px; height: 44px; margin: 0 0 0 2px; }
+    .pico-setting label { min-height: 44px; align-content: center; }
+    .pico-tabs a { min-height: 54px; }
+}
+@media (forced-colors: active) {
+    .pico-theme-toggle input.pico-switch { appearance: auto; -webkit-appearance: auto; }
+    .pico-theme-toggle input.pico-switch::before { content: none; }
+}
+
+.pico-child-install { margin: 18px 0 22px; }
+.pico-child-install .pico-button svg { flex-shrink: 0; }
+.pico-child-install .pico-help { margin-top: 10px; }
+.pico-sass-section > .pico-actions { margin: 18px 0 12px; }
+
+/* Keep the Sass guide scannable; examples and diagnostics open on demand. */
+.pico-sass-section .pico-doc-state { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--pico-line); font-size: 13px; }
+.pico-sass-section .pico-doc-next { margin: 0 0 22px; font-size: 13px; }
+.pico-sass-section .pico-doc-next strong { color: var(--pico-text); }
+.pico-doc-content { padding: 0 0 20px; }
+.pico-doc-content > p + p { margin-top: 14px; }
+.pico-doc-content > p { margin-bottom: 14px; font-size: 13px; }
+.pico-doc-content > p:last-child { margin-bottom: 0; }
+.pico-doc-content h3 { margin: 18px 0 10px; font-size: 15px; }
+.pico-doc-content h3:first-child { margin-top: 0; }
+.pico-doc-content .pico-file-guide { margin-top: 0; }
+.pico-doc-content .pico-file-guide dt { font-size: 13px; font-weight: 600; }
+.pico-doc-order, .pico-doc-checks { margin: 0 0 18px 20px !important; }
+.pico-doc-order { list-style: decimal; }
+.pico-doc-checks { list-style: disc; }
+.pico-doc-order li, .pico-doc-checks li { margin-bottom: 12px; padding-left: 4px; color: var(--pico-muted); font-size: 13px; line-height: 1.7; }
+.pico-doc-order code { overflow-wrap: anywhere; }

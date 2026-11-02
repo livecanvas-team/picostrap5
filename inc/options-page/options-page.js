@@ -31,6 +31,9 @@
     // Native top-layer popovers stay clear of clipped panels and narrow viewports.
     root.querySelectorAll('.pico-help-button').forEach(button => {
         const bubble = document.getElementById(button.getAttribute('popovertarget'));
+        if (!bubble) return;
+        button.setAttribute('aria-controls', bubble.id);
+        button.setAttribute('aria-expanded', 'false');
         const place = () => {
             const rect = button.getBoundingClientRect();
             const width = bubble.getBoundingClientRect().width;
@@ -40,7 +43,10 @@
             bubble.style.top = `${Math.max(12, below + height <= window.innerHeight - 12 ? below : rect.top - height - 10)}px`;
         };
         if (typeof bubble.showPopover === 'function') {
-            bubble.addEventListener('toggle', event => { if (event.newState === 'open') place(); });
+            bubble.addEventListener('toggle', event => {
+                button.setAttribute('aria-expanded', String(event.newState === 'open'));
+                if (event.newState === 'open') place();
+            });
             window.addEventListener('resize', () => { if (bubble.matches(':popover-open')) place(); });
             document.addEventListener('scroll', event => {
                 if (!bubble.contains(event.target) && bubble.matches(':popover-open')) bubble.hidePopover();
@@ -142,9 +148,10 @@
             panels[index].hidden = index !== current;
         });
         tabs[current].scrollIntoView?.({block: 'nearest', inline: 'nearest'});
-        if (focus) tabs[current].focus();
+        if (focus) tabs[current].focus({preventScroll: true});
     };
     const navigate = (id, focus = false) => {
+        if (!panels.some(panel => panel.id === id)) return;
         activate(id, focus);
         history.replaceState(null, '', `#${id}`);
     };
