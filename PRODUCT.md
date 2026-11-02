@@ -16,7 +16,7 @@ The panel lives inside WordPress admin. Preserve native navigation, permissions,
 
 ## Brand Commitments
 
-The requested options redesign is dark, modern, slightly cyberpunk, imaginative but concrete and clearly organized. Use the Picostrap logo and picostrap.com as visual references. Keep this treatment scoped to the options panel.
+The options panel defaults to a clean, light WordPress admin appearance: white surfaces, neutral borders, compact controls and restrained blue accents. Preserve the Picostrap logo as the brand detail. Provide an optional dark mode, remembered in the browser and scoped to the options panel. Keep WordPress navigation and global admin styling native.
 
 ## Evidence on Hand
 

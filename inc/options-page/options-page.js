@@ -3,6 +3,29 @@
     'use strict';
     const root = document.getElementById('pico-options');
     if (!root) return;
+    const themeToggle = document.getElementById('pico-theme-toggle');
+    const themeControl = document.getElementById('pico-theme-control');
+    if (themeToggle && themeControl) {
+        let theme = 'light';
+        try { theme = localStorage.getItem('picostrap-options-theme') === 'dark' ? 'dark' : 'light'; } catch {}
+        const applyTheme = value => {
+            document.documentElement.dataset.picoOptionsTheme = value;
+            themeToggle.checked = value === 'dark';
+        };
+        applyTheme(theme);
+        themeControl.hidden = false;
+        themeToggle.addEventListener('change', () => {
+            const value = themeToggle.checked ? 'dark' : 'light';
+            applyTheme(value);
+            try { localStorage.setItem('picostrap-options-theme', value); } catch {}
+        });
+        window.addEventListener('storage', event => {
+            if (event.key === 'picostrap-options-theme' || event.key === null) {
+                applyTheme(event.newValue === 'dark' ? 'dark' : 'light');
+            }
+        });
+    }
+
     const config = window.picoOptions;
     if (!config) return;
     // Native top-layer popovers stay clear of clipped panels and narrow viewports.

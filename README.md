@@ -1,232 +1,245 @@
-# Picostrap 5 - Bootstrap 5 WordPress Starter Theme
+# Picostrap 5 — WordPress, Bootstrap and NinjaBootstrap
 
 [![License: GPL v2 or later](https://img.shields.io/badge/License-GPL%20v2%20or%20later-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
-
-
 <p align="center">
-  <img src="https://picostrap.com/wp-content/uploads/2025/03/picostrap5-logo.svg" alt="Picostrap 5 Logo" width="300">
+  <img src="inc/options-page/assets/picostrap-logo.svg" alt="Picostrap" width="300">
 </p>
 
-**The fastest Bootstrap 5 WordPress starter theme. Experience the power of SASS merged with the WordPress Customizer.**
+**A WordPress starter theme with Bootstrap, NinjaBootstrap and Sass compilation directly in your browser.**
 
-Picostrap 5 leverages the flexibility of Bootstrap 5 (currently v5.3+) and integrates it deeply with the WordPress Customizer. Customize Bootstrap's look and feel directly from your WordPress backend, and Picostrap will recompile the necessary CSS on the fly using a built-in SASS compiler that runs right in your browser.
+Picostrap connects the WordPress Customizer to [Bootstrap 5](https://getbootstrap.com/docs/5.3/) and includes [NinjaBootstrap](https://bootstrap.ninja/ninjabootstrap/) for additional utilities and framework defaults. Set colors, typography and component variables, then compile your design with PicoSASS. No local Node.js installation or build process is needed for this workflow.
 
-**[Watch the introduction video](https://youtu.be/nrHFh_08w78) to get started!**
-**[Visit the Picostrap website](https://picostrap.com)**
+Use Picostrap on its own, extend it with a child theme, or pair it with LiveCanvas. The options panel brings theme settings, asset measurements, Sass tools and update controls into WordPress admin.
 
-## Key Features
+[Picostrap website](https://picostrap.com/) · [Documentation](https://picostrap.com/docs/) · [Introduction video](https://youtu.be/nrHFh_08w78) · [GitHub releases](https://github.com/livecanvas-team/picostrap5/releases)
 
-*   **Bootstrap 5.3+ Integration:** Built on the latest stable version of the world's most popular front-end framework.
-*   **Turbocharged by NinjaBootstrap** Bootstrap Configuration & Additional Utility Classes. This helps you make the most out of Bootstrap, enabling responsive variations of utility classes you DO need, eg position-lg-absolute - check out https://bootstrap.ninja/ninjabootstrap/ 
-*   **Live SASS Compilation:** Modify Bootstrap SCSS variables (colors, fonts, spacing, components, etc.) directly through the WordPress Customizer. Picostrap uses **PicoSASS** (an implementation of Dart SASS running in the browser via JSPM) to recompile your CSS instantly upon hitting "Publish" or via a manual trigger in the admin bar.
-*   **Single CSS Bundle:** Generates a single, minified `css-output/bundle.css` file for optimal performance.
-*   **Extensive Customizer Options:**
-    *   Control Bootstrap SCSS variables.
-    *   **AI Palette Generator:** Generate color palettes using AI (powered by Huemint API).
-    *   **Live Style Guide Preview:** See your changes reflected in a comprehensive style guide directly within the Customizer preview.
-    *   **Font Picker:** Choose Google Fonts easily with a built-in font picker.
-    *   Layout options (Navbar position, expansion, etc.).
-    *   Toggle various theme features on/off.
-*   **Opt-in Features:** Keep your site lean by enabling only the features you need:
-    *   Disable Gutenberg Editor (and its CSS)
-    *   Disable Block-based Widgets Editor
-    *   Disable WordPress Comments
-    *   Disable XML-RPC
-    *   Add a "Back to Top" button
-    *   Enable GLightbox for image lightboxes
-    *   Enable Bootstrap Tooltips & Popovers
-    *   Enable Page Scroll Detection (adds body classes `scroll-position-at-top` / `scroll-position-not-at-top`)
-    *   Open Main Menu on Hover (for non-touch devices)
-*   **Performance Focused:** Includes head cleanup (`clean-head.php`) to remove unnecessary WordPress meta tags, emoji scripts, etc.
-*   **Dark Mode Switch:** Optional Bootstrap 5-compatible dark mode toggle.
-*   **WooCommerce Ready:** Includes basic support and template overrides for WooCommerce integration.
-*   **LiveCanvas & WindPress Friendly:** Designed to work well with the LiveCanvas page builder and WindPress Tailwind CSS integration plugins.
-*   **Developer Friendly:** Clean codebase, standard WordPress practices, starter theme philosophy. Uses a Bootstrap 5 Navwalker.
-*   **Translation Ready:** Includes language files (`.pot`, `.po`) for easy translation.
+## What is included
 
-## Getting Started
+- **Bootstrap 5.3:** responsive layouts, components, forms, utilities and color modes. The bundled Bootstrap JavaScript identifies itself as **5.3.7**; the bundled files determine the version used by the theme.
+- **NinjaBootstrap:** Sass defaults and utility extensions compiled into the theme stylesheet, including extended spacing, responsive positioning, sizing, borders, letter spacing and color shades.
+- **PicoSASS:** browser-based Dart Sass compilation, Customizer previews, manual recompilation and continuous recompilation while working on Sass files.
+- **WordPress Customizer:** colors, typography, Bootstrap variables, navigation, layouts, a live style guide and an AI palette generator.
+- **Theme options:** a light WordPress-style workspace with an optional, browser-persisted dark mode, shared optimization switches and contextual help.
+- **Performance tools:** saved asset sizes, gzip estimates, an HTTP compression check and a CSS reduction preview.
+- **Optional frontend features:** lightbox, back-to-top button, hover menus, Bootstrap tooltips/popovers and a visitor-facing dark-mode switch.
+- **WordPress integrations:** navigation menus, widget areas, page templates, WooCommerce support, LiveCanvas integration and a WindPress source provider.
+- **GitHub updates:** stable parent-theme releases delivered through the native WordPress updater.
+- **Translations:** a translation template and language files for German, Spanish, Estonian, French, Italian, Dutch, Portuguese and Romanian. New interface strings may require updated translations.
 
-1.  **Installation:** Install like any other WordPress theme. Download the `.zip` file, **RENAME** it to "**picostrap5.zip**" and upload it via the WordPress admin panel (`Appearance > Themes > Add New`) or upload the extracted folder via FTP to `/wp-content/themes/`.
-2.  **Child Theme (Recommended):** For customization beyond the Customizer, it's highly recommended to use a child theme. You can download a starter child theme from the [Picostrap website](https://picostrap.com/#downloads).
+## Bootstrap and NinjaBootstrap
 
-3.  **Customize:** Navigate to `Appearance > Customize` in your WordPress admin panel. Explore the various sections (Colors, Typography, Global Options, Buttons, Forms, Navbars, etc.) to tailor the theme to your needs.
-4.  **Compile SASS:**
-    *   **Via Customizer:** Make your changes and click "Publish". The SCSS will automatically recompile in your browser, and the new CSS bundle will be saved via AJAX.
-    *   **Via Admin Bar:** While viewing the frontend (as an administrator), click the "SASS" icon in the admin bar and choose "Recompile Once" or "Recompile Continuously".
+### Bootstrap: the foundation
 
-### Updates from GitHub
+[Bootstrap](https://getbootstrap.com/) supplies the grid, breakpoints, components, forms, helpers and core utility API. Picostrap includes its Sass sources in [`sass/bootstrap5/`](sass/bootstrap5/) and its JavaScript bundle in [`js/bootstrap.bundle.min.js`](js/bootstrap.bundle.min.js).
 
-With WordPress 6.1 or later and Picostrap (or a Picostrap child theme) active, stable GitHub Releases appear in **Dashboard > Updates**. Use **Check again** to refresh the GitHub check immediately. The updater prefers a release asset named `picostrap5.zip`, falling back to the source ZIP of that release's tag. Drafts, prereleases and branch snapshots are excluded.
+Use the [Bootstrap 5.3 documentation](https://getbootstrap.com/docs/5.3/) for standard classes and component markup, and the [Bootstrap Sass guide](https://getbootstrap.com/docs/5.3/customize/sass/) for variables, maps, mixins and import dependencies. Bootstrap JavaScript is enqueued in the footer using WordPress's `defer` strategy, subject to WordPress dependency resolution.
 
-## Theme options workspace
+### NinjaBootstrap: more utilities in the same build
 
-Open **Appearance > Picostrap Options** for the theme overview, grouped optimization switches, Sass tools, exports and update controls. Settings are shared with the Customizer and require saving. The dark interface is scoped to this admin screen, with no extra frontend assets.
+[NinjaBootstrap](https://bootstrap.ninja/ninjabootstrap/) configures and extends Bootstrap through Sass. It is already included in Picostrap: no separate plugin, npm installation or additional framework stylesheet is needed.
 
-The **CSS lab** previews a conservative reduction of the saved bundle against public homepage HTML without changing settings. Its uncompressed byte calculation includes the inline markup and runtime fallback helper. It is a page-specific preview, not a speed benchmark or a guarantee of transfer savings. The core-script reference sizes separately describe local WordPress files excluded from automatic loading.
+The included [`sass/ninjabootstrap/`](sass/ninjabootstrap/) sources extend the framework with:
 
-The payload inspector also shows **gzip level-6 estimates** for saved CSS and Bootstrap JS. A separate browser-side delivery check reads `Content-Encoding` from public HTML, CSS and JS responses and recognizes gzip, Brotli and Zstandard. Estimates are not actual transferred bytes or evidence that server compression is enabled. Failed, redirected and cross-origin responses are reported as unverified. Configure compression with your host/CDN; the theme does not change server settings.
+- Spacing steps through `10`, plus negative margins.
+- Responsive positioning and additional positional values.
+- Extended width and height utilities.
+- Responsive border utilities and letter-spacing classes.
+- Additional theme-color shades and color utility collections.
 
-Contextual help explains measurements, the CSS runtime fallback, deferred Bootstrap JS, and each optimization. Bootstrap uses WordPress's `defer` strategy in the footer, subject to dependency resolution; it is not interaction-triggered lazy loading. A native **Picostrap theme options** dashboard widget introduces the panel and experimental CSS feature to users with theme-editing permissions.
+For example, `position-relative position-lg-absolute` changes positioning at the large breakpoint, while `mt-3 mt-lg-7` applies a larger top margin on large screens. These utilities are generated with the rest of the theme CSS.
 
-## How SASS Compilation Works
+Consult the [NinjaBootstrap utility reference](https://bootstrap.ninja/ninjabootstrap/) for examples and syntax. The sources shipped with your installed theme remain the authority for available classes, especially if you customize the Sass imports.
 
-1.  **Customizer Changes:** When you modify SCSS variables in the Customizer, the values are saved as theme mods.
-2.  **PicoSASS Trigger:** When you publish changes or use the admin bar trigger, the `picosass.js` script is loaded.
-3.  **SCSS Generation:** JavaScript reads the SCSS theme mods, constructs the SASS code (variables + `@import 'main';`), and passes it to the Dart SASS compiler running in the browser.
-4.  **Compilation:** PicoSASS fetches necessary Bootstrap SCSS files (from the theme folder, potentially falling back to the parent theme if using a child theme) and compiles the final CSS.
-5.  **Live Preview:** The compiled CSS is injected into the Customizer preview iframe (or the main page if using the admin bar trigger) via a `<style id="picosass-injected-style">` tag.
-6.  **Saving:** After compilation (and Customizer save, or manual trigger completion), the compiled CSS is sent via AJAX to a WordPress action (`picostrap_save_css_bundle`) which saves it to `/wp-content/themes/(your-theme)/css-output/bundle.css`. The theme mod `css_bundle_version_number` is incremented to ensure cache busting.
+## Getting started
 
-*Note: SASS compilation requires administrator privileges and happens in the administrator's browser.*
+1. **Install Picostrap.** In **Appearance > Themes > Add New > Upload Theme**, upload the theme ZIP. The theme directory should be named `picostrap5`; when using a GitHub source archive, rename its extracted top-level directory before uploading it by FTP or creating an installation ZIP.
+2. **Activate a child theme for project code.** Download a starter from the [Picostrap downloads page](https://picostrap.com/#downloads). Keep PHP, template and Sass changes in the child theme so parent-theme updates do not overwrite them.
+3. **Open Appearance > Picostrap Options.** Review the theme overview, saved asset sizes and available settings.
+4. **Customize the design.** Open **Appearance > Customize** to change colors, typography, Bootstrap variables and layout options. Publish your changes to save the settings and compiled CSS.
+5. **Recompile after editing Sass files.** Use **Design & Sass > Recompile CSS** in Picostrap Options, or the frontend compiler controls in the admin toolbar.
+6. **Check the result.** Review desktop and mobile layouts and interactive components. Clear any page cache after changing settings or rebuilding styles.
 
-## Theme Structure
+Compilation needs an administrator session, JavaScript, network access to the browser compiler's dependencies, and a writable CSS output directory in the active theme. Regular visitors receive the saved stylesheet; they do not run the Sass compiler.
 
-### Core Directories
-*   **`/sass/`** - SCSS source files and Bootstrap 5 sources
-*   **`/css-output/`** - Compiled CSS bundle (`bundle.css`)
-*   **`/inc/`** - PHP functionality and customizer assets
-*   **`/page-templates/`** - Specialized page templates
-*   **`/loops/`** - Content display loop templates
-*   **`/partials/`** - Reusable template parts
-*   **`/languages/`** - Translation files (8 languages included)
-*   **`/woocommerce/`** - WooCommerce template overrides
+## The theme options workspace
 
-### Available Page Templates
-*   **Blank Templates:** `blank.php`, `blank-nofooter.php`, `empty.php`
-*   **Sidebar Layouts:** `page-sidebar-left.php`, `page-sidebar-right.php`
-*   **Special Pages:** `bootstrap-demo.php`, `default-no-jumbotron.php`
+The panel lives at **Appearance > Picostrap Options**. Its styles and scripts load only on that admin screen.
 
-### Loop Templates
-*   **Cards Layout:** `loops/cards.php` - Bootstrap card-based post display
-*   **Accordion Layout:** `loops/accordion.php` - Collapsible content display
-*   **Standard Loop:** `loops/index.php` - Default post loop
-
-### Widget Areas
-*   **Main Sidebar** - Primary sidebar area
-*   **Footer Full** - Full-width footer with dynamic grid
-*   **WooCommerce Sidebar** - Shop sidebar (when WooCommerce is active)
-
-### Menu Locations
-*   **Primary Menu** - Main navigation
-*   **Secondary Menu** - Secondary navigation area
-
-## Customization
-
-*   **WordPress Customizer:** The primary way to customize colors, typography, and theme options.
-*   **Child Theme SCSS:** For more advanced CSS or structural changes, create a child theme and edit the `sass/_custom.scss` file. Remember to recompile using the admin bar link after saving your changes.
-
-## Opt-in Features
-
-Many features can be toggled on or off under `Customize > Global Utilities`. This allows you to load only the code you need. Features include:
-
-*   Disable Gutenberg Editor & CSS
-*   Disable Block-based Widgets Editor
-*   Disable WordPress Comments entirely
-*   Disable XML-RPC for security
-*   Add a "Back to Top" button
-*   Enable GLightbox JS library for image lightboxes
-*   Enable Bootstrap Tooltips & Popovers initialization script
-*   Enable Page Scroll Detection script
-*   Open Main Menu on Hover script
-
-## Performance & Security Features
-
-### Performance Optimizations
-*   **Single CSS Bundle:** All styles compile to one minified file
-*   **Head Cleanup:** Removes unnecessary WordPress meta tags and scripts
-*   **Emoji Removal:** Completely disables WordPress emoji scripts and CSS
-*   **REST API Optimization:** Removes REST API links for non-logged-in users
-*   **Selective Loading:** Opt-in features prevent loading unused code
-
-### Security Enhancements
-*   **Login Security:** Obscures login error messages
-*   **Self-Pingback Prevention:** Disables self-referential pingbacks
-*   **XML-RPC Control:** Option to disable XML-RPC entirely
-*   **oEmbed Management:** Smart embed handling while preserving video functionality
-
-## Developer Features
-
-### Custom Functions
-*   **`picostrap_site_info()`** - Customizable footer text
-*   **`picostrap_the_sharing_buttons()`** - Social sharing functionality
-*   **Modified excerpt length** - 22 words with custom "Read More" styling
-
-### WordPress Features Support
-*   **Post Thumbnails:** Full featured image support
-*   **Post Formats:** Aside, image, video, quote, link
-*   **Custom Logo:** WordPress custom logo feature
-*   **HTML5 Markup:** Modern markup for forms, galleries, captions
-*   **Responsive Embeds:** Automatic responsive video embedding
-*   **Selective Refresh:** Customizer widget live preview
-
-### Bootstrap Integration
-*   **Bootstrap 5 Navwalker:** v1.3.4 with custom patches for dropdown support
-*   **NinjaBootstrap:** Additional utility classes and responsive variations
-*   **Dark Mode:** Bootstrap 5-compatible dark mode toggle
-
-## Translation Support
-
-Included translations for 8 languages:
-*   German (de_DE), Spanish (es_ES), Estonian (et), French (fr_FR)
-*   Italian (it_IT), Dutch (nl_NL), Portuguese (pt_PT), Romanian (ro_RO)
-*   Base POT file included for creating new translations
-
-## Compatibility
-
-### PHP runtime validation
-
-Picostrap has been tested on **real PHP runtimes**, using isolated WordPress **7.1.4** installations on 2 November 2026:
-
-| PHP runtime | Validation |
+| Section | What you can do |
 | --- | --- |
-| **8.4.14** | Cleanup, PHP performance audit and WindPress scanner regression checks |
-| **8.6.0 RC4** | 157 assertions passed; WindPress scanner fix validated separately |
-| **8.7.0-dev**, commit [`f4d80ce83e01`](https://github.com/php/php-src/commit/f4d80ce83e0193a674ce42c4512666cb235128cf) | **195 assertions passed; all 60 PHP files passed native lint** |
+| **Overview** | Inspect saved CSS/JS sizes, estimate gzip payloads, check HTTP compression and preview CSS reduction against the public homepage. |
+| **Optimizations** | Configure grouped frontend and WordPress utilities, then click **Save changes**. These settings share the same theme modifications as **Customizer > Global Utilities**. |
+| **Design & Sass** | Open the Customizer, recompile Sass, inspect the saved bundle and read the compiler entry code and Sass pipeline. |
+| **Tools & updates** | Export Customizer settings and navigation menus, check for updates and open documentation. |
+| **Useful resources** | Find performance, SEO and content tools and prepare links for testing a public URL. |
+| **LiveCanvas** | View the companion page-builder introduction when LiveCanvas is not installed. |
 
-The PHP 8.7 snapshot passed the tested frontend, editor, Customizer, REST, theme options, CSS/source-map AJAX save and WindPress provider paths, with **no PHP warnings or deprecations captured from the web requests**. WindPress scanning was verified with both the parent theme and a child theme, including its actual PHP transport. No extra theme changes were needed specifically for that snapshot.
+The panel defaults to a light appearance with neutral surfaces and blue accents. Its **Dark mode** switch remembers your choice in this browser and applies only to the options workspace. The separate frontend dark-mode setting controls the visitor-facing site.
 
-**PHP 8.6 RC4 and PHP 8.7-dev are pre-release test targets.** These results apply to the exact runtimes above, rather than guaranteeing compatibility with future releases or every plugin combination. WP-CLI 2.12.0 emitted a separate deprecation in its bundled color library; it did not originate in the theme. The tests used SQLite, simulated the LiveCanvas `gtblocks` option, and covered the PHP side of compilation; full WooCommerce/LiveCanvas workflows and browser-side Sass/Tailwind compilation were outside their scope.
+A dashboard widget links users with theme-editing permissions to the panel and explains the experimental CSS feature. Individual actions retain their own WordPress capability checks: exports require permission to manage options, updates require permission to update themes, and Sass compilation requires an administrator.
 
-### WordPress integrations
+### Asset sizes and compression
 
-*   **WooCommerce:** Theme support and basic template adjustments included.
-*   **LiveCanvas:** Tested and marked as friendly (`lc_theme_is_livecanvas_friendly`). Respects LC's header/footer handling options.
-*   **WindPress:** Includes specific support for integrating with the WindPress plugin for Tailwind CSS scanning (`inc/windpress-support.php`).
-*   **Multisite:** Full WordPress multisite compatibility with separate CSS bundles per site.
+The payload inspector reports the size of the saved theme CSS and Bootstrap JavaScript. Gzip values are **level-6 estimates calculated from local files**, not observed transfer sizes.
 
-## Troubleshooting
+The delivery check requests the public homepage, saved CSS and Bootstrap JS URLs and reads `Content-Encoding`. It recognizes gzip, Brotli and Zstandard; failed, redirected and cross-origin responses remain unverified. The theme does not enable server compression: configure that with your host or CDN.
 
-### Common Issues
-*   **SASS Not Compiling:** Ensure you have administrator privileges and JavaScript is enabled
-*   **Changes Not Showing:** Clear browser cache and check if CSS bundle version incremented
-*   **Performance Issues:** Use opt-in features to disable unused functionality
-*   **Child Theme SASS:** Remember to recompile using admin bar after editing child theme SASS files
+Excluded WordPress core-script sizes are reference file sizes, not measured savings on every visit. Plugins, fonts, images and other stylesheets contribute additional requests and bytes.
 
-### Debug Mode
-*   Enable WordPress debug mode to see compilation errors
-*   Check browser console for JavaScript errors during SASS compilation
-*   Verify file permissions for `/css-output/` directory write access
+### Experimental page-specific CSS
 
-## Advanced Configuration
+Enable this explicitly in **Optimizations**, or preview a candidate first with **Overview > Analyze homepage**. The preview does not change settings.
 
-### Custom SCSS Variables
-Child themes can override Bootstrap variables in `sass/_custom.scss`:
+When enabled, the theme conservatively reduces its saved CSS against the rendered page and serves retained rules inline in place of the theme stylesheet request. An inline JavaScript guard can restore the complete bundle when dynamic content needs classes or IDs outside the retained set. If processing cannot safely produce a replacement, the original bundle remains available. Plugin stylesheets are handled separately.
+
+The feature skips editing and preview contexts, the Customizer, Sass compilation, and non-page responses such as feeds and REST requests. It can apply to both anonymous and logged-in frontend visits. Reduction results use the object cache where available, with a transient fallback for anonymous requests.
+
+A smaller CSS candidate does not guarantee a faster page or a higher PageSpeed score. Inline CSS travels with each HTML response, while an external stylesheet can be reused from the browser cache. Preview sizes include the inline markup and fallback helper. Compare first and repeat visits, and check navigation, galleries, forms and other dynamic content on desktop and mobile. Clear your page cache after enabling or disabling the setting.
+
+## Customization and Sass compilation
+
+### How the build works
+
+1. Saved Customizer values with the `SCSSvar_` prefix become Sass variable declarations.
+2. PicoSASS imports `sass/main.scss` and resolves Sass files from the child theme first, falling back to the parent theme.
+3. The Bootstrap loader imports functions, NinjaBootstrap defaults and theme variables, followed by Bootstrap components and extended utility maps.
+4. WordPress, Picostrap and WooCommerce styles follow; `sass/_custom.scss` is imported last.
+5. The browser compiles the Sass and injects CSS into the preview.
+6. An authenticated AJAX request saves the compiled bundle in the active theme's output directory and advances its cache version.
+
+The default output is `css-output/bundle.css`. On multisite, compiled filenames include the site ID. Theme helper functions can override the output directory and filenames. The frontend compiler can also save a source map when one is supplied.
+
+The bundle contains the framework and theme styles; it does not combine every plugin stylesheet. Editing a Sass file does not update the saved CSS until you recompile.
+
+### Where to put custom code
+
+Use these files **in your child theme**:
+
+| File | Purpose |
+| --- | --- |
+| `sass/_theme_variables.scss` | Set variable defaults before Bootstrap generates components and utilities. |
+| `sass/_custom.scss` | Add selectors and component styles after the framework and theme styles. |
+| `sass/main.scss` | Customize the overall import pipeline when your project needs it. |
+
+For example, in the child theme's `sass/_theme_variables.scss`:
+
 ```scss
-$primary: #your-color;
-$font-family-base: 'Your Font', sans-serif;
+$primary: #176b87 !default;
+$border-radius: .375rem !default;
 ```
 
-### Customizer Export/Import
-*   Theme includes JSON export functionality for theme customizations
-*   Useful for transferring settings between sites
+Using `!default` preserves an already-declared value, including one supplied by the Customizer. NinjaBootstrap defaults load before `_theme_variables.scss`; if you need to replace an already-defined default, assign it deliberately without `!default` and account for the Customizer precedence you want. See the [Bootstrap Sass variable documentation](https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults).
 
-### Hooks and Filters
-The theme provides various WordPress hooks for developers:
-*   Custom template tags in `/inc/template-tags.php`
-*   Filter hooks for content modification
-*   Action hooks for theme setup and enhancements
+In `sass/_custom.scss`, add your project styles:
+
+```scss
+.project-intro {
+  padding-block: 4rem;
+
+  @include media-breakpoint-up(lg) {
+    padding-block: 6rem;
+  }
+}
+```
+
+Setting Bootstrap variables only in `_custom.scss` is too late to regenerate components already imported earlier in the pipeline. Use the Customizer or the earlier variable file, then recompile.
+
+### Typography and external services
+
+The Customizer includes body and heading font pickers backed by Fontsource. The generated font code loads WOFF2 files from jsDelivr. The palette generator uses Huemint, and PicoSASS loads Dart Sass through JSPM. These workflows need access to their external services; selecting a remotely hosted font also adds a frontend font dependency.
+
+Use the Customizer font controls, system font stacks or child-theme font-loading code to match your typography and hosting requirements.
+
+## Optional features
+
+The shared **Optimizations / Global Utilities** controls include:
+
+- Disable Gutenberg and core block styles. Leave this off when your content depends on blocks; LiveCanvas Gutenberg compatibility preserves block styles.
+- Disable the block-based widgets editor.
+- Disable WordPress comments.
+- Disable XML-RPC.
+- Disable Bootstrap, removing the theme CSS bundle and Bootstrap JS. Supply your own styles and interactions if you use this option.
+- Enable the back-to-top button, desktop hover menus, lightbox, and Bootstrap tooltips/popovers.
+- Enable experimental page-specific CSS.
+
+Other Customizer controls include the frontend dark-mode switch, scroll-position detection and navigation/layout settings. They are separate from the ten switches in the options panel.
+
+The optional lightbox uses gLightBox from jsDelivr. On single posts and pages it marks linked images automatically; use `glightbox` for additional targets, `nolightbox` to exclude an image, or `autolightbox` on a container.
+
+## Frontend cleanup and integrations
+
+Built-in cleanup removes selected WordPress discovery markup, REST discovery links, automatic emoji assets and automatic loading of the post-embed script. It preserves the REST API itself and normal content embeds. Plugins can still request script dependencies. The theme also suppresses detailed login error messages and prevents self-pingbacks.
+
+- **LiveCanvas:** theme compatibility hooks, content handling and Bootstrap version information support the page builder.
+- **WindPress:** the source provider scans active parent/child theme PHP, JavaScript and HTML, avoids duplicate roots and excludes dependency directories. Custom child-theme sources remain available to the provider.
+- **WooCommerce:** theme support, shop widgets, styles and template overrides are included. Check your storefront against the WooCommerce version and extensions you deploy.
+- **Multisite:** compiled CSS uses site-specific filenames after compilation. Settings, write permissions and cache behavior still need to be checked for your network.
+
+These integrations do not install the corresponding plugins.
+
+## Updates and exports
+
+### Stable releases from GitHub
+
+On WordPress 6.1 or later, with Picostrap or a Picostrap child theme active, the parent theme checks [GitHub Releases](https://github.com/livecanvas-team/picostrap5/releases) through the native WordPress update system.
+
+Only published stable releases with a numeric `X.Y.Z` or `vX.Y.Z` tag are accepted. The release must be newer than the installed parent-theme version to produce an update offer. Drafts and prereleases are excluded; creating a tag or pushing a branch alone does not publish an update.
+
+The updater prefers a release asset named `picostrap5.zip` and otherwise uses the release tag's source archive. Successful metadata is cached for six hours; failed checks are cached for five minutes. Use **Dashboard > Updates > Check again** to refresh the check immediately. Unavailable or invalid GitHub responses do not trigger a fallback to a development branch.
+
+Keep custom code in a child theme: parent-theme updates replace parent-theme files.
+
+### Configuration exports
+
+**Tools & updates** can download saved theme modifications as `theme-options.json` and navigation menu data as `menus.json`. These exports do not include theme files, site content or a built-in import workflow. Use a full site backup when you need a restorable copy of the installation.
+
+## Repository structure
+
+| Path | Contents |
+| --- | --- |
+| [`sass/`](sass/) | Main pipeline, Bootstrap sources, NinjaBootstrap utilities and theme styles. |
+| [`css-output/`](css-output/) | Saved theme CSS and any generated source maps. |
+| [`inc/options-page/`](inc/options-page/) | Options panel PHP, CSS, JavaScript and local brand assets. |
+| [`inc/customizer-assets/`](inc/customizer-assets/) | Customizer controls, preview helpers and font picker. |
+| [`inc/picosass/`](inc/picosass/) | Browser compiler implementation. |
+| [`inc/extra-settings.php`](inc/extra-settings.php) | Shared options definitions and save handler. |
+| [`inc/used-css.php`](inc/used-css.php) | Experimental CSS reduction, caching and runtime fallback. |
+| [`inc/theme-updates.php`](inc/theme-updates.php) | Stable GitHub release updater. |
+| [`page-templates/`](page-templates/) | Blank, sidebar, demo and other page templates. |
+| [`loops/`](loops/) and [`partials/`](partials/) | Post loops, navigation and reusable template parts. |
+| [`languages/`](languages/) | Translation template and language files. |
+| [`woocommerce/`](woocommerce/) | WooCommerce template overrides. |
+
+The theme registers **Primary Menu** and **Secondary Menu**, plus **Main Sidebar**, **Footer Full** and **WooCommerce Shop Sidebar** widget areas. Page templates include blank layouts, left/right sidebar layouts and a Bootstrap demo. Loop layouts include the standard index, cards and an accordion.
+
+## Developer hooks
+
+Use child-theme code and the available hooks to extend behavior. Examples include:
+
+- `ps_main_sass`: filter the generated compiler entry source.
+- `picostrap_theme_default_settings`: filter initial theme defaults.
+- `picostrap_used_css_enabled`: control eligibility for experimental CSS reduction.
+- `picostrap_used_css_safelist`: retain additional classes and IDs needed by dynamic content.
+- `picostrap_used_css_persistent_cache`: control the reducer's transient-cache fallback.
+
+Footer and sharing helpers live in [`inc/template-tags.php`](inc/template-tags.php); WordPress actions and filters remain available throughout the theme.
+
+## Compatibility and troubleshooting
+
+The codebase includes Bootstrap 5.3 sources and JavaScript. The GitHub updater requires WordPress 6.1 or later; browser compilation requires modern JavaScript support, network access and administrator permissions. Validate the complete theme/plugin combination on your intended WordPress and PHP versions before deploying.
+
+| Symptom | What to check |
+| --- | --- |
+| Sass changes are missing | Recompile after saving the source, then clear browser, page and CDN caches. |
+| Compilation does not start | Confirm an administrator session, enabled JavaScript and access to the compiler's external dependencies. Inspect the browser console and network requests. |
+| Compiled CSS cannot be saved | Check write access to the active theme's CSS output directory and the AJAX response. |
+| Layout breaks after enabling an optimization | Restore the setting, clear page caches and test the affected content and interactions. |
+| The compression check is unverified | Check the public asset URLs and response headers. Redirects, network failures and cross-origin responses prevent verification. |
+| No GitHub update appears | Confirm a newer stable release exists, the theme's update metadata is intact and the GitHub API is reachable; use **Check again**. |
+
+For site-specific troubleshooting, enable WordPress debug logging on your development installation and inspect PHP logs alongside browser errors.
 
 ## License
 
-Picostrap 5 is licensed under the [GPL v2 or later](https://www.gnu.org/licenses/gpl-2.0.html).
+Picostrap 5 is licensed under [GPL v2 or later](https://www.gnu.org/licenses/gpl-2.0.html). Bundled third-party components retain their own license notices, including Bootstrap's MIT license.

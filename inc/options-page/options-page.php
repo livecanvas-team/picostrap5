@@ -108,6 +108,19 @@ function add_picostrap_theme_page() {
 }
 add_action( 'admin_menu', 'add_picostrap_theme_page' );
  
+// Apply the saved preference before paint, only on this admin screen.
+add_action( 'admin_head-appearance_page_picostrap-theme-options', function () {
+    ?>
+    <script>
+    try {
+        if (localStorage.getItem('picostrap-options-theme') === 'dark') {
+            document.documentElement.dataset.picoOptionsTheme = 'dark';
+        }
+    } catch (error) { /* Storage may be unavailable in private browser sessions. */ }
+    </script>
+    <?php
+} );
+
 // Load admin styles only on the theme options screen.
 add_action( 'admin_enqueue_scripts', function ( $hook_suffix ) {
     if ( 'appearance_page_picostrap-theme-options' !== $hook_suffix ) {
@@ -147,6 +160,33 @@ add_action( 'admin_enqueue_scripts', function ( $hook_suffix ) {
         'leave' => __( 'You have unsaved changes.', 'picostrap5' ),
     ) );
 } );
+
+/** Prominent design actions shared by Overview and Design & Sass. */
+function picostrap_options_design_actions( $compile_url ) {
+    $id = wp_unique_id( 'pico-design-actions-' );
+    ?>
+    <div class="pico-design-actions">
+        <div class="pico-design-action">
+            <a class="pico-button pico-primary pico-design-button" href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>" aria-describedby="<?php echo esc_attr( $id . '-customizer' ); ?>">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="currentColor" stroke="none"/><circle cx="15" cy="17" r="3" fill="currentColor" stroke="none"/></svg>
+                <span><?php esc_html_e( 'Open WordPress Customizer', 'picostrap5' ); ?></span>
+            </a>
+            <p id="<?php echo esc_attr( $id . '-customizer' ); ?>"><?php esc_html_e( 'Change colors, fonts, layouts and Bootstrap settings with a live preview. Publish your changes to save your design.', 'picostrap5' ); ?></p>
+        </div>
+        <div class="pico-design-action">
+            <?php if ( current_user_can( 'administrator' ) ) : ?>
+            <a class="pico-button pico-design-button" href="<?php echo esc_url( $compile_url ); ?>" aria-describedby="<?php echo esc_attr( $id . '-compile' ); ?>">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 6.1A8 8 0 0 1 20 12M4 12a8 8 0 0 0 13.9 5.9"/></svg>
+                <span><?php esc_html_e( 'Recompile CSS', 'picostrap5' ); ?></span>
+            </a>
+            <?php else : ?>
+            <span class="pico-button pico-design-button" aria-disabled="true"><?php esc_html_e( 'Recompile CSS', 'picostrap5' ); ?></span>
+            <?php endif; ?>
+            <p id="<?php echo esc_attr( $id . '-compile' ); ?>"><?php esc_html_e( 'Rebuild and save the theme stylesheet from your saved settings and Sass files. Opens the frontend compiler; administrator access and an internet connection are required.', 'picostrap5' ); ?></p>
+        </div>
+    </div>
+    <?php
+}
 
 function theme_option_page() {
     if ( ! current_user_can( 'edit_theme_options' ) ) return;
@@ -195,6 +235,11 @@ function theme_option_page() {
             <img src="<?php echo esc_url( get_template_directory_uri() . '/inc/options-page/assets/picostrap-logo.svg' ); ?>" width="166" height="34" alt="Picostrap">
             <h1><?php esc_html_e( 'Theme options', 'picostrap5' ); ?></h1>
             <span class="pico-version">v<?php echo esc_html( pico_get_parent_theme_version() ); ?></span>
+            <label class="pico-theme-toggle" id="pico-theme-control" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 14a8 8 0 0 1-10-10 8 8 0 1 0 10 10Z"/></svg>
+                <span><?php esc_html_e( 'Dark mode', 'picostrap5' ); ?></span>
+                <input class="pico-switch" id="pico-theme-toggle" type="checkbox" role="switch" aria-label="<?php esc_attr_e( 'Dark mode for theme options', 'picostrap5' ); ?>">
+            </label>
             <a class="pico-site-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View site', 'picostrap5' ); ?> <span aria-hidden="true">↗</span></a>
         </header>
         <nav class="pico-tabs" aria-label="<?php esc_attr_e( 'Theme options sections', 'picostrap5' ); ?>">
@@ -211,7 +256,7 @@ function theme_option_page() {
                 <div>
                     <h2 id="pico-overview-heading"><?php esc_html_e( 'WordPress doesn’t have to be heavy.', 'picostrap5' ); ?></h2>
                     <p><?php esc_html_e( 'Keep the power. Lose the unnecessary weight. Picostrap gives you a cleaner frontend, one compiled theme stylesheet, and control over what you load.', 'picostrap5' ); ?></p>
-                    <div class="pico-actions"><a class="pico-button pico-primary" href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>"><?php esc_html_e( 'Make it yours', 'picostrap5' ); ?> <span aria-hidden="true">→</span></a><a class="pico-text-link" href="#pico-extras-title" data-pico-link><?php esc_html_e( 'Tune your optimizations', 'picostrap5' ); ?></a></div>
+                    <div class="pico-actions"><a class="pico-text-link" href="#pico-extras-title" data-pico-link><?php esc_html_e( 'Tune your optimizations', 'picostrap5' ); ?></a></div>
                 </div>
                 <div class="pico-payload">
                     <h3><?php esc_html_e( 'Your theme payload', 'picostrap5' ); ?></h3>
@@ -224,6 +269,8 @@ function theme_option_page() {
                     <p class="pico-help"><?php esc_html_e( 'Gzip values are estimates. Check actual delivery below. Fonts, plugin assets and images are additional.', 'picostrap5' ); ?><?php if ( get_theme_mod( 'disable_bootstrap' ) ) : ?> <?php esc_html_e( 'Both theme assets are currently disabled.', 'picostrap5' ); ?><?php endif; ?></p>
                 </div>
             </div>
+
+            <?php picostrap_options_design_actions( $compile_url ); ?>
 
             <details class="pico-delivery" open>
                 <summary><span><?php esc_html_e( 'Compression & delivery', 'picostrap5' ); ?></span><span class="pico-help" id="pico-delivery-summary"><?php esc_html_e( 'Not checked yet', 'picostrap5' ); ?></span></summary>
@@ -300,7 +347,8 @@ function theme_option_page() {
         </section>
 
         <section class="pico-tabpanel" id="pico-design" aria-labelledby="pico-design-heading">
-            <div class="pico-page-heading"><h2 id="pico-design-heading"><?php esc_html_e( 'Your design. One build.', 'picostrap5' ); ?></h2><p><?php esc_html_e( 'Set colors, typography and Bootstrap variables in the Customizer. PicoSASS compiles your settings and Sass into the theme stylesheet.', 'picostrap5' ); ?></p><div class="pico-actions"><a class="pico-button pico-primary" href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>"><?php esc_html_e( 'Open Customizer', 'picostrap5' ); ?></a><a class="pico-button" href="<?php echo esc_url( $compile_url ); ?>"><?php esc_html_e( 'Recompile Sass', 'picostrap5' ); ?></a></div><p class="pico-help"><?php esc_html_e( 'Recompilation opens the frontend compiler. An internet connection is required.', 'picostrap5' ); ?></p></div>
+            <div class="pico-page-heading"><h2 id="pico-design-heading"><?php esc_html_e( 'Your design. One build.', 'picostrap5' ); ?></h2><p><?php esc_html_e( 'Set colors, typography and Bootstrap variables in the Customizer. PicoSASS compiles your settings and Sass into the theme stylesheet.', 'picostrap5' ); ?></p></div>
+            <?php picostrap_options_design_actions( $compile_url ); ?>
             <div class="pico-build-info"><dl class="pico-file-sizes"><div><dt><?php esc_html_e( 'Saved bundle', 'picostrap5' ); ?><?php picostrap_options_help( __( 'Saved bundle', 'picostrap5' ), __( 'Default bundle means the theme’s shipped stylesheet is selected. Custom build means a compiler save has been recorded for this active theme. This status does not detect edits made to Sass since the last compilation.', 'picostrap5' ) ); ?></dt><dd><?php echo esc_html( $bundle_exists ? ( $has_custom_bundle ? __( 'Custom build', 'picostrap5' ) : __( 'Default bundle', 'picostrap5' ) ) : __( 'Missing — recompile Sass', 'picostrap5' ) ); ?></dd></div><div><dt><?php esc_html_e( 'Output file', 'picostrap5' ); ?><?php picostrap_options_help( __( 'Output file', 'picostrap5' ), __( 'Path relative to the active theme directory. PicoSASS saves the compiled stylesheet here; on multisite the filename may include the current site ID. Editing Sass does not update this file until you recompile.', 'picostrap5' ) ); ?></dt><dd><code><?php echo esc_html( $bundle_relative ); ?></code><?php if ( $bundle_exists ) : ?> · <a href="<?php echo esc_url( picostrap_get_css_url() ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View CSS', 'picostrap5' ); ?></a><?php endif; ?></dd></div></dl><p class="pico-help"><?php esc_html_e( 'This describes the saved file. Recompile after changing Sass source files.', 'picostrap5' ); ?></p></div>
                 <section class="pico-sass-section" aria-labelledby="pico-custom-title">
                     <h2 id="pico-custom-title"><?php esc_html_e( 'Add your own Sass', 'picostrap5' ); ?></h2>
