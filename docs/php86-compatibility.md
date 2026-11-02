@@ -4,7 +4,7 @@ Tested on 2 November 2026 with the current worktree, including the pending clean
 
 ## Result
 
-**The web and cleanup checks pass on an actual PHP 8.6.0 RC4 runtime.** All 59 PHP files pass native 8.6 lint, and 157 automated assertions pass. No theme-originated warnings, deprecations or fatal errors were observed in those passing checks. The HTTP error capture remained empty. The separately reproduced, pre-existing WindPress scanner failure is described below.
+**The web and cleanup checks pass on an actual PHP 8.6.0 RC4 runtime.** All 59 PHP files pass native 8.6 lint, and 157 automated assertions pass. No theme-originated warnings, deprecations or fatal errors were observed in those passing checks. The HTTP error capture remained empty. The separately reproduced WindPress scanner failure is described below; a subsequent fix is documented in [WindPress scanner fix](windpress-scanner-fix.md).
 
 No additional production PHP changes were needed for these results. This is evidence for the tested release candidate and paths, not a certification of the future stable release or every plugin combination.
 
@@ -46,7 +46,7 @@ CSS comparisons against the earlier PHP 8.4 captures normalize only the local po
 
 **WP-CLI tooling:** its bundled `php-cli-tools` emits a repeated deprecation from `cli/Colors.php:95`: using null as an array offset. This was the sole diagnostic origin in the final CLI capture. It was recorded separately rather than suppressed or attributed to the theme. The web requests do not load WP-CLI and produced none of those messages. A setup-only theme-update check also encountered the intentionally blocked outbound network; that diagnostic was archived with setup logs.
 
-**Known WindPress issue:** directly invoking the theme's scanner under PHP 8.6 reproduces the existing undefined `$wpTheme` error. A minimally amended experimental copy also reproduces the unguarded `parent()` error. The same failures were already reproduced on PHP 8.4; they are not a new PHP 8.6 regression and remain unresolved by this compatibility test. Full WindPress compilation was not claimed as passing.
+**WindPress issue at the time of this test:** directly invoking the theme's scanner under PHP 8.6 reproduced the existing undefined `$wpTheme` error. A minimally amended experimental copy also reproduced the unguarded `parent()` error. The same failures were reproduced on PHP 8.4; they were not a new PHP 8.6 regression. They have subsequently been fixed and the provider/transport validated on both runtimes; see the follow-up above. Full browser-side Tailwind compilation was not exercised by these PHP checks.
 
 ## Limits and artifacts
 

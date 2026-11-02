@@ -6,55 +6,45 @@
 
 function pico_scanner_picostrap_provider(): array
 {
-    // Any files with this extension will be scanned
-    $file_extensions = [
-        'php',
-        'js',
-        'html',
-    ];
-
-    // Exclude the picostrap theme's internal directories
-    $parentNotPath = [
-        'picostrap5/css-output',
-        'picostrap5/inc',
-        'picostrap5/js',
-        'picostrap5/languages',
-        'picostrap5/sass',
-    ];
-
     $contents = [];
-
-    // The current active theme
 
     // if the theme is not Picostrap or its' child, early return
     if (get_template() != 'picostrap5') {
         return $contents;
     }
 
-    $themeDir = $wpTheme->get_stylesheet_directory();
-
-    $finder = new \WindPressDeps\Symfony\Component\Finder\Finder();
-
-    // Check if the current theme is a child theme and get the parent theme directory
-    $has_parent = $wpTheme->parent() ? true : false;
-    $parentThemeDir = $wpTheme->parent()->get_stylesheet_directory() ?? null;
-
-    $finder->files()->notPath($parentNotPath);
-
-    // Scan the theme directory according to the file extensions
-    foreach ($file_extensions as $extension) {
-        $finder->files()->in($themeDir)->name('*.' . $extension);
-        if ($has_parent) {
-            $finder->files()->in($parentThemeDir)->name('*.' . $extension);
-        }
+    $wpTheme = wp_get_theme();
+    $themes = [$wpTheme];
+    $parent = $wpTheme->parent();
+    if ($parent) {
+        $themes[] = $parent;
     }
 
-    // Get the file contents and send to the compiler
-    foreach ($finder as $file) {
-        $contents[] = [
-            'name' => $file->getRelativePathname(),
-            'content' => $file->getContents(),
-        ];
+    foreach ($themes as $theme) {
+        $themeName = $theme->get_stylesheet();
+        $excludedDirectories = ['node_modules', 'vendor', 'tests'];
+
+        // Exclusions are relative to each Finder root. Keep custom child-theme
+        // PHP/JS sources, including inc/ and js/, available to Tailwind.
+        if ($themeName === 'picostrap5') {
+            $excludedDirectories = array_merge($excludedDirectories, [
+                'css-output', 'inc', 'js', 'languages', 'sass',
+            ]);
+        }
+
+        $finder = new \WindPressDeps\Symfony\Component\Finder\Finder();
+        $finder->files()
+            ->in($theme->get_stylesheet_directory())
+            ->name(['*.php', '*.js', '*.html'])
+            ->exclude($excludedDirectories);
+
+        // Add each root once; repeated in() calls would scan every file again.
+        foreach ($finder as $file) {
+            $contents[] = [
+                'name' => $themeName . '/' . $file->getRelativePathname(),
+                'content' => $file->getContents(),
+            ];
+        }
     }
 
     return $contents;

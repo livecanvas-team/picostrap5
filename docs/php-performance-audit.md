@@ -25,6 +25,8 @@ Recommended next change: provide a guarded font-resolver opt-out for the no-Gute
 
 Relevant code: `inc/windpress-support.php:34`, `:40`, `:42`, `:45`.
 
+**Follow-up:** the scanner has now been fixed after checkpoint commit `ae4029b`. The observations below describe the pre-fix version. See [WindPress scanner fix](windpress-scanner-fix.md) for the implementation and validation.
+
 Reproduced with the actual Finder dependency from the locally installed WindPress plugin, without activating that plugin on the test site:
 
 - The callback uses `$wpTheme` without assigning it. Calling it raises an undefined-variable warning followed by an error.

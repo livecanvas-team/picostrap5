@@ -159,6 +159,24 @@ Included translations for 8 languages:
 
 ## Compatibility
 
+### PHP runtime validation
+
+Picostrap has been tested on **real PHP runtimes**, using isolated WordPress **7.1.4** installations on 2 November 2026:
+
+| PHP runtime | Validation | Details |
+| --- | --- | --- |
+| **8.4.14** | Cleanup, PHP performance audit and WindPress scanner regression checks | [PHP audit](docs/php-performance-audit.md) |
+| **8.6.0 RC4** | 157 assertions passed; WindPress scanner fix validated separately | [PHP 8.6 report](docs/php86-compatibility.md) |
+| **8.7.0-dev**, commit [`f4d80ce83e01`](https://github.com/php/php-src/commit/f4d80ce83e0193a674ce42c4512666cb235128cf) | **195 assertions passed; all 60 PHP files passed native lint** | [PHP 8.7 snapshot report](docs/php87-compatibility.md) |
+
+The PHP 8.7 snapshot passed the tested frontend, editor, Customizer, REST, theme options, CSS/source-map AJAX save and WindPress provider paths, with **no PHP warnings or deprecations captured from the web requests**. WindPress scanning was verified with both the parent theme and a child theme, including its actual PHP transport. No extra theme changes were needed specifically for that snapshot.
+
+**PHP 8.6 RC4 and PHP 8.7-dev are pre-release test targets.** These results apply to the exact runtimes above, rather than guaranteeing compatibility with future releases or every plugin combination. WP-CLI 2.12.0 emitted a separate deprecation in its bundled color library; it did not originate in the theme. The tests used SQLite, simulated the LiveCanvas `gtblocks` option, and covered the PHP side of compilation; full WooCommerce/LiveCanvas workflows and browser-side Sass/Tailwind compilation were outside their scope.
+
+Repeatable regression tests are included in [`tests/integration/`](tests/integration/). See also the [cleanup audit](docs/performance-audit.md) and [WindPress scanner fix](docs/windpress-scanner-fix.md).
+
+### WordPress integrations
+
 *   **WooCommerce:** Theme support and basic template adjustments included.
 *   **LiveCanvas:** Tested and marked as friendly (`lc_theme_is_livecanvas_friendly`). Respects LC's header/footer handling options.
 *   **WindPress:** Includes specific support for integrating with the WindPress plugin for Tailwind CSS scanning (`inc/windpress-support.php`).
