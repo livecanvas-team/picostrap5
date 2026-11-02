@@ -6,7 +6,7 @@ function picostrap_get_extra_settings() {
     return array(
         'disable_gutenberg' => array(
             'label' => __( 'Disable Gutenberg and core block styles', 'picostrap5' ),
-            'description' => __( 'Recommended for sites built entirely with LiveCanvas, without WordPress blocks in pages, posts or widgets. Uses the classic editor and removes core block CSS and global styles from the frontend to reduce unused CSS. Leave disabled if you use blocks, as their layout may change. LiveCanvas Gutenberg compatibility preserves block styles.', 'picostrap5' ),
+            'description' => __( 'Disables the Gutenberg block editor for posts and pages, restoring the classic editor. Also removes frontend WordPress CSS for the core block library, individual core blocks, global styles and classic theme styles, along with core block support and duotone CSS/SVG assets. Use for sites built entirely with LiveCanvas or other layouts that do not need WordPress blocks. Existing block content is kept, but may lose its styling. LiveCanvas Gutenberg compatibility preserves block styles and keeps the editor available for LiveCanvas Gutenberg blocks. Third-party block assets are not removed by this setting. The block-based Widgets Editor has its own separate switch.', 'picostrap5' ),
         ),
         'disable_widgets_block_editor' => array(
             'label' => __( "Disable the Block-based Widgets Editor", 'picostrap5' ),
@@ -42,7 +42,7 @@ function picostrap_get_extra_settings() {
         ),
         'picostrap_inline_css' => array(
             'label' => __( 'Page-specific CSS — remove the bundle CSS request and serve page-specific styles directly inline.', 'picostrap5' ),
-            'description' => __( 'Experimental: serves page-specific inline CSS processed in PHP. A higher PageSpeed score is not guaranteed: compare results with this option on and off, including repeat visits with a warm cache. If you enable it, check that your site looks correct on desktop and mobile and test menus, galleries, forms and other dynamic content. An inline JavaScript guard can restore the full theme bundle when needed. Normal frontend visits can use reduced CSS for both anonymous and logged-in users; LiveCanvas editing, previews, the Customizer and Sass compilation keep the original bundle. Clear your page cache after changing this setting. If you notice visual or interaction issues, disable the option and clear the cache again.', 'picostrap5' ),
+            'description' => __( 'Experimental: replaces the external theme CSS bundle request with reduced CSS embedded directly in each page HTML. PHP reads the compiled bundle, removes rules it can identify as unnecessary for that page and inserts the remaining styles inline. The bundle file is not deleted or compilation disabled: it remains the source and fallback. Plugin stylesheets are separate. Normal frontend visits can use reduced CSS for both anonymous and logged-in users. LiveCanvas editing, previews, the Customizer and Sass compilation keep the original bundle; safety checks can also keep it, and a JavaScript guard can load it again for dynamic content. A higher PageSpeed score is not guaranteed: compare results with this option on and off, including repeat visits with a warm cache. Test layouts, menus, galleries, forms and other dynamic content on desktop and mobile. Clear your page cache after changing this setting. If styling or interactions break, disable it and clear the cache again.', 'picostrap5' ),
         ),
     );
 }

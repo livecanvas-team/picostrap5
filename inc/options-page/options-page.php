@@ -215,12 +215,12 @@ function theme_option_page() {
     foreach ( $settings as $key => $definition ) if ( get_theme_mod( $key, false ) ) ++$enabled;
     $groups = array(
         array( 'title' => __( 'CSS & frontend assets', 'picostrap5' ), 'description' => __( 'Choose what your frontend actually needs.', 'picostrap5' ), 'keys' => array( 'disable_gutenberg', 'picostrap_inline_css', 'disable_bootstrap' ) ),
-        array( 'title' => __( 'Optional interactions', 'picostrap5' ), 'description' => __( 'Load extra interactions only when you use them.', 'picostrap5' ), 'keys' => array( 'enable_back_to_top', 'enable_open_menu_on_hover', 'enable_lightbox', 'enable_tooltips' ) ),
+        array( 'title' => __( 'Optional interactions', 'picostrap5' ), 'description' => __( 'Load extra interactions only when you use them.', 'picostrap5' ), 'inline_help' => true, 'keys' => array( 'enable_back_to_top', 'enable_open_menu_on_hover', 'enable_lightbox', 'enable_tooltips' ) ),
         array( 'title' => __( 'WordPress features', 'picostrap5' ), 'description' => __( 'Keep the tools and services your project uses.', 'picostrap5' ), 'keys' => array( 'disable_widgets_block_editor', 'singlepost_disable_comments', 'disable_xml_rpc' ) ),
     );
     $hints = array(
-        'disable_gutenberg' => __( 'For sites built without WordPress blocks. Preserves block CSS when LiveCanvas Gutenberg compatibility is enabled.', 'picostrap5' ),
-        'picostrap_inline_css' => __( 'Experimental. Compare PageSpeed with this option on and off: improvement is not guaranteed. If you use it, verify that your site looks and works correctly on desktop and mobile.', 'picostrap5' ),
+        'disable_gutenberg' => __( 'Switches posts and pages to the classic editor and removes WordPress core block CSS, global styles and duotone assets from the frontend. Use for sites built without blocks: existing block content may lose its styling. Block styles are preserved when LiveCanvas Gutenberg compatibility is enabled.', 'picostrap5' ),
+        'picostrap_inline_css' => __( 'Replaces loading the full theme CSS bundle file with reduced, page-specific CSS embedded directly in the page HTML. The bundle file is kept as the source and fallback. Experimental: compare PageSpeed with this on and off, test layouts and interactions on desktop and mobile, and clear your page cache after changing it.', 'picostrap5' ),
         'disable_bootstrap' => __( 'Enable only if you know what you are doing. Removes the entire theme stylesheet and Bootstrap JavaScript. You must add your own CSS; layouts and interactive components may stop working until you provide replacements.', 'picostrap5' ),
         'enable_back_to_top' => __( 'A lightweight return-to-top control for longer pages.', 'picostrap5' ),
         'enable_open_menu_on_hover' => __( 'Open desktop navigation dropdowns on hover.', 'picostrap5' ),
@@ -242,7 +242,6 @@ function theme_option_page() {
                 <span><?php esc_html_e( 'Dark mode', 'picostrap5' ); ?></span>
                 <input class="pico-switch" id="pico-theme-toggle" type="checkbox" role="switch" aria-label="<?php esc_attr_e( 'Dark mode for theme options', 'picostrap5' ); ?>">
             </label>
-            <a class="pico-site-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View site', 'picostrap5' ); ?> <span aria-hidden="true">↗</span></a>
         </header>
         <nav class="pico-tabs" aria-label="<?php esc_attr_e( 'Theme options sections', 'picostrap5' ); ?>">
             <a href="#pico-overview"><?php esc_html_e( 'Overview', 'picostrap5' ); ?></a>
@@ -337,7 +336,13 @@ function theme_option_page() {
                     <fieldset class="pico-settings-group"><legend><?php echo wp_kses( $group['title'], array( 'em' => array() ) ); ?></legend><p class="pico-group-description"><?php echo esc_html( $group['description'] ); ?></p>
                         <?php foreach ( $group['keys'] as $key ) : $definition = $settings[ $key ]; ?>
                             <div class="pico-setting">
-                                <div class="pico-setting-copy"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( 'picostrap_inline_css' === $key ? __( 'Page-specific CSS', 'picostrap5' ) : $definition['label'] ); ?></label><?php if ( 'picostrap_inline_css' === $key ) : ?><span class="pico-badge pico-experimental" id="pico-inline-css-status"><?php esc_html_e( 'Experimental', 'picostrap5' ); ?></span><?php endif; ?><?php picostrap_options_help( $definition['label'], $definition['description'] ); ?><p id="<?php echo esc_attr( $key . '-hint' ); ?>"><?php echo esc_html( $hints[ $key ] ); ?></p>
+                                <div class="pico-setting-copy"><label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( 'picostrap_inline_css' === $key ? __( 'Page-specific CSS', 'picostrap5' ) : $definition['label'] ); ?></label><?php if ( 'picostrap_inline_css' === $key ) : ?><span class="pico-badge pico-experimental" id="pico-inline-css-status"><?php esc_html_e( 'Experimental', 'picostrap5' ); ?></span><?php endif; ?><?php if ( empty( $group['inline_help'] ) ) picostrap_options_help( $definition['label'], $definition['description'] ); ?><p id="<?php echo esc_attr( $key . '-hint' ); ?>"><?php echo esc_html( $hints[ $key ] ); ?></p>
+                                    <?php if ( ! empty( $group['inline_help'] ) ) : ?>
+                                        <details class="pico-setting-details">
+                                            <summary><?php esc_html_e( 'Setup and usage', 'picostrap5' ); ?></summary>
+                                            <div><?php echo wp_kses_post( $definition['description'] ); ?></div>
+                                        </details>
+                                    <?php endif; ?>
                                 </div>
                                 <input class="pico-switch" type="checkbox" role="switch" id="<?php echo esc_attr( $key ); ?>" name="picostrap_extras[<?php echo esc_attr( $key ); ?>]" value="1" <?php checked( (bool) get_theme_mod( $key, false ) ); ?> aria-describedby="<?php echo esc_attr( $key . '-hint' . ( 'picostrap_inline_css' === $key ? ' pico-inline-css-status' : '' ) ); ?>">
                             </div>

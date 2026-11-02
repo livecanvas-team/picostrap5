@@ -137,8 +137,7 @@
 .pico-setting-copy > p { margin-top: 6px; font-size: 13px; max-width: 70ch; }
 .pico-setting-details { margin-top: 10px; }
 .pico-setting-details summary { display: inline-block; font-size: 12px; color: var(--pico-muted); text-decoration: underline; text-underline-offset: 3px; }
-.pico-setting-details summary::after { content: none; }
-.pico-setting-details[open] > summary::after { content: none; }
+.pico-setting-details summary::after { float: none; display: inline-block; }
 .pico-setting-details > div { padding: 12px 0 0; font-size: 13px; color: var(--pico-muted); line-height: 1.7; max-width: 70ch; }
 /* Native, keyboard-operable checkboxes; only their appearance changes. */
 .pico-options input.pico-switch { appearance: none; -webkit-appearance: none; position: relative; display: inline-block; flex: 0 0 46px; width: 46px; min-width: 46px; height: 26px; padding: 0; margin: 2px 0 0; border: 1px solid var(--pico-switch-bg); border-radius: 20px; background: var(--pico-switch-bg); box-shadow: none; cursor: pointer; transition: background 180ms ease-out, border-color 180ms ease-out; }
