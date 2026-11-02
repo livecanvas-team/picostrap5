@@ -15,12 +15,6 @@ if ( ! isset( $content_width ) ) {
 
 add_action( 'after_setup_theme', 'picostrap_setup' );
 
-// Keep font selection in the theme Customizer instead of a separate core menu.
-function picostrap_remove_font_library_menu() {
-	remove_submenu_page( 'themes.php', 'font-library.php' );
-}
-add_action( 'admin_menu', 'picostrap_remove_font_library_menu', 100 );
-
 if ( ! function_exists( 'picostrap_setup' ) ) {
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.

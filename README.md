@@ -151,6 +151,34 @@ The Customizer includes body and heading font pickers backed by Fontsource. The 
 
 Use the Customizer font controls, system font stacks or child-theme font-loading code to match your typography and hosting requirements.
 
+### Locally hosted fonts with WordPress Font Library
+
+On WordPress 7.0 or later, Picostrap can use enabled fonts from the native [WordPress Font Library](https://wordpress.org/documentation/article/the-font-library/). Existing font choices remain unchanged until you select a WordPress font.
+
+1. Open **Appearance > Fonts** or **Manage WordPress fonts** in the options page’s **Design & Sass** tab.
+2. Upload your font files or install a family from the library. Enable the weights and styles you need, then click **Update**. Installation and variant activation are saved separately from Customizer changes.
+3. Open **Customize > Typography**, click the existing **Choose Font…** button for body text or headings, then choose **Hosted fonts** from the category filter. Only enabled families with font faces appear. **Add or manage fonts** opens the WordPress Font Library inside a modal without the admin sidebar; closing it refreshes the hosted list automatically. Use **Refresh list** after changes made in another tab. A new-tab link is also available inside the library modal.
+4. Choose a hosted family in the picker for body text, headings, or both. Existing font-weight controls are preserved: enable matching variants, including italics or a suitable variable-font range, in the library.
+5. Wait for the preview to finish compiling, then **Publish**. Clear page/CDN caches and check the public site. Editing Sass separately still requires **Recompile CSS**.
+
+WordPress prints the font-face declarations and serves the installed files from your site. Picostrap assigns the selected family through its existing Bootstrap Sass variables; the compiler is unchanged. Local selections skip Picostrap’s Fontsource lookup and generated CDN declarations. You can use a local font for one role and the existing CDN picker for the other. WordPress may emit declarations for other enabled families, but browsers request font files when they are used.
+
+**One-click local hosting:** after choosing a Fontsource/CDN font, use **Host locally** beneath its family field or inside the picker. Picostrap downloads its Latin, normal-style weights from jsDelivr and uploads them through WordPress’s Font Library API. Variable fonts use one file for the available weight range; static fonts import their listed weights. Matching local variants are reused. The family is enabled in WordPress and the selected Picostrap role switches to **Hosted fonts**. Wait for compilation, then **Publish** and clear page/CDN caches. Importing saves font files and library activation immediately; it does not publish pending Customizer changes. Other scripts, styles and language subsets can be added through **Add or manage fonts**. Custom remote fonts without Fontsource metadata use that manual upload workflow.
+
+Imports require permission to upload files and edit theme options, plus access to Fontsource, jsDelivr and the WordPress REST API. If a download or upload fails, the current font choice is retained. Successfully uploaded variants stay in the Font Library so a retry can continue without downloading them again. A newly selected font made while an import is running is preserved.
+
+Choosing a font through the existing picker, editing a family field manually, using font combinations or resetting Sass settings clears the corresponding WordPress selection. Picostrap does not migrate or download existing CDN fonts automatically, and it does not rewrite manual header code merely because you open the Customizer. Explicit font changes regenerate the theme-owned code under **Edit theme font code**, and the combined preview updates to match. Keep separately maintained font code in your child theme or the general header-code field.
+
+If you disable or delete a selected family, Picostrap retains its family value and warns in the Customizer. Normal CSS fallback applies; no replacement is downloaded from a CDN. Re-enable the family and its variants, or choose another font and publish. WordPress font output remains enabled when **Disable Gutenberg and core block styles** is on. Older WordPress versions keep the original font controls without this integration.
+
+### Inspect font-loading code
+
+**Customize > Header / Footer Code > Font loading header code** shows one read-only preview combining your enabled theme font code with WordPress’s generated font-face rules. It works with CDN fonts, hosted fonts or a mix. The WordPress section reflects all enabled families in the Font Library, including families not currently assigned to body text or headings. It refreshes when you return from the library modal, refresh hosted fonts or complete a local import.
+
+Expand **Edit theme font code** to edit the existing CDN/custom code or regenerate it from the font choices. That editable value is the existing `picostrap_fonts_header_code` theme modification; no migration is required. The combined preview is never saved or printed as a second font-loading block. WordPress remains responsible for its local font-face rules, so disabling or deleting a font does not leave a saved copy of those rules in the theme code.
+
+**Disable theme font header code** suppresses only the editable theme code. It leaves WordPress-managed font rules active, and the preview explains what remains enabled. If a library refresh fails, the inspector identifies its WordPress rules as the last retrieved snapshot. Other font output added independently by plugins or custom hooks is outside this inspector.
+
 ## Optional features
 
 The shared **Optimizations / Global Utilities** controls include:

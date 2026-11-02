@@ -675,31 +675,21 @@ function picostrap_theme_customize_register($wp_customize) {
 			)
     ));
 
-	//ADD FONT LOADING HEADER CODE  
-	$wp_customize->add_setting("picostrap_fonts_header_code", array(
-        "default" => "",
-		//"transport" => "refresh",
-        "transport" => "postMessage", // and no custom js is added: so no live page update is done, how it should be - but causes unstable behaviour
-    ));
-	$wp_customize->add_control(new WP_Customize_Control(
+    // Keep the saved theme code compatible; inspect WordPress-managed rules separately.
+    require_once __DIR__ . '/font-loading-control.php';
+    $wp_customize->add_setting( 'picostrap_fonts_header_code', array(
+        'default' => '',
+        'transport' => 'postMessage',
+    ) );
+    $wp_customize->add_control( new Picostrap_Font_Loading_Control(
         $wp_customize,
-        "picostrap_fonts_header_code",
+        'picostrap_fonts_header_code',
         array(
-            "label" => __("Font Loading Header code", 'picostrap5'),
-            "section" => "addcode",
-            'type'     => 'textarea',
-			'description' =>__('
-						The code in the field below is generated each time you set a new font family for body or headings, and is served in the site\'s &lt;head&gt;.
-						<br><br>
-						You can customize this code, but please mind that if you edit font family settings your customizations will be overwritten.
-						<br><br>
-						In case you break things up while editing, you can manually regenerate the code <a href="#" id="regenerate-font-loading-code">clicking here</a>.
-						<br><br>
-						Using the JSDelivr CDN is known to be GDPR compliant.
-                        ')
-			)
-    ));
-	
+            'label' => __( 'Font loading header code', 'picostrap5' ),
+            'section' => 'addcode',
+        )
+    ) );
+
     /*
 	//USE ALTERNATIVE FONT SOURCE FOR GDPR COMPLIANCE
 	$wp_customize->add_setting("picostrap_fonts_use_alternative_font_source", array(
@@ -728,9 +718,8 @@ function picostrap_theme_customize_register($wp_customize) {
         $wp_customize,
         "picostrap_fonts_header_code_disable",
         array(
-            "label" => __("Disable the Font Loading in Header", 'picostrap5'),
-			"description" =>  __("<b>Keep this unchecked, unless you really want. </b>").__("Prevents the code of 
-			the textarea above from being served in the site's &lt;head&gt;. ", 'picostrap5'),
+            "label" => __( 'Disable theme font header code', 'picostrap5' ),
+            'description' => __( 'Stops the editable theme font code from being printed in the site header. WordPress-hosted fonts remain managed and loaded by the Font Library. This does not disable WordPress font-face rules.', 'picostrap5' ),
             "section" => "addcode", 
             'type'     => 'checkbox',
 			)

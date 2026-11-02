@@ -143,116 +143,67 @@
         }
     }
 
-    //CHECK IF FONTS HAVE CHANGED, IF SO GRAB FONT INFO REMOTELY AND REBUILD IMPORT CODE SNIPPET 
-    function ps_update_font_objects_and_import_code(){
+    const changedFontFamilies = new Set();
 
-        //get old font values from object fields
-
-        // BODY: Get the value from the input field
-        let bodyFontObjectFieldValue = $("#_customize-input-body_font_object").val();
-
-        // Parse the JSON string to an object
-        let bodyFontObjectData = JSON.parse(bodyFontObjectFieldValue ? bodyFontObjectFieldValue : "{}");
-
-        // Extract the   field, defaulting to an empty string if it doesn't exist
-        let old_body_font_family = bodyFontObjectData.family ?? "";
-
-        // HEADINGS: Get the value from the input field
-        let headingsFontObjectFieldValue = $("#_customize-input-headings_font_object").val();
-
-        // Parse the JSON string to an object
-        let headingsFontObjectData = JSON.parse(headingsFontObjectFieldValue ? headingsFontObjectFieldValue : "{}");
-
-        // Extract the cssImport field, defaulting to an empty string if it doesn't exist
-        let old_headings_font_family = headingsFontObjectData.family ?? "";
-
-        //get new font values from text fields
-        let new_body_font_family = $("#_customize-input-SCSSvar_font-family-base").val();
-        let new_headings_font_family = $("#_customize-input-SCSSvar_headings-font-family").val();
-
-        console.log("Old fonts: " + old_body_font_family + " & " + old_headings_font_family);
-        console.log("New fonts: " + new_body_font_family + " & " + new_headings_font_family);
-
-        //if fonts differ, update obect and preview data, and rebuild code snippet
-
-        // BODY FONT
-        if (old_body_font_family != new_body_font_family) {
-            console.log("Body font has changed");
-            
-            //get remote font data
-            const fontData = getFontData(new_body_font_family.replaceAll("'", '').replaceAll('"', '').split(',')[0]);
-            console.log(fontData);
-
-            //save font object data into field
-            $("#_customize-input-body_font_object").val(JSON.stringify(fontData)).change();
-
-            //update font import code
-            ps_update_fonts_import_code_snippet_from_object_fields();
-        }
-
-        //HEADINGS FONT
-        if (old_headings_font_family != new_headings_font_family) {
-            console.log("Headings font has changed");
-            
-            //get remote font data      
-            const fontData = getFontData(new_headings_font_family.replaceAll("'", '').replaceAll('"', '').split(',')[0]);
-            console.log(fontData);
-
-            //save font object data into field
-            $("#_customize-input-headings_font_object").val(JSON.stringify(fontData)).change();
-
-            //update font import code
-            ps_update_fonts_import_code_snippet_from_object_fields();
-        }
-        
+    function wordpressFontSelected(role) {
+        const id = 'picostrap_wp_font_' + role;
+        return wp.customize.has(id) && Boolean(wp.customize(id).get());
     }
 
+    function clearWordPressFont(role) {
+        const id = 'picostrap_wp_font_' + role;
+        if (wp.customize.has(id)) wp.customize(id).set('');
+    }
 
-    // FUNCTION TO PREPARE THE HTML CODE FONT IMPORT SNIPPET FROM THE FONT OBJECT FIELDS, and put it into Customizer field & preview
-    function ps_update_fonts_import_code_snippet_from_object_fields() {
-
-        console.log('Running function ps_update_fonts_import_code_snippet_from_object_fields to generate the code snippet for fonts import');
-
-        // BODY: Get the value from the input field
-        let bodyFontObjectFieldValue = $("#_customize-input-body_font_object").val();
-
-        // Parse the JSON string to an object
-        let bodyFontObjectData = JSON.parse(bodyFontObjectFieldValue ? bodyFontObjectFieldValue : "{}");
-
-        // Extract the cssImport field, defaulting to an empty string if it doesn't exist
-        let css_snippet_body_font = bodyFontObjectData.cssImport ?? "";
-
-        // HEADINGS: Get the value from the input field
-        let headingsFontObjectFieldValue = $("#_customize-input-headings_font_object").val();
-
-        // Parse the JSON string to an object
-        let headingsFontObjectData = JSON.parse(headingsFontObjectFieldValue ? headingsFontObjectFieldValue : "{}");
-
-        // Extract the cssImport field, defaulting to an empty string if it doesn't exist
-        let css_snippet_headings_font = headingsFontObjectData.cssImport ?? "";
-
-        //build the full import code
-        let css_code =  css_snippet_body_font + ' \n ' + css_snippet_headings_font; //for preview
-        let html_code = ("\n<link rel='dns-prefetch' href='//cdn.jsdelivr.net' /> \n<style>\n " + css_code + "\n </style>\n"); //for site frontend
-
-        //handle empty case
-        if (css_snippet_body_font == "" && css_snippet_headings_font=="") html_code="";
-
-        //populate the textarea with the full import code
-        $("#_customize-input-picostrap_fonts_header_code").val(html_code).change();
-
-        //update CSS font loading snippet in preview
-        var iframeDoc = document.querySelector('#customize-preview iframe').contentWindow.document;
-        var fontLoadingStyle = iframeDoc.querySelector('#font-loading-style-for-preview');
-
-        if (fontLoadingStyle) {
-            fontLoadingStyle.innerHTML = css_code;
-        } else {
-            alert('Element #font-loading-style-for-preview does not exist.');
+    function fontObject(role) {
+        try {
+            const value = JSON.parse($('#_customize-input-' + role + '_font_object').val() || '{}');
+            return value && typeof value === 'object' ? value : {};
+        } catch (error) {
+            return {};
         }
+    }
 
+    // Local selections, including missing ones, must never trigger a CDN lookup.
+    function ps_update_font_objects_and_import_code(forceRoles = []) {
+        let changed = false;
+        ['body', 'headings'].forEach(function(role) {
+            const field = $('#_customize-input-' + role + '_font_object');
+            const previous = fontObject(role);
+            if (wordpressFontSelected(role)) {
+                if (field.val() && field.val() !== '{}') {
+                    field.val('{}').change();
+                    changed = true;
+                }
+                return;
+            }
+            const familyId = role === 'body' ? 'font-family-base' : 'headings-font-family';
+            const family = ($('#_customize-input-SCSSvar_' + familyId).val() || '').replaceAll("'", '').replaceAll('"', '').split(',')[0].trim();
+            if ((previous.family || '') !== family && (changedFontFamilies.has(role) || forceRoles.includes(role))) {
+                field.val(JSON.stringify(family ? getFontData(family) : {})).change();
+                changed = true;
+            }
+            changedFontFamilies.delete(role);
+        });
+        if (changed) ps_update_fonts_import_code_snippet_from_object_fields();
+    }
 
-    } // end function 
+    // The optional Font Library bridge calls this only after an explicit source change.
+    window.picostrapRefreshFontLoading = function(role) {
+        ps_update_font_objects_and_import_code(role ? [role] : ['body', 'headings']);
+        ps_update_fonts_import_code_snippet_from_object_fields();
+    };
+
+    // Generate only theme-owned code. WordPress emits hosted font faces independently.
+    function ps_update_fonts_import_code_snippet_from_object_fields() {
+        const snippets = ['body', 'headings'].map(role => wordpressFontSelected(role) ? '' : (fontObject(role).cssImport || ''));
+        const css = [...new Set(snippets.filter(Boolean))].join('\n');
+        const html = css ? "\n<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />\n<style>\n" + css + "\n</style>\n" : '';
+        $('#_customize-input-picostrap_fonts_header_code').val(html).change();
+        const iframe = document.querySelector('#customize-preview iframe');
+        const preview = iframe?.contentWindow.document.querySelector('#font-loading-style-for-preview');
+        if (preview) preview.textContent = css;
+    }
 
 
 	// FUNCTION TO PREPARE THE SCSS CODE assigning all the variables according to THE WIDGETS VALUES
@@ -418,14 +369,14 @@
 		*/
 
         // CHECK IF USING VINTAGE FONTS API, REBUILD FONT IMPORT CODE
-        if ( ($("#_customize-input-body_font_object").val().length > 10) && !$("#_customize-input-body_font_object").val().includes('cssImport')) {
+        if ( !wordpressFontSelected("body") && ($("#_customize-input-body_font_object").val().length > 10) && !$("#_customize-input-body_font_object").val().includes('cssImport')) {
             // Display a confirmation dialog
             if (confirm("Your font import settings seem obsolete. Do you want to try to auto-update them? ")) {
                 // User confirmed
                 $("#_customize-input-headings_font_object").val("");
                 $("#_customize-input-body_font_object").val("");
                 $("#_customize-input-picostrap_fonts_header_code").val("");
-                ps_update_font_objects_and_import_code(); 
+                ps_update_font_objects_and_import_code(['body', 'headings']);
             } 
         }
 		
@@ -436,6 +387,17 @@
 		wp.customize.bind('change', function (setting) {
 
             console.dir("Changed setting: " + setting.id); //very useful to inspect 
+
+            if (!window.picostrapApplyingWordPressFont) {
+                if (setting.id === 'SCSSvar_font-family-base') {
+                    changedFontFamilies.add('body');
+                    clearWordPressFont('body');
+                }
+                if (setting.id === 'SCSSvar_headings-font-family') {
+                    changedFontFamilies.add('headings');
+                    clearWordPressFont('headings');
+                }
+            }
 
 			if (setting.id.includes("SCSSvar")) {
                 //a scss option changed, rebuild bundle
@@ -526,19 +488,25 @@
 
         //UPON FONT PICKER FONT SELECTION for BODY FONT 
         document.querySelector('#fontpickerbasefont').addEventListener('font-selected', (event) => {
+            if (event.detail.source === 'wordpress') return;
+            clearWordPressFont('body');
             
             //set font family and font weight fields	
             $("#_customize-input-SCSSvar_font-family-base").val('"'+event.detail.family+'"').change();
             $("#_customize-input-SCSSvar_font-weight-base").val('').change(); 
+            window.picostrapRefreshFontLoading('body');
 
         });
 
         //UPON FONT PICKER FONT SELECTION for HEADINGS FONT 
         document.querySelector('#fontpickerheadingsfont').addEventListener('font-selected', (event) => {
+            if (event.detail.source === 'wordpress') return;
+            clearWordPressFont('headings');
 
             //set font family and font weight fields	
             $("#_customize-input-SCSSvar_headings-font-family").val('"'+event.detail.family+'"').change();
             $("#_customize-input-SCSSvar_headings-font-weight").val('').change();
+            window.picostrapRefreshFontLoading('headings');
 
         });
 
@@ -567,6 +535,9 @@
             var font_body = arr[1];
             if (value === '') { font_headings = ""; font_body = ""; }
 
+            clearWordPressFont('body');
+            clearWordPressFont('headings');
+
             //SET FONT FAMILY VALUES
             $("#_customize-input-SCSSvar_font-family-base").val('"' + font_body + '"').change();
             $("#_customize-input-SCSSvar_headings-font-family").val('"' + font_headings + '"').change();
@@ -574,6 +545,7 @@
             //RESET FONT WEIGHT FIELDS
             $("#_customize-input-SCSSvar_font-weight-base").val("").change();
             $("#_customize-input-SCSSvar_headings-font-weight").val("").change();
+            window.picostrapRefreshFontLoading();
 
             //reset combination select
             //$('select#_ps_font_combinations option:first').attr('selected','selected');
@@ -633,6 +605,8 @@
 		$("body").on("click", ".reset-scss-vars", function (e) {
 			e.preventDefault();		 
 			console.log("reset scss vars");
+            clearWordPressFont("body");
+            clearWordPressFont("headings");
 			// loop all input text widgets that have values matched to SCSS vars
 			var els = document.querySelectorAll(`[id^='customize-control-SCSSvar'] input`);
 

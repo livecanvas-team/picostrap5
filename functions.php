@@ -21,7 +21,9 @@ $picostrap_includes = array(
 	'/bootstrap-navwalker.php',    			// Load custom WordPress nav walker. 
 	'/woocommerce.php',                     // Load WooCommerce functions.
 	'/editor.php',                          // Load Editor functions. 
+	'/font-loading.php',                    // Shared font-loading code preview.
 	'/customizer-assets/customizer.php',	//Defines Customizer options
+	'/wordpress-fonts.php',                // Optional bridge to the WordPress Font Library.
 	'/picosass-compiler-integration.php',	//To interface the Customizer with the SCSS js compiler
 	//'/scssphp-legacy-compiler-integration.php', //To interface the Customizer with the SCSS php compiler
 	'/options-page/options-page.php',     // Load theme options page.

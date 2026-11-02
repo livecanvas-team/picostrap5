@@ -186,5 +186,19 @@ div#compile-error:hover{
     font-family: 'Courier New', Courier, monospace;
     font-size:8px;
 }
- 
- 
+
+/* Font source feedback stays within the existing picker. */
+.pico-font-source-status { clear: both; margin: 6px 0; font-size: 12px; }
+.pico-font-source-status:empty { display: none; }
+
+.pico-font-hosting-offer { margin-top: 10px; padding: 12px; border: 1px solid #c3c4c7; border-radius: 3px; background: #fff; }
+.pico-font-hosting-offer[hidden] { display: none; }
+.pico-font-hosting-offer p { margin: 0 0 10px; font-size: 12px; line-height: 1.6; }
+
+/* Inspect the combined output while keeping generated WordPress code read-only. */
+#pico-font-header-preview { width: 100%; min-height: 240px; resize: vertical; font: 12px/1.6 monospace; background: #f6f7f7; color: #1d2327; }
+#pico-font-header-status { margin: 8px 0; }
+#pico-wordpress-font-source { display: none; }
+.pico-font-code-editor { margin-top: 12px; }
+.pico-font-code-editor summary { cursor: pointer; font-weight: 600; padding: 8px 0; }
+.pico-font-code-editor > label { display: block; margin-top: 10px; font-weight: 600; }
