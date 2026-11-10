@@ -40,6 +40,11 @@ function picostrap_get_wordpress_fonts() {
     return $fonts;
 }
 
+/** Customizer passes its setting as argument two; it must not become a fallback slug. */
+function picostrap_sanitize_wordpress_font_slug( $value ) {
+    return is_string( $value ) ? sanitize_title( $value ) : null;
+}
+
 add_action( 'customize_register', function ( $customize ) {
     if ( ! picostrap_wordpress_fonts_available() ) return;
     foreach ( array( 'body', 'headings' ) as $role ) {
@@ -47,7 +52,7 @@ add_action( 'customize_register', function ( $customize ) {
         $customize->add_setting( $id, array(
             'default' => '',
             'transport' => 'postMessage',
-            'sanitize_callback' => 'sanitize_title',
+            'sanitize_callback' => 'picostrap_sanitize_wordpress_font_slug',
         ) );
 
     }

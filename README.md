@@ -216,7 +216,9 @@ Only published stable releases with a numeric `X.Y.Z` or `vX.Y.Z` tag are accept
 
 The updater prefers a release asset named `picostrap5.zip` and otherwise uses the release tag's source archive. Successful metadata is cached for six hours; failed checks are cached for five minutes. Use **Dashboard > Updates > Check again** to refresh the check immediately. Unavailable or invalid GitHub responses do not trigger a fallback to a development branch.
 
-Keep custom code in a child theme: parent-theme updates replace parent-theme files.
+Before replacing the parent theme, the updater copies its existing `css-output/` directory into the temporary, unpacked release. WordPress installs those saved files with the new theme, preserving compiled CSS and source maps, including all site-specific bundles on multisite. If the copy fails, the update stops before replacing the installed theme. Child-theme CSS stays in the child theme's own directory. This preserves the current styling without automatically recompiling Sass; recompile explicitly when you want to rebuild against updated Sass sources.
+
+Keep custom code in a child theme: parent-theme updates replace other parent-theme files. CSS preservation requires the installed version to already contain this updater safeguard.
 
 ### Configuration exports
 

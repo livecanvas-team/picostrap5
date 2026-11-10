@@ -86,3 +86,39 @@ function picostrap_github_update_directory( $source, $remote_source, $upgrader, 
     return $destination;
 }
 add_filter( 'upgrader_source_selection', 'picostrap_github_update_directory', 10, 4 );
+
+/**
+ * Preserve compiled CSS before WordPress removes the installed parent theme.
+ *
+ * Copy the complete output directory into the unpacked update, outside the live
+ * theme. WordPress then installs these saved files along with the new release.
+ * This includes every multisite bundle and source map, without switching sites.
+ * Child-theme output lives in a separate directory and is not replaced here.
+ */
+function picostrap_preserve_update_css( $source, $remote_source, $upgrader, $hook_extra ) {
+    if ( is_wp_error( $source ) || empty( $hook_extra['theme'] ) || get_template() !== $hook_extra['theme']
+        || 'theme' !== ( $hook_extra['type'] ?? '' ) || 'update' !== ( $hook_extra['action'] ?? '' ) ) {
+        return $source;
+    }
+
+    global $wp_filesystem;
+    $theme_root = $wp_filesystem->find_folder( get_theme_root( $hook_extra['theme'] ) );
+    if ( ! $theme_root ) {
+        return new WP_Error( 'picostrap_css_preservation', __( 'The installed theme directory could not be located. The update was stopped to preserve your compiled CSS.', 'picostrap5' ) );
+    }
+
+    $output = trailingslashit( $theme_root ) . $hook_extra['theme'] . '/css-output/';
+    if ( ! $wp_filesystem->exists( $output ) ) {
+        return $source;
+    }
+
+    // Overwrite the release's default bundle with the site's existing output.
+    // A copy failure must stop installation before the live theme is removed.
+    $saved = copy_dir( $output, trailingslashit( $source ) . 'css-output/' );
+    if ( is_wp_error( $saved ) ) {
+        return new WP_Error( 'picostrap_css_preservation', __( 'The compiled CSS could not be preserved. The update was stopped before replacing the theme. Check filesystem permissions and try again.', 'picostrap5' ), $saved );
+    }
+
+    return $source;
+}
+add_filter( 'upgrader_source_selection', 'picostrap_preserve_update_css', 20, 4 );
