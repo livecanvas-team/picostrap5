@@ -16,7 +16,7 @@ Use Picostrap on its own, extend it with a child theme, or pair it with LiveCanv
 
 ## What is included
 
-- **Bootstrap 5.3:** responsive layouts, components, forms, utilities and color modes. The bundled Bootstrap JavaScript identifies itself as **5.3.7**; the bundled files determine the version used by the theme.
+- **Bootstrap 5.3:** responsive layouts, components, forms, utilities and color modes. The bundled Bootstrap JavaScript identifies itself as **5.3.9**; the bundled files determine the version used by the theme.
 - **NinjaBootstrap:** Sass defaults and utility extensions compiled into the theme stylesheet, including extended spacing, responsive positioning, sizing, borders, letter spacing and color shades.
 - **PicoSASS:** browser-based Dart Sass compilation, Customizer previews, manual recompilation and continuous recompilation while working on Sass files.
 - **WordPress Customizer:** colors, typography, Bootstrap variables, navigation, layouts, a live style guide and an AI palette generator.
